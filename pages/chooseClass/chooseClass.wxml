@@ -56,7 +56,8 @@
     <view class='again'>再加一门，仅需33元</view>
   </view>
   <view class='flex-end'>
-    <view class='totalNumber'>合计:暂无价格</view>
+    <view class='totalNumber' wx:if="{{a==true}}">合计:暂无价格</view>
+    <view class='totalNumber start' wx:else>合计:<view class='payMoney start'><view class='symbol'>￥</view>5000</view></view>
     <button class='paybtn'>确认购买</button>
   </view>
 </view>

@@ -221,3 +221,11 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .kl .total{
   margin-top: 30rpx;
 }
+.payMoney{
+  font-size: 32rpx;
+  color: #E93A37;
+  font-weight: 600;
+}
+.symbol{
+  font-size: 24rpx;
+}

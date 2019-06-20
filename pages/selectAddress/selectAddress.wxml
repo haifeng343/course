@@ -1,0 +1,11 @@
+<!-- 自定义的导航栏 -->
+<view class="custom flex_center" style="padding-top:{{statusBarHeight}}px">
+  <view class='navTop start'>
+    <image class='navImg' src='../../images/prvent.png' mode='widthFix' lazy-load='true' bindtap='prvent'></image>
+    <view class='title'>选择地址</view>
+  </view>
+  <view class='topInput'>
+    <view class='abso'>杭州市∨</view>
+    <input type='search' class='search' placeholder='小区/写字楼/学校等'></input>
+  </view>
+</view>

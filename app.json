@@ -1,7 +1,6 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
     "pages/mine/mine",
     "pages/authorization/authorization",
     "pages/gobind/gobind",
@@ -9,7 +8,9 @@
     "pages/groupDetail/groupDetail",
     "pages/courseDetail/courseDetail",
     "pages/allTeacher/allTeacher",
-    "pages/chooseClass/chooseClass"
+    "pages/chooseClass/chooseClass",
+    "pages/selectAddress/selectAddress",
+    "pages/order/order"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,7 +33,7 @@
       {
         "selectedIconPath": "images/orders.png",
         "iconPath": "images/order.png",
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/order/order",
         "text": "订单"
       },
       {
