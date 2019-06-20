@@ -1,0 +1,7 @@
+<view class="absolute">
+  <view class="dialog">
+    <image src="../../pages/images/nobinding.png" class="binding"></image>
+    <p>账号须绑定手机号才可登录</p>
+    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">去绑定</button>
+  </view>
+</view>

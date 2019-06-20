@@ -1,0 +1,56 @@
+<view class='keep start'>
+  <view class='leftImg'>
+    <image class='topImg' src='../../images/t1.png' mode='widthFix' lazy-load='true'></image>
+  </view>
+  <view class='right'>
+    <view class='activity'>英孚亲子活动英孚亲子活动英孚亲子活动英孚亲子活动英孚亲子活动</view>
+    <view class='courseRow start well'>
+      <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+      <view>UUID教育</view>
+    </view>
+    <view class='courseRow between well'>
+      <view class='startd'>
+        <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+        <view class='address'>UUID教育UUID教育UUID教育UUID教育UUID教育UUID教育</view>
+      </view>
+      <view class='end'>1.8km</view>
+    </view>
+    <view class='courseRow start well'>
+      <view class='start'>
+        <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+        <view>课程数量 1 节</view>
+      </view>
+      <view class='start'>
+        <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+        <view>单节课时 60 min</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='teacher boxd'>
+  <view class='teaTitle start'>授课老师
+    <view class='gray'> (2)</view>
+  </view>
+  <view class='teacherList'>
+    <view class='teacherItem start'>
+      <image src='../../images/teacher.png' class='avator' mode='widthFix' lazy-load='true'></image>
+      <view class='teaRight'>
+        <view class='start mylog'>
+          <view class='name'>APRI</view>
+          <view class='profession'> 旅游英语 | 5年教龄</view>
+        </view>
+        <view class='mylogText'>5年教师资格认证5年教师资格认证5年教师资格认证5年教师资格认证</view>
+      </view>
+    </view>
+    <view class='teacherItem start'>
+      <image src='../../images/teacher.png' class='avator' mode='widthFix' lazy-load='true'></image>
+      <view class='teaRight'>
+        <view class='start mylog'>
+          <view class='name'>APRI</view>
+          <view class='profession'> 旅游英语 | 5年教龄</view>
+        </view>
+        <view class='mylogText'>5年教师资格认证5年教师资格认证5年教师资格认证5年教师资格认证</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,96 @@
+<view class='banner'>
+  <swiper bindchange="swiperChange" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1' next-margin='35rpx' previous-margin='35rpx'>
+    <block wx:for="{{imgUrls}}" wx:key>
+      <swiper-item>
+        <view class='box'>
+          <image src='{{item.img}}' mode="widthFix" lazy-load="true"></image>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="dots">
+    <block wx:for="{{imgUrls}}" wx:key>
+      <view class="dot{{index == currentSwiper ? ' active' : ''}}">{{current+1}}/{{imgUrls.length}}</view>
+    </block>
+  </view>
+</view>
+<view class='courseCont'>
+  <view class='between well courseLi'>
+    <view class='name'>UUOD绘画</view>
+    <view class='howMoney'>价值：￥50</view>
+  </view>
+  <view class='somebody well'>
+    7878人已参与 | 剩余名额 3 个
+  </view>
+  <view class='courseRow start well'>
+    <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+    <view>UUID教育</view>
+  </view>
+  <view class='courseRow between well'>
+    <view class='start'>
+      <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+      <view class='address'>UUID教育UUID教育UUID教育UUID教育UUID教育UUID教育</view>
+    </view>
+    <view class='end'>1.8km</view>
+  </view>
+  <button class='courseRow start well'>
+    <image class='rowImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+    <view>400-100-100</view>
+  </button>
+  <view class='courseRow start well'>
+    <view class='start'>
+      <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+      <view>课程数量 1 节</view>
+    </view>
+    <view class='start'>
+      <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+      <view>单节课时 60 min</view>
+    </view>
+  </view>
+</view>
+<view class='prompt boxd'>
+  <view class='prompTitle'>购买须知</view>
+  <view class='promptText'>购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知</view>
+</view>
+<view class='teacherList boxd' bindtap='allTeacher'>
+  <view class='tearcherTitle between'>
+    <view class='teaNumber'>师资力量 (33)</view>
+    <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
+  </view>
+  <view class='teaList'>
+    <view class='teachers'>
+      <image class='teaImg' src='../../images/teacher.png' mode='widthFix' lazy-load='true'></image>
+      <view class='teaName'>Apri</view>
+      <view class='profession'>Apri</view>
+      <view class='profession'>Apri</view>
+    </view>
+    <view class='teachers'>
+      <image class='teaImg' src='../../images/teacher.png' mode='widthFix' lazy-load='true'></image>
+      <view class='teaName'>Apri</view>
+      <view class='profession'>Apri</view>
+      <view class='profession'>Apri</view>
+    </view>
+    <view class='teachers'>
+      <image class='teaImg' src='../../images/teacher.png' mode='widthFix' lazy-load='true'></image>
+      <view class='teaName'>Apri</view>
+      <view class='profession'>Apri</view>
+      <view class='profession'>Apri</view>
+    </view>
+    <view class='teachers'>
+      <image class='teaImg' src='../../images/teacher.png' mode='widthFix' lazy-load='true'></image>
+      <view class='teaName'>Apri</view>
+      <view class='profession'>Apri</view>
+      <view class='profession'>Apri</view>
+    </view>
+    <view class='teachers'>
+      <image class='teaImg' src='../../images/teacher.png' mode='widthFix' lazy-load='true'></image>
+      <view class='teaName'>Apri</view>
+      <view class='profession'>Apri</view>
+      <view class='profession'>Apri</view>
+    </view>
+  </view>
+</view>
+<view class='prompt boxd'>
+  <view class='prompTitle'>购买须知</view>
+  <view class='promptText'>购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知</view>
+</view>

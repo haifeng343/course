@@ -1,0 +1,41 @@
+<view class="content">
+  <view class="accountLogin">
+    <view class="loginInput">
+      <view class="subtitle">手机号</view>
+      <input type="number" placeholder="请输入手机号" value="{{Mobile}}" bindinput="GetPhoneVerifyCodeCountdown" />
+    </view>
+    <view class="loginInput">
+      <view class="subtitle">验证码</view>
+      <input type="number" placeholder="请输入验证码" value="{{VerifyCode}}" placeholder-style="color:#ccc;" />
+      <view class="imgCoded" wx:if="{{NumberCountDown==0}}" bindtap="getPicCode">获取验证码</view>
+      <view class="imgCoded" wx:if="{{NumberCountDown>0}}">重新获取({{NumberCountDown}})</view>
+      <view class="imgCoded" wx:if="{{NumberCountDown==-1}}">次数已到</view>
+    </view>
+  </view>
+  <button class="loginBtn loginBtnState" bindtap="SMSVerifyCodeLogin">提交</button>
+</view>
+<!-- 图形验证码弹框 -->
+<view class="masks" wx:if="{{imgCodeShow}}">
+  <view class="imgCode">
+    <view class="imgCodeTitle">
+      请输入图片验证码
+      <icon class="delete" type="clear" size="15" bindtap="closeAlert" />
+    </view>
+    <view class="inputBox">
+      <input type="text" class='codeNumber' placeholder="请输入" value="{{PicCode}}" placeholder-style="color:#ccc;" />
+      <image :src="PicUrl" class='codeImg' alt="failed" bindtap="getPicCode" alt=""></image>
+    </view>
+    <view class="loginBtns" bindtap="getSMSCode">确定</view>
+  </view>
+</view>
+<view class="absolute" wx:if="{{isShow}}">
+  <view class="fiexed">
+    <image :src="{{imgUrl}}" bindtap="previewImage" class="img_er" alt=""></image>
+    <view class="er_text" v-if="contents!=null && contents.length>0">
+      客服微信号： {{contents}}
+      <view bindtap="copyText" class="copy">复制</view>
+      <view class="please">{{Remark}}</view>
+    </view>
+    <image src="../../images/close-icon.png" class="close" bindtap="closed" alt=""></image>
+  </view>
+</view>

@@ -1,0 +1,55 @@
+<!-- 自定义的导航栏 -->
+<view class="custom flex_center" style="padding-top:{{statusBarHeight}}px">
+  <view class='navTop'>
+    <image class='navImg' src='../../images/address.png'></image>
+    <view>西湖区</view>
+  </view>
+</view>
+<view style="padding-top:{{statusBarHeight+60}}px" class='topInput'>
+  <input type='search' class='search' placeholder='新品上架'></input>
+</view>
+<view class='banner'>
+  <swiper bindchange="swiperChange" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1'>
+    <block wx:for="{{imgUrls}}" wx:key>
+      <swiper-item>
+        <view class='box'>
+          <image src='{{item.img}}' mode="widthFix" lazy-load="true"></image>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="dots">
+    <block wx:for="{{imgUrls}}" wx:key>
+      <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
+    </block>
+  </view>
+</view>
+<view class='groupList'>
+  <view class='groupItem' wx:for="{{groupList}}" wx:key bindtap='groupDetail'>
+    <view class='itemImg'>
+      <image src='{{item.imgUrl}}' class='leftImg' mode='widthFix' lazy-load='true'></image>
+    </view>
+    <view class='itemRight'>
+      <view class='title'>{{item.title}}</view>
+      <view class='addr'>
+        <image src='../../images/ad1.png' class='ad1' mode='widthFix'></image>
+        <view>{{item.addr}}</view>
+        <view class='distance'>{{item.distance}}Km</view>
+      </view>
+      <view class='time'>活动截止时间：{{item.time}}</view>
+      <view class='tagList'>
+        <view class='tagItem' wx:for='{{item.tagList}}' wx:key style='background:{{bgcolor}};color:{{color}}'>{{item.tag}}</view>
+      </view>
+      <view class='bottom'>
+        <view class='bottom-left'>
+          <view class='money'>￥{{item.money}}</view>
+          <view class='integral'>积分抵扣{{item.integral}}%</view>
+        </view>
+        <view class='bottom-right'>
+          <view class='number'>已售 {{item.number}}</view>
+          <image src='../../images/go.png' class='go' mode='widthFix'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

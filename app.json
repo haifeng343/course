@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/mine/mine",
+    "pages/authorization/authorization",
+    "pages/gobind/gobind",
+    "pages/binding/binding",
+    "pages/groupDetail/groupDetail",
+    "pages/courseDetail/courseDetail",
+    "pages/allTeacher/allTeacher",
+    "pages/chooseClass/chooseClass"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#DBDBDB",
+    "selectedColor": "#29D9D5",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "images/indexs.png",
+        "iconPath": "images/index.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "images/orders.png",
+        "iconPath": "images/order.png",
+        "pagePath": "pages/logs/logs",
+        "text": "订单"
+      },
+      {
+        "selectedIconPath": "images/mines.png",
+        "iconPath": "images/mine.png",
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  }
+}

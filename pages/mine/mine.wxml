@@ -1,0 +1,8 @@
+<!--pages/mine/mine.wxml-->
+<text>pages/mine/mine.wxml</text>
+<image src="https://img.fetow.com/Public/Index/images/shewm.jpg" mode="widthFix" data-src="https://img.fetow.com/Public/Index/images/shewm.jpg" bindtap="previewImage"></image>
+<view wx:for="{{synctable}}">
+  <view bindtap='navto' data-index="{{index}}">{{item.index}}{{item.name}}</view>
+</view>
+<view>内容：{{contents}} </view>
+<view bindtap='copyText' data-text="{{contents}}">复制</view>

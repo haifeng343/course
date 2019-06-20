@@ -1,0 +1,62 @@
+<view class='title'>
+  本团单共有15门课程，最多可选6节，仅需99元!</view>
+<view class='courseList'>
+  <view class='courseItem' wx:for='{{courseList}}' wx:key>
+    <view class='check'>课程3选1</view>
+    <view class='courseCont' bindtap='courseDetail'>
+      <view class='leftImg'>
+        <image class='cover' src='{{item.imgUrl}}' mode='widthFix' lazy-load='true'></image>
+      </view>
+      <view class='rightContent'>
+        <view class='between relative'>
+          <view class='courseTitle'>{{item.titleName}}</view>
+          <view>
+            <radio checked="{{checked}}" catchtap='checkedTap'></radio>
+          </view>
+        </view>
+        <view class='coursePeople'>{{item.yiPeople}}人已参与 | 剩余名额 {{item.guo}} 个</view>
+        <view class='tagList'>
+          <view class='tagItm' wx:for="{{item.tagList}}" wx:key style='background:{{bgcolor}};color:{{color}}'>{{item.tag}}</view>
+        </view>
+        <view class='detail'>
+          <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+          <view class='name'>{{item.name}}</view>
+        </view>
+        <view class='detail around'>
+          <view class='addrLong'>
+            <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+            <view class='name address'>{{item.address}}</view>
+          </view>
+          <view class='long'>{{item.nearby}}km</view>
+        </view>
+        <view class='detail'>
+          <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+          <view class='name'>{{item.phone}}</view>
+        </view>
+        <view class='detail'>
+          <view class='ring'>
+            <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+            <view class='name'>共有{{item.number}}节课</view>
+          </view>
+          <view class='ring'>
+            <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+            <view class='name'>单节课时 {{item.time}} min</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='pay between'>
+  <view class='el' wx:if="{{a==true}}">
+    <view class='total'>共3门课程</view>
+  </view>
+  <view class='kl' wx:else>
+    <view class='total'>共3门课程</view>
+    <view class='again'>再加一门，仅需33元</view>
+  </view>
+  <view class='flex-end'>
+    <view class='totalNumber'>合计:暂无价格</view>
+    <button class='paybtn'>确认购买</button>
+  </view>
+</view>

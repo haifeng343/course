@@ -1,0 +1,151 @@
+.banner {
+  width: 100%;
+  height: 300rpx;
+  position: relative;
+  z-index: 0;
+  background-color: #fff;
+}
+swiper {
+  height: 100%;
+}
+
+swiper-item {
+  text-align: center;
+}
+
+swiper-item image {
+  width: 660rpx;
+  object-fit: cover;
+  border-radius: 10rpx;
+}
+
+.box {
+  width: 95%;
+  height: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.dot {
+  position: absolute;
+  bottom: 60rpx;
+  right: 70rpx;
+  background: rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 40rpx;
+  padding: 3rpx 20rpx;
+}
+.courseCont{
+  background-color: #fff;
+  padding-bottom: 15rpx;
+}
+.courseLi{
+  font-size: 30rpx;
+  line-height: 45rpx;
+  font-weight: 600;
+}
+.howMoney{
+  color: #F8000F;
+}
+.somebody{
+  font-size: 26rpx;
+  color: #ACACAC;
+  margin: 10rpx 0; 
+}
+.courseRow{
+  width: 100%;
+  border-bottom: 1rpx solid #F7F7F7;
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
+}
+.courseRow:last-child{
+  border: none;
+}
+.rowImg{
+  width: 40rpx;
+  margin-right: 5rpx;
+  margin-top: 18rpx;
+}
+.courseRow .start{
+  width: 90%;
+}
+.address{
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+}
+button{
+  padding: 0;
+}
+.end{
+  display: flex;
+  justify-content: flex-end;
+}
+.prompt{
+  margin-top: 15rpx;
+}
+.prompTitle{
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.promptText{
+  font-size: 26rpx;
+  line-height: 35rpx;
+  letter-spacing: 2rpx;
+  margin-top: 20rpx;
+}
+.teacherList{
+  width: 100%;
+  height: auto;
+  margin-top: 15rpx;
+}
+.tearcherTitle{
+  margin-bottom: 30rpx;
+}
+.teaNumber{
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.go{
+  position: relative;
+  top: 8rpx;
+}
+.teaList{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow-x: scroll;
+}
+.teaList::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.teachers{
+  width: 200rpx;
+  margin-right: 25rpx;
+  text-align: center;
+  word-break:keep-all;
+}
+.teaImg{
+  width: 150rpx;
+}
+.teaName{
+  font-size: 30rpx;
+}
+
+.profession{
+  color: #656565;
+  font-size: 28rpx;
+  word-break: keep-all;
+}
+
+.Introduction{
+
+}
+
+
