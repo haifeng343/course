@@ -1,0 +1,143 @@
+.keep{
+  background-color: #fff;
+  width: 100%;
+  padding: 30rpx 5%;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-bottom: 1rpx solid #F6F6F6;
+}
+.well{
+  padding: 0;
+}
+.courseRow {
+  width: 65%;
+}
+.leftImg{
+  width: 35%;
+  margin-right: 15rpx;
+}
+.right{
+  right: 65%;
+  overflow: hidden;
+}
+.activity{
+  font-size: 28rpx;
+  font-weight: 600;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topImg{
+  width: 150rpx;
+  border-radius: 10rpx;
+}
+.courseRow{
+  width: 100%;
+  font-size: 24rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  box-sizing: border-box;
+}
+.courseRow:last-child{
+  border: none;
+}
+.rowImg{
+  width: 40rpx;
+  margin-right: 5rpx;
+  margin-top: 0rpx;
+}
+.courseRow .start{
+  width: 60%;
+}
+.startd{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+.address{
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+}
+.payTitle{
+  width: 100%;
+  padding-left: 5%;
+  background-color: #fff;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.count{
+  font-size: 24rpx;
+  color: #D7D7D7;
+}
+.money{
+  margin: 0 10rpx 0 25rpx;
+}
+.numberD{
+  font-size: 32rpx;
+  color: red;
+  font-weight: 600;
+  margin-top: -4rpx;
+}
+.low{
+  margin-top: 20rpx;
+  font-size: 28rpx;
+}
+.txt{
+  font-size: 26rpx;
+  margin-top: 10rpx;
+}
+.txt1{
+  margin-left: 20rpx;
+  color: #D7D7D7;
+}
+radio{
+  margin-top: 20rpx;
+}
+
+.pay {
+  font-size: 26rpx;
+}
+
+.again {
+  text-decoration: line-through;
+  color: #9b9b9b;
+}
+
+.el {
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+}
+
+.totalNumber {
+  line-height: 120rpx;
+  margin-right: 20rpx;
+}
+
+.paybtn {
+  background-color: #29d9d6;
+  color: #fff;
+  font-size: 26rpx;
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 40rpx;
+  margin-top: 30rpx;
+}
+.kl .total{
+  margin-top: 30rpx;
+}
+.kld{
+  line-height: 120rpx;
+  color: #D1D1D1;
+}
+.payMoney{
+  font-size: 32rpx;
+  color: #E93A37;
+  font-weight: 600;
+}
+.symbol{
+  font-size: 24rpx;
+}

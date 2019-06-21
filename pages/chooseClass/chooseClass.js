@@ -70,6 +70,12 @@ Page({
       "checked": !checked
     })
   },
+  courseDetail: function() {
+    var checked = this.data.checked;
+    this.setData({
+      "checked": !checked
+    })
+  },
   onShareAppMessage: function () {
 
   }

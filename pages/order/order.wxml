@@ -1,2 +1,81 @@
-<!--pages/order/order.wxml-->
-<text>pages/order/order.wxml</text>
+<view>
+
+</view><view class="movie-container">
+  <!-- 导航栏 -->
+  <view class="navbar">
+    <block wx:for="{{navbarTitle}}" wx:key="index">
+      <view class="navbar-item {{navbarActiveIndex === index ? 'navbar-item-active' : ''}}" data-navbar-index="{{index}}" catchtap="onNavBarTap">
+        <text>{{item}}</text>
+      </view>
+    </block>
+  </view>
+  <view class="movie-content-wrapper">
+    <swiper current="{{navbarActiveIndex}}" bindanimationfinish="onBindAnimationFinish">
+      <swiper-item wx:for="{{navbarTitle}}" wx:key="index">
+        <scroll-view scroll-y="{{true}}">
+          <view class='orderList'>
+            <view class='orderItem'>
+              <view class='title between'>
+                <view class='numbering'>订单编号：455475874857498</view>
+                <view class='happening'>未使用</view>
+              </view>
+              <view class='orderContent' bindtap='orderDetail'>
+                <image class='orderImg' src='../../images/o1.png' mode='widthFix' lazy-load='true'></image>
+                <view class='Right'>
+                  <view class='between'>
+                    <view class='name'>明志书院</view>
+                    <view class='money'>￥500.00</view>
+                  </view>
+                  <view class='start'>
+                    <image class='icon' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+                    <view class='address'>西溪商圈</view>
+                  </view>
+                  <view class='test'>购买时间:2019-10-21 08:54:21</view>
+                  <view class='test'>有效期:2019-10-21</view>
+                  <view class='test start'><view>语数外</view>共3门课程</view>
+                </view>
+              </view>
+              <view class='bottom between'>
+                <view class='tag'>团购</view>
+                <view>
+                  <button class='btn' bindtap='Refund'>申请退款</button>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+  <view class='zan-title'>提示</view>
+    <view class='zan-content'>此处是填充的布局代码</view>
+    <view class='know' bindtap='closed'>知道了</view>
+  </view>
+</view>
+
+<!--退款失败原因提示弹出框-->
+<view class="zan-dialog {{ showError ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+  <view class='zan-title'>失败原因</view>
+    <view class='zan-content date'>退款处理日期： 2019-10-20 10:30:25</view>
+    <view class='zan-content'>失败原因：不予构成退款理由</view>
+    <view class='know' bindtap='closed'>知道了</view>
+  </view>
+</view>
+<!--退款成功提示弹出框-->
+<view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+  <view class='zan-title'>退款成功</view>
+    <view class='le zan-til'>已退款200元</view>
+    <view class='zan-content align-left le'>交易编号: 158454584841</view>
+    <view class='zan-content align-left le'>退款时间: 158454584841</view>
+    <view class='zan-content align-left le'>到账时间: 158454584841</view>
+    <view class='know' bindtap='closeded'>知道了</view>
+  </view>
+</view>

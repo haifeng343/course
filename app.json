@@ -10,7 +10,11 @@
     "pages/allTeacher/allTeacher",
     "pages/chooseClass/chooseClass",
     "pages/selectAddress/selectAddress",
-    "pages/order/order"
+    "pages/order/order",
+    "pages/orderDetail/orderDetail",
+    "pages/payOk/payOk",
+    "pages/payOrder/payOrder",
+    "pages/refund/refund"
   ],
   "window": {
     "backgroundTextStyle": "light",

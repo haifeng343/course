@@ -1,0 +1,17 @@
+<view class='payTop'>
+  <view class='center'>
+    <image class='payok' src='../../images/payok.png' mode='widthFix' lazy-load='true'></image>
+    <view class='payText'>购买成功</view>
+  </view>
+</view>
+<view class='detail'>
+  <view class='title'>都是带大今飞凯达是否会地方那就</view>
+  <view>券码: 5841848478</view>
+  <view class='code'>
+    <image class='codeImg' src='../../images/quancode.png' mode='widthFix' lazy-load='true'></image>
+  </view>
+</view>
+<view class='around'>
+  <button class='btnd' bindtap='navto'>订单详情</button>
+  <button class='btnd btnd1' bindtap='groupTo'>返回团单</button>
+</view>

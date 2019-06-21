@@ -1,0 +1,136 @@
+<view class='Top'>
+  <view class='List between'>
+    <view>订单编号: 1056565584741547</view>
+    <view class='status'>退款中</view>
+  </view>
+  <view class='List'>
+    <view>创建订单: 1056565584741547</view>
+  </view>
+  <view class='List'>
+    <view>支付时间: 1056565584741547</view>
+  </view>
+  <view class='List kl'>
+    <view>退款时间: 1056565584741547</view>
+  </view>
+  <view class='List'>
+    <view>团单名称: 1056565584741547</view>
+  </view>
+  <view class='List'>
+    <view>购买类型: 1056565584741547</view>
+  </view>
+  <view class='List between'>
+    <view>券码: 1056565584741547</view>
+    <image class='code' src='../../images/code.png' mode='widthFix' lazy-load='true' bindtap='codeShow'></image>
+  </view>
+</view>
+<view class='Top'>
+  <view class='keep start kl'>
+    <view class='leftImg'>
+      <image class='topImg' src='../../images/t1.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+    <view class='right'>
+      <view class='activity'>英孚亲子活动英孚亲子活动英孚亲子活动英孚亲子活动英孚亲子活动</view>
+      <view class='courseRow start well'>
+        <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+        <view>UUID教育</view>
+      </view>
+      <view class='courseRow between well'>
+        <view class='startd'>
+          <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+          <view class='address'>UUID教育UUID教育UUID教育UUID教育UUID教育UUID教育</view>
+        </view>
+        <view class='end'>1.8km</view>
+      </view>
+      <view class='courseRow start well'>
+        <view class='start'>
+          <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+          <view>课程数量 1 节</view>
+        </view>
+        <view class='start'>
+          <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+          <view>单节课时 60 min</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='keep start gray'>
+    <view class='leftImg'>
+      <image class='topImg' src='../../images/t1.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+    <view class='right'>
+      <view class=' between'>
+        <view class='activity'>英孚亲子活动英孚亲子活动英</view>
+        <image class='use' src='../../images/used.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+      <view class='courseRow start well'>
+        <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+        <view>UUID教育</view>
+      </view>
+      <view class='courseRow between well'>
+        <view class='startd'>
+          <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+          <view class='address'>UUID教育UUID教育UUID教育UUID教育UUID教育UUID教育</view>
+        </view>
+        <view class='end'>1.8km</view>
+      </view>
+      <view class='courseRow start well'>
+        <view class='start'>
+          <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+          <view>课程数量 1 节</view>
+        </view>
+        <view class='start'>
+          <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+          <view>单节课时 60 min</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='between bt1'>
+    <view class='integral'>1000积分抵10元</view>
+    <view class='deduction'>-￥10.00</view>
+  </view>
+  <view class='between bt2'>
+    <view class='tel'>实付款</view>
+    <view class='money'>￥390.00</view>
+  </view>
+</view>
+<!--券码弹出框-->
+<view class='dialog' hidden='{{showCode}}' bindtap='dialogShow'>
+  <view class='dialog-contatner'>
+    <view class='dialog-title'>请扫描以下券码验券</view>
+    <view class='dialog-code'>券码: 106484854</view>
+    <image class='codeImg' src='../../images/quancode.png' mode='widthFix' lazy-load='true'></image>
+  </view>
+</view>
+<!--退款失败原因提示弹出框-->
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+  <view class='zan-title'>失败原因</view>
+    <view class='zan-content date'>退款处理日期： 2019-10-20 10:30:25</view>
+    <view class='zan-content'>失败原因：不予构成退款理由</view>
+    <view class='know' bindtap='closed'>知道了</view>
+  </view>
+</view>
+<!--退款成功提示弹出框-->
+<view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+  <view class='zan-title'>退款成功</view>
+    <view class='le zan-til'>已退款200元</view>
+    <view class='zan-content align-left le'>交易编号: 158454584841</view>
+    <view class='zan-content align-left le'>退款时间: 158454584841</view>
+    <view class='zan-content align-left le'>到账时间: 158454584841</view>
+    <view class='know' bindtap='closeded'>知道了</view>
+  </view>
+</view>
+<!-- <view class='pay start'>
+  <button class='btnd' bindtap='errorShow'>查看原因</button>
+  <button class='btnd btnd2'>重新退款</button>
+</view> -->
+<view class='pay'>
+  <button class='btnd end' bindtap='showSucess'>退款详情</button>
+</view>
+<!-- <view class='pay'>
+  <button class='btnd end'>取消退款</button>
+</view> -->

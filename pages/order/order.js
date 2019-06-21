@@ -1,66 +1,55 @@
-// pages/order/order.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    navbarActiveIndex: 0,
+    navbarTitle: [
+      "全部订单",
+      "可使用",
+      "已完成/已过期",
+      "退款"
+    ],
+    showDialog: false,
+    showError:false,
+    showSuccess:false,
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 点击导航栏
    */
-  onLoad: function (options) {
-
+  onNavBarTap: function (event) {
+    // 获取点击的navbar的index
+    let navbarTapIndex = event.currentTarget.dataset.navbarIndex
+    // 设置data属性中的navbarActiveIndex为当前点击的navbar
+    this.setData({
+      navbarActiveIndex: navbarTapIndex
+    })
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 
    */
-  onReady: function () {
-
+  onBindAnimationFinish: function ({ detail }) {
+    // 设置data属性中的navbarActiveIndex为当前点击的navbar
+    this.setData({
+      navbarActiveIndex: detail.current
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  orderDetail:function() {
+    wx.navigateTo({
+      url: '/pages/orderDetail/orderDetail',
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  Refund:function() {
+    this.setData({
+      showDialog: !this.data.showDialog
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  closed:function(){
+    this.setData({
+      showDialog: !this.data.showDialog
+    });
   }
 })

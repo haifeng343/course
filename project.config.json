@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 13,
 			"list": [
 				{
 					"id": -1,
@@ -111,6 +111,41 @@
 					"id": -1,
 					"name": "selectAddress",
 					"pathName": "pages/selectAddress/selectAddress",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "order",
+					"pathName": "pages/order/order",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "orderDetail",
+					"pathName": "pages/orderDetail/orderDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "payOk",
+					"pathName": "pages/payOk/payOk",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "payOrder",
+					"pathName": "pages/payOrder/payOrder",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "refund",
+					"pathName": "pages/refund/refund",
 					"scene": null
 				}
 			]
