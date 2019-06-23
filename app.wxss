@@ -1,7 +1,6 @@
 page {
   overflow-x: hidden;
   background-color: #eee;
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .container {
@@ -34,14 +33,35 @@ page {
 button::after {
   border: 0;
 }
-
+.line{
+  height: 20rpx;
+  width: 100%;
+  background-color: #eee;
+}
 button {
   background-color: #fff;
   padding: 0;
 }
+.mt20{
+  margin-top: 20rpx;
+}
 .center{
   display: flex;
   justify-content: center;
+}
+.home,.company{
+  margin-left: 30rpx;
+  color: #DC5B57;
+  background-color: #FFF0F1;
+  padding: 5rpx 15rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 24rpx;
+  margin-top: 6rpx;
+}
+.company{
+  color: #80A5DC;
+  background-color: #E6F9FE;
 }
 .around{
   display: flex;

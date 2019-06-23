@@ -1,1 +1,62 @@
-/* pages/mine/mine.wxss */
+.myTop{
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  padding: 40rpx 5%;
+  box-sizing: border-box;
+}
+.avator{
+  width: 150rpx;
+  margin-right: 20rpx;
+}
+.name{
+  font-size: 30rpx;
+}
+.share{
+  font-size: 28rpx;
+  color: #B1B1B1;
+}
+.code{
+  font-size: 26rpx;
+}
+.align{
+  padding-top: 35rpx;
+}
+.List{
+  width: 100%;
+  height: auto;
+}
+.item{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 5%;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.icon1{
+  width: 40rpx;
+  margin: 18rpx 15rpx 0 0;
+}
+.go{
+  margin: 25rpx 0 0 15rpx;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

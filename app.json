@@ -14,7 +14,15 @@
     "pages/orderDetail/orderDetail",
     "pages/payOk/payOk",
     "pages/payOrder/payOrder",
-    "pages/refund/refund"
+    "pages/refund/refund",
+    "pages/integralLog/integralLog",
+    "pages/callUs/callUs",
+    "pages/setting/setting",
+    "pages/modifyPhone/modifyPhone",
+    "pages/invite/invite",
+    "pages/recommendation/recommendation",
+    "pages/address/address",
+    "pages/editAddress/editAddress"
   ],
   "window": {
     "backgroundTextStyle": "light",

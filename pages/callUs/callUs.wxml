@@ -1,0 +1,22 @@
+<view class='callUS mt20'>
+  <view class='column mel'>
+    <image class='erCode' src='../../images/er.png' mode='widthFix' lazy-load='true'></image>
+    <view class='wechat'>客服微信号: {{contents}}
+      <view bindtap='copyText' data-text="{{contents}}" class='copy'>复制</view>
+    </view>
+  </view>
+</view>
+<view class='List'>
+  <view class='item between'>
+    <view class='name'>工作时间</view>
+    <view class='content'>周一至周五09:00-18:00（法定节假日除外）</view>
+  </view>
+  <view class='item between'>
+    <view class='name'>工作时间</view>
+    <view class='content'>周一至周五09:00-18:00（法定节假日除外）</view>
+  </view>
+  <view class='item between'>
+    <view class='name'>工作时间</view>
+    <view class='content'>周一至周五09:00-18:00（法定节假日除外）</view>
+  </view>
+</view>

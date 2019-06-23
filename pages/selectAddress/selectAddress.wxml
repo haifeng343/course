@@ -9,3 +9,45 @@
     <input type='search' class='search' placeholder='小区/写字楼/学校等'></input>
   </view>
 </view>
+<view class='currentd'>
+  <view class='now'>当前定位</view>
+  <view class='between kowd'>
+    <view class='start'>
+      <image class='adIcon' src='../../images/selectAddress.png' mode='widthFix' lazy-load='true'></image>
+      <view class='addressDetail'>西溪谷</view>
+    </view>
+    <view class='again'>重新定位</view>
+  </view>
+</view>
+<view class='line'></view>
+<view class='about'>
+  <view class='now md'>我的地址</view>
+  <view class='List'>
+    <view class='item between'>
+      <view class='column'>
+        <view class='start'>
+          <view class='name'>西溪谷</view>
+          <view class='home'>家</view>
+        </view>
+        <view class='addressDetail'>杭州市西湖区紫霞街国际商务中心</view>
+      </view>
+    </view>
+    <view class='item between'>
+      <view class='column'>
+        <view class='start'>
+          <view class='name'>西溪谷</view>
+          <view class='company'>公司</view>
+        </view>
+        <view class='addressDetail'>杭州市西湖区紫霞街国际商务中心</view>
+      </view>
+    </view>
+  </view>
+  <view class='now md mt20'>附近地址</view>
+  <view class='addressList'>
+  <view class='addressItem'>杭州市西湖区紫霞街国际商务中心</view>
+  <view class='addressItem'>杭州市西湖区紫霞街国际商务中心</view>
+  <view class='addressItem'>杭州市西湖区紫霞街国际商务中心</view>
+  <view class='addressItem'>杭州市西湖区紫霞街国际商务中心</view>
+  </view>
+</view>
+<view class='add'>新增地址</view>

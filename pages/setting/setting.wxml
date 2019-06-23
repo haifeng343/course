@@ -1,0 +1,16 @@
+<view class='horizontal between mt20' bindtap='modify'>
+  <view class='name'>修改手机号</view>
+  <view class='content start'>
+  <view class='phone'>1358754554</view>
+    <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
+  </view>
+</view>
+<view class='horizontal between mt20' bindtap='address'>
+  <view class='name'>地址管理</view>
+  <view class='content'>
+    <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
+  </view>
+</view>
+<view class='horizontal center mt20'>
+  <view class='exit'>退出登录</view>
+</view>

@@ -1,0 +1,83 @@
+.integral{
+  width: 95%;
+  height: auto;
+  margin: 20rpx 2.5%;
+  background-color: #fff;
+  border-radius: 15rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.avator{
+  width: 150rpx;
+  margin-right: 20rpx;
+}
+.integralTop{
+  font-size: 28rpx;
+  padding-top: 35rpx;
+}
+.number{
+  font-size: 32rpx;
+  font-weight: 600;
+}
+.rule{
+  position: absolute;
+  right: 30rpx;
+  padding: 5rpx 15rpx;
+  border-radius: 25rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background-color: #9F9F9F;
+}
+.log{
+  width: 100%;
+  background-color: #fff;
+  padding: 0 5%;
+  box-sizing: border-box;
+}
+.logTop{
+  font-size: 30rpx;
+  align-items: center;
+  padding: 15rpx 0;
+}
+.go{
+  margin-top: 6rpx;
+}
+.math{
+  font-size: 24rpx;
+  color: #2F2F2F;
+}
+.logList{
+  width: 100%;
+  height: auto;
+  font-size: 32rpx;
+}
+.logItem{
+  border-top: 1rpx solid #F9F9F9;
+  border-bottom: 1rpx solid #F9F9F9;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+}
+.time{
+  font-size: 24rpx;
+  line-height: 40rpx;
+  color: #717171;
+}
+.fraction{
+  line-height:90rpx;
+  font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

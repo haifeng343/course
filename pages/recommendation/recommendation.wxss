@@ -1,0 +1,49 @@
+.recommendation{
+  width: 90%;
+  margin:20rpx 5%;
+  height: auto;
+}
+.Input{
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #EAEAEA;
+  background: #fff;
+  padding-left: 30rpx;
+  font-size: 28rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+.prompt{
+  font-size: 24rpx;
+  color: #6F6F6F;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.sure{
+  width: 100%;
+  background-color: #29D9D6;
+  color: #fff;
+  font-size: 28rpx;
+  text-align: center;
+  height: 70rpx;
+  line-height: 70rpx;
+  border-radius: 45rpx;
+}
+.top{
+  width: 80rpx;
+  margin-left: 10rpx;
+  margin-top: 10rpx;
+  border-radius: 5rpx;
+}
+.mg{
+  margin: 10rpx 0;
+}
+.mg1{
+  padding-left: 31rpx;
+}
+.t1{
+  font-size: 24rpx;
+  color: #D3D3D3;
+}
+
+

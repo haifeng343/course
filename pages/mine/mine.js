@@ -24,84 +24,26 @@ Page({
       name: '波利亚'
     }]
   },
-  copyText: function (e) {
-    console.log(e)
-    wx.setClipboardData({
-      data: e.currentTarget.dataset.text,
-      success: function (res) {
-        wx.getClipboardData({
-          success: function (res) {
-            wx.showToast({
-              title: '复制成功'
-            })
-          }
-        })
-      }
+  integral:function() {
+    wx.navigateTo({
+      url: '/pages/integralLog/integralLog',
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-  navto:function(e) {
-    var that = this;
-    wx.switchTab({
-      url: '/pages/index/index',
+  callUs:function() {
+    wx.navigateTo({
+      url: '/pages/callUs/callUs',
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-  previewImage: function (e) {
-    var current = e.target.dataset.src;
-    wx.previewImage({
-      current: current,
-      urls: [current]
+  setting:function() {
+    wx.navigateTo({
+      url: '/pages/setting/setting',
     })
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  invite:function() {
+    wx.navigateTo({
+      url: '/pages/invite/invite',
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
 
   }

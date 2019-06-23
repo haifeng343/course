@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 22,
 			"list": [
 				{
 					"id": -1,
@@ -146,6 +146,69 @@
 					"id": -1,
 					"name": "refund",
 					"pathName": "pages/refund/refund",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "mine",
+					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "integralLog",
+					"pathName": "pages/integralLog/integralLog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "callUs",
+					"pathName": "pages/callUs/callUs",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "setting",
+					"pathName": "pages/setting/setting",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "modifyPhone",
+					"pathName": "pages/modifyPhone/modifyPhone",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "invite",
+					"pathName": "pages/invite/invite",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "recommendation",
+					"pathName": "pages/recommendation/recommendation",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "address",
+					"pathName": "pages/address/address",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "editAddress",
+					"pathName": "pages/editAddress/editAddress",
 					"scene": null
 				}
 			]

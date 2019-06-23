@@ -1,0 +1,32 @@
+<view class='address' hidden='{{hasAddress}}'>
+  <image class='noads' src='../../images/noads.png' mode='widthFix' lazy-load='true'></image>
+  <view class='nohave'>暂无收货地址</view>
+  <view class='haveto'>点击下方按钮进行添加</view>
+  <view class='add'>+新增地址</view>
+</view>
+<view class='address'>
+  <view class='List'>
+    <view class='item between'>
+      <view class='column'>
+        <view class='start'>
+          <view class='name'>西溪谷</view>
+          <view class='home'>家</view>
+        </view>
+        <view class='addressDetail'>杭州市西湖区紫霞街国际商务中心</view>
+      </view>
+      <image class='edit' bindtap='edit' src='../../images/edit.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+    <view class='item between'>
+      <view class='column'>
+        <view class='start'>
+          <view class='name'>西溪谷</view>
+          <view class='company'>公司</view>
+        </view>
+        <view class='addressDetail'>杭州市西湖区紫霞街国际商务中心</view>
+      </view>
+      <image class='edit' bindtap='edit' src='../../images/edit.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+  <view class='add'>+新增地址</view>
+</view>
+<view></view>

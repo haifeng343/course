@@ -1,11 +1,12 @@
-const app = getApp()
+
+const app = getApp();
 App({
   // 头部导航栏的高度
-  onLaunch: function () {
+  onLaunch: function() {
     var that = this;
     //自定义title设置顶部
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.globalData.platform = res.platform
         let totalTopHeight = 68
         if (res.model.indexOf('iPhone X') !== -1) {
@@ -51,6 +52,19 @@ App({
           })
         }
       }
+    })
+  },
+  onLoad() {
+    wx.loadFontFace({//微信小程序平方字体
+
+      family: 'PingFangSC-Medium',
+
+      source: 'url("https://www.your-server.com/PingFangSC-Medium.ttf")',
+
+      success: function() {
+        console.log('load font success')
+      }
+
     })
   },
   globalData: {

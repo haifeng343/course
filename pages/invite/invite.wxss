@@ -1,0 +1,55 @@
+.item{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 5%;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.go{
+  margin-top: 25rpx;
+}
+.avator{
+  width: 80rpx;
+  margin-right: 20rpx;
+  margin-top: 5rpx;
+}
+.itemLeft{
+  margin-top: 10rpx;
+}
+.myTitle{
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding-left: 5%;
+}
+.logList{
+  width: 100%;
+  height: auto;
+  font-size: 28rpx;
+}
+.logItem{
+  background-color: #fff;
+  border-top: 1rpx solid #F9F9F9;
+  border-bottom: 1rpx solid #F9F9F9;
+  padding: 20rpx 5%;
+  box-sizing: border-box;
+}
+.time{
+  font-size: 24rpx;
+  line-height: 35rpx;
+  color: #717171;
+}
+.fraction{
+  font-size: 28rpx;
+  line-height:90rpx;
+}
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+<view class='item between mt20' bindtap='recommendation'>
+  <view>我的邀请人</view>
+  <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+</view>
+<view class='myTitle'>我的邀请</view>
+<view class='logList'>
+  <view class='logItem between'>
+    <view class='start'>
+    <image class='avator' src='../../images/invite.png' mode='widthFix' lazy-load='true'></image>
+      <view class='itemLeft'>
+        <view>梵蒂冈</view>
+        <view class='time'>2019-10-22</view>
+      </view>
+    </view>
+    <view class='fraction'>+ 9 积分</view>
+  </view>
+  <view class='logItem between'>
+    <view class='start'>
+    <image class='avator' src='../../images/invite.png' mode='widthFix' lazy-load='true'></image>
+      <view class='itemLeft'>
+        <view>是非得失</view>
+        <view class='time'>2019-10-22</view>
+      </view>
+    </view>
+    <view class='fraction'>+ ￥5.00</view>
+  </view>
+</view>

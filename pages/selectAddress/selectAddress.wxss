@@ -1,3 +1,6 @@
+page{
+  background-color: #fff;
+}
 .navTop{
   width: 100%;
   height: 90rpx;
@@ -53,9 +56,97 @@ margin-top:33rpx;
   background-repeat: no-repeat;
   background-position: 27% 50%;
 }
+.currentd{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 5% 15rpx;
+  height: auto;
+  background: #fff;
+}
+.kowd{
+  margin: 15rpx 0;
+}
+.now{
+  font-size: 26rpx;
+  color: #959595;
+}
+.md{
+  padding:20rpx 0 0 5%;
+}
+.again{
+  font-size: 28rpx;
+  color: #29D9D6;
+}
+.adIcon{
+  width: 30rpx;
+  margin-top: 8rpx;
+  margin-right: 10rpx;
+}
+.addressDetail{
+  font-size: 32rpx;
+}
+.about{
+  width: 100%;
+  background-color: #fff;
+  height: auto;
+}
+.List{
+  width: 100%;
+  height: auto;
+  padding: 0 0 0 5%;
+  box-sizing: border-box;
+}
+.item{
+  width: 95%;
+  margin-left: 5%;
+  padding: 25rpx 0;
+  border-bottom:1rpx solid #F7F7F7;
+}
+.name{
+  font-size: 32rpx;
+}
+.addressDetail{
+  font-size: 26rpx;
+  color: #A19B9B;
+}
+.addressList{
+  width: 100%;
+  height: auto;
+}
+.addressItem{
+  width: 90%;
+  margin-left: 10%;
+  font-size: 28rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+}
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+.add{
+  width: 90%;
+  height: 80rpx;
+  line-height: 80rpx;
+  position: fixed;
+  border-radius: 10rpx;
+  text-align: center;
+  bottom: 40rpx;
+  left: 5%;
+  background: #29D9D6;
+  color: #fff;
+  font-size: 28rpx;
+}
 
 
 

@@ -1,8 +1,66 @@
-<!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
-<image src="https://img.fetow.com/Public/Index/images/shewm.jpg" mode="widthFix" data-src="https://img.fetow.com/Public/Index/images/shewm.jpg" bindtap="previewImage"></image>
-<view wx:for="{{synctable}}">
-  <view bindtap='navto' data-index="{{index}}">{{item.index}}{{item.name}}</view>
+<view class='myTop'>
+  <view class='start'>
+    <image class='avator' src='../../images/avator.png' mode='widthFix' lazy-load='true'></image>
+    <view class='align'>
+    <view class='name'>LKJDSFL</view>
+    <view class='share start'>分享码： <view class='code'>dlisa</view></view>
+    </view>
+  </view>
 </view>
-<view>内容：{{contents}} </view>
-<view bindtap='copyText' data-text="{{contents}}">复制</view>
+<view class='List mt20'>
+  <view class='item' bindtap='integral'>
+    <view class='start'>
+      <image class='icon1' src='../../images/integral.png' mode='widthFix' lazy-load='true'></image>
+      <view>我的积分</view>
+    </view>
+    <view class='start'>
+      <view>1980</view>
+      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+  <view class='item mt20' bindtap='setting'>
+    <view class='start'>
+      <image class='icon1' src='../../images/setting.png' mode='widthFix' lazy-load='true'></image>
+      <view>设置</view>
+    </view>
+    <view class='start'>
+      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+  <view class='item mt20'>
+    <view class='start'>
+      <image class='icon1' src='../../images/a1.png' mode='widthFix' lazy-load='true'></image>
+      <view>关于我们</view>
+    </view>
+    <view class='start'>
+      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+  <view class='item' bindtap='callUs'>
+    <view class='start'>
+      <image class='icon1' src='../../images/a2.png' mode='widthFix' lazy-load='true'></image>
+      <view>联系我们</view>
+    </view>
+    <view class='start'>
+      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+  <view class='item'>
+    <view class='start'>
+      <image class='icon1' src='../../images/a3.png' mode='widthFix' lazy-load='true'></image>
+      <view>分享给好友</view>
+    </view>
+    <view class='start'>
+      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+  <view class='item mt20' bindtap='invite'>
+    <view class='start'>
+      <image class='icon1' src='../../images/a4.png' mode='widthFix' lazy-load='true'></image>
+      <view>推荐与邀请</view>
+    </view>
+    <view class='start'>
+      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+</view>
