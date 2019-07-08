@@ -5,8 +5,8 @@
     <view class='title'>选择地址</view>
   </view>
   <view class='topInput'>
-    <view class='abso'>杭州市∨</view>
-    <input type='search' class='search' placeholder='小区/写字楼/学校等'></input>
+    <view class='abso' bindtap='cityChange'>杭州市</view>
+    <input type='search' class='search' bindinput="bindInput" placeholder='小区/写字楼/学校等'></input>
   </view>
 </view>
 <view class='currentd'>
@@ -14,9 +14,9 @@
   <view class='between kowd'>
     <view class='start'>
       <image class='adIcon' src='../../images/selectAddress.png' mode='widthFix' lazy-load='true'></image>
-      <view class='addressDetail'>西溪谷</view>
+      <view class='addressDetail'>{{address}}</view>
     </view>
-    <view class='again'>重新定位</view>
+    <view class='again' bindtap='onceAgain'>重新定位</view>
   </view>
 </view>
 <view class='line'></view>
@@ -44,10 +44,7 @@
   </view>
   <view class='now md mt20'>附近地址</view>
   <view class='addressList'>
-  <view class='addressItem'>杭州市西湖区紫霞街国际商务中心</view>
-  <view class='addressItem'>杭州市西湖区紫霞街国际商务中心</view>
-  <view class='addressItem'>杭州市西湖区紫霞街国际商务中心</view>
-  <view class='addressItem'>杭州市西湖区紫霞街国际商务中心</view>
+    <view class='addressItem' wx:for="{{nearList}}" wx:key bindtap='adsChange' data-location="{{item.location}}">{{item.title}}</view>
   </view>
 </view>
 <view class='add'>新增地址</view>

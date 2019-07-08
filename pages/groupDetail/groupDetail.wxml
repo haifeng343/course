@@ -15,12 +15,12 @@
   </view>
 </view>
 <view class='content'>
-  <view class='title'>英孚英语/英孚英语/英孚英语</view>
+  <view class='title'>{{detailCent.SheetName}}</view>
   <view class='contents'>
-    <view class='time'>活动截止时间：2019-06-20</view>
+    <view class='time'>活动截止时间：{{detailCent.EndTime}}</view>
     <view class='money'>
       <view class='sym'>￥</view>
-      <view class='number'>50~200</view>
+      <view class='number'>{{detailCent.SheetPrice}}</view>
     </view>
   </view>
 </view>
@@ -69,9 +69,9 @@
     </view>
   </view>
 </view>
-<view class='disclaimerList'>
-  <view class='disTitle'>免责声明</view>
-  <view class='disContent'>免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明</view>
+<view class='disclaimerList' wx:for="{{ExtraList}}" wx:key>
+  <view class='disTitle'>{{item.Title}}</view>
+  <view class='disContent'>{{item.Content}}</view>
 </view>
 <view class='pay'>
   <button class='payBtn' bindtap='chooseClass'>立即购买</button>

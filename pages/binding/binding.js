@@ -5,7 +5,7 @@ Page({
     PicUrl:'',
     Mobile:'',
     isShow:false,
-    imgCodeShow:true,
+    imgCodeShow:false,
     NumberCountDown:0,
     Remark:'',
     imgUrl:'',

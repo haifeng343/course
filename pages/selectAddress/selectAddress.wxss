@@ -31,6 +31,7 @@ margin-top:33rpx;
   font-size: 28rpx;
   left:10%;
   top:-15rpx;
+  z-index: 999;
 }
 .abso::after{
   content: "";
@@ -111,14 +112,15 @@ margin-top:33rpx;
 }
 .addressList{
   width: 100%;
-  height: auto;
+  max-height: 420rpx;
+  overflow: hidden;
 }
 .addressItem{
   width: 90%;
   margin-left: 10%;
   font-size: 28rpx;
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 60rpx;
+  line-height: 60rpx;
 }
 
 

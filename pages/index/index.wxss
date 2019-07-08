@@ -123,6 +123,7 @@ swiper-item image{
 }
 .groupItem{
   width: 100%;
+  height: auto;
   display: flex;
   justify-content: flex-start;
   box-sizing: border-box;

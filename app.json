@@ -22,13 +22,19 @@
     "pages/invite/invite",
     "pages/recommendation/recommendation",
     "pages/address/address",
-    "pages/editAddress/editAddress"
+    "pages/editAddress/editAddress",
+    "pages/city/city"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {
