@@ -8,6 +8,7 @@ Page({
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
     nearList:[],
+    ads:"杭州市",
   },
   onLoad: function (options) {
     console.log(options)
@@ -41,7 +42,7 @@ Page({
       }
     });
     qqmapsdk.search({
-      keyword: '商圈',
+      keyword: '商圈,学校，小区',
       success: function (res) {
         that.setData({
           nearList: res.data,
@@ -49,14 +50,28 @@ Page({
         // console.log(res);
       },
       fail: function (res) {
-        console.log(res);
+        // console.log(res);
       }
     });
   },
+  onShow() {
+    let that = this;
+    wx.getStorage({
+      key: 'address',
+      success: function(res) {
+        that.setData({
+          ads: res.data
+        })
+      },
+    })
+  },
   //跳转首页
   adsChange(e){
+    let { location, title } = e.currentTarget.dataset;
+    let a = Object.assign({}, location, { title: title });
+    wx.setStorageSync('loc', a);
     wx.switchTab({
-      url: '/pages/index/index?location='+e.location,
+      url: '/pages/index/index',
     })
     console.log(e);
   },

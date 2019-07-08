@@ -5,7 +5,7 @@
     <view class='title'>选择地址</view>
   </view>
   <view class='topInput'>
-    <view class='abso' bindtap='cityChange'>杭州市</view>
+    <view class='abso' bindtap='cityChange'>{{ads}}</view>
     <input type='search' class='search' bindinput="bindInput" placeholder='小区/写字楼/学校等'></input>
   </view>
 </view>
@@ -44,7 +44,7 @@
   </view>
   <view class='now md mt20'>附近地址</view>
   <view class='addressList'>
-    <view class='addressItem' wx:for="{{nearList}}" wx:key bindtap='adsChange' data-location="{{item.location}}">{{item.title}}</view>
+    <view class='addressItem' wx:for="{{nearList}}" wx:key bindtap='adsChange' data-title='{{item.title}}' data-location="{{item.location}}">{{item.title}}</view>
   </view>
 </view>
 <view class='add'>新增地址</view>

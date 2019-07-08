@@ -5,9 +5,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      cityType: options.cityType
-    })
+    
     if (this.data.cityResults == null) {
       this.setData({
         cityResults: this.data.citys
@@ -61,7 +59,7 @@ Page({
   },
   citySelected: function (e) {
     var cityNameTemp = e.currentTarget.dataset.cityname
-
+    wx.setStorageSync("address", cityNameTemp);
     if (this.data.cityType == 'begin') {
       app.globalData.trainBeginCity = cityNameTemp
     }

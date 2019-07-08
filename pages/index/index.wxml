@@ -2,7 +2,7 @@
 <view class="custom flex_center" style="padding-top:{{statusBarHeight}}px">
   <view class='navTop' bindtap='address'>
     <image class='navImg' src='../../images/address.png' mode='widthFix' lazy-load='true'></image>
-    <view>{{Acount.LocationName}}</view>
+    <view>{{locationName}}</view>
   </view>
 </view>
 <view style="padding-top:{{statusBarHeight+60}}px" class='topInput'>
@@ -27,12 +27,12 @@
 <view class='groupList'>
   <view class='groupItem' wx:for="{{groupList}}" wx:for-item="item" wx:key data-id='{{item.SheetId}}' bindtap='groupDetail'>
     <view class='itemImg'>
-      <image src="../../images/t1.png" binderror="binding" class='leftImg' mode='widthFix' lazy-load='true'></image>
+      <image src="{{item.SheetCoverImg}}" binderror="binding" class='leftImg' mode='widthFix' lazy-load='true'></image>
     </view>
     <view class='itemRight'>
       <view class='title'>{{item.SheetName}}</view>
       <view class='addr'>
-        <image src='{{item.SheetCoverImg}}' class='ad1' mode='widthFix' lazy-load='true'></image>
+        <image src='../../images/ad1.png' class='ad1' mode='widthFix' lazy-load='true'></image>
         <view>{{item.TradingAreaName}}</view>
         <view class='distance'>{{item.TradingAreaDistance}}Km</view>
       </view>

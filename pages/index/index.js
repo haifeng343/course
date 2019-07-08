@@ -37,6 +37,7 @@ Page({
     color: '#59B8B3',
     bgcolor: '#EDFBFB',
     groupList: [],
+    locationName: '',
   },
 
   groupDetail: function(e) {
@@ -52,28 +53,48 @@ Page({
     })
   },
   onShow() {
+    var _this = this;
+    wx.getStorage({
+      key: 'loc',
+      success: function(res) {
+        console.log(res)
+        _this.setData({
+          longitude : res.data.lng,
+          latitude : res.data.lat,
+          locationName: res.data.title,
+        });
+      },
+    })
+  },
+  func:function() {
     let that = this;
     var url = 'sheet/near/list';
     var params = {
       SearchName: '',
-      Longitude: 0,
-      Latitude: 0,
+      Longitude: that.data.longitude,
+      Latitude: that.data.latitude,
       LocationName: '',
       PageCount: 10,
       PageIndex: 1,
     }
 
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      let arr = res.Data.List;
+      for (let index of arr) {
+        index.SheetCoverImg = index.SheetCoverImg.replace(/\\/, "/");
+      }
+      let loc = that.data.locationName;
+      if (!loc) {
+        loc = res.Data.LocationName;
+      }
       that.setData({
-        groupList: res.Data.List,
+        groupList: arr,
         Acount: res.Data,
+        locationName: loc
       })
-      // for (var index in res.Data.List) {
-      //   console.log(res.Data.List[index].SheetCoverImg.replace("\\\\", "\/\/"));
-      // }
       that.Longitude = res.Data.Longitude;
       that.Latitude = res.Data.Latitude;
-    }, function(msg) { //onFailed失败回调
+    }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -81,16 +102,12 @@ Page({
         })
       }
     }); //调用get方法情就是户数
-
   },
   onLoad: function(options) {
-    console.log(options);
-    this.setData({
-
-    });
     wx.getLocation({
       type: 'wgs84',
       success: (res) => {
+        console.log(res);
         var latitude = res.latitude
         var longitude = res.longitude
         var speed = res.speed
@@ -99,6 +116,7 @@ Page({
           latitude: latitude,
           longitude: longitude
         })
+        this.func();
       }
     })
   },
@@ -106,6 +124,9 @@ Page({
     this.setData({
       currentSwiper: e.detail.current
     })
+  },
+  onReachBottom:function(){
+
   },
   onShareAppMessage: function() {
 
