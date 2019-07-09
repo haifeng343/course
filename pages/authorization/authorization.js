@@ -53,9 +53,15 @@ Page({
     that.userInfo = res.Data;
     wx.setStorageSync('userInfo', that.userInfo);
     wx.setStorageSync('usertoken', res.Data.UserToken);
-    wx.redirectTo({
-      url: '/pages/gobind/gobind',
-    })
+    if (res.Data.Mobile == "" || res.Data.Mobile ==null){
+      wx.redirectTo({
+        url: '/pages/gobind/gobind',
+      })
+    }else{
+      wx.navigateBack({
+        delta:1
+      })
+    }
   },
   onFailed: function () { //onFailed失败回调
     wx.showToast({

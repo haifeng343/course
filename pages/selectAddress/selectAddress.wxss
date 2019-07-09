@@ -42,6 +42,21 @@ margin-top:33rpx;
   right: -15rpx;
   top: 35rpx;
 }
+.addressListed{
+  width: 90%;
+  background-color: #fff;
+  margin-left: 5%;
+  max-height: 600rpx;
+  box-shadow: 0 2rpx 10rpx #f1f1f1;
+}
+.addItem{
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 30rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+}
 .search{
   width: 90%;
   height: 60rpx;

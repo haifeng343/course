@@ -3,7 +3,7 @@
     <block wx:for="{{imgUrls}}" wx:key>
       <swiper-item>
         <view class='box'>
-          <image src='{{item.img}}' mode="widthFix" lazy-load="true"></image>
+          <image src='{{item}}' mode="widthFix" lazy-load="true"></image>
         </view>
       </swiper-item>
     </block>
@@ -25,47 +25,47 @@
   </view>
 </view>
 <view class='courseList'>
-  <view class='courseItem' wx:for='{{courseList}}' wx:key>
+  <view class='courseItem' wx:for='{{GroupList}}' wx:key>
     <view class='title'>
-      <view class='heng'></view> {{item.title}}
+      <view class='heng'></view> {{item.GroupName}}({{text}})
       <view class='heng'></view>
     </view>
-    <view class='courseCont' bindtap='courseDetail'>
-      <view class='leftImg'>
-        <image class='cover' src='{{item.imgUrl}}' mode='widthFix' lazy-load='true'></image>
-      </view>
-      <view class='rightContent'>
-        <view class='courseTitle'>{{item.titleName}}</view>
-        <view class='coursePeople'>{{item.yiPeople}}人已参与 | 剩余名额 {{item.guo}} 个</view>
-        <view class='tagList'>
-          <view class='tagItm' wx:for="{{item.tagList}}" wx:key style='background:{{bgcolor}};color:{{color}}'>{{item.tag}}</view>
+    <view class='courseCont' wx:for="{{item.ItemList}}" wx:key wx:for-item="k" data-Id="{{k.RelId}}" bindtap='courseDetail'>
+        <view class='leftImg'>
+          <image class='cover' src='{{k.ItemCoverImg}}' mode='widthFix' lazy-load='true'></image>
         </view>
-        <view class='detail'>
-          <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
-          <view class='name'>{{item.name}}</view>
-        </view>
-        <view class='detail around'>
-          <view class='addrLong'>
-            <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
-            <view class='name address'>{{item.address}}</view>
+        <view class='rightContent'>
+          <view class='courseTitle'>{{k.ItemName}}</view>
+          <view class='coursePeople'>{{k.SoldCount}}人已参与 | 剩余名额 {{k.RemainCount}} 个</view>
+          <view class='tagList'>
+            <view class='tagItm' wx:for="{{k.TagList}}" wx:key wx:for-item="b" style='background:{{b.TagBgColor}};color:{{b.TagFontColor}}'>{{b.TagName}}</view>
           </view>
-          <view class='long'>{{item.nearby}}km</view>
-        </view>
-        <view class='detail'>
-          <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
-          <view class='name'>{{item.phone}}</view>
-        </view>
-        <view class='detail'>
-          <view class='ring'>
-            <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-            <view class='name'>共有{{item.number}}节课</view>
+          <view class='detail'>
+            <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+            <view class='name'>{{k.SellerName}}</view>
           </view>
-          <view class='ring'>
-            <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
-            <view class='name'>单节课时 {{item.time}} min</view>
+          <view class='detail around'>
+            <view class='addrLong'>
+              <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+              <view class='name address'>{{k.StoreAddress}}</view>
+            </view>
+            <view class='long'>{{k.Distance}}km</view>
+          </view>
+          <view class='detail'>
+            <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+            <view class='name'>{{k.Mobile}}</view>
+          </view>
+          <view class='detail'>
+            <view class='ring'>
+              <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+              <view class='name'>共有{{k.CoursesNumber}}节课</view>
+            </view>
+            <view class='ring'>
+              <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+              <view class='name'>单节课时 {{k.SingleTime}} min</view>
+            </view>
           </view>
         </view>
-      </view>
     </view>
   </view>
 </view>

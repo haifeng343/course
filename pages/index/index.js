@@ -1,3 +1,6 @@
+
+// 引入SDK核心类
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var netUtil = require("../../utils/request.js"); //require引入
 
 const app = getApp();
@@ -57,11 +60,10 @@ Page({
     wx.getStorage({
       key: 'loc',
       success: function(res) {
-        console.log(res)
         _this.setData({
           longitude : res.data.lng,
           latitude : res.data.lat,
-          locationName: res.data.title,
+          locationName: res.data.title.substring(0, 6),
         });
       },
     })
@@ -73,11 +75,10 @@ Page({
       SearchName: '',
       Longitude: that.data.longitude,
       Latitude: that.data.latitude,
-      LocationName: '',
+      LocationName: that.data.locationName,
       PageCount: 10,
       PageIndex: 1,
     }
-
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       let arr = res.Data.List;
       for (let index of arr) {
@@ -104,18 +105,33 @@ Page({
     }); //调用get方法情就是户数
   },
   onLoad: function(options) {
+    var that = this
+    // 实例化腾讯地图API核心类
+    var qqmapsdk = new QQMapWX({
+      key: 'IDXBZ-GUJCF-2QKJB-NXK2V-VRZXE-MGFUI' // 必填
+    });
     wx.getLocation({
       type: 'wgs84',
       success: (res) => {
-        console.log(res);
         var latitude = res.latitude
         var longitude = res.longitude
         var speed = res.speed
         var accuracy = res.accuracy
-        this.setData({
+        that.setData({
           latitude: latitude,
           longitude: longitude
-        })
+        });
+        qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: res.latitude,
+            longitude: res.longitude
+          },
+          success: function (res) {
+            that.setData({
+              locationName: res.result.formatted_addresses.recommend
+            })
+          }
+        });
         this.func();
       }
     })

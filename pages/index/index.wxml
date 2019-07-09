@@ -2,7 +2,7 @@
 <view class="custom flex_center" style="padding-top:{{statusBarHeight}}px">
   <view class='navTop' bindtap='address'>
     <image class='navImg' src='../../images/address.png' mode='widthFix' lazy-load='true'></image>
-    <view>{{locationName}}</view>
+    <view class='abs'>{{locationName}}</view>
   </view>
 </view>
 <view style="padding-top:{{statusBarHeight+60}}px" class='topInput'>

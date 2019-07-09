@@ -6,9 +6,8 @@
     </view>
     <view class="loginInput">
       <view class="subtitle">验证码</view>
-      <input type="number" placeholder="请输入验证码" value="{{VerifyCode}}" placeholder-style="color:#ccc;" />
-      <view class="imgCoded" wx:if="{{NumberCountDown==0}}" bindtap="getPicCode">获取验证码</view>
-      <view class="imgCoded" wx:if="{{NumberCountDown>0}}">重新获取({{NumberCountDown}})</view>
+      <input type="number" placeholder="请输入验证码" value="{{VerifyCode}}" bindinput='cendCode' placeholder-style="color:#ccc;" />
+      <button class="imgCoded" bindtap='codeyan' wx:if="{{NumberCountDown==0}}" disabled='{{notEdit}}'>{{btntext}}</button>
       <view class="imgCoded" wx:if="{{NumberCountDown==-1}}">次数已到</view>
     </view>
   </view>
@@ -22,13 +21,13 @@
       <icon class="delete" type="clear" size="15" bindtap="closeAlert" />
     </view>
     <view class="inputBox">
-      <input type="text" class='codeNumber' placeholder="请输入" value="{{PicCode}}" placeholder-style="color:#ccc;" />
-      <image :src="PicUrl" class='codeImg' alt="failed" bindtap="getPicCode" alt=""></image>
+      <input type="text" class='codeNumber' placeholder="请输入" value="{{PicVerifycode}}" bindinput='codeText' placeholder-style="color:#ccc;" />
+      <image src="{{PicUrl}}" class='codeImg' alt="failed" bindtap="codeyan" alt=""></image>
     </view>
     <view class="loginBtns" bindtap="getSMSCode">确定</view>
   </view>
 </view>
-<view class="absolute" wx:if="{{isShow}}">
+<!-- <view class="absolute" wx:if="{{isShow}}">
   <view class="fiexed">
     <image :src="{{imgUrl}}" bindtap="previewImage" class="img_er" alt=""></image>
     <view class="er_text" v-if="contents!=null && contents.length>0">
@@ -38,4 +37,4 @@
     </view>
     <image src="../../images/close-icon.png" class="close" bindtap="closed" alt=""></image>
   </view>
-</view>
+</view> -->

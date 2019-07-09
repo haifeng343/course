@@ -6,7 +6,10 @@
   </view>
   <view class='topInput'>
     <view class='abso' bindtap='cityChange'>{{ads}}</view>
-    <input type='search' class='search' bindinput="bindInput" placeholder='小区/写字楼/学校等'></input>
+    <input type='search' class='search' bindinput="getsuggest" value='{{searchAdr}}' placeholder='小区/写字楼/学校等'></input>
+    <view class='addressListed'wx:if="{{show}}">
+      <view class='addItem' wx:for="{{addressList}}" wx:key bindtap='adsChange' data-location="{{item.location}}" data-title="{{item.title}}">{{item.title}}</view>
+    </view>
   </view>
 </view>
 <view class='currentd'>

@@ -3,7 +3,7 @@
     <block wx:for="{{imgUrls}}" wx:key>
       <swiper-item>
         <view class='box'>
-          <image src='{{item.img}}' mode="widthFix" lazy-load="true"></image>
+          <image src='{{item}}' mode="widthFix" lazy-load="true"></image>
         </view>
       </swiper-item>
     </block>
@@ -16,81 +16,53 @@
 </view>
 <view class='courseCont'>
   <view class='between well courseLi'>
-    <view class='name'>UUOD绘画</view>
-    <view class='howMoney'>价值：￥50</view>
+    <view class='name'>{{List.ItemName}}</view>
+    <view class='howMoney'>价值：￥{{Price}}</view>
   </view>
   <view class='somebody well'>
-    7878人已参与 | 剩余名额 3 个
+    {{List.SoldCount}}人已参与 | 剩余名额 {{List.RemainCount}} 个
   </view>
   <view class='courseRow start well'>
     <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
-    <view>UUID教育</view>
+    <view>{{List.SellerName}}</view>
   </view>
   <view class='courseRow between well'>
     <view class='start'>
       <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
-      <view class='address'>UUID教育UUID教育UUID教育UUID教育UUID教育UUID教育</view>
+      <view class='address'>{{List.StoreAddress}}</view>
     </view>
-    <view class='end'>1.8km</view>
+    <view class='end'>{{List.Distance}}km</view>
   </view>
-  <button class='courseRow start well'>
+  <button class='courseRow start well' bindtap='callPhone'>
     <image class='rowImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
-    <view>400-100-100</view>
+    <view>{{mobile}}</view>
   </button>
   <view class='courseRow start well'>
     <view class='start'>
       <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-      <view>课程数量 1 节</view>
+      <view>课程数量 {{List.CoursesNumber}} 节</view>
     </view>
     <view class='start'>
       <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
-      <view>单节课时 60 min</view>
+      <view>单节课时 {{List.SingleTime}} min</view>
     </view>
   </view>
-</view>
-<view class='prompt boxd'>
-  <view class='prompTitle'>购买须知</view>
-  <view class='promptText'>购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知</view>
 </view>
 <view class='teacherList boxd' bindtap='allTeacher'>
   <view class='tearcherTitle between'>
-    <view class='teaNumber'>师资力量 (33)</view>
+    <view class='teaNumber'>师资力量 ({{List.TeacherCount}})</view>
     <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
   </view>
   <view class='teaList'>
-    <view class='teachers'>
-      <image class='teaImg' src='../../images/teacher.png' mode='widthFix' lazy-load='true'></image>
-      <view class='teaName'>Apri</view>
-      <view class='profession'>Apri</view>
-      <view class='profession'>Apri</view>
-    </view>
-    <view class='teachers'>
-      <image class='teaImg' src='../../images/teacher.png' mode='widthFix' lazy-load='true'></image>
-      <view class='teaName'>Apri</view>
-      <view class='profession'>Apri</view>
-      <view class='profession'>Apri</view>
-    </view>
-    <view class='teachers'>
-      <image class='teaImg' src='../../images/teacher.png' mode='widthFix' lazy-load='true'></image>
-      <view class='teaName'>Apri</view>
-      <view class='profession'>Apri</view>
-      <view class='profession'>Apri</view>
-    </view>
-    <view class='teachers'>
-      <image class='teaImg' src='../../images/teacher.png' mode='widthFix' lazy-load='true'></image>
-      <view class='teaName'>Apri</view>
-      <view class='profession'>Apri</view>
-      <view class='profession'>Apri</view>
-    </view>
-    <view class='teachers'>
-      <image class='teaImg' src='../../images/teacher.png' mode='widthFix' lazy-load='true'></image>
-      <view class='teaName'>Apri</view>
-      <view class='profession'>Apri</view>
-      <view class='profession'>Apri</view>
+    <view class='teachers' wx:for="{{teaList}}" wx:key>
+      <image class='teaImg' src='{{item.HeadUrl}}' lazy-load='true'></image>
+      <view class='teaName'>{{item.Name}}</view>
+      <view class='profession'>{{item.Honor}}</view>
+      <view class='profession'>{{item.TeachingAge}}</view>
     </view>
   </view>
 </view>
-<view class='prompt boxd'>
-  <view class='prompTitle'>购买须知</view>
-  <view class='promptText'>购买须知购买须知购买须知购买须知购买须知购买须知购买须知购买须知</view>
+<view class='prompt boxd' wx:for="{{List.OtherList}}" wx:key>
+  <view class='prompTitle'>{{item.Title}}</view>
+  <view class='promptText'>{{item.Content}}</view>
 </view>

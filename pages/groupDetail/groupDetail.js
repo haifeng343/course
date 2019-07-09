@@ -6,23 +6,8 @@ Page({
     content: {},
     detailCent:{},
     ExtraList:[],
-    imgUrls: [{
-      img: '../../images/banner.png',
-      Id: 1
-    },
-    {
-      img: '../../images/banner.png',
-      Id: 2
-    },
-    {
-      img: '../../images/banner.png',
-      Id: 3
-    },
-    {
-      img: '../../images/banner.png',
-      Id: 4
-    },
-    ],
+    imgUrls: [],
+    text:'',//介绍
     autoplay: true, //是否自动播放
     indicatorDots: false, //指示点
     circular: true,
@@ -97,13 +82,51 @@ Page({
       Latitude: that.content.Latitude,
       Id: that.content.Id
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
+      var tempList = [];
+      for (let index of res.Data.SheetImgList){
+        index = index.replace(/\\/, "/");
+        tempList.push(index);
+      }
+      let arr = [];
       that.setData({
         GroupList: res.Data.GroupList,
         detailCent : res.Data,
         ExtraList: res.Data.ExtraList,
+        imgUrls: tempList
       })
-      console.log(that.detailCent)
+      arr = res.Data.GroupList;
+      for(let a of arr){
+        if (a.MinCount!=0){
+          that.setData({
+            text:"最多选"+a.MaxCount+'个，最少'+a.MinCount+'个'
+          })
+        } else if (a.MaxCount >= a.ItemList.length){
+          that.setData({
+            text: "以下课程包含全部"
+          })
+        }else{
+          that.setData({
+            text: "以下课程" + a.ItemList.length + '选' + a.MaxCount
+          })
+        }
+      }
+
+      // var arr1 = [],arr2=[],arr3=[];
+      // arr1 = res.Data.GroupList;
+      // for(let a of arr1){
+      //   let arr2 = a.ItemList;
+      //   // console.log(arr2)
+      //   for(let b of arr2){
+      //     b.ItemCoverImg = b.ItemCoverImg.replace(/\\/,"/");
+      //     arr3.push(b);
+      //     console.log(arr2)
+      //   }
+      // }
+      for (let index of res.Data.SheetImgList) {
+        index = index.replace(/\\/, "/");
+        tempList.push(index);
+      }
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -123,9 +146,9 @@ Page({
       url: '/pages/chooseClass/chooseClass',
     })
   },
-  courseDetail() {
+  courseDetail(e) {
     wx.navigateTo({
-      url: '/pages/courseDetail/courseDetail',
+      url: '/pages/courseDetail/courseDetail?Id='+e.currentTarget.dataset.id,
     })
   },
   onShareAppMessage: function () {

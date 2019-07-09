@@ -23,17 +23,12 @@ function get(url, params, onStart, onSuccess, onFailed) {
  */
 
 const baseUrl = "https://test.guditech.com/rocketclient/";
-let UserToken = "";
-wx.getStorage({
-  key: 'userInfo',
-  success: function (res) {
-    UserToken = res.data.UserToken;
-  },
-})
 
 function request(url, params, method, onSuccess, onFailed) {
   let moment = {};
   var that = this;
+  var usertoken = wx.getStorageSync('usertoken');//wx.getStorageSync(key)，获取本地缓存
+
   wx.request({
     url: baseUrl + url,
     data: dealParams(params),
@@ -42,7 +37,7 @@ function request(url, params, method, onSuccess, onFailed) {
       'content-type': 'application/json', // 默认值
       'channelCode': 'wechat',
       'appVersion': '1.0.1',
-      'userToken': UserToken,
+      'userToken': usertoken,
     },
     success: function (res) {
       if (res.data) {

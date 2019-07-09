@@ -133,6 +133,8 @@ button{
 }
 .teaImg{
   width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
 }
 .teaName{
   font-size: 30rpx;
@@ -140,12 +142,8 @@ button{
 
 .profession{
   color: #656565;
-  font-size: 28rpx;
+  font-size: 26rpx;
   word-break: keep-all;
-}
-
-.Introduction{
-
 }
 
 
