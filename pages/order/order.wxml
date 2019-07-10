@@ -8,7 +8,7 @@
         <text>{{item}}</text>
       </view>
     </block>
-  </view>
+  </view> 
   <view class="movie-content-wrapper">
     <swiper current="{{navbarActiveIndex}}" bindanimationfinish="onBindAnimationFinish">
       <swiper-item wx:for="{{navbarTitle}}" wx:key="index">

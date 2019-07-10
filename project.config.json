@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 23,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -101,10 +101,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 7,
 					"name": "chooseClass",
 					"pathName": "pages/chooseClass/chooseClass",
-					"query": "",
+					"query": "Id=8",
 					"scene": null
 				},
 				{
@@ -136,10 +136,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 12,
 					"name": "payOrder",
 					"pathName": "pages/payOrder/payOrder",
-					"query": "",
+					"query": "Id=8&ids=10",
 					"scene": null
 				},
 				{
@@ -216,6 +216,7 @@
 					"id": -1,
 					"name": "city",
 					"pathName": "pages/city/city",
+					"query": "",
 					"scene": null
 				}
 			]

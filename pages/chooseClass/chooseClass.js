@@ -14,6 +14,9 @@ Page({
     detailCent:{},
     text:"",
     RelId:[],
+    Remark:'',
+    TotalPrice:'',
+    a:true
   },
   onLoad(options){
     let that = this;
@@ -31,8 +34,13 @@ Page({
       Id: that.data.Id
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
+      let r = res.Data.GroupList;
+      for (let v of r) {
+        v.checkedArr = [];
+      }
+
       that.setData({
-        GroupList: res.Data.GroupList,
+        GroupList: r,
         detailCent: res.Data,
       })
       for (let a of that.data.GroupList) {
@@ -63,13 +71,19 @@ Page({
   hasMoney:function(){
     var that = this;
     var url = 'sheet/buy/price';
+    let ids = [];
+    for (let v of this.data.GroupList) {
+      ids = ids.concat(v.checkedArr);
+    }
+    this.setData({ ids: ids });
     var params = {
       SheetId: that.data.Id,
-      RelId: that.data.RelId
+      RelId: ids
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
       that.setData({
-       
+        Remark: res.Data.Remark,
+        TotalPrice: res.Data.TotalPrice*1.0/100
       })
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
@@ -82,18 +96,40 @@ Page({
   },
   //是否
   checkedTap: function (e) {
-    let that = this;
-    that.hasMoney();
-  },
-  courseDetail: function() {
-    var checked = this.data.checked;
-    this.setData({
-      "checked": !checked
-    })
+    let index = e.currentTarget.dataset.index;
+    let s = this.data.GroupList[index];
+    let arr = e.detail.value, arr2 = [];
+    if (arr.length >= s.MaxCount) {
+      for (let v of s.ItemList) {
+        if (arr.indexOf(v.RelId.toString()) == -1) {
+          arr2.push(v.RelId);
+        } else {
+          arr2.push(0);
+        }
+      }
+    }
+    let f = false;
+    for (let v of this.data.GroupList) {
+      if (v.checkedArr.length > 0) {
+        f = true;
+      }
+    }
+    let a = 'GroupList[' + index + '].checkedArr';
+    let b = 'GroupList[' + index + '].disabled';
+    this.setData({ [a]: arr, [b]: arr2, a: f });
+    this.hasMoney();
   },
   paybtn:function() {
+    for (let v of this.data.GroupList) {
+      if (v.checkedArr.length <= v.MinCount || v.checkedArr.length > v.MaxCount) {
+        wx.showToast({
+          title: '请正确勾选',
+        })
+        return;
+      }
+    }
     wx.navigateTo({
-      url: '/pages/payOrder/payOrder',
+      url: '/pages/payOrder/payOrder?Id=' + this.data.Id + '&ids=' + this.data.ids.join('-'),
     })
   },
   onShareAppMessage: function () {

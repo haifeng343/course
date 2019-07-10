@@ -1,3 +1,5 @@
+
+var netUtil = require("../../utils/request.js"); //require引入
 Page({
 
   /**
@@ -15,7 +17,25 @@ Page({
     showError:false,
     showSuccess:false,
   },
-
+  getData: function () {
+    let that = this;
+    var url = 'sorder/list';
+    var params = {
+      Status: that.data.navbarActiveIndex+1,
+      PageCount: 10,
+      PageIndex: 1,
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      console.log(res)
+    }, function (msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
+  },
   /**
    * 点击导航栏
    */
@@ -26,6 +46,7 @@ Page({
     this.setData({
       navbarActiveIndex: navbarTapIndex
     })
+    this.getData();
   },
 
   /**

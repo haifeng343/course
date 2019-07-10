@@ -144,6 +144,9 @@ Page({
   onReachBottom:function(){
 
   },
+  onPullDownRefresh:function(){
+    this.func(1);
+  },
   onShareAppMessage: function() {
 
   }
