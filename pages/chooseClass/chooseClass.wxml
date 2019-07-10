@@ -1,46 +1,46 @@
 <view class='title'>
-  本团单共有15门课程，最多可选6节，仅需99元!</view>
+  共{{detailCent.TotalItemCount}}门课程，<text>最少{{detailCent.MinItemCount}}门，</text><text>最多{{detailCent.MaxItemCount}}门，</text>仅需{{detailCent.MaxPrice}}元!</view>
 <view class='courseList'>
-  <view class='courseItem' wx:for='{{courseList}}' wx:key>
-    <view class='check'>课程3选1</view>
-    <view class='courseCont' bindtap='courseDetail'>
+  <view class='courseItem' wx:for='{{GroupList}}' wx:key>
+    <view class='check'>{{text}}</view>
+    <view class='courseCont' wx:for="{{item.ItemList}}" wx:for-item="k" wx:key bindtap='courseDetail'>
       <view class='leftImg'>
-        <image class='cover' src='{{item.imgUrl}}' mode='widthFix' lazy-load='true'></image>
+        <image class='cover' src='{{k.ItemCoverImg}}' mode='widthFix' lazy-load='true'></image>
       </view>
       <view class='rightContent'>
         <view class='between relative'>
-          <view class='courseTitle'>{{item.titleName}}</view>
+          <view class='courseTitle'>{{k.ItemName}}</view>
           <view>
-            <radio checked="{{checked}}" catchtap='checkedTap'></radio>
+            <radio data-Id="{{k.RelId}}" data-groupItem="{{item}}" data-itemIndex="{{index}}" checked="{{k.Distance==1}}" catchtap='checkedTap'></radio>
           </view>
         </view>
-        <view class='coursePeople'>{{item.yiPeople}}人已参与 | 剩余名额 {{item.guo}} 个</view>
+        <view class='coursePeople'>{{k.SoldCount}}人已参与 | 剩余名额 {{k.RemainCount}} 个</view>
         <view class='tagList'>
-          <view class='tagItm' wx:for="{{item.tagList}}" wx:key style='background:{{bgcolor}};color:{{color}}'>{{item.tag}}</view>
+          <view class='tagItm' wx:for="{{k.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}}'>{{l.TagName}}</view>
         </view>
         <view class='detail'>
           <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
-          <view class='name'>{{item.name}}</view>
+          <view class='name'>{{k.SellerName}}</view>
         </view>
         <view class='detail around'>
           <view class='addrLong'>
             <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
-            <view class='name address'>{{item.address}}</view>
+            <view class='name address'>{{k.StoreAddress}}</view>
           </view>
-          <view class='long'>{{item.nearby}}km</view>
+          <view class='long'>{{k.Distance}}km</view>
         </view>
         <view class='detail'>
           <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
-          <view class='name'>{{item.phone}}</view>
+          <view class='name'>{{k.Mobile}}</view>
         </view>
         <view class='detail'>
           <view class='ring'>
             <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-            <view class='name'>共有{{item.number}}节课</view>
+            <view class='name'>共有{{k.CoursesNumber}}节课</view>
           </view>
           <view class='ring'>
             <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
-            <view class='name'>单节课时 {{item.time}} min</view>
+            <view class='name'>单节课时 {{k.SingleTime}} min</view>
           </view>
         </view>
       </view>
@@ -58,6 +58,6 @@
   <view class='flex-end'>
     <view class='totalNumber' wx:if="{{a==true}}">合计:暂无价格</view>
     <view class='totalNumber start' wx:else>合计:<view class='payMoney start'><view class='symbol'>￥</view>5000</view></view>
-    <button class='paybtn'>确认购买</button>
+    <button class='paybtn' bindtap='paybtn'>确认购买</button>
   </view>
 </view>

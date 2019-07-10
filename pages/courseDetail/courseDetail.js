@@ -59,9 +59,10 @@ Page({
       current: e.detail.current
     })
   },
-  allTeacher:function() {
+  allTeacher:function(e) {
+    console.log(e)
     wx.navigateTo({
-      url: '/pages/allTeacher/allTeacher',
+      url: '/pages/allTeacher/allTeacher?Id='+e.currentTarget.dataset.id,
     })
   },
   onShareAppMessage: function() {

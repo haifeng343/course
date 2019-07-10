@@ -43,7 +43,7 @@ swiper-item image {
 .content {
   background-color: #fff;
   width: 90%;
-  padding: 10rpx 5% 10rpx;
+  padding: 30rpx 5% 10rpx;
 }
 
 .content .title {

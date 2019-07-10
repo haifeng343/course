@@ -74,5 +74,5 @@
   <view class='disContent'>{{item.Content}}</view>
 </view>
 <view class='pay'>
-  <button class='payBtn' bindtap='chooseClass'>立即购买</button>
+  <button class='payBtn' bindtap='chooseClass' data-Id="{{detailCent.SheetId}}">立即购买</button>
 </view>

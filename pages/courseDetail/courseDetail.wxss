@@ -39,6 +39,7 @@ swiper-item image {
 .courseCont{
   background-color: #fff;
   padding-bottom: 15rpx;
+  padding-top: 40rpx;
 }
 .courseLi{
   font-size: 30rpx;
