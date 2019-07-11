@@ -1,4 +1,5 @@
 var netUtil = require("../../utils/request.js"); //require引入
+let baseUrl = "https://test.guditech.com/rocketclient/";
 Page({
   data: {
     array: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
@@ -47,15 +48,14 @@ Page({
     var that = this;
     var imgs = that.data.imgs;//存图片地址的变量
     wx.chooseImage({
-      count: 6,
+      count: 1,
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
-        for (var i = 0; i < tempFilePaths.length; i++) {
-          imgs.push(tempFilePaths[i]);
-        }
+        imgs.push(tempFilePaths[0]);
+        that.upLoadImg(tempFilePaths[0]);
         that.setData({
           imgs: imgs
         });
@@ -74,7 +74,6 @@ Page({
       imgs: imgs
     });
     this.showHide();
-    console.log(that.data.imgs)
   },
   /*
       预览图片
@@ -136,41 +135,23 @@ Page({
   },
   //上传图片
   upLoadImg: function (data) {
-    var that = this,
-      i = data.i ? data.i : 0,//当前上传的哪张图片
-      success = data.success ? data.success : 0,//上传成功的个数
-      fail = data.fail ? data.fail : 0;//上传失败的个数
+    var that = this;
+    let usertoken = wx.getStorageSync('usertoken');
     wx.uploadFile({
-      url: baseUrl+'',
-      filePath: data.imgs[i],
-      name: 'Order.Refund',
-      formData: {
-        id: data.id
+      url: baseUrl +'img/upload',
+      filePath: data,
+      header: {
+        "Content-Type": "multipart/form-data",//记得设置
+        "userToken": usertoken,
       },
-      success: (resp) => {
-        success++;//图片上传成功，图片上传成功的变量+1
-        console.log(resp);
-        console.log(i);
-        //这里可能有BUG，失败也会执行这里,所以这里应该是后台返回过来的状态码为成功时，这里的success才+1
+      name: 'Order.Refund',
+      success: (res) => {
+       console.log(res);
+        
       },
       fail: (res) => {
-        fail++;//图片上传失败，图片上传失败的变量+1
-        console.log('fail:' + i + "fail:" + fail);
+        
       },
-      complete: () => {
-        console.log(i);
-        i++;//这个图片执行完上传后，开始上传下一张
-        if (i == data.imgs.length) {   //当图片传完时，停止调用          
-          console.log('执行完毕');
-          console.log('成功：' + success + " 失败：" + fail);
-        } else {//若图片还没有传完，则继续调用函数
-          console.log(i);
-          data.i = i;
-          data.success = success;
-          data.fail = fail;
-          that.a(data);
-        }
-      }
     });
   },
   bindPickerChange: function (e) {
