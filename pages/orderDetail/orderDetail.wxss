@@ -3,6 +3,8 @@
   font-size: 30rpx;
   color: #000;
   font-weight: 600;
+  width: 140rpx;
+  text-align: right;
 }
 .kl{
   border-bottom: 1rpx solid #F4F4F4;
@@ -13,11 +15,22 @@
   width: 30rpx;
   margin-top: 10rpx;
 }
+.ml10{
+  margin-left: 5rpx;
+}
+.ml{
+  display: block;
+  width: 76%;
+  overflow: hidden;
+  word-break: break-keep;
+  text-overflow: ellipsis;
+}
 .keep{
   background-color: #fff;
   width: 100%;
   box-sizing: border-box;
   overflow: hidden;
+  position: relative;
 }
 .well{
   padding: 0;
@@ -26,11 +39,11 @@
   width: 65%;
 }
 .leftImg{
-  width: 35%;
+  width: 25%;
   margin-right: 15rpx;
 }
-.right{
-  right: 65%;
+.Right{
+  width: 75%;
   overflow: hidden;
 }
 .activity{
@@ -91,6 +104,9 @@
 .use{
   width: 100rpx;
   margin-bottom: -45rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 .pay .btnd2{
   background-color: #fff;
@@ -110,7 +126,10 @@
   margin-bottom: 20rpx;
 }
 .codeImg{
-  width: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
 }
 .date{
   font-size: 26rpx;

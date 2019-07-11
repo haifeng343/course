@@ -41,6 +41,8 @@ Page({
     bgcolor: '#EDFBFB',
     groupList: [],
     locationName: '',
+    page:1,
+    pageCount:10,
   },
 
   groupDetail: function(e) {
@@ -76,8 +78,8 @@ Page({
       Longitude: that.data.longitude,
       Latitude: that.data.latitude,
       LocationName: that.data.locationName,
-      PageCount: 10,
-      PageIndex: 1,
+      PageCount: that.data.pageCount,
+      PageIndex: that.data.page,
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       let arr = res.Data.List;
@@ -141,8 +143,19 @@ Page({
       currentSwiper: e.detail.current
     })
   },
+  //下拉刷新
   onReachBottom:function(){
-
+    let that = this;
+    wx.showToast({
+      icon:'none',
+      title: '玩命加载中..',
+    })
+    // page = that.data.page + 1;
+    
+  },
+  //上拉加载
+  onPullDownRefresh:function(){
+    this.func(1);
   },
   onShareAppMessage: function() {
 

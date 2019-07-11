@@ -1,105 +1,88 @@
 <view class='Top'>
   <view class='List between'>
-    <view>订单编号: 1056565584741547</view>
-    <view class='status'>退款中</view>
+    <view class="start">订单编号: <text class='ml ml10'>{{detail.OrderSn}}</text></view>
+    <view class='status' wx:if="{{detail.UseStatus==1}}">未使用</view>
+    <view class='status' wx:if="{{detail.UseStatus==2}}">部分使用</view>
+    <view class='status' wx:if="{{detail.UseStatus==3}}">已完成</view>
+    <view class='status' wx:if="{{detail.UseStatus==4}}">已过期</view>
+    <view class='status' wx:if="{{detail.UseStatus==5}}">申请退款</view>
+    <view class='status' wx:if="{{detail.UseStatus==6}}">退款中</view>
+    <view class='status' wx:if="{{detail.UseStatus==7}}">退款失败</view>
+    <view class='status' wx:if="{{detail.UseStatus==8}}">退款成功</view>
+    <view class='status' wx:if="{{detail.UseStatus==9}}">取消退款</view>
   </view>
   <view class='List'>
-    <view>创建订单: 1056565584741547</view>
+    <view>创建订单: <text class='ml10'>{{detail.CreateTime}}</text></view>
   </view>
   <view class='List'>
-    <view>支付时间: 1056565584741547</view>
+    <view>支付时间: <text class='ml10'>{{detail.PayTime}}</text></view>
   </view>
-  <view class='List kl'>
-    <view>退款时间: 1056565584741547</view>
+  <view class='List kl' wx:if="{{detail.UseStatus==1}}">
+    <view>有效期至:<text class='ml10'>{{detail.ExpriesTime}}</text></view>
+  </view>
+  <view class='List kl' wx:if="{{detail.UseStatus==4}}">
+    <view>已过期: {{detail.ExpriesDays}}天(<text class='ml10'>{{detail.ExpriesTime}}</text>)</view>
+  </view>
+  <view class='List kl' wx:if="{{detail.UseStatus==8}}">
+    <view>退款时间: <text class='ml10'>{{detail.RefundTime}}</text></view>
   </view>
   <view class='List'>
-    <view>团单名称: 1056565584741547</view>
+    <view>团单名称: <text class='ml10'>{{detail.SheetName}}</text></view>
   </view>
   <view class='List'>
-    <view>购买类型: 1056565584741547</view>
+    <view>购买类型: <text class='ml10' wx:if="{{detail.BuyType==1}}">团购</text></view>
   </view>
   <view class='List between'>
-    <view>券码: 1056565584741547</view>
+    <view>券码: {{detail.TicketNumber}}</view>
     <image class='code' src='../../images/code.png' mode='widthFix' lazy-load='true' bindtap='codeShow'></image>
   </view>
 </view>
 <view class='Top'>
-  <view class='keep start kl'>
+  <view class='keep start kl' wx:for="{{ItemList}}" wx:key>
     <view class='leftImg'>
-      <image class='topImg' src='../../images/t1.png' mode='widthFix' lazy-load='true'></image>
+      <image class='topImg' src='{{item.ItemCoverImg}}' mode='widthFix' lazy-load='true'></image>
     </view>
-    <view class='right'>
-      <view class='activity'>英孚亲子活动英孚亲子活动英孚亲子活动英孚亲子活动英孚亲子活动</view>
+    <view class='Right'>
+      <view class='activity'>{{item.ItemName}}</view>
+      <image wx:if="{{detail.UseStatus==2}}" class='use' src='../../images/used.png' mode='widthFix' lazy-load='true'></image>
       <view class='courseRow start well'>
         <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
-        <view>UUID教育</view>
+        <view>{{item.SellerName}}</view>
       </view>
       <view class='courseRow between well'>
         <view class='startd'>
           <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
-          <view class='address'>UUID教育UUID教育UUID教育UUID教育UUID教育UUID教育</view>
+          <view class='address'>{{item.StoreAddress}}</view>
         </view>
-        <view class='end'>1.8km</view>
+        <view class='end'></view>
       </view>
       <view class='courseRow start well'>
         <view class='start'>
           <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-          <view>课程数量 1 节</view>
+          <view>课程数量{{item.CoursesNumber}}节</view>
         </view>
         <view class='start'>
           <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
-          <view>单节课时 60 min</view>
+          <view >单节课时{{item.SingleTime}}min</view>
         </view>
       </view>
     </view>
   </view>
-  <view class='keep start gray'>
-    <view class='leftImg'>
-      <image class='topImg' src='../../images/t1.png' mode='widthFix' lazy-load='true'></image>
-    </view>
-    <view class='right'>
-      <view class=' between'>
-        <view class='activity'>英孚亲子活动英孚亲子活动英</view>
-        <image class='use' src='../../images/used.png' mode='widthFix' lazy-load='true'></image>
-      </view>
-      <view class='courseRow start well'>
-        <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
-        <view>UUID教育</view>
-      </view>
-      <view class='courseRow between well'>
-        <view class='startd'>
-          <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
-          <view class='address'>UUID教育UUID教育UUID教育UUID教育UUID教育UUID教育</view>
-        </view>
-        <view class='end'>1.8km</view>
-      </view>
-      <view class='courseRow start well'>
-        <view class='start'>
-          <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-          <view>课程数量 1 节</view>
-        </view>
-        <view class='start'>
-          <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
-          <view>单节课时 60 min</view>
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class='between bt1'>
-    <view class='integral'>1000积分抵10元</view>
-    <view class='deduction'>-￥10.00</view>
+  <view class='between bt1' wx:if="{{detail.UseScore!=0}}">
+    <view class='integral'>{{detail.UseScore*1.0/100}}积分抵{{detail.ScoreAmount*1.0/100}}元</view>
+    <view class='deduction'>-￥{{detail.ScoreAmount*1.0/100}}</view>
   </view>
   <view class='between bt2'>
     <view class='tel'>实付款</view>
-    <view class='money'>￥390.00</view>
+    <view class='money'>￥{{(detail.PayAmount-detail.ScoreAmount)*1.0/100}}</view>
   </view>
 </view>
 <!--券码弹出框-->
 <view class='dialog' hidden='{{showCode}}' bindtap='dialogShow'>
-  <view class='dialog-contatner'>
+  <view class='dialog-contatner' style='height:500rpx'>
     <view class='dialog-title'>请扫描以下券码验券</view>
-    <view class='dialog-code'>券码: 106484854</view>
-    <image class='codeImg' src='../../images/quancode.png' mode='widthFix' lazy-load='true'></image>
+    <view class='dialog-code'>券码: {{detail.TicketNumber}}</view>
+    <image class='codeImg' src='{{detail.QRCodeUrl}}' mode='widthFix' lazy-load='true'></image>
   </view>
 </view>
 <!--退款失败原因提示弹出框-->
@@ -107,8 +90,8 @@
   <view class="zan-dialog__mask" bindtap="toggleDialog" />
   <view class="zan-dialog__container">
   <view class='zan-title'>失败原因</view>
-    <view class='zan-content date'>退款处理日期： 2019-10-20 10:30:25</view>
-    <view class='zan-content'>失败原因：不予构成退款理由</view>
+    <view class='zan-content date'>退款处理日期： {{detail.RefundTime}}</view>
+    <view class='zan-content'>失败原因：{{detail.RefundFailReason}}</view>
     <view class='know' bindtap='closed'>知道了</view>
   </view>
 </view>
@@ -124,13 +107,13 @@
     <view class='know' bindtap='closeded'>知道了</view>
   </view>
 </view>
-<!-- <view class='pay start'>
+<view class='pay start' wx:if="{{detail.UseStatus==7}}">
   <button class='btnd' bindtap='errorShow'>查看原因</button>
   <button class='btnd btnd2'>重新退款</button>
-</view> -->
-<view class='pay'>
+</view>
+<view class='pay' wx:if="{{detail.UseStatus==8}}">
   <button class='btnd end' bindtap='showSucess'>退款详情</button>
 </view>
-<!-- <view class='pay'>
+<view class='pay' wx:if="{{detail.UseStatus==9}}">
   <button class='btnd end'>取消退款</button>
-</view> -->
+</view>

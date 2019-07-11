@@ -26,15 +26,18 @@
   font-size: 28rpx;
 }
 .code{
-  width: 100%;
+  width: 400rpx;
+  margin: 0 auto;
   margin-top: 20rpx;
   height: auto;
-  padding: 20rpx 0;
+  padding: 20rpx;
+  display: flex;
+  justify-content: center;
   box-sizing: border-box;
   box-shadow: 0 0 10rpx #F5F5F5;
 }
 .codeImg{
-  width: 95%;
+  width: 80%;
   padding-top: 10rpx;
   margin-left: 2.5%;
 }

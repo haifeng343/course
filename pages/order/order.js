@@ -15,6 +15,10 @@ Page({
     showDialog: false,
     showError:false,
     showSuccess:false,
+    List:[],
+  },
+  onLoad() {
+    this.getData();
   },
   getData: function () {
     let that = this;
@@ -26,6 +30,9 @@ Page({
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       console.log(res)
+      that.setData({
+        List:res.Data
+      })
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -57,15 +64,27 @@ Page({
       navbarActiveIndex: detail.current
     })
   },
+  //下拉刷新
+  onPullDownRefresh:function(){
+
+  },
+  //上拉触底
+  onReachBottom:function(){
+    let that = this;
+    that.getData(1);
+  },
   orderDetail:function() {
     wx.navigateTo({
       url: '/pages/orderDetail/orderDetail',
     })
   },
-  Refund:function() {
-    this.setData({
-      showDialog: !this.data.showDialog
-    });
+  Refund:function(e) {
+    // this.setData({
+    //   showDialog: !this.data.showDialog
+    // });
+    wx.navigateTo({
+      url: '/pages/refund/refund?OrderId='+e.currentTarget.dataset.id,
+    })
   },
   closed:function(){
     this.setData({

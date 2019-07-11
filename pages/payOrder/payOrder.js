@@ -5,12 +5,18 @@ Page({
     checked: false,
     Id: "",
     relId: [],
-    ItemList:[],
-    TotalAmount:"",
-    TotalScore:"",
-    UseScore:"",
-    UseScoreAmount:"",
-    OrderId:'',
+    ItemList: [],
+    TotalAmount: "",
+    TotalScore: "",
+    UseScore: "",
+    UseScoreAmount: "",
+    OrderId: '',
+    AppId: '',
+    NonceStr: '',
+    Package: '',
+    PaySign: '',
+    SignType: '',
+    TimeStamp: ''
   },
   onLoad(options) {
     let that = this;
@@ -32,8 +38,8 @@ Page({
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
       console.log(res)
       that.setData({
-        ItemList:res.Data.ItemList,
-        TotalAmount: res.Data.TotalAmount*1.0/100,
+        ItemList: res.Data.ItemList,
+        TotalAmount: res.Data.TotalAmount * 1.0 / 100,
         TotalScore: res.Data.TotalScore * 1.0 / 100,
         UseScore: res.Data.UseScore * 1.0 / 100,
         UseScoreAmount: res.Data.UseScoreAmount * 1.0 / 100,
@@ -53,17 +59,72 @@ Page({
       "checked": !checked
     })
   },
-  oderPay:function(){
+  //支付成功
+  payok:function(onSuccess){
+    var that = this;
+    var url = 'order/pay/issuccess'
+    var params = {
+      OrderId: that.data.OrderId,
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
+      that.setData({
+        orderContent:res.Data
+      })
+      onSuccess(res.Data);
+    }, function (msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
+  },
+  oderPay: function () {
     var that = this;
     var url = 'order/pay'
     var params = {
       OrderId: that.data.OrderId,
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
-      console.log(res)
       that.setData({
-        
-      })
+        NonceStr: res.Data.NonceStr,
+        Package: res.Data.Package,
+        PaySign: res.Data.PaySign,
+        SignType: res.Data.SignType,
+        TimeStamp: res.Data.TimeStamp,
+      });
+      console.log(res)
+      wx.requestPayment({
+        timeStamp: that.data.TimeStamp,
+        nonceStr: that.data.NonceStr,
+        package: that.data.Package,
+        signType: that.data.SignType,
+        paySign: that.data.PaySign,
+        'success': function (res) {
+          var setTime = setTimeout(function () {
+            that.payok(function(res){
+              if(res.IsPay){
+                clearTimeout(setTime);
+                wx.showToast({
+                  title: '订单创建成功',
+                  icon: 'none',
+                  duration: 1000
+                });
+                wx.navigateTo({
+                  url: '/pages/payOk/payOk?OrderId='+that.data.OrderId,
+                })
+              }
+            });
+          }, 2000);
+        },
+        'fail': function (res) {
+          wx.showToast({
+            title: '用户取消支付',
+            image: '../../images/cancel.png',
+          });
+        },
+      });
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -84,25 +145,9 @@ Page({
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
       console.log(res)
       that.setData({
-       OrderId:res.Data.OrderId
+        OrderId: res.Data.OrderId
       })
       that.oderPay();
-      wx.requestPayment({
-        timeStamp: '',
-        nonceStr: '',
-        package: 'prepay_id=',
-        signType: '',
-        paySign: '',
-        'success': function (res) { },
-        'fail': function (res) { 
-          wx.showToast({
-            title: '用户取消支付',
-            image: '../../images/cancel.png',
-            duration: 2000
-          });
-        },
-        'complete': function (res) { }
-      })
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -111,11 +156,7 @@ Page({
         })
       }
     }); //调用get方法情就是户数
-    // wx.showToast({
-    //   title: '正在提交订单',
-    //   icon: 'loading',
-    //   duration: 1000
-    // });
+
   },
   onShareAppMessage: function () {
 

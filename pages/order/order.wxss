@@ -8,7 +8,7 @@ page{
 }
 .navbar{
   display: flex;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   z-index: 1;
@@ -36,10 +36,13 @@ swiper{
 .movie-content-wrapper{
   height: 100%;
   padding-top: 80rpx;
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
 }
 scroll-view{
   height: 100%;
 }
+
 .orderList{
   width: 100%;
   height: auto;
@@ -56,6 +59,9 @@ scroll-view{
   border-radius: 10rpx;
   display: flex;
   flex-direction: column;
+}
+.orderItem:last-child{
+  margin-bottom: 30rpx;
 }
 .title{
   font-size: 28rpx;
@@ -77,6 +83,10 @@ scroll-view{
   width: 160rpx;
   margin-right: 20rpx;
 }
+.hl{
+  height: 55rpx;
+  line-height: 55rpx;
+}
 .Right{
   width: 71%;
 }
@@ -91,11 +101,13 @@ scroll-view{
   font-size: 28rpx;
 }
 .icon{
- margin-top: 5rpx;
+ margin-top: 15rpx;
  margin-left: -5rpx;
 }
 .test{
   font-size: 24rpx;
+  height: 40rpx;
+  line-height: 40rpx;
   color: #858585;
   overflow: hidden;
   word-break: keep-all;

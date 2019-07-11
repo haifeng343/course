@@ -5,10 +5,10 @@
   </view>
 </view>
 <view class='detail'>
-  <view class='title'>都是带大今飞凯达是否会地方那就</view>
-  <view>券码: 5841848478</view>
+  <view class='title'>{{detail.SheetName}}</view>
+  <view>券码: {{detail.TicketNumber}}</view>
   <view class='code'>
-    <image class='codeImg' src='../../images/quancode.png' mode='widthFix' lazy-load='true'></image>
+    <image class='codeImg' src='{{detail.QRCodeAccessUrl}}' mode='widthFix' lazy-load='true'></image>
   </view>
 </view>
 <view class='around'>

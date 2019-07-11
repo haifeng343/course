@@ -1,49 +1,53 @@
-
+var netUtil = require("../../utils/request.js"); //require引入
 Page({
   data: {
-    array: ['美国', '中国', '巴西', '日本'],
-    objectArray: [{
-      id: 0,
-      name: '美国'
-    },
-    {
-      id: 1,
-      name: '中国'
-    },
-    {
-      id: 2,
-      name: '巴西'
-    },
-    {
-      id: 3,
-      name: '日本'
-    }
-    ],
+    array: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
+    index:0,
+    objectArray: ['拍错/不想拍','不喜欢','与实物不符合', '重新再拍'],
     index:0,
     imgs: [],
     text: '',
     plusShow: true,
     courseId: 1,
     userId: 1,
-    userRole: 4
-
+    userRole: 4,
+    orderId:'',
+    Reason:'拍错/不想拍',
+    lpm:{},
   },
-  onLoad: function (e) {
-    //读出courseId
-    wx.getStorage({
-      key: "organHomeworkListConf",
-      success: function (res) {
-        that.setData({
-          courseId: e.currentTarget.dataset.courseId
-        });
-      }
+  onLoad: function (options) {
+    this.setData({
+      orderId: options.OrderId
     });
+    this.has();
+  },
+  getData: function () {
+    let that = this;
+    var url = 'order/refund/apply';
+    var params = {
+      OrderId: that.data.orderId,
+      Reason: that.data.Reason,
+      ImgList: that.data.imgs,
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      console.log(res)
+      that.setData({
+        List: res.Data
+      })
+    }, function (msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
   },
   chooseImg: function (e) {
     var that = this;
-    var imgs = this.data.imgs;//存图片地址的变量
+    var imgs = that.data.imgs;//存图片地址的变量
     wx.chooseImage({
-      count: 9 - imgs.length,
+      count: 6,
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
@@ -70,6 +74,7 @@ Page({
       imgs: imgs
     });
     this.showHide();
+    console.log(that.data.imgs)
   },
   /*
       预览图片
@@ -104,10 +109,30 @@ Page({
       });
     }
   },
+  has:function(){
+    let that = this;
+    var url = 'order/details';
+    var params = {
+      Id: that.data.orderId,
+      Status: 1,
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      console.log(res)
+      that.setData({
+        lpm: res.Data
+      })
+    }, function (msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    });
+  },
   /*提交*/
-  submit: function (e) {
-    this.upLoadText();
-
+  submit: function () {
+    this.getData();
   },
   //上传图片
   upLoadImg: function (data) {
@@ -116,9 +141,9 @@ Page({
       success = data.success ? data.success : 0,//上传成功的个数
       fail = data.fail ? data.fail : 0;//上传失败的个数
     wx.uploadFile({
-      url: data.url,
+      url: baseUrl+'',
       filePath: data.imgs[i],
-      name: 'file',
+      name: 'Order.Refund',
       formData: {
         id: data.id
       },
@@ -149,9 +174,11 @@ Page({
     });
   },
   bindPickerChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    let index = e.detail.value;
+    console.log('picker发送选择改变，携带值为', this.data.array[index])
     this.setData({
-      index: e.detail.value
+      index: e.detail.value,
+      Reason: this.data.array[index]
     })
   },
 })
