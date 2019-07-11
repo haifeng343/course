@@ -199,9 +199,6 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   display: flex;
   align-items: center;
 }
-.total{
-
-}
 
 .totalNumber {
   line-height: 120rpx;
@@ -218,14 +215,17 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   border-radius: 40rpx;
   margin-top: 30rpx;
 }
-.kl .total{
+
+.kl .total {
   margin-top: 30rpx;
 }
-.payMoney{
+
+.payMoney {
   font-size: 32rpx;
-  color: #E93A37;
+  color: #e93a37;
   font-weight: 600;
 }
-.symbol{
+
+.symbol {
   font-size: 24rpx;
 }
