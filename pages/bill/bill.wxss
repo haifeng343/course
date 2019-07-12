@@ -1,0 +1,57 @@
+
+.log{
+  width: 100%;
+  background-color: #fff;
+}
+.logTop{
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 30rpx;
+  align-items: center;
+  width: 100%;
+  padding: 0 5%;
+  box-sizing: border-box;
+  border-top: 1rpx solid #F9F9F9;
+  border-bottom: 1rpx solid #F9F9F9;
+}
+.go{
+  margin-top: 26rpx;
+}
+.avator{
+  width: 120rpx;
+  margin-right: 15rpx;
+}
+.share{
+  margin-top: 25rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #000;
+}
+.math{
+  font-size: 24rpx;
+  color: #2F2F2F;
+}
+.logList{
+  width: 100%;
+  height: auto;
+  font-size: 32rpx;
+}
+.logItem{
+  
+  width: 100%;
+  padding: 20rpx 5%;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #F9F9F9;
+}
+.time{
+  font-size: 24rpx;
+  line-height: 40rpx;
+  color: #717171;
+}
+.fraction{
+  height: 120rpx;
+  line-height:120rpx;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+

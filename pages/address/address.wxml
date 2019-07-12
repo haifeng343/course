@@ -5,6 +5,10 @@
   <view class='add'>+新增地址</view>
 </view>
 <view class='address'>
+  <view class='nohasLog' style='display:none'>
+    <image class='noImg' src='../../images/noads.png' mode='widthFix' lazy-load='true'></image>
+    <view>暂无地址，点击下方按钮去添加</view>
+  </view>
   <view class='List'>
     <view class='item between'>
       <view class='column'>

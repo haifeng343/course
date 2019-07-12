@@ -1,7 +1,7 @@
 <view class='horizontal between mt20' bindtap='modify'>
   <view class='name'>修改手机号</view>
   <view class='content start'>
-  <view class='phone'>1358754554</view>
+  <view class='phone'>{{mobile}}</view>
     <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
   </view>
 </view>

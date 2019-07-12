@@ -6,24 +6,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    contents: '这是可以复制的文字,粘贴后即可看到效果',
-    synctable: [{
-      index: 1685,
-      name: '伦敦桥'
-    }, {
-      index: 1686,
-      name: '大海'
-    }, {
-      index: 1687,
-      name: '大山'
-    }, {
-      index: 1688,
-      name: '山海经'
-    }, {
-      index: 1689,
-      name: '波利亚'
-    }]
+    userInfo:{},
   },
+  onLoad(){
+    let userInfo = wx.getStorageSync('userInfo');
+    console.log(userInfo)
+    this.setData({
+      userInfo: userInfo,
+    })
+  },
+
   integral:function() {
     wx.navigateTo({
       url: '/pages/integralLog/integralLog',
@@ -36,12 +28,17 @@ Page({
   },
   setting:function() {
     wx.navigateTo({
-      url: '/pages/setting/setting',
+      url: '/pages/setting/setting?mobile='+this.data.userInfo.Mobile+'&ids='+1,
     })
   },
   invite:function() {
     wx.navigateTo({
       url: '/pages/invite/invite',
+    })
+  },
+  wallet:function(){
+    wx.navigateTo({
+      url: '/pages/wallet/wallet',
     })
   },
   onShareAppMessage: function () {

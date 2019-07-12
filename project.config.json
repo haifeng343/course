@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 35,
 			"list": [
 				{
 					"id": -1,
@@ -224,6 +224,82 @@
 					"name": "chooseClass",
 					"pathName": "pages/chooseClass/chooseClass",
 					"query": "Id=8",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "wallet",
+					"pathName": "pages/wallet/wallet",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "bill",
+					"pathName": "pages/bill/bill",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "withdraw",
+					"pathName": "pages/withdraw/withdraw",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "withdrawLog",
+					"pathName": "pages/withdrawLog/withdrawLog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "cashBack",
+					"pathName": "pages/cashBack/cashBack",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "cashBackDetail",
+					"pathName": "pages/cashBackDetail/cashBackDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "withdrawDetail",
+					"pathName": "pages/withdrawDetail/withdrawDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "ballanceLog",
+					"pathName": "pages/ballanceLog/balanceLog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "bankList",
+					"pathName": "pages/bankList/bankList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "addBank",
+					"pathName": "pages/addBank/addBank",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "searchAddress",
+					"pathName": "pages/searchAddress/searchAddress",
 					"scene": null
 				}
 			]

@@ -1,0 +1,45 @@
+<view class='nohasLog' style='display:none'>
+  <image class='noImg' src='../../images/zanwu1.png' mode='widthFix' lazy-load='true'></image>
+  <view>暂无银行卡，点击下方按钮去添加</view>
+</view>
+<view class='List'>
+  <view class='item' style='background:-webkit-linear-gradient(left top, {{bg1}}, {{bg2}});'>
+    <view class='between'>
+      <view class='start'>
+        <image class='bankIcon' src='../../images/avator.png' mode='widthFix' lazy-load='true'></image>
+        <view class='column'>
+          <view class='t1'>招商银行</view>
+          <view class='t2'>储蓄卡</view>
+          <view class='t3'>54151461456418541</view>
+        </view>
+      </view>
+      <view class='delete'>解绑</view>
+    </view>
+  </view>
+  <view class='item' style='background:-webkit-linear-gradient(left top, {{bg1}}, {{bg2}});'>
+    <view class='between'>
+      <view class='start'>
+        <image class='bankIcon' src='../../images/avator.png' mode='widthFix' lazy-load='true'></image>
+        <view class='column'>
+          <view class='t1'>招商银行</view>
+          <view class='t2'>储蓄卡</view>
+          <view class='t3'>54151461456418541</view>
+        </view>
+      </view>
+      <view class='delete'>解绑</view>
+    </view>
+  </view>
+</view>
+<view class='add' bindtap='addBank'>+添加银行卡</view>
+
+<!--绑定成功提示弹出框-->
+  <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}">
+    <view class="zan-dialog__mask" />
+    <view class="zan-dialog__container">
+      <image class='success1' src='../../images/success1.png' mode='widthFix' lazy-load='true'></image>
+      <view class='le zan-til'></view>
+      <view class='zan-content le1'>绑定银行卡成功</view>
+      <view class='zan-content'>恭喜你！绑定银行卡成功！</view>
+      <view class='btnSubmit' bindtap='closeded'>知道了</view>
+    </view>
+  </view>

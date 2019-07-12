@@ -12,6 +12,10 @@
   </view>
   <view class="movie-content-wrapper">
     <swiper current="{{navbarActiveIndex}}" bindanimationfinish="onBindAnimationFinish">
+      <view class='nohasLog' style='display:none'>
+        <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+        <view>暂无余额变更记录</view>
+      </view>
       <swiper-item wx:for="{{navbarTitle}}" wx:key="index">
         <scroll-view scroll-y="{{true}}">
           <view class='orderList'>

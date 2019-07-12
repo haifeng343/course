@@ -1,0 +1,59 @@
+<view style='display:none'>
+  <view class="tip">请绑定持卡人本人的银行卡</view>
+  <view class='kep between'>
+    <view class='start'>
+      <view>持卡人</view>
+      <input placeholder='持卡人姓名'></input>
+    </view>
+    <image class='Description' bindtap='Description' src='../../images/js.png' mode='widthFix' lazy-load='true'></image>
+  </view>
+  <view class='kep'>
+    <view class='start'>
+      <view>卡号</view>
+      <input type='number'></input>
+    </view>
+  </view>
+
+  <view class='next'>下一步</view>
+
+  <!--说明提示弹出框-->
+  <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}">
+    <view class="zan-dialog__mask" />
+    <view class="zan-dialog__container">
+      <view class='le zan-til'>持卡人说明</view>
+      <view class='zan-content'>为了资金安全，只能绑定当前持卡人的银行卡</view>
+      <view class='know' bindtap='closeded'>知道了</view>
+    </view>
+  </view>
+</view>
+
+
+<!--下一步之后的内容-->
+<view>
+  <view class="tip">选择银行卡类型</view>
+  <view class='kep between'>
+    <view class='start'>
+      <view>卡类型</view>
+      <input class='gray' value='{{bankName}}' disabled></input>
+    </view>
+    <image class='Description' bindtap='Description' src='../../images/js.png' mode='widthFix' lazy-load='true'></image>
+  </view>
+  <view class="tip">请填写银行预留手机号</view>
+  <view class='keps'>
+    <view class='start'>
+      <view>银行预留手机号:</view>
+      <input type='number'></input>
+    </view>
+  </view>
+  <view class='keps'>
+    <view class='between'>
+      <view class='start'>
+        <view class='code'>手机号验证码:</view>
+        <input type='number'></input>
+      </view>
+      <!-- <text class="imgCoded" bindtap='codeyan' disabled='{{notEdit}}'>获取验证码</text> -->
+      <text class="imgCoded imgLoad" bindtap='codeyan' disabled='{{notEdit}}'>{{btntext}}</text>
+    </view>
+  </view>
+    <view class='end'>验证码已发送至136****5454</view>
+</view>

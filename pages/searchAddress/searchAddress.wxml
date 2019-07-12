@@ -1,0 +1,27 @@
+<!-- 自定义的导航栏 -->
+<view class="custom flex_center">
+  <view class='topInput'>
+    <view class='abso' bindtap='cityChange'>{{ads}}</view>
+    <input type='search' class='search' bindinput="getsuggest" value='{{searchAdr}}' placeholder='小区/写字楼/学校等'></input>
+    <view class='addressListed' wx:if="{{show}}">
+      <view class='addItem' wx:for="{{addressList}}" wx:key bindtap='adsChange' data-location="{{item.location}}" data-title="{{item.title}}">{{item.title}}</view>
+    </view>
+  </view>
+</view>
+
+<view class='line'></view>
+<view class='about'>
+  <map longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" class='map' markers="{{markers}}" covers="{{covers}}" show-location></map>
+
+  <view class='addressList'>
+    <view class='addressItem' wx:for="{{nearList}}" wx:key bindtap='adsChange' data-title='{{item.title}}' data-location="{{item.location}}">
+      <view class='start k' bindtap=''>
+        <image class='addr' src='{{addr}}' mode='widthFix' lazy-load='true'></image>
+        <view>
+            <view class='k1'>{{item.title}}</view>
+            <view class='k2'>{{item.address}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

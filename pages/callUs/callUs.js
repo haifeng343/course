@@ -1,11 +1,10 @@
-// pages/callUs/callUs.js
+
+var netUtil = require("../../utils/request.js"); //require引入
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-    contents: '684784785'
+    contents: '684784785',
+    List:[],
   },
   //复制微信号
   copyText: function (e) {
@@ -22,6 +21,28 @@ Page({
         })
       }
     })
+  },
+  onLoad:function(){
+    this.getData();
+  },
+  getData: function () {
+    let that = this;
+    var url = 'sheet/near/list';
+    var params = {
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      console.log(res)
+      that.setData({
+        List :res.Data
+      })
+    }, function (msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
   },
   onShareAppMessage: function () {
 

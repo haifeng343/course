@@ -1,0 +1,70 @@
+<view class='nohasLog' style='display:none'>
+  <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+  <view>暂无记录</view>
+</view>
+<view>
+  <view class='List'>
+    <view class='Bill' bindtap='withdrawLog'>
+      <view class='start'>
+        <image class='icon1' src='../../images/m5.png' mode='widthFix' lazy-load='true'></image>
+        <view>提现记录</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+  </view>
+  <view class='List mt20'>
+    <!-- <view class='item between'>
+    <view class='start align'>
+      <image class='bankIcon' src='../../images/m2.png' mode='widthFix' lazy-load='true'></image>
+      <view class='bankText'>
+        <view class='bankTitle'>中国工商银行</view>
+        <view class='bankTxt'>尾号 8892 的储蓄卡</view>
+      </view>
+    </view>
+    <image class='go bankRight' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+  </view> -->
+    <view class='nohave red' bindtap='nohaveTo'>暂无银行卡，点击去添加</view>
+  </view>
+
+  <view class='item1 bor'>
+    <view class='withdrawTxt'>提现金额</view>
+    <view class='start'>
+      <text class='moneyTxt'>￥</text>
+      <input class='money' type='digit'></input>
+      <text class='moneyTxt'>全部</text>
+    </view>
+  </view>
+  <view class='item2 bor'>
+    <!-- <view>可用余额￥100.00</view> -->
+    <view>额外扣除￥0.1 服务费（费率0.10%）</view>
+  </view>
+
+  <!-- <view class='btn1'>提现</view> -->
+  <view class='btn1 g1'>提现</view>
+
+  <!--确认提现提示弹出框-->
+  <view class="zan-dialog {{ showSure ? 'zan-dialog--show' : '' }}">
+    <view class="zan-dialog__mask" />
+    <view class="zan-dialog__container">
+      <view class='zan-title'>确认退款</view>
+      <view class='le zan-til'></view>
+      <view class='zan-content'>提现</view>
+      <view class='zan-content le'>￥28.00</view>
+      <view class='btnSubmit' bindtap='submitTo'>确认提现</view>
+    </view>
+  </view>
+
+  <!--提现申请成功提示弹出框-->
+  <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}">
+    <view class="zan-dialog__mask" />
+    <view class="zan-dialog__container">
+      <image class='success1' src='../../images/success1.png' mode='widthFix' lazy-load='true'></image>
+      <view class='le zan-til'></view>
+      <view class='zan-content le1'>提现申请成功，等待银行处理</view>
+      <view class='zan-content'>预计一个工作日内到账</view>
+      <view class='know' bindtap='closeded'>知道了</view>
+    </view>
+  </view>
+</view>

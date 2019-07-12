@@ -1,12 +1,41 @@
 .myTop{
-  width: 100%;
+  width: 90%;
+  margin: 30rpx 5%;
   height: auto;
   background-color: #fff;
   padding: 40rpx 5%;
   box-sizing: border-box;
+  border-radius: 25rpx;
 }
+.paypag{
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.paypagItem{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.paypagItem:first-child::after{
+  content: "";
+  width: 1rpx;
+  height: 80rpx;
+  background-color: #E8E8E8;
+  position: absolute;
+  right: 0;
+}
+.paypagItem .ml1{
+  font-size: 26rpx;
+  color: #9A9A9A;
+}
+
 .avator{
   width: 150rpx;
+  border-radius: 50%;
   margin-right: 20rpx;
 }
 .name{

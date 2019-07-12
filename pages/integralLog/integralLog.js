@@ -14,8 +14,9 @@ Page({
     if (month >= 1 && month <= 9) {
       month = "0" + month;
     }
-    this.date = year + '-' + month;
-    console.log(this.date);
+    this.setData({
+      date: year + '-' + month
+    })
   },
   bindDateChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)

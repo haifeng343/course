@@ -24,6 +24,15 @@ Page({
     that.setData({
       Mobile: options.phone
     })
+    if (options.mobile != "") {
+      wx.setNavigationBarTitle({
+        title: '修改手机号',
+      })
+    } else {
+      wx.setNavigationBarTitle({
+        title: '绑定手机号',
+      })
+    }
   },
   codeyan: function() {
     let that = this;

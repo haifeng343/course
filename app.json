@@ -23,7 +23,18 @@
     "pages/recommendation/recommendation",
     "pages/address/address",
     "pages/editAddress/editAddress",
-    "pages/city/city"
+    "pages/city/city",
+    "pages/wallet/wallet",
+    "pages/bill/bill",
+    "pages/withdraw/withdraw",
+    "pages/withdrawLog/withdrawLog",
+    "pages/cashBack/cashBack",
+    "pages/cashBackDetail/cashBackDetail",
+    "pages/withdrawDetail/withdrawDetail",
+    "pages/ballanceLog/balanceLog",
+    "pages/bankList/bankList",
+    "pages/addBank/addBank",
+    "pages/searchAddress/searchAddress"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -62,6 +62,9 @@ Page({
   //触发关键词输入提示事件
   getsuggest: function (e) {
     var _this = this;
+    // wx.navigateTo({
+    //   url: '/pages/searchAddress/searchAddress?name' + _this.data.searchAdr,
+    // })
     _this.setData({
       searchAdr:e.detail.value
     })

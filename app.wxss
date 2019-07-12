@@ -12,6 +12,33 @@ page {
   padding: 200rpx 0;
   box-sizing: border-box;
 }
+.nohasLog{
+  width: 100%;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: #6C6C6C;
+  text-align: center;
+}
+.noImg{
+  width: 400rpx;
+  display: flex;
+  justify-content: center;
+  margin: 100rpx auto 0;
+}
+.add{
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #42DFDE;
+  font-size: 28rpx;
+  position: fixed;
+  background-color: #fff;
+  bottom: 0;
+  box-shadow: 0 0 15rpx #F9F9F9;
+}
 .Top{
   width: 95%;
   height:auto;
@@ -28,7 +55,7 @@ page {
   line-height: 50rpx;
 }
 .red{
-  color: red;
+  color: red!important;
 }
 button::after {
   border: 0;
@@ -42,7 +69,16 @@ button {
   background-color: #fff;
   padding: 0;
 }
-
+.btn1{
+  font-size: 28rpx;
+  color: #fff;
+  background-color: #29D9D6;
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 checkbox .wx-checkbox-input {
   height: 46rpx;
   width: 46rpx;
