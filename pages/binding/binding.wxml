@@ -2,7 +2,7 @@
   <view class="accountLogin">
     <view class="loginInput">
       <view class="subtitle">手机号</view>
-      <input type="number" placeholder="请输入手机号" value="{{Mobile}}" bindinput="GetPhoneVerifyCodeCountdown" />
+      <input type="number" placeholder="请输入手机号" value="{{Mobile}}" bindinput="getCode" />
     </view>
     <view class="loginInput">
       <view class="subtitle">验证码</view>

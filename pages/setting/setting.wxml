@@ -1,4 +1,4 @@
-<view class='horizontal between mt20' bindtap='modify'>
+<view class='horizontal between mt20' data-ids="{{ids}}" bindtap='modify'>
   <view class='name'>修改手机号</view>
   <view class='content start'>
   <view class='phone'>{{mobile}}</view>

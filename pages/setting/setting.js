@@ -6,6 +6,7 @@ Page({
    */
   data: {
     mobile: '',
+    ids:1,
   },
   onLoad(options){
     console.log(options)
@@ -15,7 +16,7 @@ Page({
   },
   modify:function() {
     wx.navigateTo({
-      url: '/pages/binding/binding?phone='+this.data.mobile,
+      url: '/pages/binding/binding?phone='+this.data.mobile+'&ids='+this.data.ids,
     })
   },
   exitOut:function(){

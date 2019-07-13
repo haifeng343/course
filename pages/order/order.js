@@ -25,10 +25,10 @@ Page({
     pagecont:20,
   },
   onShow(){
-    this.getData();
-    let userInfo = wx.getStorageSync('userInfo')
+    // this.getData();
   },
   onLoad() {
+    this.getData();
   },
   lookEor:function(e){
     console.log(e)
@@ -55,10 +55,19 @@ Page({
       PageIndex: that.data.page,
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      console.log(res)
-      that.setData({
-        List:res.Data
-      })
+      let arr = res.Data;
+      if(arr.length>0){
+        let arr1 = [];
+        if(that.data.page==1){
+          arr1 = arr;
+        }else{
+          arr1 = that.data.List;
+          arr1 = arr1.concat(arr);
+        }
+        that.setData({
+          List: arr1
+        })
+      }
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -115,16 +124,21 @@ Page({
   //下拉刷新
   onPullDownRefresh:function(){
     let that = this;
-    that.getData(1);
-  },
-  //上拉触底
-  onReachBottom:function(res){
-
-    console.log(res)
-    let that = this;
     that.setData({
-      page: 1
+      page:1
     })
+    that.getData();
+    wx.stopPullDownRefresh();
+  },
+  //上拉加载更多
+  onReachBottom:function(res){
+    let that = this;
+    let temp = that.data.page;
+    temp++;
+    that.setData({
+      page: temp
+    })
+    that.getData();
   },
   orderDetail:function(e) {
     wx.navigateTo({
@@ -152,7 +166,7 @@ Page({
             Id: e.currentTarget.dataset.id,
           }
           netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-            that.getData();
+            this.getData();
           }, function (msg) { //onFailed失败回调
             wx.hideLoading();
             if (msg) {

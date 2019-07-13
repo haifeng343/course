@@ -78,6 +78,11 @@ Page({
         icon: "none",
         title: '编辑成功',
       })
+      setTimeout(() => {
+        wx.redirectTo({
+          url: '/pages/address/address',
+        })
+      }, 500)
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -126,11 +131,15 @@ Page({
       that.setData({
         List: res.Data
       })
-      wx.showToast({
-        icon: "none",
-        title: '提交成功',
-      })
-      that.getData();
+        wx.showToast({
+          icon: "none",
+          title: '提交成功',
+        })
+      setTimeout(()=>{
+        wx.navigateTo({
+          url: '/pages/address/address',
+        })
+      },500)
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {

@@ -11,10 +11,10 @@
   <view class="movie-content-wrapper">
     <swiper current="{{navbarActiveIndex}}" bindanimationfinish="onBindAnimationFinish">
       <swiper-item wx:for="{{navbarTitle}}" wx:key="index">
-      <view class='nohasLog' wx:if="{{userInfo==''}}">
-        <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
-        <view>先去登录</view>
-      </view>
+        <view class='nohasLog' wx:if="{{List.length==0}}">
+          <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+          <view>暂无订单</view>
+        </view>
         <scroll-view scroll-y="{{true}}" wx:else>
           <view class='orderList'>
             <view class='orderItem' wx:for="{{List}}" wx:key>

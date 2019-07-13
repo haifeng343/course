@@ -4,25 +4,32 @@ Page({
   data: {
     PicUrl: '',
     Mobile: '',
+    ids: '',
     isShow: false,
     imgCodeShow: false,
     NumberCountDown: 0,
     Remark: '',
     imgUrl: '',
-    VerifyCode: '',//发送验证码
+    VerifyCode: '', //发送验证码
     PicVerifycode: '', //验证码
     btntext: '获取验证码',
     notEdit: false,
-    ActionCode: '',//操作码
+    ActionCode: '', //操作码
   },
   closeAlert: function() {
 
+  },
+  getCode:function(e) {
+    this.setData({
+      Mobile:e.detail.value
+    })
   },
   onLoad(options) {
     var that = this;
     console.log(options)
     that.setData({
-      Mobile: options.phone
+      Mobile: options.phone,
+      ids: options.ids
     })
     if (options.mobile != "") {
       wx.setNavigationBarTitle({
@@ -70,7 +77,7 @@ Page({
     })
   },
   //获取验证码
-  cendCode:function(e){
+  cendCode: function(e) {
     let that = this;
     var val = e.detail.value;
     that.setData({
@@ -90,7 +97,7 @@ Page({
         _this.setData({
           notEdit: true
         })
-      }else{
+      } else {
         _this.setData({
           notEdit: false
         })
@@ -112,11 +119,11 @@ Page({
       CodeType: 1,
       PicVerifycode: that.data.PicVerifycode
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       that.setData({
-        ActionCode : res.Data
+        ActionCode: res.Data
       })
-    }, function (msg) { //onFailed失败回调
+    }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -138,7 +145,7 @@ Page({
       console.log(res);
       if (res.ErrorCode == 0) {
         wx.showToast({
-          icon:'none',
+          icon: 'none',
           title: "验证码已发送",
         })
         that.setData({
@@ -160,7 +167,7 @@ Page({
     // })
   },
   //绑定
-  SMSVerifyCodeLogin:function(){
+  SMSVerifyCodeLogin: function() {
     let that = this;
     var url = 'user/phone/bind';
     var params = {
@@ -168,18 +175,17 @@ Page({
       VerifyCode: that.data.VerifyCode,
       ActionCode: that.data.ActionCode
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      console.log(res);
-      if (res.ErrorCode == 0) {
-        wx.showToast({
-          icon: 'none',
-          title: "绑定成功!",
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+      wx.showToast({
+        icon: 'none',
+        title: that.data.ids == 1 ? "修改成功!" : "绑定成功!"
+      })
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1
         })
-       wx.navigateBack({
-         delta:1
-       })
-      }
-    }, function (msg) { //onFailed失败回调
+      }, 500)
+    }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -194,7 +200,7 @@ Page({
       imgCodeShow: false,
     })
   },
-  closed:function(){
+  closed: function() {
     let that = this;
     that.setData({
       isShow: false,

@@ -83,10 +83,10 @@ Page({
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
         let arr = res.Data.List;
         if (arr.length > 0) {
-          var temp=[];
-          if(that.data.page==1){//刷新
-            temp=arr;
-          }else{//加载更多
+          var temp = [];
+          if (that.data.page == 1) { //刷新
+            temp = arr;
+          } else { //加载更多
             temp = that.data.groupList;
             temp = temp.concat(arr);
           }
@@ -101,7 +101,7 @@ Page({
           })
           that.Longitude = res.Data.Longitude;
           that.Latitude = res.Data.Latitude;
-          
+
         }
         wx.hideLoading();
       },
@@ -157,7 +157,7 @@ Page({
     wx.showLoading({
       title: '玩命加载中',
     });
-    var temp_page=this.data.page;
+    var temp_page = this.data.page;
     temp_page++;
     this.setData({
       page: temp_page
@@ -171,7 +171,7 @@ Page({
       title: "玩命加载中",
     });
     this.setData({
-      page:1
+      page: 1
     });
     this.func();
     // 停止下拉动作

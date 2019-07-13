@@ -156,11 +156,13 @@ Page({
       addr: '../../images/addr.png'
     })
     let pages = getCurrentPages(); //当前页面
-    console.log(pages)
+    console.log(e)
     let prevPage = pages[pages.length - 2]; //上一页面
     prevPage.setData({ //直接给上移页面赋值
       address: e.currentTarget.dataset.address,
       InputValue: e.currentTarget.dataset.title,
+      lat: e.currentTarget.dataset.lat,
+      lng: e.currentTarget.dataset.lng,
     });
     wx.navigateBack({
       delta: 1
