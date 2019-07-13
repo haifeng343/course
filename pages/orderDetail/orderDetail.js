@@ -15,7 +15,7 @@ Page({
   onLoad(options){
     this.setData({
       Id: options.Id,
-      Status: options.Status
+      Status: options.status
     })
     this.getData();
   },
@@ -61,7 +61,35 @@ Page({
       showDialog: true
     })
   },
-
+  //取消退款
+  cancelOrder:function(e) {
+    console.log(e)
+    let that = this;
+    var url = 'order/refund/cancel';
+    var params = {
+      Id: e.currentTarget.dataset.id,
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      wx.showToast({
+        icon: "none",
+        title: '取消退款成功',
+      })
+      that.getData();
+    }, function (msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
+  },
+  //重新退款
+  Refund: function (e) {
+    wx.navigateTo({
+      url: '/pages/refund/refund?OrderId=' + e.currentTarget.dataset.orderid,
+    })
+  },
   closed: function() {
     this.setData({
       showDialog: !this.data.showDialog

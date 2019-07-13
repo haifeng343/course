@@ -9,16 +9,16 @@ Page({
     addressList: [],
     ads: "杭州市",
     show: false,
-    searchAdr: '',//搜索地址
-    addr:'../../images/noaddr.png',
+    searchAdr: '', //搜索地址
+    addr: '../../images/noaddr.png',
     Height: 0,
     scale: 18,
-    latitude:'',
-    longitude:'',
+    latitude: '',
+    longitude: '',
     speed: 0,
     accuracy: 0,
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     console.log(options)
     wx.showLoading({
       title: "定位中",
@@ -26,7 +26,7 @@ Page({
     });
     this.onceAgain();
   },
-  onceAgain: function () {
+  onceAgain: function() {
     var that = this
     // 实例化腾讯地图API核心类
     var qqmapsdk = new QQMapWX({
@@ -35,7 +35,7 @@ Page({
     //1、获取当前位置坐标
     wx.getLocation({
       type: 'wgs84',
-      success: function (res) {
+      success: function(res) {
         var latitude = res.latitude
         var longitude = res.longitude
         var speed = res.speed
@@ -54,7 +54,7 @@ Page({
             latitude: res.latitude,
             longitude: res.longitude
           },
-          success: function (addressRes) {
+          success: function(addressRes) {
             var address = addressRes.result.formatted_addresses.recommend;
             console.log(address)
             that.setData({
@@ -63,26 +63,26 @@ Page({
           }
         })
       },
-      fail:function(){
+      fail: function() {
         wx.showToast({
           title: "定位失败",
           icon: "none"
         })
       },
-      complete:function(){
+      complete: function() {
         wx.hideLoading()
       }
     });
     qqmapsdk.search({
       keyword: '商圈',
-      success: function (res) {
+      success: function(res) {
         that.setData({
           nearList: res.data,
           show: true
         })
         // console.log(res);
       },
-      fail: function (res) {
+      fail: function(res) {
         // console.log(res);
         that.setData({
           show: false
@@ -91,16 +91,16 @@ Page({
     });
   },
   //触发关键词输入提示事件
-  getsuggest: function (e) {
+  getsuggest: function(e) {
     var _this = this;
     _this.setData({
-      searchAdr:e.detail.value
+      searchAdr: e.detail.value
     })
-    if (e.detail.value==""){
+    if (e.detail.value == "") {
       _this.setData({
-        show : false
+        show: false
       })
-    }else{
+    } else {
       _this.setData({
         show: true
       })
@@ -113,10 +113,10 @@ Page({
       //获取输入框值并设置keyword参数
       keyword: _this.data.searchAdr, //用户输入的关键词，可设置固定值,如keyword:'KFC'
       region: _this.data.ads, //设置城市名，限制关键词所示的地域范围，非必填参数
-      success: function (res) {//搜索成功后的回调
+      success: function(res) { //搜索成功后的回调
         console.log(res);
         _this.setData({
-          addressList:res.data
+          addressList: res.data
         });
         // var sug = [];
         for (var i = 0; i < res.data.length; i++) {
@@ -134,7 +134,7 @@ Page({
           suggestion: _this.data.addressList
         });
       },
-      fail: function (error) {
+      fail: function(error) {
         console.error(error);
       },
     });
@@ -143,7 +143,7 @@ Page({
     let that = this;
     wx.getStorage({
       key: 'address',
-      success: function (res) {
+      success: function(res) {
         that.setData({
           ads: res.data
         })
@@ -152,27 +152,32 @@ Page({
   },
   //跳转编辑地址
   adsChange(e) {
-    let { location, title } = e.currentTarget.dataset;
-    let a = Object.assign({}, location, { title: title });
-    wx.setStorageSync('loc', a);
     this.setData({
       addr: '../../images/addr.png'
     })
-    wx.navigateTo({
-      url: '/pages/editAddress/editAddress',
-    })
-    console.log(e);
+    let pages = getCurrentPages(); //当前页面
+    console.log(pages)
+    let prevPage = pages[pages.length - 2]; //上一页面
+    prevPage.setData({ //直接给上移页面赋值
+      address: e.currentTarget.dataset.address,
+      InputValue: e.currentTarget.dataset.title,
+    });
+    wx.navigateBack({
+      delta: 1
+    });
   },
   //跳转城市选择
-  cityChange: function () {
+  cityChange: function() {
     wx.navigateTo({
       url: '/pages/city/city',
     })
   },
-  prvent: function () {
-    wx.navigateBack({ changed: true });
+  prvent: function() {
+    wx.navigateBack({
+      changed: true
+    });
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

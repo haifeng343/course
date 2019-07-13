@@ -4,14 +4,14 @@ page {
 
 .container {
   min-height: 100%;
-  padding: 20rpx 0rpx 100rpx;
+  padding: 20rpx 0rpx;
 }
 
 .touch-item {
   font-size: 14px;
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid #f9f9f9;
+  border-bottom: 1px solid #ccc;
   width: 100%;
   overflow: hidden;
 }

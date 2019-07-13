@@ -43,11 +43,11 @@ margin-top:33rpx;
   top: 35rpx;
 }
 .addressListed{
-  width: 90%;
+  width: 100%;
+  height: auto;
   background-color: #fff;
-  margin-left: 5%;
-  max-height: 600rpx;
   box-shadow: 0 2rpx 10rpx #f1f1f1;
+  z-index: 9999999;
 }
 .addItem{
   width: 100%;
@@ -130,7 +130,6 @@ margin-top:33rpx;
 }
 .addressList{
   width: 100%;
-  max-height: 800rpx;
   overflow: hidden;
   overflow-y: scroll;
 }

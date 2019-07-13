@@ -18,6 +18,20 @@ Page({
       url: '/pages/binding/binding?phone='+this.data.mobile,
     })
   },
+  exitOut:function(){
+    wx.removeStorage({
+      key: 'userInfo',
+      success: function(res) {
+        console.log(res)
+      },
+    })
+    wx.removeStorage({
+      key: 'usertoken',
+      success: function (res) {
+        console.log(res)
+      },
+    })
+  },
   address:function() {
     wx.navigateTo({
       url: '/pages/address/address',

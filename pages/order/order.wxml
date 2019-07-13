@@ -1,6 +1,4 @@
-<view>
 
-</view>
 <view class="movie-container">
   <!-- 导航栏 -->
   <view class="navbar">
@@ -12,12 +10,12 @@
   </view>
   <view class="movie-content-wrapper">
     <swiper current="{{navbarActiveIndex}}" bindanimationfinish="onBindAnimationFinish">
-      <view class='nohasLog' style='display:none'>
-        <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
-        <view>暂无余额变更记录</view>
-      </view>
       <swiper-item wx:for="{{navbarTitle}}" wx:key="index">
-        <scroll-view scroll-y="{{true}}">
+      <view class='nohasLog' wx:if="{{userInfo==''}}">
+        <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+        <view>先去登录</view>
+      </view>
+        <scroll-view scroll-y="{{true}}" wx:else>
           <view class='orderList'>
             <view class='orderItem' wx:for="{{List}}" wx:key>
               <view class='title between'>
@@ -28,11 +26,11 @@
                 <view class='happening' wx:if="{{item.UseStatus==4}}">已过期</view>
                 <view class='happening' wx:if="{{item.UseStatus==5}}">申请退款</view>
                 <view class='happening' wx:if="{{item.UseStatus==6}}">退款中</view>
-                <view class='happening' wx:if="{{item.UseStatus==7}}">退款失败</view>
+                <view class='happening red' wx:if="{{item.UseStatus==7}}">退款失败</view>
                 <view class='happening' wx:if="{{item.UseStatus==8}}">退款成功</view>
                 <view class='happening' wx:if="{{item.UseStatus==9}}">取消退款</view>
               </view>
-              <view class='orderContent' bindtap='orderDetail'>
+              <view class='orderContent' data-Id="{{item.OrderId}}" data-status="{{item.UseStatus}}" bindtap='orderDetail'>
                 <image class='orderImg' src='{{item.SheerCoverImg}}' mode='widthFix' lazy-load='true'></image>
                 <view class='Right'>
                   <view class='between'>
@@ -53,9 +51,14 @@
                 <view class='tag' wx:if="{{item.BuyType==1}}">团购</view>
                 <view>
                   <button class='btn' bindtap='Refund' data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==1}}">申请退款</button>
-                  <button class='btn' bindtap='Refund' wx:if="{{item.UseStatus==3}}">删除订单</button>
-                  <button class='btn' bindtap='Refund' wx:if="{{item.UseStatus==4}}">删除订单</button>
-                  <button class='btn' bindtap='Refund' wx:if="{{item.UseStatus==5}}">取消退款</button>
+                  <button class='btn' bindtap='delete' data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==3 || item.UseStatus==4}}">删除订单</button>
+                  <view class='kld'>
+                    <button class='btn' bindtap='lookEor' data-item="{{item}}" wx:if="{{item.RefundFailReason==''}}" data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==7}}">查看原因</button>
+                    <button class='btn' style='margin-left:15rpx' bindtap='Refund' data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==7}}">重新退款</button>
+                    <button class='btn' style='margin-left:15rpx' bindtap='Refund' data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==9}}">重新退款</button>
+                  </view>
+                  <button class='btn' bindtap='cancelOrder' data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==5}}">取消退款</button>
+                  <button class='btn' bindtap='lookDetails' data-item="{{item}}" data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==8}}">查看详情</button>
                 </view>
               </view>
             </view>
@@ -79,9 +82,8 @@
   <view class="zan-dialog__mask" bindtap="toggleDialog" />
   <view class="zan-dialog__container">
     <view class='zan-title'>失败原因</view>
-    <view class='zan-content date'>退款处理日期： 2019-10-20 10:30:25</view>
-    <view class='zan-content'>失败原因：不予构成退款理由</view>
-    <view class='know' bindtap='closed'>知道了</view>
+    <view class='zan-content'>失败原因：{{RefundFailReason}}</view>
+    <view class='know' bindtap='closeds'>知道了</view>
   </view>
 </view>
 <!--退款成功提示弹出框-->
@@ -89,10 +91,10 @@
   <view class="zan-dialog__mask" bindtap="toggleDialog" />
   <view class="zan-dialog__container">
     <view class='zan-title'>退款成功</view>
-    <view class='le zan-til'>已退款200元</view>
-    <view class='zan-content align-left le'>交易编号: 158454584841</view>
-    <view class='zan-content align-left le'>退款时间: 158454584841</view>
-    <view class='zan-content align-left le'>到账时间: 158454584841</view>
+    <view class='le zan-til'>已退款{{PayAmount*1.0/100}}元</view>
+    <view class='zan-content align-left le'>交易编号: {{OrderSn}}</view>
+    <view class='zan-content align-left le'>退款时间: {{RefundTime}}</view>
+    <view class='zan-content align-left le' wx:if="{{RefundArrivalTime==''}}">到账时间: {{RefundArrivalTime}}</view>
     <view class='know' bindtap='closeded'>知道了</view>
   </view>
 </view>

@@ -15,6 +15,7 @@ Page({
     orderId:'',
     Reason:'拍错/不想拍',
     lpm:{},
+    urlImgs:[],
   },
   onLoad: function (options) {
     this.setData({
@@ -28,13 +29,21 @@ Page({
     var params = {
       OrderId: that.data.orderId,
       Reason: that.data.Reason,
-      ImgList: that.data.imgs,
+      ImgList:that.data.urlImgs,
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      console.log(res)
+      // console.log(res)
       that.setData({
         List: res.Data
       })
+      wx.switchTab({
+        url: '/pages/order/order',
+      })
+      wx.showToast({
+        icon:"none",
+        title: '提交成功',
+      })
+      that.getData();
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -54,6 +63,7 @@ Page({
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
+        // console.log(res)
         imgs.push(tempFilePaths[0]);
         that.upLoadImg(tempFilePaths[0]);
         that.setData({
@@ -116,7 +126,7 @@ Page({
       Status: 1,
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      console.log(res)
+      // console.log(res)
       that.setData({
         lpm: res.Data
       })
@@ -142,21 +152,30 @@ Page({
       filePath: data,
       header: {
         "Content-Type": "multipart/form-data",//记得设置
+        'channelCode': 'wechat',
+        'appVersion': '1.0.1',
         "userToken": usertoken,
       },
       name: 'Order.Refund',
       success: (res) => {
-       console.log(res);
-        
+        var ttt=JSON.parse(res.data)
+        var temp = that.data.urlImgs;
+        temp.push(ttt.Data.ImgPath);
+        that.setData({
+          urlImgs: temp
+        })
       },
       fail: (res) => {
-        
+        wx.showToast({
+          icon: 'none',
+          title: res.data.ErrorMessage,
+        })
       },
     });
   },
   bindPickerChange: function (e) {
     let index = e.detail.value;
-    console.log('picker发送选择改变，携带值为', this.data.array[index])
+    // console.log('picker发送选择改变，携带值为', this.data.array[index])
     this.setData({
       index: e.detail.value,
       Reason: this.data.array[index]

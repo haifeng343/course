@@ -78,8 +78,8 @@
     </view>
   </view>
 </view>
-
-<view wx:if="{{userInfo==''||userInfo==null}}">
+<!-- 
+<view>
   <view class='myTop'>
     <view class='start'>
       <image class='avator' src='../../images/avator.png' mode='widthFix' lazy-load='true'></image>
@@ -102,7 +102,7 @@
     </view>
   </view>
   <view class='List mt20'>
-    <!-- <view class='item'>
+    <view class='item'>
     <view class='start'>
       <image class='icon1' src='../../images/integral.png' mode='widthFix' lazy-load='true'></image>
       <view>我的积分</view>
@@ -111,7 +111,7 @@
       <view>1980</view>
       <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
     </view>
-  </view> -->
+  </view>
     <view class='item mt20' bindtap='setting'>
       <view class='start'>
         <image class='icon1' src='../../images/setting.png' mode='widthFix' lazy-load='true'></image>
@@ -158,4 +158,4 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->

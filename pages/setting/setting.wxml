@@ -11,6 +11,6 @@
     <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
   </view>
 </view>
-<view class='horizontal center mt20'>
-  <view class='exit'>退出登录</view>
-</view>
+<!-- <view class='horizontal center mt20'>
+  <view class='exit' bindtap='exitOut'>退出登录</view>
+</view> -->

@@ -37,6 +37,7 @@
   width: 150rpx;
   border-radius: 50%;
   margin-right: 20rpx;
+  height:150rpx;
 }
 .name{
   font-size: 30rpx;

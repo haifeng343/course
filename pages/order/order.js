@@ -16,23 +16,71 @@ Page({
     showError:false,
     showSuccess:false,
     List:[],
+    RefundFailReason:'',
+    PayAmount:'',
+    OrderSn:'',
+    RefundTime:'',
+    RefundArrivalTime:'',
+    page:1,
+    pagecont:20,
+  },
+  onShow(){
+    this.getData();
+    let userInfo = wx.getStorageSync('userInfo')
   },
   onLoad() {
-    this.getData();
+  },
+  lookEor:function(e){
+    console.log(e)
+    this.setData({
+      showError:true,
+      RefundFailReason: e.currentTarget.dataset.item.RefundFailReason
+    })
+  },
+  lookDetails:function(e){
+    this.setData({
+      showSuccess: true,
+      PayAmount: e.currentTarget.dataset.item.PayAmount,
+      OrderSn: e.currentTarget.dataset.item.OrderSn,
+      RefundTime: e.currentTarget.dataset.item.RefundTime,
+      RefundArrivalTime: e.currentTarget.dataset.item.RefundArrivalTime,
+    })
   },
   getData: function () {
     let that = this;
     var url = 'order/list';
     var params = {
       Status: that.data.navbarActiveIndex + 1,
-      PageCount: 10,
-      PageIndex: 1,
+      PageCount: that.data.pagecont,
+      PageIndex: that.data.page,
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       console.log(res)
       that.setData({
         List:res.Data
       })
+    }, function (msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
+  },
+  //取消订单
+  cancelOrder:function(e) {
+    let that = this;
+    var url = 'order/refund/cancel';
+    var params = {
+      Id: e.currentTarget.dataset.id,
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      wx.showToast({
+        icon:"none",
+        title: '取消退款成功',
+      })
+      that.getData();
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -66,16 +114,21 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh:function(){
-
-  },
-  //上拉触底
-  onReachBottom:function(){
     let that = this;
     that.getData(1);
   },
-  orderDetail:function() {
+  //上拉触底
+  onReachBottom:function(res){
+
+    console.log(res)
+    let that = this;
+    that.setData({
+      page: 1
+    })
+  },
+  orderDetail:function(e) {
     wx.navigateTo({
-      url: '/pages/orderDetail/orderDetail',
+      url: '/pages/orderDetail/orderDetail?Id=' + e.currentTarget.dataset.id + '&status=' + (this.data.navbarActiveIndex + 1),
     })
   },
   Refund:function(e) {
@@ -86,9 +139,43 @@ Page({
       url: '/pages/refund/refund?OrderId='+e.currentTarget.dataset.id,
     })
   },
-  closed:function(){
+  //删除
+  delete:function(e){
+    wx.showModal({
+      title: '提示',
+      content: '确定要删除吗？',
+      success: function (sm) {
+        if (sm.confirm) {
+          let that = this;
+          var url = 'order/delete';
+          var params = {
+            Id: e.currentTarget.dataset.id,
+          }
+          netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+            that.getData();
+          }, function (msg) { //onFailed失败回调
+            wx.hideLoading();
+            if (msg) {
+              wx.showToast({
+                title: msg,
+              })
+            }
+          }); //调用get方法情就是户数
+        } else if (sm.cancel) {
+
+        }
+      }
+    })
+    
+  },
+  closeds:function(){
     this.setData({
-      showDialog: !this.data.showDialog
+      showError: !this.data.showError
     });
-  }
+  },
+  closeded: function () {
+    this.setData({
+      showSuccess: !this.data.showSuccess
+    });
+  },
 })

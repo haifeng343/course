@@ -38,13 +38,13 @@
   </view>
 </view>
 <view class='Top'>
-  <view class='keep start kl' wx:for="{{ItemList}}" wx:key>
+  <view class="keep start kl {{ detail.UseStatus==4 ? 'gray' : '' }}" wx:for="{{ItemList}}" wx:key>
     <view class='leftImg'>
       <image class='topImg' src='{{item.ItemCoverImg}}' mode='widthFix' lazy-load='true'></image>
     </view>
     <view class='Right'>
       <view class='activity'>{{item.ItemName}}</view>
-      <image wx:if="{{detail.UseStatus==2}}" class='use' src='../../images/used.png' mode='widthFix' lazy-load='true'></image>
+      <image wx:if="{{detail.UseStatus==4}}" class="use" src='../../images/used.png' mode='widthFix' lazy-load='true'></image>
       <view class='courseRow start well'>
         <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
         <view>{{item.SellerName}}</view>
@@ -100,20 +100,23 @@
   <view class="zan-dialog__mask" bindtap="toggleDialog" />
   <view class="zan-dialog__container">
   <view class='zan-title'>退款成功</view>
-    <view class='le zan-til'>已退款200元</view>
-    <view class='zan-content align-left le'>交易编号: 158454584841</view>
-    <view class='zan-content align-left le'>退款时间: 158454584841</view>
-    <view class='zan-content align-left le'>到账时间: 158454584841</view>
+    <view class='le zan-til'>已退款{{detail.PayAmount*1.0/100}}元</view>
+    <view class='zan-content align-left le'>交易编号: {{detail.OrderSn}}</view>
+    <view class='zan-content align-left le'>退款时间: {{detail.RefundTime}}</view>
+    <view class='zan-content align-left le' wx:if="{{detail.RefundFailReason==''}}">到账时间: {{detail.RefundFailReason}}</view>
     <view class='know' bindtap='closeded'>知道了</view>
   </view>
 </view>
-<view class='pay start' wx:if="{{detail.UseStatus==7}}">
+<view class='pay start' wx:if="{{detail.UseStatus==7 || detail.UseStatus==9}}">
   <button class='btnd' bindtap='errorShow'>查看原因</button>
-  <button class='btnd btnd2'>重新退款</button>
+  <button class='btnd btnd2' wx:if="{{detail.UseStatus==7}}">重新退款</button>
+</view>
+<view class='pay' wx:if="{{detail.UseStatus==9}}">
+  <button class='btnd end' bindtap='Refund' data-OrderId="{{Id}}">重新退款</button>
 </view>
 <view class='pay' wx:if="{{detail.UseStatus==8}}">
   <button class='btnd end' bindtap='showSucess'>退款详情</button>
 </view>
-<view class='pay' wx:if="{{detail.UseStatus==9}}">
-  <button class='btnd end'>取消退款</button>
+<view class='pay' wx:if="{{detail.UseStatus==5}}">
+  <button class='btnd end' bindtap='cancelOrder' data-Id="{{Id}}">取消退款</button>
 </view>

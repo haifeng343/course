@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 35,
+			"current": 36,
 			"list": [
 				{
 					"id": -1,
@@ -300,6 +300,13 @@
 					"id": -1,
 					"name": "searchAddress",
 					"pathName": "pages/searchAddress/searchAddress",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "demo",
+					"pathName": "pages/demo/demo",
 					"scene": null
 				}
 			]

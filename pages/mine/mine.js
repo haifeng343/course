@@ -14,6 +14,9 @@ Page({
     this.setData({
       userInfo: userInfo,
     })
+    if (userInfo==""){
+      console.log(111)
+    }
   },
 
   integral:function() {

@@ -1,4 +1,3 @@
-
 // 引入SDK核心类
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var netUtil = require("../../utils/request.js"); //require引入
@@ -41,8 +40,8 @@ Page({
     bgcolor: '#EDFBFB',
     groupList: [],
     locationName: '',
-    page:1,
-    pageCount:10,
+    page: 1,
+    pageCount: 2,
   },
 
   groupDetail: function(e) {
@@ -63,14 +62,14 @@ Page({
       key: 'loc',
       success: function(res) {
         _this.setData({
-          longitude : res.data.lng,
-          latitude : res.data.lat,
+          longitude: res.data.lng,
+          latitude: res.data.lat,
           locationName: res.data.title.substring(0, 6),
         });
       },
     })
   },
-  func:function() {
+  func: function() {
     let that = this;
     var url = 'sheet/near/list';
     var params = {
@@ -81,30 +80,39 @@ Page({
       PageCount: that.data.pageCount,
       PageIndex: that.data.page,
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      let arr = res.Data.List;
-      for (let index of arr) {
-        index.SheetCoverImg = index.SheetCoverImg.replace(/\\/, "/");
-      }
-      let loc = that.data.locationName;
-      if (!loc) {
-        loc = res.Data.LocationName;
-      }
-      that.setData({
-        groupList: arr,
-        Acount: res.Data,
-        locationName: loc
-      })
-      that.Longitude = res.Data.Longitude;
-      that.Latitude = res.Data.Latitude;
-    }, function (msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+        let arr = res.Data.List;
+        if (arr.length > 0) {
+          var temp=[];
+          if(that.data.page==1){//刷新
+            temp=arr;
+          }else{//加载更多
+            temp = that.data.groupList;
+            temp = temp.concat(arr);
+          }
+          let loc = that.data.locationName;
+          if (!loc) {
+            loc = res.Data.LocationName;
+          }
+          that.setData({
+            groupList: temp,
+            Acount: res.Data,
+            locationName: loc
+          })
+          that.Longitude = res.Data.Longitude;
+          that.Latitude = res.Data.Latitude;
+          
+        }
+        wx.hideLoading();
+      },
+      function(msg) { //onFailed失败回调
+        wx.hideLoading();
+        if (msg) {
+          wx.showToast({
+            title: msg,
+          })
+        }
+      }); //调用get方法情就是户数
   },
   onLoad: function(options) {
     var that = this
@@ -128,7 +136,7 @@ Page({
             latitude: res.latitude,
             longitude: res.longitude
           },
-          success: function (res) {
+          success: function(res) {
             that.setData({
               locationName: res.result.formatted_addresses.recommend
             })
@@ -143,19 +151,31 @@ Page({
       currentSwiper: e.detail.current
     })
   },
-  //下拉刷新
-  onReachBottom:function(){
+  //上拉加载更多
+  onReachBottom: function() {
     let that = this;
-    wx.showToast({
-      icon:'none',
-      title: '玩命加载中..',
-    })
-    // page = that.data.page + 1;
-    
+    wx.showLoading({
+      title: '玩命加载中',
+    });
+    var temp_page=this.data.page;
+    temp_page++;
+    this.setData({
+      page: temp_page
+    });
+    that.func();
+
   },
-  //上拉加载
-  onPullDownRefresh:function(){
-    this.func(1);
+  //下拉刷新
+  onPullDownRefresh: function() {
+    wx.showLoading({
+      title: "玩命加载中",
+    });
+    this.setData({
+      page:1
+    });
+    this.func();
+    // 停止下拉动作
+    wx.stopPullDownRefresh();
   },
   onShareAppMessage: function() {
 

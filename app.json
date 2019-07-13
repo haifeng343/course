@@ -34,7 +34,8 @@
     "pages/ballanceLog/balanceLog",
     "pages/bankList/bankList",
     "pages/addBank/addBank",
-    "pages/searchAddress/searchAddress"
+    "pages/searchAddress/searchAddress",
+    "pages/demo/demo"
   ],
   "window": {
     "backgroundTextStyle": "light",

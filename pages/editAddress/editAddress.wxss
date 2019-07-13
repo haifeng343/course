@@ -11,17 +11,33 @@
   margin-left: 5%;
   padding-right: 5%;
   box-sizing: border-box;
+}
+.between{
   border-bottom: 1rpx solid #f9f9f9;
 }
 .InputValue{
   height: 100rpx;
   line-height: 100rpx;
-  margin-left: 60rpx;
+  margin-left: 40rpx;
+  overflow: hidden;
+}
+
+.tagName{
+  font-size: 30rpx;
+  font-weight: 600;
+  position: absolute;
+  left: -25%;
+  top: -22rpx;
 }
 .mg{
+  width: 100%;
   margin-left: 30rpx;
 }
+.start{
+  width: 100%;
+}
 .adName{
+  width: 120rpx;
   font-weight: 600;
 }
 .go{
@@ -30,6 +46,7 @@
 .kl{
   width: 60%;
   margin: 40rpx 20%; 
+  position: relative;
 }
 .tagHome,.tagCompany{
   font-size: 28rpx;

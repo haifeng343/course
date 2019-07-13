@@ -9,28 +9,25 @@
     <image class='noImg' src='../../images/noads.png' mode='widthFix' lazy-load='true'></image>
     <view>暂无地址，点击下方按钮去添加</view>
   </view>
-  <view class='List'>
-    <view class='item between'>
-      <view class='column'>
-        <view class='start'>
-          <view class='name'>西溪谷</view>
-          <view class='home'>家</view>
+  <view>
+    <view class="container">
+      <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{items}}" wx:key="">
+        <view class="content between">
+          <view class='column'>
+            <view class='start'>
+              <view class='name'>{{item.AddressName}}</view>
+              <view class='home' wx:if="{{item.Tag=='家'}}">家</view>
+              <view class='company' wx:if="{{item.Tag=='公司'}}">公司</view>
+              <view class='home' wx:if="{{item.Tag=='学校'}}">学校</view>
+            </view>
+            <view class='addressDetail' wx:if="{{item.DoorNumber=='' || item.DoorNumber==null}}">{{item.AddressDetails}}</view>
+            <view class='addressDetail' wx:else>{{item.DoorNumber}}</view>
+          </view>
+          <image class='edit' bindtap='edit' data-title='{{item.AddressName}}' data-lat="{{item.Latitude}}" data-lng="{{item.Longitude}}" data-address="{{item.AddressDetails}}" data-DoorNumber="{{item.DoorNumber}}" data-tag="{{item.Tag}}" data-addressId="{{item.AddressId}}" src='../../images/edit.png' mode='widthFix' lazy-load='true'></image>
         </view>
-        <view class='addressDetail'>杭州市西湖区紫霞街国际商务中心</view>
+        <view class="del" catchtap="del" data-index="{{index}}">删除</view>
       </view>
-      <image class='edit' bindtap='edit' src='../../images/edit.png' mode='widthFix' lazy-load='true'></image>
     </view>
-    <view class='item between'>
-      <view class='column'>
-        <view class='start'>
-          <view class='name'>西溪谷</view>
-          <view class='company'>公司</view>
-        </view>
-        <view class='addressDetail'>杭州市西湖区紫霞街国际商务中心</view>
-      </view>
-      <image class='edit' bindtap='edit' src='../../images/edit.png' mode='widthFix' lazy-load='true'></image>
-    </view>
+    <view class='add' data-ids="{{ids}}" bindtap='addAddress'>+新增地址</view>
   </view>
-  <view class='add'>+新增地址</view>
 </view>
-<view></view>
