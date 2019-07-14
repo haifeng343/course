@@ -6,6 +6,10 @@
   padding: 0 5%;
   box-sizing: border-box;
 }
+.lookd{
+  color: #3CD5D1;
+  font-size: 26rpx;
+}
 
 .kep {
   font-size: 30rpx;
@@ -104,4 +108,83 @@
   justify-content: flex-end;
   padding-right: 5%;
   padding-bottom: 20rpx;
+}
+
+.imgCode {
+  width: 570rpx;
+  height: 400rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  background: #fff;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.imgCodeTitle {
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  position: relative;
+  color: #000;
+  font-size: 34rpx;
+}
+.codeNumber{
+  text-align: left;
+}
+
+.delete {
+  width: 26rpx;
+  height: 26rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.inputBox {
+  width: 500rpx;
+  height: 80rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+}
+.masks {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 503;
+}
+.codeNumber {
+  width: 300rpx;
+  height: 100%;
+  border: none;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+
+.codeImg {
+  width: 200rpx;
+  height: 100%;
+}
+
+.loginBtns {
+  width: 500rpx;
+  height: 88rpx;
+  border-radius: 10rpx;
+  background: #e65248;
+  color: #fff;
+  font-size: 32rpx;
+  text-align: center;
+  line-height: 88rpx;
 }

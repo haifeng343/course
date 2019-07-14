@@ -6,7 +6,7 @@ Page({
     items: [],
     startX: 0, //开始坐标
     startY: 0,
-    pl:'',
+    pl: '',
   },
   edit: function(e) {
     // console.log(e)
@@ -15,12 +15,12 @@ Page({
       url: '/pages/editAddress/editAddress?address=' + item.address + '&title=' + item.title + '&lat=' + item.lat + '&lng=' + item.lng + '&tag=' + item.tag + '&addressId=' + item.addressid + '&doornumber=' + item.doornumber,
     })
   },
-  addAddress:function() {
+  addAddress: function() {
     wx.navigateTo({
-      url: '/pages/editAddress/editAddress?ids='+1,
+      url: '/pages/editAddress/editAddress?ids=' + 1,
     })
   },
-  onShow(){
+  onShow() {
     this.getData();
   },
   getData: function() {
@@ -28,12 +28,12 @@ Page({
 
     var url = 'user/address/list';
     var params = {
-      
+
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       console.log(res);
       that.setData({
-        items:res.Data
+        items: res.Data
       })
     }, function(msg) { //onFailed失败回调
       wx.hideLoading();
@@ -44,39 +44,39 @@ Page({
       }
     }); //调用get方法情就是户数
   },
-  onLoad: function (e) {
+  onLoad: function(e) {
 
-    var that = this;
+      var that = this;
 
-    for (var i = 0; i < 10; i++) {
+      for (var i = 0; i < 10; i++) {
 
-      this.data.items.push({
+        this.data.items.push({
 
-        content: i + " 向左滑动删除哦,向左滑动删除哦,向左滑动删除哦,向左滑动删除哦,向左滑动删除哦",
+          content: i + " 向左滑动删除哦,向左滑动删除哦,向左滑动删除哦,向左滑动删除哦,向左滑动删除哦",
 
-        isTouchMove: false //默认隐藏删除
+          isTouchMove: false //默认隐藏删除
 
-      })
+        })
+
+      }
+
+      this.setData({
+
+        items: this.data.items
+
+      });
 
     }
 
-    this.setData({
-
-      items: this.data.items
-
-    });
-
-  }
-
-  ,
+    ,
 
   //手指触摸动作开始 记录起点X坐标
 
-  touchstart: function (e) {
+  touchstart: function(e) {
 
     //开始触摸时 重置所有删除
 
-    this.data.items.forEach(function (v, i) {
+    this.data.items.forEach(function(v, i) {
 
       if (v.isTouchMove) //只操作为true的
 
@@ -98,7 +98,7 @@ Page({
 
   //滑动事件处理
 
-  touchmove: function (e) {
+  touchmove: function(e) {
 
     var that = this,
 
@@ -118,11 +118,11 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
+        X: touchMoveX,
+        Y: touchMoveY
+      });
 
-    that.data.items.forEach(function (v, i) {
+    that.data.items.forEach(function(v, i) {
 
       v.isTouchMove = false
 
@@ -164,7 +164,7 @@ Page({
   
   */
 
-  angle: function (start, end) {
+  angle: function(start, end) {
 
     var _X = end.X - start.X,
 
@@ -178,19 +178,51 @@ Page({
 
   //删除事件
 
-  del: function (e) {
+  del: function(e) {
+    console.log(e)
+    let that = this;
 
-    this.data.items.splice(e.currentTarget.dataset.index, 1)
+    var url = 'user/address/delete';
+    var params = {
+      Id: e.currentTarget.dataset.id
+    }
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+      wx.showModal({
+        title: '提示',
+        content: '确定要删除吗？',
+        success: function(sm) {
+          if (sm.confirm) {
+            wx.showToast({
+              icon: "none",
+              title: '删除成功',
+            });
+            setTimeout(() => {
+              that.getData();
+            }, 500)
+          } else if (sm.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      });
 
-    this.setData({
+    }, function(msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
+    // this.data.items.splice(e.currentTarget.dataset.index, 1)
+    // this.setData({
 
-      items: this.data.items
+    //   items: this.data.items
 
-    })
+    // })
 
   },
   onShareAppMessage: function() {
 
   },
-  
+
 })

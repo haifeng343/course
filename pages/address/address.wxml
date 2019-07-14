@@ -25,7 +25,7 @@
           </view>
           <image class='edit' bindtap='edit' data-title='{{item.AddressName}}' data-lat="{{item.Latitude}}" data-lng="{{item.Longitude}}" data-address="{{item.AddressDetails}}" data-DoorNumber="{{item.DoorNumber}}" data-tag="{{item.Tag}}" data-addressId="{{item.AddressId}}" src='../../images/edit.png' mode='widthFix' lazy-load='true'></image>
         </view>
-        <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+        <view class="del" bindtap="del" data-Id="{{item.AddressId}}">删除</view>
       </view>
     </view>
   </view>

@@ -1,28 +1,46 @@
-// pages/bankList/bankList.js
+var netUtil = require("../../utils/request.js"); //require引入
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    bg1:'#FF4F4F',
-    bg2:'#E88786',
-    showSuccess:false,
+    bg1: '#FF4F4F',
+    bg2: '#E88786',
+    showSuccess: false,
   },
-  closeded:function(){
+  closeded: function() {
     this.setData({
-      showSuccess : false
+      showSuccess: false
     })
   },
-  addBank:function(){
+  addBank: function() {
     wx.navigateTo({
       url: '/pages/addBank/addBank',
     })
   },
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+    this.getData();
   },
-  onShareAppMessage: function () {
+  getData: function() {
+    let that = this;
+
+    var url = 'user/bank/card/list';
+    var params = {
+     
+    }
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+      console.log(res);
+    }, function(msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
+  },
+  onShareAppMessage: function() {
 
   }
 })

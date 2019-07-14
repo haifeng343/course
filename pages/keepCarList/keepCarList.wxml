@@ -1,0 +1,33 @@
+<view class='List'>
+  <view class='item start'>
+     <image class='cion' src='../../images/icon11.jpg' mode='widthFix' lazy-load='true'></image>
+      <view>中国工商银行</view>
+  </view>
+  <view class='item start'>
+     <image class='cion' src='../../images/icon11.jpg' mode='widthFix' lazy-load='true'></image>
+      <view>中国工商银行</view>
+  </view>
+  <view class='item start'>
+     <image class='cion' src='../../images/icon11.jpg' mode='widthFix' lazy-load='true'></image>
+      <view>中国工商银行</view>
+  </view>
+  <view class='item start'>
+     <image class='cion' src='../../images/icon11.jpg' mode='widthFix' lazy-load='true'></image>
+      <view>中国工商银行</view>
+  </view>
+  <view class='item start'>
+     <image class='cion' src='../../images/icon11.jpg' mode='widthFix' lazy-load='true'></image>
+      <view>中国工商银行</view>
+  </view>
+  <view class='item start'>
+     <image class='cion' src='../../images/icon11.jpg' mode='widthFix' lazy-load='true'></image>
+      <view>中国工商银行</view>
+  </view><view class='item start'>
+     <image class='cion' src='../../images/icon11.jpg' mode='widthFix' lazy-load='true'></image>
+      <view>中国工商银行</view>
+  </view>
+  <view class='item start'>
+     <image class='cion' src='../../images/icon11.jpg' mode='widthFix' lazy-load='true'></image>
+      <view>中国工商银行</view>
+  </view>
+</view>

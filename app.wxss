@@ -12,6 +12,13 @@ page {
   padding: 200rpx 0;
   box-sizing: border-box;
 }
+.clear{
+  width: 40rpx;
+  position: absolute;
+  right: 15rpx;
+  top:10rpx;
+  z-index: 55;
+}
 .nohasLog{
   width: 100%;
   font-size: 28rpx;

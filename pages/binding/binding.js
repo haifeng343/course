@@ -84,13 +84,13 @@ Page({
       VerifyCode: val
     })
   },
-  //验证码倒计时
+ 
   codetime() { // 点击获取验证码
-    //这里是要调api接口的，我这里就假装已经调成功了，返回200了
+
     var _this = this
-    var coden = 60 // 定义60秒的倒计时
+    var coden = 60 
     var codeV = setInterval(function() {
-      _this.setData({ // _this这里的作用域不同了
+      _this.setData({ 
         btntext: '重新获取' + (--coden) + 's'
       })
       if (coden >= 0) {

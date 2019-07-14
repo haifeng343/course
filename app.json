@@ -35,7 +35,9 @@
     "pages/bankList/bankList",
     "pages/addBank/addBank",
     "pages/searchAddress/searchAddress",
-    "pages/demo/demo"
+    "pages/demo/demo",
+    "pages/search/search",
+    "pages/keepCarList/keepCarList"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -32,13 +32,13 @@
     <view class='withdrawTxt'>提现金额</view>
     <view class='start'>
       <text class='moneyTxt'>￥</text>
-      <input class='money' type='digit'></input>
-      <text class='moneyTxt'>全部</text>
+      <input class='money' type='digit' bindinput='amoutChange' value='{{amount}}'></input>
+      <text class='moneyTxt' bindtap='all'>全部</text>
     </view>
   </view>
   <view class='item2 bor'>
-    <!-- <view>可用余额￥100.00</view> -->
-    <view>额外扣除￥0.1 服务费（费率0.10%）</view>
+    <view wx:if="{{showEor}}">可用余额￥{{money*1.0/100}}.00</view>
+    <view wx:if="{{show}}">额外扣除￥0.1 服务费（费率0.10%）</view>
   </view>
 
   <!-- <view class='btn1'>提现</view> -->

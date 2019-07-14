@@ -2,6 +2,13 @@
   <view>我的邀请人</view>
   <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
 </view>
+<view class='item between mt20' bindtap='recommendation'>
+  <view>我的邀请人</view>
+  <view class='plase start'>
+    <image class='person' src='../../images/avator.png' mode='widthFix' lazy-load='true'></image>
+    <view class='name'>小林</view>
+  </view>
+</view>
 <view class='myTitle'>我的邀请</view>
 <view class='logList'>
   <view class='logItem between'>

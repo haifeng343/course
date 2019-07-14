@@ -43,6 +43,7 @@
 .courseCont {
   width: 100%;
   height: auto;
+  margin: 15rpx 0;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-start;

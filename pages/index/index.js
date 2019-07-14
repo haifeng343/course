@@ -11,8 +11,6 @@ Page({
     Latitude: '',
     Longitude: '',
     Id: 0,
-    page: 1,
-    pages: 0,
     articles: [],
     imgUrls: [{
         img: '../../images/banner.png',
@@ -41,9 +39,13 @@ Page({
     groupList: [],
     locationName: '',
     page: 1,
-    pageCount: 2,
+    pageCount: 20,
   },
-
+  searchTo:function() {
+    wx.navigateTo({
+      url: '/pages/search/search',
+    })
+  },
   groupDetail: function(e) {
     const that = this;
     that.Id = parseInt(e.currentTarget.dataset.id)
@@ -66,8 +68,9 @@ Page({
           latitude: res.data.lat,
           locationName: res.data.title.substring(0, 6),
         });
+        _this.func();
       },
-    })
+    });
   },
   func: function() {
     let that = this;
