@@ -24,24 +24,17 @@
 </view>
 <view class='line'></view>
 <view class='about'>
-  <view class='now md'>我的地址</view>
+  <view class='now md' wx:if="{{items.length>0}}">我的地址</view>
   <view class='List'>
-    <view class='item between'>
+    <view class='item between' wx:for="{{items}}" wx:key data-title='{{item.AddressName}}' data-location="{{item.location}}"  bindtap='navToIndex'>
       <view class='column'>
         <view class='start'>
-          <view class='name'>西溪谷</view>
-          <view class='home'>家</view>
+          <view class='name'>{{item.AddressName}}</view>
+          <view class='home' wx:if="{{item.Tag=='家'}}">家</view>
+          <view class='company' wx:if="{{item.Tag=='公司'}}">公司</view>
+          <view class='home' wx:if="{{item.Tag=='学校'}}">学校</view>
         </view>
-        <view class='addressDetail'>杭州市西湖区紫霞街国际商务中心</view>
-      </view>
-    </view>
-    <view class='item between'>
-      <view class='column'>
-        <view class='start'>
-          <view class='name'>西溪谷</view>
-          <view class='company'>公司</view>
-        </view>
-        <view class='addressDetail'>杭州市西湖区紫霞街国际商务中心</view>
+        <view class='addressDetail'>{{item.AddressDetails}}</view>
       </view>
     </view>
   </view>
