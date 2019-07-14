@@ -19,14 +19,7 @@
     <view class='histitle mt40'>搜索发现</view>
   </view>
   <view class='historyList'>
-    <text class='historyItem'>英语课</text>
-    <text class='historyItem'>英语课</text>
-    <text class='historyItem'>英语课</text>
-    <text class='historyItem'>英语课</text>
-    <text class='historyItem'>英语课</text>
-    <text class='historyItem'>英语语文课</text>
-    <text class='historyItem'>英语课</text>
-    <text class='historyItem'>英语课</text>
+    <text class='historyItem' bindtap='setSearchName'>英语课</text>
   </view>
 </view>
 <view class='groupList' wx:if="{{groupList.length>0}}">

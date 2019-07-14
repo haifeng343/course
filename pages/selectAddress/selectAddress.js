@@ -165,18 +165,18 @@ Page({
   //跳转首页
   navToIndex(e) {
     console.log(e);
-    let {
-      location,
-      title
-    } = e.currentTarget.dataset;
-
-    let a = Object.assign({}, location, {
+    let lat = e.currentTarget.dataset.lat;
+    let lng = e.currentTarget.dataset.lng;
+    let title = e.currentTarget.dataset.title;
+    let loc = {
+      lat: lat,
+      lng: lng,
       title: title
-    });
-    wx.setStorageSync('loc', a);
-    // wx.switchTab({
-    //   url: '/pages/index/index',
-    // })
+    }
+    wx.setStorageSync('loc', loc);
+    wx.switchTab({
+      url: '/pages/index/index',
+    })
   },
   //跳转城市选择
   cityChange: function() {

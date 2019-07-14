@@ -26,7 +26,7 @@
 <view class='about'>
   <view class='now md' wx:if="{{items.length>0}}">我的地址</view>
   <view class='List'>
-    <view class='item between' wx:for="{{items}}" wx:key data-title='{{item.AddressName}}' data-location="{{item.location}}"  bindtap='navToIndex'>
+    <view class='item between' wx:for="{{items}}" wx:key data-title='{{item.AddressName}}'  data-lat="{{item.Latitude}}" data-lng="{{item.Longitude}}" bindtap='navToIndex'>
       <view class='column'>
         <view class='start'>
           <view class='name'>{{item.AddressName}}</view>

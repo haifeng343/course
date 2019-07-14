@@ -66,7 +66,7 @@ Page({
         _this.setData({
           longitude: res.data.lng,
           latitude: res.data.lat,
-          locationName: res.data.title.substring(0, 6),
+          locationName: res.data.title,
         });
         _this.func();
       },

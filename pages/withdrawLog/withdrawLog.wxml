@@ -6,9 +6,9 @@
   <view class='log'>
     <view class='logTop between'>
       <view class='start'>
-        <picker mode="date" value="{{date}}" start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange">
+        <picker mode="multiSelector" value="{{date}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange">
           <view class="picker">
-            {{date}}月
+            {{date?date:now}}
           </view>
         </picker>
         <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>

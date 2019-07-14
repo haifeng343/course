@@ -10,24 +10,29 @@ Page({
     page:1,
     year:'',
     month:'',
+    array:[],
   },
   onShow: function() {
     var date = new Date();
+    let arr =[],arr1=[];
     this.setData({
       year: date.getFullYear(),
       month: date.getMonth() + 1
     })
+    
     var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    if (month >= 1 && month <= 9) {
-      month = "0" + month;
+    arr.push('全部');
+    for (var i = year; i >1970;i--){
+      arr.push(i+'年')
     }
+    arr1 = ['全部','1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
     this.setData({
-      date: year + '-' + month
+      array:[arr,arr1],
+      now: this.data.month+'月'
     })
+    this.getData();
   },
   onLoad:function() {
-    this.getData();
   },
   getData: function() {
     let that = this;
@@ -53,10 +58,19 @@ Page({
     }); //调用get方法情就是户数
   },
   bindDateChange: function(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      date: e.detail.value
-    })
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
+    let index = e.detail.value;
+    if (index[0]==0 && index[1]==0){
+      this.setData({
+        date:'全部'
+      })
+    }else{
+      this.setData({
+        date: this.data.array[0][index[0]] + ',' + this.data.array[1][index[1]],
+        year: this.data.array[0][index[0]],
+        month: this.data.array[1][index[1]]
+      })
+    }
     this.getData();
   },
   showEor: function() {

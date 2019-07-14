@@ -122,9 +122,15 @@ Page({
   },
   //删除历史搜索
   deleteHistory: function () {
-    wx.clearStorage('searchRecord');
+    wx.removeStorageSync('searchRecord');
     this.setData({
       searchRecord: []
+    })
+  },
+  //搜索发现
+  setSearchName:function(){
+    this.setData({
+      
     })
   },
   //跳转详情页
