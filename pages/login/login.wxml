@@ -1,0 +1,7 @@
+<view class="container">
+  <view class="content">
+    <image src="../../images/login_img.png" class="login_img" mode='widthFix' lazy-load='true' alt=""></image>
+    <view class="center">请登录后再进行此操作！</view>
+    <button class="loginBtn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">登录</button>
+  </view>
+</view>

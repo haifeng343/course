@@ -1,0 +1,35 @@
+page{
+  background-color: #fff;
+}
+.container{
+  width: 400rpx;
+  height: auto;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+.login_img{
+  width: 250rpx;
+}
+.center{
+  font-size: 26rpx;
+}
+.loginBtn{
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: #29D9D6;
+  color: #fff;
+  margin-top: 40rpx;
+}
+
+
+
+
+

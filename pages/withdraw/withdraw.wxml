@@ -14,19 +14,19 @@
       </view>
     </view>
   </view>
-  <view class='List mt20'>
-    <!-- <view class='item between'>
-    <view class='start align'>
-      <image class='bankIcon' src='../../images/m2.png' mode='widthFix' lazy-load='true'></image>
-      <view class='bankText'>
-        <view class='bankTitle'>中国工商银行</view>
-        <view class='bankTxt'>尾号 8892 的储蓄卡</view>
+  <view class='List mt20' wx:if="{{wihdraw!=''||wihdraw!=null}}">
+    <view class='item between' data-item="{{wihdraw}}" data- bindtap='changeCard'>
+      <view class='start align'>
+        <image class='bankIcon' src='{{wihdraw.BankIconUrl}}' mode='widthFix' lazy-load='true'></image>
+        <view class='bankText'>
+          <view class='bankTitle'>{{wihdraw.BankName}}</view>
+          <view class='bankTxt'>尾号 {{CardNumber}} 的{{wihdraw.CardBreed}}</view>
+        </view>
       </view>
+      <image class='go bankRight' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
     </view>
-    <image class='go bankRight' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-  </view> -->
-    <view class='nohave red' bindtap='nohaveTo'>暂无银行卡，点击去添加</view>
   </view>
+  <view wx:else class='nohave red mt20' bindtap='nohaveTo'>暂无银行卡，点击去添加</view>
 
   <view class='item1 bor'>
     <view class='withdrawTxt'>提现金额</view>
@@ -41,17 +41,18 @@
     <view wx:if="{{show}}">额外扣除￥0.1 服务费（费率0.10%）</view>
   </view>
 
-  <!-- <view class='btn1'>提现</view> -->
-  <view class='btn1 g1'>提现</view>
+  <view class='btn1' bindtap='GetApply' wx:if="{{show}}">提现</view>
+  <view class='btn1 g1' wx:else>提现</view>
 
   <!--确认提现提示弹出框-->
+
   <view class="zan-dialog {{ showSure ? 'zan-dialog--show' : '' }}">
-    <view class="zan-dialog__mask" />
+    <view class="zan-dialog__mask" bindtap="toggleDialog" />
     <view class="zan-dialog__container">
-      <view class='zan-title'>确认退款</view>
+      <view class='zan-title'>确认提现</view>
       <view class='le zan-til'></view>
       <view class='zan-content'>提现</view>
-      <view class='zan-content le'>￥28.00</view>
+      <view class='zan-content le'>￥{{amount}}</view>
       <view class='btnSubmit' bindtap='submitTo'>确认提现</view>
     </view>
   </view>

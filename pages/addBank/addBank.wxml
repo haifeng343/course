@@ -1,4 +1,4 @@
-<view>
+<view wx:if="{{next==true}}">
   <view class="tip between">
     <view>请绑定持卡人本人的银行卡</view>
     <view class='lookd' bindtap='navtoCard'>查看支持的银行卡</view>
@@ -32,7 +32,7 @@
 
 
 <!--下一步之后的内容-->
-<view style='display:none'>
+<view wx:else>
   <view class="tip">选择银行卡类型</view>
   <view class='kep between'>
     <view class='start'>
@@ -54,12 +54,12 @@
         <input type='number' value='{{phoneCode}}' bindinput='getPhoneCode'></input>
       </view>
       <!-- <text class="imgCoded" bindtap='codeyan' disabled='{{notEdit}}'>获取验证码</text> -->
-      <text class="imgCoded imgLoad" bindtap='codeyan' disabled='{{notEdit}}'>{{btntext}}</text>
+      <button class="imgCoded  {{notEdit==true?'imgLoad':''}}" bindtap='codeyan' disabled='{{notEdit}}'>{{btntext}}</button>
     </view>
   </view>
-    <view class='end'>验证码已发送至136****5454</view>
+    <view class='end' wx:if="{{tips==true}}">验证码已发送至{{phoneNumber}}</view>
 </view>
-
+  <view class='next' bindtap='binding' wx:if="{{next==false}}">绑定</view>
 <!-- 图形验证码弹框 -->
 <view class="masks" wx:if="{{imgCodeShow}}">
   <view class="imgCode">
@@ -69,8 +69,20 @@
     </view>
     <view class="inputBox">
       <input type="text" class='codeNumber' placeholder="请输入" value="{{PicVerifycode}}" bindinput='codeText' placeholder-style="color:#ccc;" />
-      <image src="{{PicUrl}}" class='codeImg' alt="failed" bindtap="codeyan" alt=""></image>
+      <image src="{{imgCodeUrl}}" class='codeImg' alt="failed" bindtap="codeyan" alt=""></image>
     </view>
     <view class="loginBtns" bindtap="getSMSCode">确定</view>
+  </view>
+</view>
+
+<!--绑定成功提示弹出框-->
+<view class="zan-dialog {{ carShowSuccess ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" />
+  <view class="zan-dialog__container">
+    <image class='success1' src='../../images/success1.png' mode='widthFix' lazy-load='true'></image>
+    <view class='le zan-til'></view>
+    <view class='zan-content le1'>绑定银行卡成功</view>
+    <view class='zan-content'>恭喜你！绑定银行卡成功！</view>
+    <view class='btnSubmit' bindtap='closeded'>知道了</view>
   </view>
 </view>

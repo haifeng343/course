@@ -70,7 +70,14 @@ Page({
       }
     }); //调用get方法情就是户数
   },
-  swiperChange: function (e) {
+  swiperChangeTo: function (e) {
+    console.log(e.detail.current)
+    this.setData({
+      // current: e.detail.current
+    })
+  },
+  swiperChange:function(e){
+    console.log(e.detail.current)
     this.setData({
       current: e.detail.current
     })

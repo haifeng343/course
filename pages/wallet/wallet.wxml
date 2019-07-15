@@ -1,18 +1,13 @@
 <view class='mTop' bindtap='balanceLog'>
   <image class='mTopImg' src='../../images/mm1.png' mode='widthFix' lazy-load='true'></image>
-  <view class='Balance'>我的余额</view>
-  <view class='b1'>￥<text class='money'>350.00</text></view>
-</view>
-<view class='List mt20'>
-  <view class='item mt20' bindtap='Bill'>
-    <view class='start'>
-      <image class='icon1' src='../../images/m1.png' mode='widthFix' lazy-load='true'></image>
-      <view>账单</view>
-    </view>
-    <view class='start'>
-      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+  <view class='between mt10'>
+    <view class='Balance'>我的余额： </view>
+    <view class='b1'>
+      <text class='money'>{{money}}元</text>
     </view>
   </view>
+</view>
+<view class='List mt20'>
   <view class='item mt20' bindtap='withdraw'>
     <view class='start'>
       <image class='icon1' src='../../images/m2.png' mode='widthFix' lazy-load='true'></image>
@@ -26,6 +21,15 @@
     <view class='start'>
       <image class='icon1' src='../../images/m3.png' mode='widthFix' lazy-load='true'></image>
       <view>返现记录</view>
+    </view>
+    <view class='start'>
+      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+  <view class='item mt20' bindtap='Bill'>
+    <view class='start'>
+      <image class='icon1' src='../../images/m1.png' mode='widthFix' lazy-load='true'></image>
+      <view>账单</view>
     </view>
     <view class='start'>
       <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>

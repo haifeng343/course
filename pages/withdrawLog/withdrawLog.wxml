@@ -1,7 +1,3 @@
-<view class='nohasLog' style='display:none'>
-  <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
-  <view>暂无提现记录</view>
-</view>
 <view>
   <view class='log'>
     <view class='logTop between'>
@@ -14,31 +10,27 @@
         <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
       </view>
       <view class='math'>
-        <view> 提现￥100.00</view>
+        <!-- <view> 提现￥100.00</view> -->
       </view>
     </view>
-    <view class='logList'>
-      <view class='logItem column' bindtap='withdrawDetail'>
+    <view class='nohasLog' wx:if="{{List.length<=0}}">
+      <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+      <view>暂无提现记录</view>
+    </view>
+    <view class='logList' wx:else>
+      <view class='logItem column' wx:for="{{List}}" wx:key>
         <view class='between'>
-          <view class='share'>余额提现</view>
-          <view class='fraction'>+ ￥9000.00</view>
+          <view class='share'>{{item.Description}}</view>
+          <view class='fraction'>+ ￥{{item.Amount*1.0/100}}</view>
         </view>
         <view class='between'>
-          <view class='time'>2019-10-22</view>
-          <view class='status'>申请中</view>
-        </view>
-      </view>
-      <view class='logItem column'>
-        <view class='between'>
-          <view class='share'>余额提现</view>
-          <view class='fraction'>+ ￥9000.00</view>
-        </view>
-        <view class='between'>
-          <view class='time'>2019-10-22</view>
-          <view class='status red start' bindtap='showEor'>提现失败
+          <view class='time'>{{item.CreateTime}}</view>
+          <view class='status' wx:if="{{item.Status==1}}">提交申请</view>
+          <view class='status' wx:if="{{item.Status==2}}">申请处理中</view>
+          <view class='status red start' wx:if="{{item.Status==3}}" data-StatusDes="{{item.StatusDes}}" bindtap='showEor'>提现失败
             <image class='kw' src='../../images/kw.png' mode='widthFix' lazy-load='true'></image>
           </view>
-
+          <view class='status' wx:if="{{item.Status==4}}">提现成功</view>
         </view>
       </view>
     </view>
@@ -49,7 +41,7 @@
     <view class="zan-dialog__mask" bindtap="toggleDialog" />
     <view class="zan-dialog__container">
       <view class='zan-title'>失败原因</view>
-      <view class='zan-content'>账户存在异常</view>
+      <view class='zan-content'>{{statusdes}}</view>
       <view class='know' bindtap='closed'>知道了</view>
     </view>
   </view>

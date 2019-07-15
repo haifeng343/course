@@ -37,6 +37,11 @@ Page({
       RefundFailReason: e.currentTarget.dataset.item.RefundFailReason
     })
   },
+  toggleDialog: function () {
+    this.setData({
+      showError: false
+    })
+  },
   lookDetails:function(e){
     this.setData({
       showSuccess: true,
@@ -115,11 +120,13 @@ Page({
   /**
    * 
    */
-  onBindAnimationFinish: function ({ detail }) {
+  onBindAnimationFinish: function (e) {
     // 设置data属性中的navbarActiveIndex为当前点击的navbar
+    // console.log(e)
     this.setData({
-      navbarActiveIndex: detail.current
+      navbarActiveIndex: e.detail.current
     })
+    this.getData();
   },
   //下拉刷新
   onPullDownRefresh:function(){

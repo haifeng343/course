@@ -31,7 +31,7 @@
       <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
       <view class='address'>{{List.StoreAddress}}</view>
     </view>
-    <view class='end'>{{List.Distance}}km</view>
+    <!-- <view class='end'>{{List.Distance}}km</view> -->
   </view>
   <button class='courseRow start well' bindtap='callPhone'>
     <image class='rowImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>

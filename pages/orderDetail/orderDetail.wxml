@@ -1,6 +1,6 @@
 <view class='Top'>
   <view class='List between'>
-    <view class="start">订单编号: <text class='ml ml10'>{{detail.OrderSn}}</text></view>
+    <view class="start" style='width:100%'>订单编号: <text class='ml ml10'>{{detail.OrderSn}}</text></view>
     <view class='status' wx:if="{{detail.UseStatus==1}}">未使用</view>
     <view class='status' wx:if="{{detail.UseStatus==2}}">部分使用</view>
     <view class='status' wx:if="{{detail.UseStatus==3}}">已完成</view>

@@ -1,46 +1,32 @@
-// pages/keepCarList/keepCarList.js
+var netUtil = require("../../utils/request.js"); //require引入
 Page({
 
-  /**
-   * 页面的初始数据
-   */
+  
   data: {
-
+    List:[],
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  onLoad(options){
+    this.getData();
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  //点击搜索
+  getData: function () {
+    let that = this;
+    var url = 'user/bank/support/list';
+    var params = {
+      
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      that.setData({
+        List : res.Data
+      })
+    }, function (msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
   },
 
   /**
@@ -56,10 +42,6 @@ Page({
   onReachBottom: function () {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
 
   }

@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 38,
+			"current": 40,
 			"list": [
 				{
 					"id": -1,
@@ -321,6 +321,20 @@
 					"id": -1,
 					"name": "keepCarList",
 					"pathName": "pages/keepCarList/keepCarList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "login",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "share",
+					"pathName": "pages/share/share",
 					"scene": null
 				}
 			]

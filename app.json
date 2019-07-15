@@ -37,7 +37,9 @@
     "pages/searchAddress/searchAddress",
     "pages/demo/demo",
     "pages/search/search",
-    "pages/keepCarList/keepCarList"
+    "pages/keepCarList/keepCarList",
+    "pages/login/login",
+    "pages/share/share"
   ],
   "window": {
     "backgroundTextStyle": "light",

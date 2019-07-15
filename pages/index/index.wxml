@@ -9,7 +9,7 @@
   <input type='search' bindtap='searchTo' class='search' placeholder='新品上架'></input>
 </view>
 <view class='banner'>
-  <swiper bindchange="swiperChange" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1'>
+  <swiper bindchange="swiperChangeTo" bindanimationfinish="swiperChange" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1'>
     <block wx:for="{{imgUrls}}" wx:key>
       <swiper-item>
         <view class='box'>
@@ -31,9 +31,11 @@
     </view>
     <view class='itemRight'>
       <view class='title'>{{item.SheetName}}</view>
-      <view class='addr'>
-        <image src='../../images/ad1.png' class='ad1' mode='widthFix' lazy-load='true'></image>
-        <view>{{item.TradingAreaName}}</view>
+      <view class='between'>
+        <view class='addr'>
+          <image src='../../images/ad1.png' class='ad1' mode='widthFix' lazy-load='true'></image>
+          <view>{{item.TradingAreaName}}</view>
+        </view>
         <view class='distance'>{{item.TradingAreaDistance}}Km</view>
       </view>
       <view class='time'>活动截止时间：{{item.EndTime}}</view>

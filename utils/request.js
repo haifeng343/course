@@ -45,6 +45,10 @@ function request(url, params, method, onSuccess, onFailed) {
         if (res.data.ErrorCode == 0) {
           onSuccess(res.data); //request success
 
+        } else if (res.data.ErrorCode == 301){
+            wx.navigateTo({
+              url: '/pages/login/login',
+            })
         } else {
           wx.showToast({
             icon: 'none',

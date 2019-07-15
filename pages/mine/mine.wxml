@@ -1,4 +1,64 @@
-<view>
+
+<view wx:if="{{userInfo=='' || userInfo==null}}">
+  <view class='myTop'>
+    <view class='start'>
+      <image class='avator' src='../../images/userIcon.png' mode='widthFix' lazy-load='true'></image>
+      <view class='align'>
+        <button class="loginBtnd" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">登录</button>
+      </view>
+    </view>
+    <view class='paypag'>
+      <view class='paypagItem' bindtap='integral'>
+        <view class='ml1'>积分</view>
+        <view class='ml2'>0</view>
+      </view>
+      <view class='paypagItem' bindtap='wallet'>
+        <view class='ml1'>钱包 (元)</view>
+        <view class='ml2'>0.00</view>
+      </view>
+    </view>
+  </view>
+  <view class='List mt20'>
+    <view class='item mt20'>
+      <view class='start'>
+        <image class='icon1' src='../../images/a1.png' mode='widthFix' lazy-load='true'></image>
+        <view>关于我们</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class='item' bindtap='callUs'>
+      <view class='start'>
+        <image class='icon1' src='../../images/a2.png' mode='widthFix' lazy-load='true'></image>
+        <view>联系我们</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <!-- <view class='item'>
+      <view class='start'>
+        <image class='icon1' src='../../images/a3.png' mode='widthFix' lazy-load='true'></image>
+        <view>分享给好友</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class='item mt20' bindtap='invite'>
+      <view class='start'>
+        <image class='icon1' src='../../images/a4.png' mode='widthFix' lazy-load='true'></image>
+        <view>推荐与邀请</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view> -->
+  </view>
+</view>
+
+<view wx:else>
   <view class='myTop'>
     <view class='start'>
       <image class='avator' src='{{userInfo.HeadUrl}}' mode='widthFix' lazy-load='true'></image>
@@ -16,7 +76,7 @@
       </view>
       <view class='paypagItem' bindtap='wallet'>
         <view class='ml1'>钱包 (元)</view>
-        <view class='ml2'>{{userInfo.Money*1.0/100}}</view>
+        <view class='ml2'>{{userInfo.Money*1.0/100}}.00</view>
       </view>
     </view>
   </view>
@@ -58,7 +118,7 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item'>
+    <!-- <view class='item' bindtap='share' data-Id="{{recommandCode}}">
       <view class='start'>
         <image class='icon1' src='../../images/a3.png' mode='widthFix' lazy-load='true'></image>
         <view>分享给好友</view>
@@ -75,87 +135,6 @@
       <view class='start'>
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
-    </view>
+    </view> -->
   </view>
 </view>
-<!-- 
-<view>
-  <view class='myTop'>
-    <view class='start'>
-      <image class='avator' src='../../images/avator.png' mode='widthFix' lazy-load='true'></image>
-      <view class='align'>
-        <view class='name'>LKJDSFL</view>
-        <view class='share start'>分享码：
-          <view class='code'>dlisa</view>
-        </view>
-      </view>
-    </view>
-    <view class='paypag'>
-      <view class='paypagItem' bindtap='integral'>
-        <view class='ml1'>积分</view>
-        <view class='ml2'>350</view>
-      </view>
-      <view class='paypagItem' bindtap='wallet'>
-        <view class='ml1'>钱包 (元)</view>
-        <view class='ml2'>600.00</view>
-      </view>
-    </view>
-  </view>
-  <view class='List mt20'>
-    <view class='item'>
-    <view class='start'>
-      <image class='icon1' src='../../images/integral.png' mode='widthFix' lazy-load='true'></image>
-      <view>我的积分</view>
-    </view>
-    <view class='start'>
-      <view>1980</view>
-      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-    </view>
-  </view>
-    <view class='item mt20' bindtap='setting'>
-      <view class='start'>
-        <image class='icon1' src='../../images/setting.png' mode='widthFix' lazy-load='true'></image>
-        <view>设置</view>
-      </view>
-      <view class='start'>
-        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-      </view>
-    </view>
-    <view class='item mt20'>
-      <view class='start'>
-        <image class='icon1' src='../../images/a1.png' mode='widthFix' lazy-load='true'></image>
-        <view>关于我们</view>
-      </view>
-      <view class='start'>
-        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-      </view>
-    </view>
-    <view class='item' bindtap='callUs'>
-      <view class='start'>
-        <image class='icon1' src='../../images/a2.png' mode='widthFix' lazy-load='true'></image>
-        <view>联系我们</view>
-      </view>
-      <view class='start'>
-        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-      </view>
-    </view>
-    <view class='item'>
-      <view class='start'>
-        <image class='icon1' src='../../images/a3.png' mode='widthFix' lazy-load='true'></image>
-        <view>分享给好友</view>
-      </view>
-      <view class='start'>
-        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-      </view>
-    </view>
-    <view class='item mt20' bindtap='invite'>
-      <view class='start'>
-        <image class='icon1' src='../../images/a4.png' mode='widthFix' lazy-load='true'></image>
-        <view>推荐与邀请</view>
-      </view>
-      <view class='start'>
-        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-      </view>
-    </view>
-  </view>
-</view> -->

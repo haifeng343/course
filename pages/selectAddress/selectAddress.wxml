@@ -43,4 +43,3 @@
     <view class='addressItem' wx:for="{{nearList}}" wx:key bindtap='adsChange' data-title='{{item.title}}' data-location="{{item.location}}">{{item.title}}</view>
   </view>
 </view>
-<view class='add'>新增地址</view>

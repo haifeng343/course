@@ -82,22 +82,16 @@
 .imgCoded{
   border: 1rpx solid #29d9d6;
   color: #29d9d6;
-  height: 40rpx;
-  line-height: 40rpx;
+  height: 45rpx;
+  line-height: 20rpx;
   font-size: 24rpx;
-  padding: 5rpx;
+  padding: 10rpx;
   border-radius: 4rpx;
   position: relative;
-  bottom: -20rpx;
+  bottom: -30rpx;
 }
 .imgLoad{
-  font-size: 24rpx;
-  height: 40rpx;
   color: #D5D5D5;
-  line-height: 40rpx;
-  position: relative;
-  bottom: -25rpx;
-  padding: 5rpx 2rpx;
   border: 1rpx solid #D5D5D5;
 }
 .end{

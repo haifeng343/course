@@ -27,7 +27,7 @@ Page({
   },
   getData: function () {
     let that = this;
-    var url = 'sheet/near/list';
+    var url = 'user/customer/service';
     var params = {
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调

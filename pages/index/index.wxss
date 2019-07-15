@@ -184,10 +184,9 @@ swiper-item image {
 }
 
 .ad1 {
-  width: 30rpx;
-  height: 30rpx;
+  width: 35rpx;
   position: relative;
-  top: 13rpx;
+  top: 5rpx;
 }
 
 .addr {
@@ -200,7 +199,9 @@ swiper-item image {
 }
 
 .distance {
-  margin-left: 30rpx;
+   margin: 15rpx 0;
+  font-size: 30rpx;
+  color: #5b5b5b;
 }
 
 .time {

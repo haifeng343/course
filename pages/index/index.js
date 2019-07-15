@@ -86,6 +86,9 @@ Page({
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
         let arr = res.Data.List;
         if (arr.length > 0) {
+          arr.forEach(item =>{
+            item.TradingAreaDistance = (parseInt(item.TradingAreaDistance)/1000).toFixed(2);
+          })
           var temp = [];
           if (that.data.page == 1) { //刷新
             temp = arr;
@@ -149,9 +152,14 @@ Page({
       }
     })
   },
-  swiperChange: function(e) { //轮播切换
+  swiperChangeTo: function (e) {
     this.setData({
-      currentSwiper: e.detail.current
+      current: e.detail.current
+    })
+  },
+  swiperChange: function (e) {
+    this.setData({
+      current: e.detail.current
     })
   },
   //上拉加载更多

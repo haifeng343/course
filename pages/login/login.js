@@ -1,5 +1,4 @@
 var netUtil = require("../../utils/request.js"); //require引入
-const app = getApp();
 Page({
 
   /**
@@ -7,49 +6,9 @@ Page({
    */
   data: {
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    userInfo: {},
+    Info: {},
     recommandCode: '',
-  },
-  onShow() {
-    let userInfo = wx.getStorageSync('userInfo');
-    this.setData({
-      userInfo: userInfo,
-      recommandCode: userInfo.RecommandCode
-    })
-  },
-  onLoad() {
-
-  },
-
-  integral: function(e) {
-    wx.navigateTo({
-      url: '/pages/integralLog/integralLog',
-    })
-  },
-  callUs: function() {
-    wx.navigateTo({
-      url: '/pages/callUs/callUs',
-    })
-  },
-  setting: function() {
-    wx.navigateTo({
-      url: '/pages/setting/setting?mobile=' + this.data.userInfo.Mobile + '&ids=' + 1,
-    })
-  },
-  invite: function() {
-    wx.navigateTo({
-      url: '/pages/invite/invite',
-    })
-  },
-  share: function(e) {
-    wx.navigateTo({
-      url: '/pages/share/share?Id=' + e.currentTarget.dataset.id,
-    })
-  },
-  wallet: function() {
-    wx.navigateTo({
-      url: '/pages/wallet/wallet',
-    })
+    userInfo: {},
   },
   getUserInfo: function(e) {
     var that = this;

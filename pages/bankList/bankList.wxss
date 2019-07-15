@@ -5,15 +5,25 @@
   overflow-y: scroll;
 }
 .item{
-  width: 90%;
-  margin-left: 5%;
+  position: relative;
+  width: 100%;
   margin-top: 30rpx;
   color: #fff;
-  padding: 0 5%;
   box-sizing: border-box;
-  height: 200rpx;
-  border-radius: 10rpx;
-  box-shadow: 0 2rpx 5rpx #f1f1f1;
+  /* height: 200rpx; */
+  /* border-radius: 10rpx; */
+  /* box-shadow: 0 2rpx 5rpx #f1f1f1; */
+  /* background-position:center center; */
+}
+.bgImg{
+  width: 100%;
+}
+.abso{
+  width: 95%;
+  position: absolute;
+  top: 0;
+  padding-left: 5%;
+  box-sizing: border-box;
 }
 .success1{
   width: 100rpx;
@@ -40,8 +50,8 @@
 }
 .bankIcon{
   width: 100rpx;
-  margin-top: 20rpx;
-  margin-right: 15rpx;
+  margin-top: 30rpx;
+  margin-right: 30rpx;
 }
 .t1{
   font-size: 32rpx;

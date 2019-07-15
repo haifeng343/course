@@ -32,6 +32,15 @@ Page({
     })
     this.getSearch();
   },
+  searchTo:function(e){
+    // console.log(e);
+    this.setData({
+      SearchName:e.currentTarget.dataset.item.value,
+      show:false,
+      noShow:true
+    })
+    this.search();
+  },
   //搜索的名称
   setSearchName: function (e) {
     console.log(e);
@@ -125,12 +134,6 @@ Page({
     wx.removeStorageSync('searchRecord');
     this.setData({
       searchRecord: []
-    })
-  },
-  //搜索发现
-  setSearchName:function(){
-    this.setData({
-      
     })
   },
   //跳转详情页

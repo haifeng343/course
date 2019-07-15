@@ -5,23 +5,23 @@
   </view>
   <view class='searTxt' bindtap='search'>搜索</view>
 </view>
-<view class='searchHistory' wx:if="{{show || groupList.length<=0}}">
-  <view class='historyTop between mt30' wx:if="{{searchRecord.length>0}}">
+<view class='searchHistory' wx:if="{{show}}">
+  <view class='historyTop between mt30' wx:if="{{searchRecord.length>0 || SearchName!=''}}">
     <view class='histitle'>历史搜索</view>
     <image class='delete' bindtap='deleteHistory' src='../../images/delete.png' mode='widthFix' lazy-load='true'></image>
   </view>
   <view class='historyList'>
-    <text class='historyItem' wx:for="{{searchRecord}}" wx:key="{{item}}">{{item.value}}</text>
+    <text class='historyItem' wx:for="{{searchRecord}}" wx:key="{{item}}" data-item="{{item}}" bindtap='searchTo'>{{item.value}}</text>
   </view>
 </view>
-<view class='searchHistory' wx:if="{{show || groupList.length<=0}}">
+<!-- <view class='searchHistory' wx:if="{{show || groupList.length<=0}}">
   <view class='historyTop'>
     <view class='histitle mt40'>搜索发现</view>
   </view>
   <view class='historyList'>
-    <text class='historyItem' bindtap='setSearchName'>英语课</text>
+    <text class='historyItem' bindtap='setSearchNameTo'>英语课</text>
   </view>
-</view>
+</view> -->
 <view class='groupList' wx:if="{{groupList.length>0}}">
   <view class='groupItem' wx:for="{{groupList}}" wx:for-item="item" wx:key data-id='{{item.SheetId}}' bindtap='groupDetail'>
     <view class='itemImg'>
@@ -29,9 +29,11 @@
     </view>
     <view class='itemRight'>
       <view class='title'>{{item.SheetName}}</view>
-      <view class='addr'>
-        <image src='../../images/ad1.png' class='ad1' mode='widthFix' lazy-load='true'></image>
-        <view>{{item.TradingAreaName}}</view>
+      <view class='between'>
+        <view class='addr'>
+          <image src='../../images/ad1.png' class='ad1' mode='widthFix' lazy-load='true'></image>
+          <view>{{item.TradingAreaName}}</view>
+        </view>
         <view class='distance'>{{item.TradingAreaDistance}}Km</view>
       </view>
       <view class='time'>活动截止时间：{{item.EndTime}}</view>

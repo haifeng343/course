@@ -139,7 +139,9 @@ page{
 }
 
 .distance {
-  margin-left: 30rpx;
+  margin: 15rpx 0;
+  font-size: 30rpx;
+  color: #5b5b5b;
 }
 
 .time {

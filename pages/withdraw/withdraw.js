@@ -7,46 +7,85 @@ Page({
   data: {
     showSure: false,
     showSuccess: false, //提现申请成功
-    bankCardId: '',
     amount: '', //提现金额
-    money: '10000', //可提现金额
+    money: '', //可提现金额
     show: false,
     showEor: true,
+    wihdraw: {},
+    CardNumber: '',
   },
   onShow: function() {
 
+  },
+  onLoad(options) {
+    this.carList();
+  },
+  changeCard: function(e) {
+    wx.navigateTo({
+      url: '/pages/bankList/bankList?item=' + e.currentTarget.dataset.item,
+    })
   },
   amoutChange: function(e) {
     if (e.detail.value != '') {
       this.setData({
         show: true,
-        showEor: false
-      })
-    } else {
-      this.setData({
-        show: false,
-        showEor: true
+        showEor: false,
+        amount: e.detail.value
       })
     }
   },
+  toggleDialog: function() {
+    this.setData({
+      showSure: false
+    })
+  },
   submitTo: function() {
     this.getData();
+  },
+  //银行卡列表
+  carList: function() {
+    let that = this;
+    var url = 'user/bank/card/list';
+    var params = {
+
+    }
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+      if (res.Data.length >= 1) {
+        let wihdraw = res.Data[0];
+        that.setData({
+          wihdraw: res.Data[0],
+          CardNumber: wihdraw.CardNumber.substring(wihdraw.CardNumber.length - 4)
+        })
+      }
+    }, function(msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
+  },
+  //点击提现
+  GetApply: function() {
+    this.setData({
+      showSure: true,
+    })
   },
   //提现
   getData: function() {
     let that = this;
     var url = 'user/cash/apply';
     var params = {
-      BankCardId: that.data.bankCardId,
-      Amount: that.data.amount,
+      BankCardId: that.data.wihdraw.BankCardId,
+      Amount: that.data.amount * 100,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      if (res.ErrorCode == 0) {
-        this.setData({
-          showSure: false,
-          showSuccess: true,
-        })
-      }
+      that.setData({
+        showSure: false,
+        showSuccess: true,
+        amount:'',
+      })
     }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {

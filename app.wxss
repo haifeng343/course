@@ -12,6 +12,9 @@ page {
   padding: 200rpx 0;
   box-sizing: border-box;
 }
+.mt10{
+  margin-top: 10rpx;
+}
 .clear{
   width: 40rpx;
   position: absolute;
@@ -33,6 +36,12 @@ page {
   display: flex;
   justify-content: center;
   margin: 100rpx auto 0;
+}
+.loginBtnd{
+  font-size: 28rpx;
+  border: 1rpx solid #29D9D6;
+  padding: 3rpx 25rpx;
+  color: #29D9D6
 }
 .add{
   width: 100%;
