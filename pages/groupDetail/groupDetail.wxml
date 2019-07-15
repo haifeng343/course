@@ -27,7 +27,7 @@
 <view class='courseList'>
   <view class='courseItem' wx:for='{{GroupList}}' wx:key>
     <view class='title'>
-      <view class='heng'></view> {{item.GroupName}}({{text}})
+      <view class='heng'></view> {{item.GroupName}}({{item.text}})
       <view class='heng'></view>
     </view>
     <view class='courseCont' wx:for="{{item.ItemList}}" wx:key wx:for-item="k" data-Id="{{k.RelId}}" bindtap='courseDetail'>

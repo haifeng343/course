@@ -2,7 +2,7 @@
   共{{detailCent.TotalItemCount}}门课程，<text>最少{{detailCent.MinItemCount}}门，</text><text>最多{{detailCent.MaxItemCount}}门，</text>仅需{{detailCent.MaxPrice}}元!</view>
 <view class='courseList'>
   <view class='courseItem' wx:for='{{GroupList}}' wx:key>
-    <view class='check'>{{text}}</view>
+    <view class='check'>{{item.GroupName}}</view>
     <checkbox-group bindchange='checkedTap' data-index='{{index}}'>
       <view class='courseCont' wx:for="{{item.ItemList}}" wx:for-item="k" wx:for-index='index1' wx:key>
         <view class='leftImg'>
