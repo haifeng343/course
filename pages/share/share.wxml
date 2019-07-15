@@ -1,4 +1,4 @@
 <view class="shareIt">
   <image class='img' src='https://xgt.guditech.com/img/test/share.JPG' mode='widthFix' lazy-load='true'></image>
-  <view class="btn" data-id="shareBtn" open-type="share" bindtap='share'>分享好友</view>
+  <button class="btn" data-id="shareBtn" open-type="share" bindtap='share'>分享好友</button>
 </view>

@@ -12,9 +12,10 @@ Page({
   },
   onShow() {
     let userInfo = wx.getStorageSync('userInfo');
+    console.log(userInfo)
     this.setData({
       userInfo: userInfo,
-      recommandCode: userInfo.RecommandCode
+      recommandCode: userInfo.RecommandCode || ''
     })
   },
   onLoad() {
@@ -54,6 +55,7 @@ Page({
   getUserInfo: function(e) {
     var that = this;
     // 查看是否授权
+    
     wx.getSetting({
       success: function(res) {
         if (res.authSetting['scope.userInfo']) {
@@ -94,11 +96,9 @@ Page({
     that.userInfo = res.Data;
     wx.setStorageSync('userInfo', that.userInfo);
     wx.setStorageSync('usertoken', res.Data.UserToken);
-
-    wx.navigateBack({
-      delta: 1
+    that.setData({
+      userInfo:res.Data
     })
-
   },
   onFailed: function() { //onFailed失败回调
     wx.showToast({

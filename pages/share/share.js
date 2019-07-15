@@ -9,7 +9,7 @@ Page({
   },
   onLoad(options){
     this.setData({
-      Id:options.Id
+      Id:options.Id || ''
     })
   },
   onShareAppMessage: function(res) {

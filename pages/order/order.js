@@ -28,7 +28,7 @@ Page({
     // this.getData();
   },
   onLoad() {
-    this.getData();
+    this.getData(4);
   },
   lookEor:function(e){
     console.log(e)
@@ -51,7 +51,8 @@ Page({
       RefundArrivalTime: e.currentTarget.dataset.item.RefundArrivalTime,
     })
   },
-  getData: function () {
+  getData: function (a) {
+    console.log(a);return;
     let that = this;
     var url = 'order/list';
     var params = {
@@ -73,8 +74,8 @@ Page({
           List: arr1
         })
       }
-    }, function (msg) { //onFailed失败回调
       wx.hideLoading();
+    }, function (msg) { //onFailed失败回调
       if (msg) {
         wx.showToast({
           title: msg,
@@ -114,7 +115,7 @@ Page({
     this.setData({
       navbarActiveIndex: navbarTapIndex
     })
-    this.getData();
+    this.getData(5);
   },
 
   /**
@@ -126,7 +127,7 @@ Page({
     this.setData({
       navbarActiveIndex: e.detail.current
     })
-    this.getData();
+    this.getData(1);
   },
   //下拉刷新
   onPullDownRefresh:function(){
@@ -134,7 +135,7 @@ Page({
     that.setData({
       page:1
     })
-    that.getData();
+    that.getData(2);
     wx.stopPullDownRefresh();
   },
   //上拉加载更多
@@ -145,7 +146,7 @@ Page({
     that.setData({
       page: temp
     })
-    that.getData();
+    that.getData(3);
   },
   orderDetail:function(e) {
     wx.navigateTo({
