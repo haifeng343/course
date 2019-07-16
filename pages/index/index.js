@@ -41,16 +41,6 @@ Page({
     page: 1,
     pageCount: 20,
   },
-  swiperChangeTo: function (e) {
-    this.setData({
-      current: e.detail.current
-    })
-  },
-  swiperChange: function (e) {
-    this.setData({
-      current: e.detail.current
-    })
-  },
   groupDetail: function(e) {
     const that = this;
     that.Id = parseInt(e.currentTarget.dataset.id)
@@ -158,16 +148,6 @@ Page({
         });
         this.func();
       }
-    })
-  },
-  swiperChangeTo: function (e) {
-    this.setData({
-      current: e.detail.current
-    })
-  },
-  swiperChange: function (e) {
-    this.setData({
-      current: e.detail.current
     })
   },
   //上拉加载更多

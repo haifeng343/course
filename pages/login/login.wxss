@@ -16,6 +16,7 @@ page{
 }
 .login_img{
   width: 250rpx;
+  height: 520rpx;
 }
 .center{
   font-size: 26rpx;

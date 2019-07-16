@@ -1,12 +1,4 @@
-page{
-  height: 100%;
-}
-.movie-container{
-  display: flex;
-  height: 100vh;
-  overflow-y: scroll;
-  flex-direction: column;
-}
+
 .navbar{
   display: flex;
   position: fixed;

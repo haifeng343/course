@@ -9,15 +9,15 @@
     </block>
   </view>
   <view class="movie-content-wrapper">
-    <swiper current="{{navbarActiveIndex}}" bindanimationfinish="onBindAnimationFinish">
-      <swiper-item wx:for="{{navbarTitle}}" wx:key="index">
-        <view class='nohasLog' wx:if="{{List.length==0}}">
+    <view>
+      <view>
+        <view class='nohasLog' wx:if="{{modelList[navbarActiveIndex].list.length==0}}">
           <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
           <view>暂无订单</view>
         </view>
-        <scroll-view scroll-y="{{true}}" wx:else>
+        <view wx:else>
           <view class='orderList'>
-            <view class='orderItem' wx:for="{{modelList[navbarActiveIndex].list}}" wx:key>
+            <view class='orderItem' wx:for="{{modelList[navbarActiveIndex].list}}" wx:key wx:hidden='{{navbarActiveIndex == index}}'>
               <view class='title between'>
                 <view class='numbering'>订单编号：{{item.OrderSn}}</view>
                 <view class='happening' wx:if="{{item.UseStatus==1}}">未使用</view>
@@ -63,9 +63,9 @@
               </view>
             </view>
           </view>
-        </scroll-view>
-      </swiper-item>
-    </swiper>
+        </view>
+      </view>
+    </view>
   </view>
 </view>
 <view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">

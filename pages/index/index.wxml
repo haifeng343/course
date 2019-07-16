@@ -9,7 +9,7 @@
   <input type='search' bindtap='searchTo' class='search' placeholder='新品上架'></input>
 </view>
 <view class='banner'>
-  <swiper bindchange="swiperChangeTo" bindanimationfinish="swiperChange" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1'>
+  <swiper indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1'>
     <block wx:for="{{imgUrls}}" wx:key>
       <swiper-item>
         <view class='box'>

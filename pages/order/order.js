@@ -153,21 +153,6 @@ Page({
       this.getData();
     }
   },
-
-  /**
-   * 
-   */
-  onBindAnimationFinish: function(e) {
-    // 设置data属性中的navbarActiveIndex为当前点击的navbar
-    // console.log(e)
-    let navbarTapIndex = e.detail.current
-    this.setData({
-      navbarActiveIndex: navbarTapIndex
-    })
-    if (this.data.modelList[navbarTapIndex].status == 0) {
-      this.getData();
-    }
-  },
   //下拉刷新
   onPullDownRefresh: function() {
     let that = this;
@@ -181,10 +166,10 @@ Page({
   },
   //上拉加载更多
   onReachBottom: function() {
-    wx.pageScrollTo({
-      scrollTop: 0,
-      duration: 0
-    })
+    // wx.pageScrollTo({
+    //   scrollTop: 0,
+    //   duration: 0
+    // })
     let that = this;
     let temp = that.data.modelList;
     temp[that.data.navbarActiveIndex].pageIndex++;

@@ -109,37 +109,23 @@ Page({
 
     let a = 'GroupList[' + index + '].checkedArr';
     let b = 'GroupList[' + index + '].disabled';
-    this.setData({
-      [b]: arr2,
-    });
+    let c = 'GroupList[' + index + '].checked';
+    this.setData({ [b]: arr2 });
 
     let arr3 = [];
-    let arr4 = [];
-    console.log(arr)
-    if (s.MaxCount == s.ItemList.length) {
+    if (s.MaxCount >= s.ItemList.length && s.MinCount == 0) {
       let addCount = 0;
-      for (let v of s.ItemList) {
-        let index = arr.indexOf(v.RelId.toString());
-        if (index != -1) {
-          addCount = addCount + 1;
-          arr.splice(index);
+      if (s.checkedArr.length == 0) {
+        for (let v of s.ItemList) {
+          arr3.push(v.RelId);
         }
-        arr3.push(v.RelId);
+      } else {
+        arr3 = [];
       }
-      let c = 'GroupList[' + index + '].checked';
-
-      if (addCount == 1) {
-        arr=arr.concat(arr3);
-      }
-      console.log(s.ItemList)
-      console.log(arr)
-      this.setData({
-        [a]: arr,
-        [c]: 1 == addCount ? arr3 : arr4
-      });
+      arr = arr3;
+      this.setData({ [c]: arr });
     }
-
-
+    this.setData({ [a]: arr });
     this.hasMoney();
   },
   paybtn: function() {
