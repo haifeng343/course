@@ -3,48 +3,87 @@ let baseUrl = "https://test.guditech.com/rocketclient/";
 Page({
   data: {
     array: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
-    index:0,
-    objectArray: ['拍错/不想拍','不喜欢','与实物不符合', '重新再拍'],
-    index:0,
+    index: 0,
+    objectArray: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
+    index: 0,
     imgs: [],
     text: '',
     plusShow: true,
     courseId: 1,
     userId: 1,
     userRole: 4,
-    orderId:'',
-    Reason:'拍错/不想拍',
-    lpm:{},
-    urlImgs:[],
+    orderId: '', //Id
+    kmd: '', //状态码
+    kd: '',
+    Reason: '拍错/不想拍',
+    lpm: {},
+    urlImgs: [],
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
+    console.log(options)
     this.setData({
-      orderId: options.OrderId
+      orderId: options.OrderId,
+      kmd: options.kmd || '',
+      kd: options.kd || '',
     });
     this.has();
   },
-  getData: function () {
+  getData: function() {
     let that = this;
     var url = 'order/refund/apply';
     var params = {
       OrderId: that.data.orderId,
       Reason: that.data.Reason,
-      ImgList:that.data.urlImgs,
+      ImgList: that.data.urlImgs,
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       // console.log(res)
       that.setData({
         List: res.Data
       })
-      wx.switchTab({
-        url: '/pages/order/order',
-      })
-      wx.showToast({
-        icon:"none",
-        title: '提交成功',
-      })
-      that.getData();
-    }, function (msg) { //onFailed失败回调
+      let pages = getCurrentPages(); //当前页面
+      let prevPage = pages[pages.length - 2]; //上一页面
+      let prePage1 = pages[pages.length - 3]; //上上一页
+      // console.log(prePage1.data.modelList);return;
+      if (that.data.kmd == 1) {
+        let tempList = prevPage.data.modelList;
+        tempList.forEach(x => {
+          x.list.forEach(item => {
+            if (that.data.orderId == item.OrderId) {
+              item.UseStatus = 5;
+            }
+          })
+        })
+        prevPage.setData({ //直接给上移页面赋值
+          modelList: tempList,
+        });
+
+      } else if (that.data.kmd == 2) {
+        let temp = prevPage.data.detail;
+        temp.UseStatus = 5;
+        prevPage.setData({ //直接给上移页面赋值
+          detail: temp,
+        });
+
+        if (that.data.kd == 3){
+          let temp = [];
+          temp = prePage1.data.modelList;
+          temp.forEach(x => {
+            x.list.forEach(item => {
+              if (that.data.orderId == item.OrderId) {
+                item.UseStatus = 5;
+              }
+            })
+          })
+          prePage1.setData({ //直接给上移页面赋值
+            modelList: temp,
+          });
+        }
+      }
+      wx.navigateBack({
+        delta: 1
+      });
+    }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -53,14 +92,14 @@ Page({
       }
     }); //调用get方法情就是户数
   },
-  chooseImg: function (e) {
+  chooseImg: function(e) {
     var that = this;
-    var imgs = that.data.imgs;//存图片地址的变量
+    var imgs = that.data.imgs; //存图片地址的变量
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
+      success: function(res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
         // console.log(res)
@@ -76,7 +115,7 @@ Page({
   /*
       删除图片
   */
-  deleteImg: function (e) {
+  deleteImg: function(e) {
     var imgs = this.data.imgs;
     var index = e.currentTarget.dataset.index;
     imgs.splice(index, 1);
@@ -88,7 +127,7 @@ Page({
   /*
       预览图片
   */
-  previewImg: function (e) {
+  previewImg: function(e) {
     //获取当前图片的下标
     var index = e.currentTarget.dataset.index;
     //所有图片
@@ -103,7 +142,7 @@ Page({
   /*
       控制添加图片按钮是否显示出来
   */
-  showHide: function (e) {
+  showHide: function(e) {
     if (this.data.imgs.length == 1) {
       this.setData({
         plusShow: true
@@ -118,19 +157,19 @@ Page({
       });
     }
   },
-  has:function(){
+  has: function() {
     let that = this;
     var url = 'order/details';
     var params = {
       Id: that.data.orderId,
       Status: 1,
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       // console.log(res)
       that.setData({
         lpm: res.Data
       })
-    }, function (msg) { //onFailed失败回调
+    }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -140,25 +179,25 @@ Page({
     });
   },
   /*提交*/
-  submit: function () {
+  submit: function() {
     this.getData();
   },
   //上传图片
-  upLoadImg: function (data) {
+  upLoadImg: function(data) {
     var that = this;
     let usertoken = wx.getStorageSync('usertoken');
     wx.uploadFile({
-      url: baseUrl +'img/upload',
+      url: baseUrl + 'img/upload',
       filePath: data,
       header: {
-        "Content-Type": "multipart/form-data",//记得设置
+        "Content-Type": "multipart/form-data", //记得设置
         'channelCode': 'wechat',
         'appVersion': '1.0.1',
         "userToken": usertoken,
       },
       name: 'Order.Refund',
       success: (res) => {
-        var ttt=JSON.parse(res.data)
+        var ttt = JSON.parse(res.data)
         var temp = that.data.urlImgs;
         temp.push(ttt.Data.ImgPath);
         that.setData({
@@ -173,7 +212,7 @@ Page({
       },
     });
   },
-  bindPickerChange: function (e) {
+  bindPickerChange: function(e) {
     let index = e.detail.value;
     // console.log('picker发送选择改变，携带值为', this.data.array[index])
     this.setData({

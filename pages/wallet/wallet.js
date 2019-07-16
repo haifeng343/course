@@ -8,9 +8,9 @@ Page({
     money:'',
   },
   onShow(){
-    let userInfo = wx.getStorageSync('userInfo');
+    let wallet = wx.getStorageSync('wallet');
     this.setData({
-      money: Number(userInfo.Money/100).toFixed(2)
+      money: Number(wallet.Money/100).toFixed(2)
     })
   },
   Bill:function(){

@@ -65,13 +65,11 @@ Page({
     }); //调用get方法情就是户数
   },
   swiperChangeTo: function (e) {
-    console.log(e.detail.current)
     this.setData({
-      // current: e.detail.current
+      current: e.detail.current
     })
   },
   swiperChange:function(e){
-    console.log(e.detail.current)
     this.setData({
       current: e.detail.current
     })

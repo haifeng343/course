@@ -21,7 +21,7 @@
       <view class='logItem column' wx:for="{{List}}" wx:key>
         <view class='between'>
           <view class='share'>{{item.Description}}</view>
-          <view class='fraction'>+ ￥{{item.Amount*1.0/100}}</view>
+          <view class='fraction'>+ ￥{{item.Amount}}</view>
         </view>
         <view class='between'>
           <view class='time'>{{item.CreateTime}}</view>

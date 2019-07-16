@@ -12,7 +12,13 @@
   width: 100%;
   height: auto;
   padding: 0 5%;
+  margin-bottom: 80rpx;
   box-sizing: border-box;
+}
+.courseList::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }
 
 .courseItem {

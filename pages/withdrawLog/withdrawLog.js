@@ -14,7 +14,7 @@ Page({
     statusdes: '',
     List: [],
   },
-  onShow: function() {
+  onShow: function () {
     var date = new Date();
     let arr = [],
       arr1 = [];
@@ -35,8 +35,8 @@ Page({
     })
     this.getData();
   },
-  onLoad: function() {},
-  getData: function() {
+  onLoad: function () { },
+  getData: function () {
     let that = this;
     var url = 'user/cash/record/list';
     var params = {
@@ -45,22 +45,20 @@ Page({
       PageCount: that.data.pagecount,
       PageIndex: that.data.page
     }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       let arr = res.Data;
       var arr1 = [];
-      if (arr.length > 0) {
-        if (that.data.page == 1) {
-          arr1 = arr;
-        } else {
-          arr1 = that.data.List;
-          arr1 = arr1.concat(res.Data);
-        }
-        that.setData({
-          List: arr1
-        })
+      if (that.data.page == 1) {
+        arr1 = arr;
+      } else {
+        arr1 = that.data.List;
+        arr1 = arr1.concat(res.Data);
       }
+      that.setData({
+        List: arr1
+      })
       wx.hideLoading();
-    }, function(msg) { //onFailed失败回调
+    }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -69,7 +67,7 @@ Page({
       }
     }); //调用get方法情就是户数
   },
-  bindDateChange: function(e) {
+  bindDateChange: function (e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
     let index = e.detail.value;
     if (index[0] == 0 && index[1] == 0) {
@@ -87,24 +85,24 @@ Page({
     }
     this.getData();
   },
-  showEor: function(e) {
+  showEor: function (e) {
     this.setData({
       statusdes: e.currentTarget.dataset.statusdes,
       showError: true
     })
   },
-  closed: function() {
+  closed: function () {
     this.setData({
       showError: false
     })
   },
-  withdrawDetail: function() {
+  withdrawDetail: function () {
     wx.navigateTo({
       url: '/pages/withdrawDetail/withdrawDetail',
     })
   },
   //上拉加载更多
-  onReachBottom: function() {
+  onReachBottom: function () {
     let that = this;
     wx.showLoading({
       title: '玩命加载中',
@@ -118,7 +116,7 @@ Page({
 
   },
   //下拉刷新
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     wx.showLoading({
       title: "玩命加载中",
     });
@@ -129,7 +127,7 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

@@ -17,7 +17,7 @@
       <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
     </view>
   </view>
-  <view class='item' bindtap='cashBack'>
+  <!-- <view class='item' bindtap='cashBack'>
     <view class='start'>
       <image class='icon1' src='../../images/m3.png' mode='widthFix' lazy-load='true'></image>
       <view>返现记录</view>
@@ -25,7 +25,7 @@
     <view class='start'>
       <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
     </view>
-  </view>
+  </view> -->
   <view class='item mt20' bindtap='Bill'>
     <view class='start'>
       <image class='icon1' src='../../images/m1.png' mode='widthFix' lazy-load='true'></image>

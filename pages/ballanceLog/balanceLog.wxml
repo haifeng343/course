@@ -1,7 +1,3 @@
-<view class='nohasLog' style='display:none'>
-  <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
-  <view>暂无余额变更记录</view>
-</view>
 <view class='log'>
   <view class='logTop between'>
     <view class='start'>
@@ -17,25 +13,19 @@
       <view>收入:1200</view> -->
     </view>
   </view>
-  <view class='logList'>
-    <view class='logItem column' bindtap='withdrawDetail'>
+  <view class='nohasLog' wx:if="{{List.length<=0}}">
+  <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+  <view>暂无余额变更记录</view>
+</view>
+  <view class='logList' wx:else>
+    <view class='logItem column' wx:for="{{List}}" wx:key bindtap='withdrawDetail'>
       <view class='between'>
-        <view class='share'>余额提现</view>
-        <view class='fraction'>+￥9000.00</view>
+        <view class='share'>{{item.Description}}</view>
+        <view class='fraction'>￥{{item.ChangeAmount}}</view>
       </view>
       <view class='between'>
-        <view class='time'>2019-10-22</view>
-        <view class='status'>4500.00</view>
-      </view>
-    </view>
-    <view class='logItem column'>
-      <view class='between'>
-        <view class='share'>余额提现</view>
-        <view class='fraction'>-￥9000.00</view>
-      </view>
-      <view class='between'>
-        <view class='time'>2019-10-22</view>
-        <view class='status'>600.00</view>
+        <view class='time'>{{item.CreateTime}}</view>
+        <view class='status'>{{item.ChangeAmountBefore}}</view>
       </view>
     </view>
   </view>

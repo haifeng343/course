@@ -3,7 +3,8 @@ page{
 }
 .movie-container{
   display: flex;
-  height: 100%;
+  height: 100vh;
+  overflow-y: scroll;
   flex-direction: column;
 }
 .navbar{
@@ -30,6 +31,10 @@ page{
   justify-content: flex-end;
   flex-direction: row;
 }
+.scorll{
+  display: block;
+  margin-top: 25rpx;
+}
 swiper{
   height: 100%;
 }
@@ -41,7 +46,7 @@ swiper{
 
 .movie-content-wrapper{
   height: 100%;
-  padding-top: 80rpx;
+  margin-top: 80rpx;
   overflow:auto;
   -webkit-overflow-scrolling: touch;
 }
@@ -51,7 +56,8 @@ scroll-view{
 
 .orderList{
   width: 100%;
-  height: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
 }

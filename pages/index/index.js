@@ -41,9 +41,14 @@ Page({
     page: 1,
     pageCount: 20,
   },
-  searchTo:function() {
-    wx.navigateTo({
-      url: '/pages/search/search',
+  swiperChangeTo: function (e) {
+    this.setData({
+      current: e.detail.current
+    })
+  },
+  swiperChange: function (e) {
+    this.setData({
+      current: e.detail.current
     })
   },
   groupDetail: function(e) {
@@ -100,6 +105,9 @@ Page({
           if (!loc) {
             loc = res.Data.LocationName;
           }
+          temp.forEach(item=>{
+            item.SheetMinPrice = Number(item.SheetMinPrice/100).toFixed(2);
+          })
           that.setData({
             groupList: temp,
             Acount: res.Data,

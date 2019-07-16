@@ -2,7 +2,14 @@ page {
   overflow-x: hidden;
   background-color: #eee;
 }
-
+page::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+image{
+  will-change: transform;
+}
 .container {
   height: 100%;
   display: flex;

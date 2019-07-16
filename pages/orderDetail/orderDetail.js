@@ -8,14 +8,18 @@ Page({
     showCode: true, //条形码弹窗
     showDialog: false, //退款失败 查看原因弹窗
     showSuccess: false, //退款详情 成功弹窗
-    Id:'',
-    Status:'',
-    ItemList:[],
+    Id: '',
+    Status: '',
+    kd: '',
+    ItemList: [],
+    detail: {},
   },
-  onLoad(options){
+  onLoad(options) {
+    console.log(options)
     this.setData({
       Id: options.Id,
-      Status: options.status
+      Status: options.status,
+      kd: options.kd
     })
     this.getData();
   },
@@ -27,11 +31,12 @@ Page({
       Status: that.data.Status,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
-      console.log(res.Data)
+
       that.setData({
         detail: res.Data,
         ItemList: res.Data.ItemList,
       })
+
     }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -62,20 +67,39 @@ Page({
     })
   },
   //取消退款
-  cancelOrder:function(e) {
+  cancelOrder: function(e) {
     console.log(e)
     let that = this;
     var url = 'order/refund/cancel';
     var params = {
       Id: e.currentTarget.dataset.id,
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      wx.showToast({
-        icon: "none",
-        title: '取消退款成功',
-      })
-      that.getData();
-    }, function (msg) { //onFailed失败回调
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+      let pages = getCurrentPages(); //当前页面
+      let prevPage = pages[pages.length - 2]; //上一页面
+      // console.log(prevPage.data.modelList);return;
+      if (that.data.kd == 3) {
+        let tempList = prevPage.data.modelList;
+        tempList.forEach(x => {
+          x.list.forEach(item => {
+            if (that.data.Id == item.OrderId) {
+              if (x.navbarActiveIndex == 3) {
+                item.UseStatus = 9;
+              } else {
+                item.UseStatus = 1;
+              }
+            }
+          })
+        })
+        prevPage.setData({ //直接给上移页面赋值
+          modelList: tempList,
+        });
+
+      }
+      wx.navigateBack({
+        delta: 1
+      });
+    }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -85,9 +109,9 @@ Page({
     }); //调用get方法情就是户数
   },
   //重新退款
-  Refund: function (e) {
+  Refund: function(e) {
     wx.navigateTo({
-      url: '/pages/refund/refund?OrderId=' + e.currentTarget.dataset.orderid,
+      url: '/pages/refund/refund?OrderId=' + e.currentTarget.dataset.orderid + '&kmd=2' + '&kd=' + this.data.kd,
     })
   },
   closed: function() {

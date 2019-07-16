@@ -57,8 +57,8 @@
     <view class='teachers' wx:for="{{teaList}}" wx:key>
       <image class='teaImg' src='{{item.HeadUrl}}' lazy-load='true'></image>
       <view class='teaName'>{{item.Name}}</view>
-      <view class='profession'>{{item.Honor}}</view>
-      <view class='profession'>{{item.TeachingAge}}</view>
+      <!-- <view class='profession'>{{item.Honor}}</view>
+      <view class='profession'>{{item.TeachingAge}}</view> -->
     </view>
   </view>
 </view>

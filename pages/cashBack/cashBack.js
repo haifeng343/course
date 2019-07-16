@@ -50,17 +50,18 @@ Page({
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       let arr = res.Data;
       var arr1 = [];
-      if (arr.length > 0) {
-        if (that.data.page == 1) {
-          arr1 = arr;
-        } else {
-          arr1 = that.data.List;
-          arr1 = arr1.concat(res.Data);
-        }
-        that.setData({
-          List: arr1
-        })
+      if (that.data.page == 1) {
+        arr1 = arr;
+      } else {
+        arr1 = that.data.List;
+        arr1 = arr1.concat(res.Data);
       }
+      arr1.forEach(item=>{
+        item.Amount = Number(item.Amount/100).toFixed(2)
+      })
+      that.setData({
+        List: arr1
+      })
       wx.hideLoading();
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();

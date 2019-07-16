@@ -41,4 +41,4 @@
     </view>
   </view>
 </view>
-<button class='btnd pay md' bindtap='submit'>提交</button>
+<button class='btnd pay md' data-status="{{status}}" bindtap='submit'>提交</button>

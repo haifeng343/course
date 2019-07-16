@@ -21,7 +21,7 @@ Page({
   onLoad(options) {
     let that = this;
     let arr = [];
-    arr.push(options.ids);
+    arr = options.ids.split(',');
     that.setData({
       Id: options.Id,
       relId: arr,

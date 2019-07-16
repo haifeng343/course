@@ -72,11 +72,11 @@
     <view class='paypag'>
       <view class='paypagItem' bindtap='integral'>
         <view class='ml1'>积分</view>
-        <view class='ml2'>{{userInfo.Score}}</view>
+        <view class='ml2'>{{score}}</view>
       </view>
       <view class='paypagItem' bindtap='wallet'>
         <view class='ml1'>钱包 (元)</view>
-        <view class='ml2'>{{userInfo.Money*1.0/100}}.00</view>
+        <view class='ml2'>{{money}}</view>
       </view>
     </view>
   </view>

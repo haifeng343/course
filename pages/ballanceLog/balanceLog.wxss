@@ -1,4 +1,6 @@
-
+page{
+  background-color: #fff
+}
 .integralTop{
   font-size: 28rpx;
   padding-top: 35rpx;

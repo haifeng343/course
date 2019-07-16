@@ -107,6 +107,10 @@
     <view class='know' bindtap='closeded'>知道了</view>
   </view>
 </view>
+
+<view class='pay' wx:if="{{detail.UseStatus==1}}">
+  <button class='btnd end' bindtap='Refund' data-OrderId="{{Id}}">申请退款</button>
+</view>
 <view class='pay start' wx:if="{{detail.UseStatus==7 || detail.UseStatus==9}}">
   <button class='btnd' bindtap='errorShow'>查看原因</button>
   <button class='btnd btnd2' wx:if="{{detail.UseStatus==7}}">重新退款</button>

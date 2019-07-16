@@ -17,7 +17,7 @@
         </view>
         <scroll-view scroll-y="{{true}}" wx:else>
           <view class='orderList'>
-            <view class='orderItem' wx:for="{{List}}" wx:key>
+            <view class='orderItem' wx:for="{{modelList[navbarActiveIndex].list}}" wx:key>
               <view class='title between'>
                 <view class='numbering'>订单编号：{{item.OrderSn}}</view>
                 <view class='happening' wx:if="{{item.UseStatus==1}}">未使用</view>
@@ -30,7 +30,7 @@
                 <view class='happening' wx:if="{{item.UseStatus==8}}">退款成功</view>
                 <view class='happening' wx:if="{{item.UseStatus==9}}">取消退款</view>
               </view>
-              <view class='orderContent' data-Id="{{item.OrderId}}" data-status="{{item.UseStatus}}" bindtap='orderDetail'>
+              <view class='orderContent' data-Id="{{item.OrderId}}" data-kd="3" data-status="{{item.UseStatus}}" bindtap='orderDetail'>
                 <image class='orderImg' src='{{item.SheerCoverImg}}' mode='widthFix' lazy-load='true'></image>
                 <view class='Right'>
                   <view class='between'>
@@ -42,7 +42,7 @@
                     <view class='address'>{{item.TradingAreaName}}</view>
                   </view>
                   <view class='test'>购买时间:{{item.PayTime}}</view>
-                  <view class='test'>有效期:2019-10-21</view>
+                  <view class='test'>有效期:{{item.LastUseTime==null?'/':item.LastUseTime}}</view>
                   <view class='test' wx:if="{{item.UseStatus==4}}">已过期:({{item.ExpriesDays}})天{{item.ExpriesTime}}</view>
                   <view class='test' wx:if="{{item.UseStatus==8}}">退款时间:{{item.RefundTime}}</view>
                 </view>

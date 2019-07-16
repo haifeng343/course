@@ -1,4 +1,6 @@
-
+page{
+  background-color: #fff;
+}
 .log{
   width: 100%;
   background-color: #fff;

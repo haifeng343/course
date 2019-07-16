@@ -9,7 +9,6 @@ Page({
     arr: [],
     color: '#ED8D6D',
     bgcolor: '#FCF4E7',
-    checked: false,
     detailCent: {},
     text: "",
     RelId: [],
@@ -48,8 +47,12 @@ Page({
         } else {
           a.text = "以下课程" + a.ItemList.length + '选' + a.MaxCount
         }
+
+
       }
-      that.setData({GroupList:r})
+      that.setData({
+        GroupList: r
+      })
     }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -92,8 +95,8 @@ Page({
   checkedTap: function(e) {
     let index = e.currentTarget.dataset.index;
     let s = this.data.GroupList[index];
-    let arr = e.detail.value,
-      arr2 = [];
+    let arr = e.detail.value;
+    let arr2 = [];
     if (arr.length >= s.MaxCount) {
       for (let v of s.ItemList) {
         if (arr.indexOf(v.RelId.toString()) == -1) {
@@ -107,9 +110,36 @@ Page({
     let a = 'GroupList[' + index + '].checkedArr';
     let b = 'GroupList[' + index + '].disabled';
     this.setData({
-      [a]: arr,
       [b]: arr2,
     });
+
+    let arr3 = [];
+    let arr4 = [];
+    console.log(arr)
+    if (s.MaxCount == s.ItemList.length) {
+      let addCount = 0;
+      for (let v of s.ItemList) {
+        let index = arr.indexOf(v.RelId.toString());
+        if (index != -1) {
+          addCount = addCount + 1;
+          arr.splice(index);
+        }
+        arr3.push(v.RelId);
+      }
+      let c = 'GroupList[' + index + '].checked';
+
+      if (addCount == 1) {
+        arr=arr.concat(arr3);
+      }
+      console.log(s.ItemList)
+      console.log(arr)
+      this.setData({
+        [a]: arr,
+        [c]: 1 == addCount ? arr3 : arr4
+      });
+    }
+
+
     this.hasMoney();
   },
   paybtn: function() {
@@ -122,7 +152,7 @@ Page({
       }
     }
     wx.navigateTo({
-      url: '/pages/payOrder/payOrder?Id=' + this.data.Id + '&ids=' + this.data.ids.join('-'),
+      url: '/pages/payOrder/payOrder?Id=' + this.data.Id + '&ids=' + this.data.ids.join(','),
     })
   },
   onShareAppMessage: function() {

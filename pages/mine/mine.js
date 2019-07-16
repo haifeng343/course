@@ -9,14 +9,36 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: {},
     recommandCode: '',
+    money:'',
+    score:'',
   },
   onShow() {
     let userInfo = wx.getStorageSync('userInfo');
-    console.log(userInfo)
     this.setData({
       userInfo: userInfo,
-      recommandCode: userInfo.RecommandCode || ''
+      recommandCode: userInfo.RecommandCode || '',
     })
+    this.walletd();
+  },
+  walletd: function () {
+    let that = this;
+    var url = 'user/wallet';
+    var params = {
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      that.setData({
+        money: Number(res.Data.Money / 100).toFixed(2),
+        score:res.Data.Score
+      })
+      wx.setStorageSync('wallet', res.Data)
+    }, function (msg) { //onFailed失败回调
+      wx.hideLoading();
+      if (msg) {
+        wx.showToast({
+          title: msg,
+        })
+      }
+    }); //调用get方法情就是户数
   },
   onLoad() {
 

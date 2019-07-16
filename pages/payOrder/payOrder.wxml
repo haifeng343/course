@@ -15,7 +15,7 @@
           <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
           <view class='address'>{{item.StoreAddress}}</view>
         </view>
-        <view class='end'>{{item.Distance}}km</view>
+        <!-- <view class='end'>{{item.Distance}}km</view> -->
       </view>
       <view class='courseRow start well'>
         <view class='start'>
