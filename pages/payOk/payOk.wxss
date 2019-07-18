@@ -9,6 +9,7 @@
 }
 .payok{
   width: 70rpx;
+  height: 70rpx;
   margin-right: 30rpx;
 }
 .payText{
@@ -38,6 +39,7 @@
 }
 .codeImg{
   width: 80%;
+  height: 320rpx;
   padding-top: 10rpx;
   margin-left: 2.5%;
 }

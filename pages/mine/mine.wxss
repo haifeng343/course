@@ -35,6 +35,7 @@
 
 .avator{
   width: 150rpx;
+  height: 150rpx;
   border-radius: 50%;
   margin-right: 20rpx;
   height:150rpx;
@@ -68,6 +69,7 @@
 }
 .icon1{
   width: 40rpx;
+  height: 34rpx;
   margin: 18rpx 15rpx 0 0;
 }
 .go{

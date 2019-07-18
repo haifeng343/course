@@ -44,7 +44,6 @@ Page({
         teaList: res.Data.TeacherList,
         imgUrls: res.Data.ItemImgList
       })
-      console.log(that.data.teaList);
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -60,7 +59,6 @@ Page({
     })
   },
   allTeacher:function(e) {
-    console.log(e)
     wx.navigateTo({
       url: '/pages/allTeacher/allTeacher?Id='+e.currentTarget.dataset.id,
     })

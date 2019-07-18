@@ -37,34 +37,6 @@
         </view>
         <view class='fraction'>{{item.ChangeAmount}}</view>
       </view>
-      <view class='logItem between'>
-        <view class='itemLeft'>
-          <view>分享给好友</view>
-          <view class='time'>2019-10-22</view>
-        </view>
-        <view class='fraction'>+ 9</view>
-      </view>
-      <view class='logItem between'>
-        <view class='itemLeft'>
-          <view>分享给好友</view>
-          <view class='time'>2019-10-22</view>
-        </view>
-        <view class='fraction'>+ 9</view>
-      </view>
-      <view class='logItem between'>
-        <view class='itemLeft'>
-          <view>分享给好友</view>
-          <view class='time'>2019-10-22</view>
-        </view>
-        <view class='fraction'>+ 9</view>
-      </view>
-      <view class='logItem between'>
-        <view class='itemLeft'>
-          <view>分享给好友</view>
-          <view class='time'>2019-10-22</view>
-        </view>
-        <view class='fraction'>+ 9</view>
-      </view>
     </view>
   </view>
 </view>

@@ -85,6 +85,7 @@ scroll-view{
 }
 .orderImg{
   width: 160rpx;
+  height: 160rpx;
   margin-right: 20rpx;
 }
 .hl{
@@ -105,6 +106,8 @@ scroll-view{
   font-size: 28rpx;
 }
 .icon{
+  width: 30rpx;
+  height: 24rpx;
  margin-top: 15rpx;
  margin-left: -5rpx;
 }

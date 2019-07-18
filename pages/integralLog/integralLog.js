@@ -80,13 +80,15 @@ Page({
       this.setData({
         date: '全部',
         year: '全部',
-        month: '全部'
+        month: '全部',
+        page:1
       })
     } else {
       this.setData({
         date: this.data.array[0][index[0]] + '-' + this.data.array[1][index[1]],
         year: this.data.array[0][index[0]],
-        month: this.data.array[1][index[1]]
+        month: this.data.array[1][index[1]],
+        page: 1
       })
     }
     this.getData();

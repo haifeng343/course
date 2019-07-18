@@ -6,7 +6,7 @@ Page({
     dataStart: '', //有效日期
     dataEnd: '', //
     showError: false,
-    pagecount: 10,
+    pagecount: 20,
     page: 1,
     year: '',
     month: '',
@@ -48,6 +48,9 @@ Page({
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       let arr = res.Data;
       var arr1 = [];
+      arr.forEach(item=>{
+        item.Amount=Number(item.Amount/100).toFixed(2)
+      })
       if (that.data.page == 1) {
         arr1 = arr;
       } else {
@@ -74,13 +77,15 @@ Page({
       this.setData({
         date: '全部',
         year: '全部',
-        month: '全部'
+        month: '全部',
+        page:1
       })
     } else {
       this.setData({
         date: this.data.array[0][index[0]] + '-' + this.data.array[1][index[1]],
         year: this.data.array[0][index[0]],
-        month: this.data.array[1][index[1]]
+        month: this.data.array[1][index[1]],
+        page:1
       })
     }
     this.getData();

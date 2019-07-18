@@ -45,7 +45,7 @@
       <view class='bottom'>
         <view class='bottom-left'>
           <view class='money'>￥{{item.SheetMinPrice}}</view>
-          <view class='integral'>积分抵扣{{item.UseScoreRate}}%</view>
+          <view class='integral'>积分抵扣{{item.UseScoreRate/100}}%</view>
         </view>
         <view class='bottom-right'>
           <view class='number'>已售 {{item.SoldCount}}</view>

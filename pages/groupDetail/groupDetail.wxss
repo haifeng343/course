@@ -16,8 +16,9 @@ swiper-item {
   text-align: center;
 }
 
-swiper-item image {
+.img1 {
   width: 660rpx;
+  height: 300rpx;
   object-fit: cover;
   border-radius: 10rpx;
 }
@@ -142,6 +143,7 @@ swiper-item image {
 
 .cover {
   width: 210rpx;
+  height: 210rpx;
 }
 
 .rightContent {
@@ -190,6 +192,7 @@ swiper-item image {
 
 .detailImg {
   width: 30rpx;
+  height: 24rpx;
   position: relative;
   top: 6rpx;
   display: flex;

@@ -67,6 +67,11 @@ Page({
       },
     });
   },
+  searchTo:function(){
+    wx.navigateTo({
+      url: '/pages/search/search',
+    })
+  },
   func: function() {
     let that = this;
     var url = 'sheet/near/list';

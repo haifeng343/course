@@ -15,7 +15,10 @@ Page({
     CardNumber: '',
   },
   onShow: function() {
-
+    let wallet = wx.getStorageSync('wallet');
+    this.setData({
+      money: Number(wallet.Money / 100).toFixed(2)
+    })
   },
   onLoad(options) {
     this.carList();
@@ -26,11 +29,13 @@ Page({
     })
   },
   amoutChange: function(e) {
-    if (e.detail.value != '') {
+    this.setData({
+      amount: e.detail.value
+    })
+    if(this.data.amount!=''){
       this.setData({
-        show: true,
-        showEor: false,
-        amount: e.detail.value
+        show:true,
+        showEor:false
       })
     }
   },
@@ -84,7 +89,7 @@ Page({
       that.setData({
         showSure: false,
         showSuccess: true,
-        amount:'',
+        amount: '',
       })
     }, function(msg) { //onFailed失败回调
       wx.hideLoading();
@@ -98,7 +103,7 @@ Page({
   //点击全部
   all: function() {
     this.setData({
-      amount: this.data.money * 1.0 / 100,
+      amount: this.data.money,
       show: true,
       showEor: false
     })

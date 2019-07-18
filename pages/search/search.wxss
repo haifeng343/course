@@ -52,6 +52,7 @@ page{
 }
 .delete{
   width: 45rpx;
+  height: 45rpx;
 }
 .historyList{
   padding: 0;

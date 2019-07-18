@@ -37,16 +37,16 @@
     </view>
   </view>
   <view class='item2 bor'>
-    <view wx:if="{{showEor}}">可用余额￥{{money*1.0/100}}.00</view>
-    <view wx:if="{{show}}">额外扣除￥0.1 服务费（费率0.10%）</view>
+    <view  wx:if="{{amount!=''&&amount!=null}}">额外扣除￥0.1 服务费（费率0.10%）</view>
+    <view wx:else>可用余额￥{{money}}</view>
   </view>
 
-  <view class='btn1' bindtap='GetApply' wx:if="{{show}}">提现</view>
+  <view class='btn1' bindtap='GetApply' wx:if="{{amount!=''&&amount!=null}}">提现</view>
   <view class='btn1 g1' wx:else>提现</view>
 
   <!--确认提现提示弹出框-->
 
-  <view class="zan-dialog {{ showSure ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog {{ showSure ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
     <view class="zan-dialog__mask" bindtap="toggleDialog" />
     <view class="zan-dialog__container">
       <view class='zan-title'>确认提现</view>
@@ -58,7 +58,7 @@
   </view>
 
   <!--提现申请成功提示弹出框-->
-  <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
     <view class="zan-dialog__mask" />
     <view class="zan-dialog__container">
       <image class='success1' src='../../images/success1.png' mode='widthFix' lazy-load='true'></image>

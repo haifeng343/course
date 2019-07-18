@@ -66,6 +66,7 @@
 
 .cover {
   width: 210rpx;
+  height: 210rpx;
 }
 
 .rightContent {
@@ -123,6 +124,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 
 .detailImg {
   width: 30rpx;
+  height: 24rpx;
   position: relative;
   top: 6rpx;
   display: flex;

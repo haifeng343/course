@@ -42,7 +42,7 @@
                     <view class='address'>{{item.TradingAreaName}}</view>
                   </view>
                   <view class='test'>购买时间:{{item.PayTime}}</view>
-                  <view class='test'>有效期:{{item.LastUseTime==null?'/':item.LastUseTime}}</view>
+                  <view class='test'>有效期:{{item.ExpriesTime==null?'/':item.ExpriesTime}}</view>
                   <view class='test' wx:if="{{item.UseStatus==4}}">已过期:({{item.ExpriesDays}})天{{item.ExpriesTime}}</view>
                   <view class='test' wx:if="{{item.UseStatus==8}}">退款时间:{{item.RefundTime}}</view>
                 </view>
@@ -78,7 +78,7 @@
 </view>
 
 <!--退款失败原因提示弹出框-->
-<view class="zan-dialog {{ showError ? 'zan-dialog--show' : '' }}">
+<view class="zan-dialog {{ showError ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
   <view class="zan-dialog__mask" bindtap="toggleDialog" />
   <view class="zan-dialog__container">
     <view class='zan-title'>失败原因</view>
@@ -87,7 +87,7 @@
   </view>
 </view>
 <!--退款成功提示弹出框-->
-<view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}">
+<view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
   <view class="zan-dialog__mask" bindtap="toggleDialog" />
   <view class="zan-dialog__container">
     <view class='zan-title'>退款成功</view>

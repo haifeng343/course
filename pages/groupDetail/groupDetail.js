@@ -66,12 +66,8 @@ Page({
   },
   swiperChangeTo: function (e) {
     this.setData({
-      current: e.detail.current
-    })
-  },
-  swiperChange:function(e){
-    this.setData({
-      current: e.detail.current
+      current: e.detail.current,
+
     })
   },
   chooseClass: function (e) {

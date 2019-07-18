@@ -8,6 +8,7 @@
 }
 .erCode{
   width: 180rpx;
+  height: 180rpx;
 }
 .mel{
   width: 100%;

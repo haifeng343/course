@@ -13,40 +13,37 @@ Page({
   getUserInfo: function(e) {
     var that = this;
     // 查看是否授权
-    wx.getSetting({
-      success: function(res) {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: function(res) {
-              var Info = res;
-              wx.login({
-                success: res => {
+    wx.login({
+      success: res => {
+        wx.getSetting({
+          success: function(v) {
+            if (v.authSetting['scope.userInfo']) {
+              wx.getUserInfo({
+                success: function(e) {
                   var url = 'user/login/wechat';
                   var params = {
                     Code: res.code,
-                    EncryptedData: Info.encryptedData,
+                    EncryptedData: e.encryptedData,
                     RecommandCode: that.recommandCode,
-                    Iv: Info.iv,
-                    RawData: Info.rawData,
-                    Signature: Info.signature
+                    Iv: e.iv,
+                    RawData: e.rawData,
+                    Signature: e.signature
                   }
-                  wx.setStorage({
-                    key: 'code',
-                    data: res.code,
-                  });
+                  // console.log(params);return;
                   netUtil.postRequest(url, params, that.onSuccess, that.onFailed); //调用get方法情就是户数
                 }
               });
+            } else {
+              // 用户没有授权
+              wx.redirectTo({
+                url: '/pages/authorization/authorization',
+              })
             }
-          });
-        } else {
-          // 用户没有授权
-          wx.redirectTo({
-            url: '/pages/authorization/authorization',
-          })
-        }
+          }
+        });
       }
-    });
+    })
+
   },
   onSuccess: function(res) { //onSuccess成功回调
     let that = this;

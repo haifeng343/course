@@ -28,10 +28,6 @@ Page({
                     RawData: Info.rawData,
                     Signature: Info.signature
                   }
-                  wx.setStorage({
-                    key: 'code',
-                    data: res.code,
-                  });
                   netUtil.postRequest(url, params, that.onSuccess, that.onFailed); //调用get方法情就是户数
                 }
               });

@@ -28,6 +28,7 @@
 }
 .topImg{
   width: 150rpx;
+  height: 128rpx;
   border-radius: 10rpx;
 }
 .courseRow{
@@ -42,6 +43,7 @@
 }
 .rowImg{
   width: 40rpx;
+  height: 34rpx;
   margin-right: 5rpx;
   margin-top: 0rpx;
 }
@@ -81,6 +83,7 @@
 }
 .avator{
   width: 150rpx;
+  height: 150rpx;
   margin-right: 20rpx;
 }
 .teaRight{

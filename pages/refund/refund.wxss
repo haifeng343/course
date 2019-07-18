@@ -6,6 +6,8 @@ page{
 }
 
 .go {
+  width: 24rpx;
+  height: 24rpx;
   margin-top: 10rpx;
   margin-left: 15rpx;
 }
@@ -38,6 +40,7 @@ page{
 
 .jiatupian image {
   width: 180rpx;
+  height: 150rpx;
 }
 
 .image {

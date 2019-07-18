@@ -91,5 +91,6 @@ page {
 .edit{
   margin-right: 5%;
   width: 30rpx;
+  height: 24rpx;
   margin-top: 35rpx;
 }

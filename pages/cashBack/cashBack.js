@@ -7,7 +7,7 @@ Page({
     dataStart: '', //有效日期
     dataEnd: '', //
     showError: false,
-    pagecount: 10,
+    pagecount: 20,
     page: 1,
     year: '',
     month: '',
@@ -50,15 +50,15 @@ Page({
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       let arr = res.Data;
       var arr1 = [];
+      arr.forEach(item=>{
+        item.Amount = Number(item.Amount/100).toFixed(2)
+      })
       if (that.data.page == 1) {
         arr1 = arr;
       } else {
         arr1 = that.data.List;
         arr1 = arr1.concat(res.Data);
       }
-      arr1.forEach(item=>{
-        item.Amount = Number(item.Amount/100).toFixed(2)
-      })
       that.setData({
         List: arr1
       })

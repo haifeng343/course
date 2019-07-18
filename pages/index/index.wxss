@@ -44,6 +44,7 @@
 }
 .navImg {
   width: 45rpx;
+  height: 28rpx;
   position: relative;
   top: 11rpx;
 }
@@ -91,6 +92,7 @@ swiper-item {
 
 swiper-item image {
   width: 690rpx;
+  height: 240rpx;
   object-fit: cover;
   border-radius: 30rpx;
 }
@@ -168,6 +170,7 @@ swiper-item image {
 
 .leftImg {
   width: 250rpx;
+  height: 250rpx;
   border-radius: 10rpx;
 }
 
@@ -185,8 +188,9 @@ swiper-item image {
 
 .ad1 {
   width: 35rpx;
+  height: 28rpx;
   position: relative;
-  top: 5rpx;
+  top: 4rpx;
 }
 
 .addr {
@@ -274,6 +278,7 @@ swiper-item image {
 
 .go {
   width: 30rpx;
+  height: 28rpx;
   position: relative;
   top: 5rpx;
 }

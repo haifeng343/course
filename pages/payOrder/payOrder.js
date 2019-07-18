@@ -2,7 +2,7 @@ var netUtil = require("../../utils/request.js"); //require引入
 Page({
 
   data: {
-    checked: false,
+    checked: true,
     Id: "",
     relId: [],
     ItemList: [],
@@ -16,7 +16,8 @@ Page({
     Package: '',
     PaySign: '',
     SignType: '',
-    TimeStamp: ''
+    TimeStamp: '',
+    TotalAmountFen: '',
   },
   onLoad(options) {
     let that = this;
@@ -28,23 +29,24 @@ Page({
     })
     this.getData();
   },
-  getData: function () {
+  getData: function() {
     var that = this;
     var url = 'sheet/buy/details'
     var params = {
       SheetId: that.data.Id,
       RelId: that.data.relId
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
       console.log(res)
       that.setData({
         ItemList: res.Data.ItemList,
-        TotalAmount: res.Data.TotalAmount * 1.0 / 100,
-        TotalScore: res.Data.TotalScore * 1.0 / 100,
-        UseScore: res.Data.UseScore * 1.0 / 100,
-        UseScoreAmount: res.Data.UseScoreAmount * 1.0 / 100,
+        UseScore: res.Data.UseScore,
+        TotalAmount: Number(res.Data.TotalAmount / 100).toFixed(2),
+        TotalScore: res.Data.TotalScore,
+        UseScoreAmount: Number(res.Data.UseScoreAmount / 100).toFixed(2),
+        TotalAmountFen: (res.Data.TotalAmount - res.Data.UseScoreAmount) / 100
       })
-    }, function (msg) { //onFailed失败回调
+    }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -53,25 +55,25 @@ Page({
       }
     }); //调用get方法情就是户数
   },
-  swich: function () {
+  swich: function() {
     var checked = this.data.checked;
     this.setData({
       "checked": !checked
     })
   },
   //支付成功
-  payok:function(onSuccess){
+  payok: function(onSuccess) {
     var that = this;
     var url = 'order/pay/issuccess'
     var params = {
       OrderId: that.data.OrderId,
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
       that.setData({
-        orderContent:res.Data
+        orderContent: res.Data
       })
       onSuccess(res.Data);
-    }, function (msg) { //onFailed失败回调
+    }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -80,13 +82,13 @@ Page({
       }
     }); //调用get方法情就是户数
   },
-  oderPay: function () {
+  oderPay: function() {
     var that = this;
     var url = 'order/pay'
     var params = {
       OrderId: that.data.OrderId,
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
       that.setData({
         NonceStr: res.Data.NonceStr,
         Package: res.Data.Package,
@@ -101,10 +103,10 @@ Page({
         package: that.data.Package,
         signType: that.data.SignType,
         paySign: that.data.PaySign,
-        'success': function (res) {
-          var setTime = setTimeout(function () {
-            that.payok(function(res){
-              if(res.IsPay){
+        'success': function(res) {
+          var setTime = setTimeout(function() {
+            that.payok(function(res) {
+              if (res.IsPay) {
                 clearTimeout(setTime);
                 wx.showToast({
                   title: '订单创建成功',
@@ -112,20 +114,20 @@ Page({
                   duration: 1000
                 });
                 wx.navigateTo({
-                  url: '/pages/payOk/payOk?OrderId='+that.data.OrderId,
+                  url: '/pages/payOk/payOk?OrderId=' + that.data.OrderId,
                 })
               }
             });
           }, 2000);
         },
-        'fail': function (res) {
+        'fail': function(res) {
           wx.showToast({
             title: '用户取消支付',
             image: '../../images/cancel.png',
           });
         },
       });
-    }, function (msg) { //onFailed失败回调
+    }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -134,7 +136,7 @@ Page({
       }
     }); //调用get方法情就是户数
   },
-  paySure: function () {
+  paySure: function() {
     var that = this;
     var url = 'order/create'
     var params = {
@@ -142,13 +144,13 @@ Page({
       RelId: that.data.relId,
       UseScore: that.data.checked,
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
       console.log(res)
       that.setData({
         OrderId: res.Data.OrderId
       })
       that.oderPay();
-    }, function (msg) { //onFailed失败回调
+    }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -158,7 +160,7 @@ Page({
     }); //调用get方法情就是户数
 
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

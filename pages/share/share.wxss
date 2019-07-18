@@ -9,6 +9,7 @@ page{
 }
 .img{
   width: 750rpx;
+  height: 750rpx;
   display: flex;
   flex: 1;
   align-items: center;

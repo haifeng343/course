@@ -6,8 +6,9 @@
   padding: 0 5%;
   box-sizing: border-box;
 }
-.lookd{
-  color: #3CD5D1;
+
+.lookd {
+  color: #3cd5d1;
   font-size: 26rpx;
 }
 
@@ -64,10 +65,12 @@
   height: 100rpx;
   line-height: 100rpx;
 }
-.keps .start{
+
+.keps .start {
   width: 72%;
 }
-.keps input{
+
+.keps input {
   width: 45%;
   height: 60rpx;
   margin-top: 10rpx;
@@ -76,10 +79,12 @@
   border: none;
   border-bottom: 1rpx solid #f9f9f9;
 }
-.code{
+
+.code {
   margin-left: 30rpx;
 }
-.imgCoded{
+
+.imgCoded {
   border: 1rpx solid #29d9d6;
   color: #29d9d6;
   height: 45rpx;
@@ -90,14 +95,16 @@
   position: relative;
   bottom: -30rpx;
 }
-.imgLoad{
-  color: #D5D5D5;
-  border: 1rpx solid #D5D5D5;
+
+.imgLoad {
+  color: #d5d5d5;
+  border: 1rpx solid #d5d5d5;
 }
-.end{
+
+.end {
   background-color: #fff;
   font-size: 24rpx;
-  color: #E1E1E1;
+  color: #e1e1e1;
   display: flex;
   justify-content: flex-end;
   padding-right: 5%;
@@ -130,8 +137,15 @@
   color: #000;
   font-size: 34rpx;
 }
-.codeNumber{
+
+.codeNumber {
   text-align: left;
+}
+
+.success1 {
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 40rpx;
 }
 
 .delete {
@@ -150,6 +164,7 @@
   display: flex;
   align-items: center;
 }
+
 .masks {
   width: 100%;
   height: 100%;
@@ -158,6 +173,7 @@
   background: rgba(0, 0, 0, 0.4);
   z-index: 503;
 }
+
 .codeNumber {
   width: 300rpx;
   height: 100%;

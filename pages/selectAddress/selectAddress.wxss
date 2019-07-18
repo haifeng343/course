@@ -95,7 +95,8 @@ margin-top:33rpx;
 }
 .adIcon{
   width: 30rpx;
-  margin-top: 8rpx;
+  height: 30rpx;
+  margin-top: 3rpx;
   margin-right: 10rpx;
 }
 .addressDetail{

@@ -19,7 +19,6 @@ Page({
     accuracy: 0,
   },
   onLoad: function(options) {
-    console.log(options)
     wx.showLoading({
       title: "定位中",
       mask: true
@@ -47,7 +46,6 @@ Page({
           speed: speed,
           accuracy: accuracy
         })
-        console.log(res)
         //2、根据坐标获取当前位置名称，显示在顶部:腾讯地图逆地址解析
         qqmapsdk.reverseGeocoder({
           location: {
@@ -56,7 +54,6 @@ Page({
           },
           success: function(addressRes) {
             var address = addressRes.result.formatted_addresses.recommend;
-            console.log(address)
             that.setData({
               address: address
             })
@@ -80,10 +77,8 @@ Page({
           nearList: res.data,
           show: true
         })
-        // console.log(res);
       },
       fail: function(res) {
-        // console.log(res);
         that.setData({
           show: false
         })
@@ -114,7 +109,6 @@ Page({
       keyword: _this.data.searchAdr, //用户输入的关键词，可设置固定值,如keyword:'KFC'
       region: _this.data.ads, //设置城市名，限制关键词所示的地域范围，非必填参数
       success: function(res) { //搜索成功后的回调
-        console.log(res);
         _this.setData({
           addressList: res.data
         });
@@ -135,7 +129,6 @@ Page({
         });
       },
       fail: function(error) {
-        console.error(error);
       },
     });
   },
@@ -152,11 +145,10 @@ Page({
   },
   //跳转编辑地址
   adsChange(e) {
-    this.setData({
-      addr: '../../images/addr.png'
-    })
+    // this.setData({
+    //   addr: '../../images/addr.png'
+    // })
     let pages = getCurrentPages(); //当前页面
-    console.log(e)
     let prevPage = pages[pages.length - 2]; //上一页面
     prevPage.setData({ //直接给上移页面赋值
       address: e.currentTarget.dataset.address,

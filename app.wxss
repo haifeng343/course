@@ -24,6 +24,7 @@ image{
 }
 .clear{
   width: 40rpx;
+  height: 40rpx;
   position: absolute;
   right: 15rpx;
   top:10rpx;
@@ -40,6 +41,7 @@ image{
 }
 .noImg{
   width: 400rpx;
+  height: 400rpx;
   display: flex;
   justify-content: center;
   margin: 100rpx auto 0;
@@ -196,6 +198,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 
 .go {
   width: 30rpx;
+  height: 28rpx;
 }
 
 .pay {

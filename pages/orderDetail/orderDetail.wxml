@@ -78,7 +78,7 @@
   </view>
 </view>
 <!--券码弹出框-->
-<view class='dialog' hidden='{{showCode}}' bindtap='dialogShow'>
+<view class='dialog' hidden='{{showCode}}' bindtap='dialogShow' catchtouchmove="ture">
   <view class='dialog-contatner' style='height:500rpx'>
     <view class='dialog-title'>请扫描以下券码验券</view>
     <view class='dialog-code'>券码: {{detail.TicketNumber}}</view>
@@ -86,7 +86,7 @@
   </view>
 </view>
 <!--退款失败原因提示弹出框-->
-<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
   <view class="zan-dialog__mask" bindtap="toggleDialog" />
   <view class="zan-dialog__container">
   <view class='zan-title'>失败原因</view>
@@ -96,7 +96,7 @@
   </view>
 </view>
 <!--退款成功提示弹出框-->
-<view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}">
+<view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
   <view class="zan-dialog__mask" bindtap="toggleDialog" />
   <view class="zan-dialog__container">
   <view class='zan-title'>退款成功</view>

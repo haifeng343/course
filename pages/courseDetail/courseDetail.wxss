@@ -13,8 +13,9 @@ swiper-item {
   text-align: center;
 }
 
-swiper-item image {
+.img1 {
   width: 660rpx;
+  height: 300rpx;
   object-fit: cover;
   border-radius: 10rpx;
 }
@@ -67,6 +68,7 @@ swiper-item image {
 }
 .rowImg{
   width: 40rpx;
+  height: 34rpx;
   margin-right: 5rpx;
   margin-top: 18rpx;
 }

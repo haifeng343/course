@@ -14,6 +14,7 @@
 }
 .bankIcon{
   width: 70rpx;
+  height: 70rpx;
   margin-right: 10rpx;
 }
 .bankName{
@@ -54,6 +55,7 @@
 }
 .icons{
   width: 55rpx;
+  height: 55rpx;
   margin-right: 5rpx;
 }
 .betweend{

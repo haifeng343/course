@@ -26,6 +26,7 @@
 }
 .icon1{
   width: 40rpx;
+  height: 34rpx;
   margin: 28rpx 15rpx 0 0;
 }
 .go{
@@ -37,6 +38,7 @@
 }
 .bankIcon{
   width: 60rpx;
+  height: 60rpx;
   border-radius: 50%;
   margin-right: 15rpx;
 }
@@ -111,6 +113,7 @@
 }
 .success1{
   width: 100rpx;
+  height: 100rpx;
   margin-top: 40rpx;
 }
 .le1{

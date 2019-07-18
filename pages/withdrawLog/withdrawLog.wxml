@@ -37,7 +37,7 @@
   </view>
 
   <!--提现失败提示弹出框-->
-  <view class="zan-dialog {{ showError ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog {{ showError ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
     <view class="zan-dialog__mask" bindtap="toggleDialog" />
     <view class="zan-dialog__container">
       <view class='zan-title'>失败原因</view>
