@@ -37,7 +37,8 @@
           <image class='cover' src='{{k.ItemCoverImg}}' mode='widthFix' lazy-load='true'></image>
         </view>
             <view>
-              <checkbox class='absolute' value='{{k.RelId}}' disabled='{{item.disabled[index1] == k.RelId}}' checked='{{item.checked[index1] == k.RelId}}'></checkbox>
+              <checkbox class='absolute' value='{{k.RelId}}' checked='{{k.checked}}' wx:if="{{item.MaxCount>1}}"></checkbox>
+              <checkbox class='absolute' value='{{k.RelId}}' checked='{{item.checked[0]==k.RelId}}' wx:else></checkbox>
             </view>
         <view class='rightContent' data-Id="{{k.RelId}}" wx:key bindtap='courseDetail'>
           <view class='between relative'>

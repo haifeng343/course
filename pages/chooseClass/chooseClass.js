@@ -1,4 +1,5 @@
-var netUtil = require("../../utils/request.js"); //require引入
+
+
 Page({
 
 
@@ -97,7 +98,7 @@ Page({
       }
     }); //调用get方法情就是户数
   },
-  swiperChangeTo: function (e) {
+  swiperChangeTo: function(e) {
     this.setData({
       current: e.detail.current,
 
@@ -105,25 +106,13 @@ Page({
   },
   //是否
   checkedTap: function(e) {
-    console.log(e)
     let index = e.currentTarget.dataset.index;
     let s = this.data.GroupList[index];
     let arr = e.detail.value;
     let arr2 = [];
-    if (arr.length >= s.MaxCount) {
-      for (let v of s.ItemList) {
-        if (arr.indexOf(v.RelId.toString()) == -1) {
-          arr2.push(v.RelId);
-        } else {
-          arr2.push(0);
-        }
-      }
-    }
-
     let a = 'GroupList[' + index + '].checkedArr';
-    let b = 'GroupList[' + index + '].disabled';
     let c = 'GroupList[' + index + '].checked';
-    this.setData({ [b]: arr2 });
+    let d = 'GroupList[' + index + '].ItemList';
 
     let arr3 = [];
     if (s.MaxCount >= s.ItemList.length && s.MinCount == 0) {
@@ -131,25 +120,51 @@ Page({
       if (s.checkedArr.length == 0) {
         for (let v of s.ItemList) {
           arr3.push(v.RelId);
+          v.checked = true;
         }
       } else {
         arr3 = [];
       }
       arr = arr3;
-      this.setData({ [c]: arr });
+      this.setData({
+        [c]: arr,
+        [d]: s.ItemList
+      });
+    } else {
+      if (s.MaxCount == 1 && arr.length > 0) {
+        arr = [arr[arr.length - 1]]
+      } else if (s.MaxCount > 1) {
+        if (arr.length > s.MaxCount) {
+          wx.showToast({
+            title: '请正确勾选',
+          })
+          for (let v of s.ItemList) {
+            if (v.RelId == arr[arr.length - 1]) {
+              v.checked = false;
+            }
+          }
+          return
+        }
+      }
+      this.setData({
+        [c]: arr,
+        [d]: s.ItemList
+      });
     }
-    this.setData({ [a]: arr });
+    this.setData({
+      [a]: arr
+    });
     this.hasMoney();
   },
   paybtn: function() {
     for (let v of this.data.GroupList) {
-      console.log(v.checkedArr)
       if (v.checkedArr.length < v.MinCount || v.checkedArr.length > v.MaxCount) {
         wx.showToast({
           title: '请正确勾选',
         })
         return;
       }
+
     }
     wx.navigateTo({
       url: '/pages/payOrder/payOrder?Id=' + this.data.Id + '&ids=' + this.data.ids.join(','),
