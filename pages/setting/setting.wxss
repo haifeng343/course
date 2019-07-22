@@ -10,7 +10,6 @@
   color: #919191;
 }
 .go{
-  margin-top: 4rpx;
   margin-left: 20rpx;
 }
 .exit{
