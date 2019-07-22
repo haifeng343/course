@@ -1,5 +1,6 @@
 var netUtil = require("../../utils/request.js"); //require引入
 let app = getApp();
+
 Page({
 
   data: {

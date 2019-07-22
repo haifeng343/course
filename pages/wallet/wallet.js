@@ -10,7 +10,7 @@ Page({
   onShow(){
     let wallet = wx.getStorageSync('wallet');
     this.setData({
-      money: Number(wallet.Money/100).toFixed(2)
+      money: wallet? Number(wallet.Money/100).toFixed(2):0
     })
   },
   Bill:function(){

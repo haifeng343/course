@@ -17,7 +17,7 @@ Page({
     showSuccess: false,
     modelList: [{
       list: [],
-      status: 0,//是否需要刷新0是 1否
+      status: 0, //是否需要刷新0是 1否
       pageIndex: 1,
       navbarActiveIndex: 0
     }, {
@@ -41,12 +41,24 @@ Page({
     OrderSn: '',
     RefundTime: '',
     RefundArrivalTime: '',
+    usertoken: ""
   },
   onShow() {
-    // this.getData();
+    let usertoken = wx.getStorageSync('usertoken');
+    this.setData({
+      usertoken: usertoken
+    });
+    if (usertoken) {
+      this.getData();
+    }
   },
   onLoad() {
-    this.getData();
+
+  },
+  bindLogin: function() {
+    wx.navigateTo({
+      url: '/pages/login/login',
+    })
   },
   lookEor: function(e) {
     console.log(e)
@@ -149,27 +161,28 @@ Page({
     this.setData({
       navbarActiveIndex: navbarTapIndex
     })
-    if (this.data.modelList[navbarTapIndex].status == 0) {
-      this.getData();
+
+    if (this.data.usertoken) {
+      if (this.data.modelList[navbarTapIndex].status == 0) {
+        this.getData();
+      }
     }
   },
   //下拉刷新
   onPullDownRefresh: function() {
-    let that = this;
-    let temp = that.data.modelList;
-    temp[that.data.navbarActiveIndex].pageIndex=1;
-    that.setData({
-      modelList: temp
-    })
-    that.getData();
+    if(this.data.usertoken){
+      let that = this;
+      let temp = that.data.modelList;
+      temp[that.data.navbarActiveIndex].pageIndex = 1;
+      that.setData({
+        modelList: temp
+      })
+      that.getData();
+    }
     wx.stopPullDownRefresh();
   },
   //上拉加载更多
   onReachBottom: function() {
-    // wx.pageScrollTo({
-    //   scrollTop: 0,
-    //   duration: 0
-    // })
     let that = this;
     let temp = that.data.modelList;
     temp[that.data.navbarActiveIndex].pageIndex++;
@@ -180,7 +193,7 @@ Page({
   },
   orderDetail: function(e) {
     wx.navigateTo({
-      url: '/pages/orderDetail/orderDetail?Id=' + e.currentTarget.dataset.id + '&status=' + (this.data.navbarActiveIndex + 1)+'&kd=3',
+      url: '/pages/orderDetail/orderDetail?Id=' + e.currentTarget.dataset.id + '&status=' + (this.data.navbarActiveIndex + 1) + '&kd=3',
     })
   },
   Refund: function(e) {
@@ -188,7 +201,7 @@ Page({
     //   showDialog: !this.data.showDialog
     // });
     wx.navigateTo({
-      url: '/pages/refund/refund?OrderId=' + e.currentTarget.dataset.id+'&kmd=1',
+      url: '/pages/refund/refund?OrderId=' + e.currentTarget.dataset.id + '&kmd=1',
     })
   },
   //删除

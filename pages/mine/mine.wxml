@@ -1,10 +1,10 @@
-
-<view wx:if="{{userInfo=='' || userInfo==null}}">
+<view wx:if="{{!usertoken}}">
   <view class='myTop'>
-    <view class='start'>
+    <view class='start' bindtap='bindLogin'>
       <image class='avator' src='../../images/userIcon.png' mode='widthFix' lazy-load='true'></image>
-      <view class='align'>
-        <button class="loginBtnd" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">登录</button>
+      <view class='align column'>
+        <text class='please'>未登录</text>
+        <view class='more'>点击登录更精彩</view>
       </view>
     </view>
     <view class='paypag'>
@@ -19,7 +19,34 @@
     </view>
   </view>
   <view class='List mt20'>
-    <view class='item mt20'>
+    <view class='item mt20' bindtap='setting' data-mobile="{{userInfo.Mobile}}">
+      <view class='start'>
+        <image class='icon1' src='../../images/setting.png' mode='widthFix' lazy-load='true'></image>
+        <view>设置</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class='item mt20 borb' bindtap='share' data-Id="{{recommandCode}}">
+      <view class='start'>
+        <image class='icon1' src='../../images/a3.png' mode='widthFix' lazy-load='true'></image>
+        <view>分享给好友</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class='item' bindtap='invite'>
+      <view class='start'>
+        <image class='icon1' src='../../images/a4.png' mode='widthFix' lazy-load='true'></image>
+        <view>推荐与邀请</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class='item mt20 borb' bindtap='aboutUs'>
       <view class='start'>
         <image class='icon1' src='../../images/a1.png' mode='widthFix' lazy-load='true'></image>
         <view>关于我们</view>
@@ -37,24 +64,6 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <!-- <view class='item'>
-      <view class='start'>
-        <image class='icon1' src='../../images/a3.png' mode='widthFix' lazy-load='true'></image>
-        <view>分享给好友</view>
-      </view>
-      <view class='start'>
-        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-      </view>
-    </view>
-    <view class='item mt20' bindtap='invite'>
-      <view class='start'>
-        <image class='icon1' src='../../images/a4.png' mode='widthFix' lazy-load='true'></image>
-        <view>推荐与邀请</view>
-      </view>
-      <view class='start'>
-        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-      </view>
-    </view> -->
   </view>
 </view>
 
@@ -81,16 +90,6 @@
     </view>
   </view>
   <view class='List mt20'>
-    <!-- <view class='item'>
-    <view class='start'>
-      <image class='icon1' src='../../images/integral.png' mode='widthFix' lazy-load='true'></image>
-      <view>我的积分</view>
-    </view>
-    <view class='start'>
-      <view>1980</view>
-      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-    </view>
-  </view> -->
     <view class='item mt20' bindtap='setting' data-mobile="{{userInfo.Mobile}}">
       <view class='start'>
         <image class='icon1' src='../../images/setting.png' mode='widthFix' lazy-load='true'></image>
@@ -100,7 +99,25 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item mt20'>
+    <view class='item mt20 borb' bindtap='share' data-Id="{{recommandCode}}">
+      <view class='start'>
+        <image class='icon1' src='../../images/a3.png' mode='widthFix' lazy-load='true'></image>
+        <view>分享给好友</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class='item' bindtap='invite'>
+      <view class='start'>
+        <image class='icon1' src='../../images/a4.png' mode='widthFix' lazy-load='true'></image>
+        <view>推荐与邀请</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class='item mt20 borb' bindtap='aboutUs'>
       <view class='start'>
         <image class='icon1' src='../../images/a1.png' mode='widthFix' lazy-load='true'></image>
         <view>关于我们</view>
@@ -118,23 +135,5 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <!-- <view class='item' bindtap='share' data-Id="{{recommandCode}}">
-      <view class='start'>
-        <image class='icon1' src='../../images/a3.png' mode='widthFix' lazy-load='true'></image>
-        <view>分享给好友</view>
-      </view>
-      <view class='start'>
-        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-      </view>
-    </view>
-    <view class='item mt20' bindtap='invite'>
-      <view class='start'>
-        <image class='icon1' src='../../images/a4.png' mode='widthFix' lazy-load='true'></image>
-        <view>推荐与邀请</view>
-      </view>
-      <view class='start'>
-        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
-      </view>
-    </view> -->
   </view>
 </view>

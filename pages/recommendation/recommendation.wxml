@@ -1,13 +1,13 @@
 <view class='recommendation'>
-  <input class='Input' type='text' placeholder='请输入推荐人推荐码/微信号'></input>
+  <input class='Input' type='text' bindinput='setCode' value='{{code}}' placeholder='请输入推荐人推荐码'></input>
   <text class='prompt'>温馨提示： 推荐人只允许设置一次，设置成功后不可修改</text>
   <view class='sure' bindtap='sure'>确定</view>
 </view>
 <modal hidden="{{hiddenmodalput}}" title="确定推荐人" confirm-text="确认" cancel-text="取消" bindcancel="cancelM" bindconfirm="confirmM">
-  <view class='mg'>推荐人: ljsdlfmdsnf</view>
-  <view class='mg mg1'>昵称: ljsdlfmdsnf</view>
+  <view class='mg'>手机号: {{Info.Mobile}}</view>
+  <view class='mg mg1'>昵称: {{item.NickName}}</view>
   <view class='start mg mg1'>头像:
-    <image class='top' src='../../images/top.png' mode='widthFix' lazy-load='true'></image>
+    <image class='top' src='{{Info.HeadUrl}}' mode='widthFix' lazy-load='true'></image>
   </view>
   <text class='t1'>温馨提示：推荐人只允许设置一次，设置成功后不可修改</text>
 </modal>

@@ -15,8 +15,8 @@ page{
   margin: auto;
 }
 .login_img{
-  width: 250rpx;
-  height: 520rpx;
+  width: 700rpx;
+  height: 500rpx;
 }
 .center{
   font-size: 26rpx;
@@ -28,6 +28,7 @@ page{
   background-color: #29D9D6;
   color: #fff;
   margin-top: 40rpx;
+  border-radius: 50rpx;
 }
 
 

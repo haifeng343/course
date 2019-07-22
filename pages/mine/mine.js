@@ -11,14 +11,31 @@ Page({
     recommandCode: '',
     money:'',
     score:'',
+    usertoken:""
   },
   onShow() {
-    let userInfo = wx.getStorageSync('userInfo');
+    let usertoken = wx.getStorageSync('usertoken');
     this.setData({
-      userInfo: userInfo,
-      recommandCode: userInfo.RecommandCode || '',
+      usertoken: usertoken
+    });
+    if (usertoken) {
+      this.walletd();
+      let userInfo = wx.getStorageSync('userInfo');
+      this.setData({
+        userInfo: userInfo,
+        recommandCode: userInfo.RecommandCode || '',
+      })
+    }
+  },
+  bindLogin:function() {
+    wx.navigateTo({
+      url: '/pages/login/login',
     })
-    this.walletd();
+  },
+  aboutUs:function(){
+    wx.navigateTo({
+      url: '/pages/aboutUs/aboutUs',
+    })
   },
   walletd: function () {
     let that = this;
@@ -31,23 +48,21 @@ Page({
         score:res.Data.Score
       })
       wx.setStorageSync('wallet', res.Data)
-    }, function (msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
+    });
   },
   onLoad() {
-
   },
 
   integral: function(e) {
-    wx.navigateTo({
-      url: '/pages/integralLog/integralLog',
-    })
+    if(this.data.usertoken){
+      wx.navigateTo({
+        url: '/pages/integralLog/integralLog',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
   },
   callUs: function() {
     wx.navigateTo({
@@ -55,24 +70,48 @@ Page({
     })
   },
   setting: function() {
-    wx.navigateTo({
-      url: '/pages/setting/setting?mobile=' + this.data.userInfo.Mobile + '&ids=' + 1,
-    })
+    if(this.data.usertoken){
+      wx.navigateTo({
+        url: '/pages/setting/setting?mobile=' + this.data.userInfo.Mobile + '&ids=' + 1,
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
   },
   invite: function() {
-    wx.navigateTo({
-      url: '/pages/invite/invite',
-    })
+    if(this.data.usertoken){
+      wx.navigateTo({
+        url: '/pages/invite/invite',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
   },
   share: function(e) {
-    wx.navigateTo({
-      url: '/pages/share/share?Id=' + e.currentTarget.dataset.id,
-    })
+    if(this.data.usertoken){
+      wx.navigateTo({
+        url: '/pages/share/share?Id=' + e.currentTarget.dataset.id,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
   },
   wallet: function() {
-    wx.navigateTo({
-      url: '/pages/wallet/wallet',
-    })
+    if(this.data.usertoken){
+      wx.navigateTo({
+        url: '/pages/wallet/wallet',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
   },
   getUserInfo: function(e) {
     var that = this;

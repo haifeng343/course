@@ -1,22 +1,68 @@
 .keep{
-  background-color: #fff;
   width: 100%;
+  height: auto;
+  background-color: #fff;
   padding: 30rpx 5%;
   box-sizing: border-box;
+  display: flex;
+  font-size: 24rpx;
+}
+.leftImg{
+  width:23%;
+  margin-right: 15rpx;
+}
+.topImg{
+  width: 150rpx;
+  height: 128rpx;
+  border-radius: 10rpx;
+}
+.rowImg{
+  width: 40rpx;
+  height: 40rpx;
+}
+.activity{
+  font-size: 28rpx;
+}
+.right{
+  width: 77%;
+}
+.h50{
+  line-height: 45rpx;
+}
+.h40{
+  line-height: 48rpx;
+  display: flex;
+  align-items: center;
+}
+.w100{
+  width: 100%;
+}
+.address{
+  width: 100%;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+}
+.ml40{
+  margin-left: 40rpx;
+}
+/* .keep{
+  width: 100%;
+  background-color: #fff;
+  padding: 30rpx 5%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 }
 .well{
   padding: 0;
 }
-.courseRow {
-  width: 65%;
-}
 .leftImg{
-  width: 35%;
+  width: 23%;
   margin-right: 15rpx;
 }
 .right{
-  right: 65%;
+  right: 77%;
   overflow: hidden;
 }
 .activity{
@@ -60,13 +106,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: keep-all;
-}
+} */
 .teacher{
   margin-top: 20rpx;
   background-color: #fff;
 }
 .teaTitle{
-  font-size: 30rpx;
+  font-size: 32rpx;
   font-weight: 600;
 }
 .gray{
@@ -100,12 +146,13 @@
   color: #000;
 }
 .profession{
-  font-size: 26rpx;
+  font-size: 24rpx;
   color: #969696;
   margin-left: 20rpx;
 }
 .mylogText{
   color: #717171;
+  font-size: 24rpx;
 }
 
 

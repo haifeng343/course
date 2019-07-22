@@ -22,7 +22,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.6",
+	"libVersion": "2.7.4",
 	"appid": "wx9ff1317b41d4d09c",
 	"projectname": "API%E5%B0%8F%E7%A8%8B%E5%BA%8F",
 	"debugOptions": {
@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 12,
+			"current": 41,
 			"list": [
 				{
 					"id": -1,
@@ -83,28 +83,28 @@
 					"id": 4,
 					"name": "groupDetail",
 					"pathName": "pages/groupDetail/groupDetail",
-					"query": "Longitude=120.13026&Latitude=30.25961&Id=12",
+					"query": "Longitude=120.13026&Latitude=30.25961&Id=15",
 					"scene": null
 				},
 				{
 					"id": 5,
 					"name": "courseDetail",
 					"pathName": "pages/courseDetail/courseDetail",
-					"query": "Id=11",
+					"query": "Id=29",
 					"scene": null
 				},
 				{
 					"id": 6,
 					"name": "allTeacher",
 					"pathName": "pages/allTeacher/allTeacher",
-					"query": "Id=11",
+					"query": "Id=49",
 					"scene": null
 				},
 				{
 					"id": 7,
 					"name": "chooseClass",
 					"pathName": "pages/chooseClass/chooseClass",
-					"query": "Id=8",
+					"query": "Id=15",
 					"scene": null
 				},
 				{
@@ -139,7 +139,7 @@
 					"id": 12,
 					"name": "payOrder",
 					"pathName": "pages/payOrder/payOrder",
-					"query": "Id=12&ids=17",
+					"query": "Id=15&ids=28,27",
 					"scene": null
 				},
 				{
@@ -329,6 +329,20 @@
 					"name": "share",
 					"pathName": "pages/share/share",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "WebView",
+					"pathName": "pages/WebView/WebView",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "aboutUs",
+					"pathName": "pages/aboutUs/aboutUs",
+					"query": "Id=15",
 					"scene": null
 				}
 			]

@@ -33,9 +33,10 @@ Page({
       array: [arr, arr1],
       now: this.data.month + '月'
     })
+  },
+  onLoad: function() {
     this.getData();
   },
-  onLoad: function() {},
   getData: function() {
     let that = this;
     var url = 'user/wallet/change/list';
@@ -82,14 +83,14 @@ Page({
         date: '全部',
         year: '全部',
         month: '全部',
-        page:1
+        page: 1
       })
     } else {
       this.setData({
         date: this.data.array[0][index[0]] + '-' + this.data.array[1][index[1]],
         year: this.data.array[0][index[0]],
         month: this.data.array[1][index[1]],
-        page:1
+        page: 1
       })
     }
     this.getData();

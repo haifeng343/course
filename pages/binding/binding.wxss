@@ -62,18 +62,18 @@ input {
 
 .loginBtn {
   width: 690rpx;
-  height: 88rpx;
+  height: 80rpx;
   border-radius: 10rpx;
   background: #999;
   text-align: center;
-  line-height: 88rpx;
+  line-height: 80rpx;
   margin: 30rpx;
   color: #fff;
   font-size: 30rpx;
 }
 
 .loginBtnState {
-  background: #e65248;
+  background: #29D9D6;
 }
 
 .forget {

@@ -14,7 +14,7 @@ Page({
     statusdes: '',
     List: [],
   },
-  onShow: function () {
+  onShow: function() {
     var date = new Date();
     let arr = [],
       arr1 = [];
@@ -33,10 +33,11 @@ Page({
       array: [arr, arr1],
       now: this.data.month + '月'
     })
+  },
+  onLoad: function() {
     this.getData();
   },
-  onLoad: function () { },
-  getData: function () {
+  getData: function() {
     let that = this;
     var url = 'user/cash/record/list';
     var params = {
@@ -45,11 +46,11 @@ Page({
       PageCount: that.data.pagecount,
       PageIndex: that.data.page
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       let arr = res.Data;
       var arr1 = [];
-      arr.forEach(item=>{
-        item.Amount=Number(item.Amount/100).toFixed(2)
+      arr.forEach(item => {
+        item.Amount = Number(item.Amount / 100).toFixed(2)
       })
       if (that.data.page == 1) {
         arr1 = arr;
@@ -61,7 +62,7 @@ Page({
         List: arr1
       })
       wx.hideLoading();
-    }, function (msg) { //onFailed失败回调
+    }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
         wx.showToast({
@@ -70,7 +71,7 @@ Page({
       }
     }); //调用get方法情就是户数
   },
-  bindDateChange: function (e) {
+  bindDateChange: function(e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
     let index = e.detail.value;
     if (index[0] == 0 && index[1] == 0) {
@@ -78,36 +79,36 @@ Page({
         date: '全部',
         year: '全部',
         month: '全部',
-        page:1
+        page: 1
       })
     } else {
       this.setData({
         date: this.data.array[0][index[0]] + '-' + this.data.array[1][index[1]],
         year: this.data.array[0][index[0]],
         month: this.data.array[1][index[1]],
-        page:1
+        page: 1
       })
     }
     this.getData();
   },
-  showEor: function (e) {
+  showEor: function(e) {
     this.setData({
       statusdes: e.currentTarget.dataset.statusdes,
       showError: true
     })
   },
-  closed: function () {
+  closed: function() {
     this.setData({
       showError: false
     })
   },
-  withdrawDetail: function () {
+  withdrawDetail: function() {
     wx.navigateTo({
       url: '/pages/withdrawDetail/withdrawDetail',
     })
   },
   //上拉加载更多
-  onReachBottom: function () {
+  onReachBottom: function() {
     let that = this;
     wx.showLoading({
       title: '玩命加载中',
@@ -121,7 +122,7 @@ Page({
 
   },
   //下拉刷新
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     wx.showLoading({
       title: "玩命加载中",
     });
@@ -132,7 +133,7 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

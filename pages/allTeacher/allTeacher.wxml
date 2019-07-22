@@ -1,33 +1,32 @@
-<view class='keep start'>
+<view class='keep'>
   <view class='leftImg'>
     <image class='topImg' src='{{otherList.ItemCoverImg}}' mode='widthFix' lazy-load='true'></image>
   </view>
   <view class='right'>
-    <view class='activity'>英孚亲子活动英孚亲子活动英孚亲子活动英孚亲子活动英孚亲子活动</view>
-    <view class='courseRow start well'>
+    <view class='activity h50'>{{otherList.ItemName}}</view>
+    <view class='courseRow start h40'>
       <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
       <view>{{otherList.ItemName}}</view>
     </view>
-    <view class='courseRow between well'>
-      <view class='startd'>
+    <view class='courseRow between w100'>
+      <view class='start h40 w100'>
         <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
         <view class='address'>{{otherList.StoreAddress}}</view>
       </view>
-      <!-- <view class='end'>{{otherList.Distance}}km</view> -->
     </view>
-    <view class='courseRow start well'>
-      <view class='start'>
+    <view class='courseRow start'>
+      <view class='start h40'>
         <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-        <view>课程数量 {{otherList.CoursesNumber}} 节</view>
+        <view>课程数量{{otherList.CoursesNumber}}节</view>
       </view>
-      <view class='start'>
+      <view class='start h40 ml40'>
         <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
-        <view>单节课时 {{otherList.SingleTime}} min</view>
+        <view>单节课时{{otherList.SingleTime}}min</view>
       </view>
     </view>
   </view>
 </view>
-<view class='teacher boxd'>
+<view class='teacher boxd' wx:if="{{teacherList.length>0}}">
   <view class='teaTitle start'>授课老师
     <view class='gray'> ({{TeacherCount}})</view>
   </view>

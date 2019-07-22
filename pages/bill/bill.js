@@ -1,6 +1,5 @@
 var netUtil = require("../../utils/request.js"); //require引入
 Page({
-
   data: {
     date: '', //不填写默认今天日期，填写后是默认日期
     dataStart: '', //有效日期
@@ -33,9 +32,9 @@ Page({
       array: [arr, arr1],
       now: this.data.month + '月'
     })
-    this.getData();
   },
-  onLoad: function() {},
+  onLoad: function () {
+    this.getData();},
   getData: function() {
     let that = this;
     var url = 'user/bill/list';

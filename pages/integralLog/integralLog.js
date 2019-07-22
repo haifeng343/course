@@ -15,18 +15,21 @@ Page({
     List: [],
     score: '',
     avator: '',
+    usertoken:'',
   },
   onShow: function() {
     var date = new Date();
     let arr = [],
       arr1 = [];
+      let usertoken = wx.getStorageSync('usertoken');
     let userInfo = wx.getStorageSync('userInfo');
     let wallet = wx.getStorageSync('wallet');
     this.setData({
       year: date.getFullYear(),
       month: date.getMonth() + 1,
-      score: wallet.Score,
-      avator: userInfo.HeadUrl,
+      score: wallet.Score || '',
+      avator: userInfo.HeadUrl || '',
+      usertoken:usertoken
     })
     var year = date.getFullYear();
     arr.push('全部');
@@ -38,9 +41,10 @@ Page({
       array: [arr, arr1],
       now: this.data.month + '月'
     })
+  },
+  onLoad: function() {
     this.getData();
   },
-  onLoad: function() {},
   getData: function() {
     let that = this;
     var url = 'user/wallet/change/list';
@@ -64,16 +68,10 @@ Page({
         List: arr1
       })
       wx.hideLoading();
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
+    });
   },
   bindDateChange: function(e) {
+    console.log(e)
     // console.log('picker发送选择改变，携带值为', e.detail.value)
     let index = e.detail.value;
     if (index[0] == 0 && index[1] == 0) {
@@ -81,7 +79,7 @@ Page({
         date: '全部',
         year: '全部',
         month: '全部',
-        page:1
+        page: 1
       })
     } else {
       this.setData({
@@ -91,6 +89,9 @@ Page({
         page: 1
       })
     }
+    this.setData({
+      List:[]
+    })
     this.getData();
   },
   showEor: function(e) {

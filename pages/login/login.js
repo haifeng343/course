@@ -33,12 +33,7 @@ Page({
                   netUtil.postRequest(url, params, that.onSuccess, that.onFailed); //调用get方法情就是户数
                 }
               });
-            } else {
-              // 用户没有授权
-              wx.redirectTo({
-                url: '/pages/authorization/authorization',
-              })
-            }
+            } 
           }
         });
       }
@@ -50,17 +45,24 @@ Page({
     that.userInfo = res.Data;
     wx.setStorageSync('userInfo', that.userInfo);
     wx.setStorageSync('usertoken', res.Data.UserToken);
-
-    wx.navigateBack({
-      delta: 1
-    })
-
+    that.walletd();
   },
   onFailed: function() { //onFailed失败回调
     wx.showToast({
       icon: 'none',
       title: res.Data.ErrorMessage,
     })
+  },
+  walletd: function() {
+    let that = this;
+    var url = 'user/wallet';
+    var params = {}
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+      wx.setStorageSync('wallet', res.Data);
+      wx.navigateBack({
+        delta: 1
+      })
+    });
   },
   onShareAppMessage: function() {
 

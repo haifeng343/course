@@ -23,11 +23,11 @@ Page({
     })
   },
   onShow:function(){
-    this.getData();
   },
   onLoad: function(options) {
+    this.getData();
     this.setData({
-      item: options.item
+      item: options.item || {}
     })
   },
   navtoWith: function(e) {

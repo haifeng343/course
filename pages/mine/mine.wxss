@@ -1,17 +1,30 @@
 .myTop{
-  width: 90%;
-  margin: 30rpx 5%;
+  width: 95%;
+  margin: 20rpx 2.5%;
   height: auto;
   background-color: #fff;
-  padding: 40rpx 5%;
+  padding: 20rpx 3%;
   box-sizing: border-box;
-  border-radius: 25rpx;
+  border-radius: 15rpx;
+}
+.please{
+  color: #000;
+  padding: 5rpx 10rpx;
+  margin:0 5rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+}
+.more{
+  font-size: 24rpx;
+  margin-left: 15rpx;
+color: #ccc;
 }
 .paypag{
   width: 100%;
   justify-content: center;
   align-items: center;
   display: flex;
+  margin-top: 20rpx;
 }
 .paypagItem{
   display: flex;
@@ -29,7 +42,7 @@
   right: 0;
 }
 .paypagItem .ml1{
-  font-size: 26rpx;
+  font-size: 28rpx;
   color: #9A9A9A;
 }
 
@@ -38,7 +51,6 @@
   height: 150rpx;
   border-radius: 50%;
   margin-right: 20rpx;
-  height:150rpx;
 }
 .name{
   font-size: 30rpx;
@@ -48,7 +60,7 @@
   color: #B1B1B1;
 }
 .code{
-  font-size: 26rpx;
+  font-size: 24rpx;
 }
 .align{
   padding-top: 35rpx;
@@ -67,15 +79,14 @@
   justify-content: space-between;
   background-color: #fff;
 }
+.borb{
+  border-bottom: 1rpx solid #f9f9f9;
+}
 .icon1{
   width: 40rpx;
   height: 34rpx;
-  margin: 18rpx 15rpx 0 0;
+  margin: 0rpx 15rpx 0 0;
 }
-.go{
-  margin: 25rpx 0 0 15rpx;
-}
-
 
 
 

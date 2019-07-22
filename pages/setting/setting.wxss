@@ -16,5 +16,8 @@
 .exit{
   color: #F04549;
 }
+.kpl{
+  line-height: 40rpx;
+  border-radius:0;
 
-
+}

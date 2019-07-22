@@ -31,7 +31,7 @@ Page({
       Mobile: options.phone,
       ids: options.ids
     })
-    if (options.mobile != "") {
+    if (options.ids == 1) {
       wx.setNavigationBarTitle({
         title: '修改手机号',
       })

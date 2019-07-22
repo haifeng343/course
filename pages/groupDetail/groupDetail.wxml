@@ -19,8 +19,8 @@
   <view class='contents'>
     <view class='time'>活动截止时间：{{detailCent.EndTime}}</view>
     <view class='money'>
-      <view class='sym'>￥</view>
-      <view class='number'>{{detailCent.SheetPrice}}</view>
+      <!-- <view class='sym'></view> -->
+      <view class='number'>￥{{detailCent.SheetPrice}}</view>
     </view>
   </view>
 </view>
@@ -36,10 +36,6 @@
         </view>
         <view class='rightContent'>
           <view class='courseTitle'>{{k.ItemName}}</view>
-          <view class='coursePeople'>{{k.SoldCount}}人已参与 | 剩余名额 {{k.RemainCount}} 个</view>
-          <view class='tagList'>
-            <view class='tagItm' wx:for="{{k.TagList}}" wx:key wx:for-item="b" style='background:{{b.TagBgColor}};color:{{b.TagFontColor}}'>{{b.TagName}}</view>
-          </view>
           <view class='detail'>
             <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
             <view class='name'>{{k.SellerName}}</view>
@@ -65,6 +61,10 @@
               <view class='name'>单节课时 {{k.SingleTime}} min</view>
             </view>
           </view>
+          <view class='tagList'>
+            <view class='tagItm' wx:for="{{k.TagList}}" wx:key wx:for-item="b" style='background:{{b.TagBgColor}};color:{{b.TagFontColor}};border:2rpx solid {{b.BorColor}}'>{{b.TagName}}</view>
+          </view>
+          <view class='coursePeople'>{{k.SoldCount}}人已参与 | 剩余名额 {{k.RemainCount}} 个</view>
         </view>
     </view>
   </view>

@@ -1,10 +1,20 @@
 <view>
-  <view class='integral between'>
+  <view class='integral between' wx:if="{{usertoken}}">
     <view class='start'>
       <image class='avator' src='{{avator}}' mode='widthFix' lazy-load='true'></image>
       <view class='integralTop'>
         <view>积分总额</view>
         <view class='number'>{{score}}</view>
+      </view>
+    </view>
+    <view class='rule'>积分规则</view>
+  </view>
+  <view class='integral between' wx:else>
+    <view class='start'>
+      <image class='avator' src='../../images/userIcon.png' mode='widthFix' lazy-load='true'></image>
+      <view class='integralTop'>
+        <view>积分总额</view>
+        <view class='number'>0</view>
       </view>
     </view>
     <view class='rule'>积分规则</view>

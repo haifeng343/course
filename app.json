@@ -39,7 +39,9 @@
     "pages/search/search",
     "pages/keepCarList/keepCarList",
     "pages/login/login",
-    "pages/share/share"
+    "pages/share/share",
+    "pages/WebView/WebView",
+    "pages/aboutUs/aboutUs"
   ],
   "window": {
     "backgroundTextStyle": "dark",

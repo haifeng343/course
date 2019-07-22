@@ -9,7 +9,7 @@
     </block>
   </view>
   <view class="movie-content-wrapper">
-    <view>
+    <view wx:if="{{usertoken}}">
       <view>
         <view class='nohasLog' wx:if="{{modelList[navbarActiveIndex].list.length==0}}">
           <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
@@ -65,6 +65,10 @@
           </view>
         </view>
       </view>
+    </view>
+    <view class='nohasLog' wx:else bindtap='bindLogin' >
+      <image class='noImg' src='../../images/noOrder.png' mode='widthFix' lazy-load='true'></image>
+      <view class='langqi'>点击登录后，查看订单</view>
     </view>
   </view>
 </view>

@@ -48,7 +48,7 @@
     </view>
   </view>
 </view>
-<view class='teacherList boxd' bindtap='allTeacher' data-Id="{{List.RelId}}">
+<view class='teacherList boxd' wx:if="{{!List.TeacherCount==0}}" bindtap='allTeacher' data-Id="{{List.RelId}}">
   <view class='tearcherTitle between'>
     <view class='teaNumber'>师资力量 ({{List.TeacherCount}})</view>
     <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>

@@ -1,7 +1,14 @@
-<view class='horizontal between mt20' data-ids="{{ids}}" bindtap='modify'>
-  <view class='name'>修改手机号</view>
+<button class='horizontal between mt20 kpl' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" wx:if="{{!mobile}}">
+  <view class='name'>{{name}}</view>
   <view class='content start'>
-  <view class='phone'>{{mobile}}</view>
+    <view class='phone'>{{mobile}}</view>
+    <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
+  </view>
+</button>
+<view class='horizontal between mt20' data-ids="{{ids}}" bindtap='modify' wx:else>
+  <view class='name'>{{name}}</view>
+  <view class='content start'>
+    <view class='phone'>{{mobile}}</view>
     <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
   </view>
 </view>

@@ -1,0 +1,19 @@
+page{
+  background-color: #fff;
+}
+.logo{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 15rpx;
+  display: flex;
+  justify-content: center;
+  margin: 20rpx auto;
+}
+.manaText{
+  width: 100%;
+  font-size: 24rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  text-align: center;
+  font-weight: bold;
+}

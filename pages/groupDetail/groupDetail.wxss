@@ -1,13 +1,15 @@
-page{
+page {
   padding-bottom: 120rpx;
 }
+
 .banner {
   width: 100%;
-  height: 300rpx;
+  height: 306rpx;
   position: relative;
   z-index: 0;
   background-color: #fff;
 }
+
 swiper {
   height: 100%;
 }
@@ -20,11 +22,11 @@ swiper-item {
   width: 660rpx;
   height: 300rpx;
   object-fit: cover;
-  border-radius: 10rpx;
+  border-radius: 15rpx;
 }
 
 .box {
-  width: 95%;
+  width: 100%;
   height: 100%;
   display: inline-block;
   box-sizing: border-box;
@@ -32,10 +34,10 @@ swiper-item {
 
 .dot {
   position: absolute;
-  bottom: 40rpx;
-  right: 70rpx;
+  bottom: 8rpx;
+  right: 47rpx;
   background: rgba(0, 0, 0, 0.1);
-  color: #fff;
+  color: #c9c9c9;
   font-size: 24rpx;
   border-radius: 40rpx;
   padding: 3rpx 20rpx;
@@ -66,16 +68,17 @@ swiper-item {
 }
 
 .sym {
+  font-size: 32rpx;
   position: relative;
   top: 7rpx;
 }
 
 .money .number {
-  font-size: 36rpx;
+  font-size: 32rpx;
 }
 
 .contents .time {
-  font-size: 26rpx;
+  font-size: 28rpx;
   color: #8d8d8d;
   line-height: 50rpx;
 }
@@ -84,26 +87,23 @@ swiper-item {
   background-color: #fff;
   width: 100%;
   height: auto;
-  padding: 0 5%;
+  padding: 0 2.5%;
   box-sizing: border-box;
 }
 
 .courseItem {
-  padding-bottom: 30rpx;
   border-bottom: 1rpx solid #fbfbfb;
 }
-.courseItem:last-child{
-  border-bottom: none;
-}
+
 .courseItem .title {
   text-align: center;
   color: #8d8d8d;
-  font-size: 30rpx;
+  font-size: 32rpx;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 40rpx 0;
-  margin-bottom:-40rpx;
+  padding: 20rpx 0;
+  margin-bottom: -40rpx;
 }
 
 .title .heng {
@@ -125,8 +125,8 @@ swiper-item {
 .courseCont {
   width: 100%;
   height: auto;
-  margin: 55rpx 0;
-  padding-right: 5%;
+  margin-top: 40rpx;
+  margin-bottom: 20rpx;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
@@ -134,20 +134,21 @@ swiper-item {
 }
 
 .leftImg {
-  width: 33%;
+  width: 30%;
   height: auto;
   overflow: hidden;
   margin-right: 15rpx;
-  border-radius: 10rpx;
 }
-
+.leftImg image{
+  border-radius: 15rpx;
+}
 .cover {
   width: 210rpx;
   height: 210rpx;
 }
 
 .rightContent {
-  width: 67%;
+  width: 69%;
 }
 
 .courseTitle {
@@ -165,9 +166,9 @@ swiper-item {
   width: 100%;
   overflow-x: scroll;
   display: flex;
+  font-size: 24rpx;
   justify-content: flex-start;
   flex-direction: row;
-  margin-bottom: 5rpx;
 }
 
 .tagList::-webkit-scrollbar {
@@ -179,9 +180,10 @@ swiper-item {
 .tagItm {
   word-break: keep-all;
   font-size: 24rpx;
-  padding: 2rpx 8rpx;
+  padding: 0rpx 8rpx;
   margin-right: 15rpx;
   margin-top: 0rpx;
+  border-radius: 5rpx;
   box-sizing: border-box;
 }
 
@@ -214,7 +216,7 @@ swiper-item {
 
 .long {
   width: 20%;
-  color:#8d8d8d;
+  color: #8d8d8d;
   text-align: right;
 }
 
@@ -232,25 +234,29 @@ swiper-item {
   text-overflow: ellipsis;
   color: #404040;
 }
-.ring{
+
+.ring {
   display: flex;
   justify-content: flex-start;
   margin-right: 25rpx;
 }
-.disclaimerList{
+
+.disclaimerList {
   width: 100%;
   height: auto;
   box-sizing: border-box;
   background-color: #fff;
   margin-top: 15rpx;
 }
-.disTitle{
+
+.disTitle {
   font-size: 32rpx;
   font-weight: 700;
   padding-top: 30rpx;
   margin-left: 5%;
 }
-.disContent{
+
+.disContent {
   width: 90%;
   font-size: 26rpx;
   line-height: 40rpx;
@@ -258,32 +264,30 @@ swiper-item {
   margin-top: 20rpx;
   padding-bottom: 30rpx;
 }
-.pay{
+
+.pay {
   position: fixed;
   bottom: 0;
   width: 100%;
+  font-size: 32rpx;
   height: 120rpx;
-  display: flex;
   background: #fff;
+  box-sizing: border-box;
   box-shadow: 0 -8rpx 15rpx rgba(0, 0, 0, 0.1);
-  justify-content: flex-end;
-  text-align: right;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
-.payBtn{
+
+.payBtn {
   position: absolute;
-  top: 25rpx;
-  right: 50rpx;
-  width: 300rpx;
+  right: 5%;
+  width: 260rpx;
+  box-sizing: border-box;
   height: 70rpx;
   line-height: 70rpx;
   font-size: 32rpx;
-  background: #29D9D6;
+  background: #29d9d6;
   color: #fff;
   border-radius: 40rpx;
 }
-
-
-
-
-
-

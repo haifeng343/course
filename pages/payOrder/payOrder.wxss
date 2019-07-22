@@ -1,6 +1,7 @@
 .keep{
   background-color: #fff;
   width: 100%;
+  height: auto;
   padding: 30rpx 5%;
   box-sizing: border-box;
   overflow: hidden;
@@ -13,11 +14,16 @@
   width: 65%;
 }
 .leftImg{
-  width: 35%;
+  width: 23%;
   margin-right: 15rpx;
 }
+.ml1{
+  height: auto;
+  line-height: 25rpx;
+  font-size: 24rpx;
+}
 .right{
-  right: 65%;
+  right: 77%;
   overflow: hidden;
 }
 .activity{
@@ -35,7 +41,7 @@
 .courseRow{
   width: 100%;
   font-size: 24rpx;
-  height: 40rpx;
+  height: auto;
   line-height: 40rpx;
   box-sizing: border-box;
 }
@@ -50,9 +56,11 @@
 }
 .courseRow .start{
   width: 60%;
+  height: auto;
 }
 .startd{
-  width: 80%;
+  width: 100%;
+  font-size: 28rpx;
   display: flex;
   justify-content: space-between;
 }
@@ -66,7 +74,7 @@
   width: 100%;
   padding-left: 5%;
   background-color: #fff;
-  font-size: 30rpx;
+  font-size: 32rpx;
   font-weight: 600;
 }
 .count{
@@ -87,12 +95,15 @@
   font-size: 28rpx;
 }
 .txt{
-  font-size: 26rpx;
+  font-size: 28rpx;
   margin-top: 10rpx;
 }
 .txt1{
   margin-left: 20rpx;
   color: #D7D7D7;
+}
+.kl,.kld{
+  font-size: 24rpx;
 }
 radio{
   margin-top: 20rpx;
@@ -116,6 +127,7 @@ radio{
 .totalNumber {
   line-height: 120rpx;
   margin-right: 20rpx;
+  font-size: 24rpx;
 }
 
 .paybtn {
@@ -141,5 +153,5 @@ radio{
   font-weight: 600;
 }
 .symbol{
-  font-size: 24rpx;
+  font-size: 32rpx;
 }

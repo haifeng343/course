@@ -5,24 +5,24 @@
     <view class='abs'>{{locationName}}</view>
   </view>
 </view>
-<view style="padding-top:{{statusBarHeight+60}}px" class='topInput'>
-  <input type='search' bindtap='searchTo' class='search' placeholder='新品上架'></input>
+<view style="padding-top:{{statusBarHeight+45/375*winWidth}}px" class='topInput'>
+  <input class='SearchInput' bindtap='searchTo' disabled placeholder='新品上架'></input>
 </view>
 <view class='banner'>
-  <swiper indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1'>
-    <block wx:for="{{imgUrls}}" wx:key>
-      <swiper-item>
+  <swiper bindanimationfinish="swiperChangeTo" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1'>
+    <block>
+      <swiper-item wx:for="{{imgUrls}}" wx:key data-path="{{item.ImgPath}}">
         <view class='box'>
-          <image src='{{item.img}}' mode="widthFix" lazy-load="true"></image>
+          <image src='{{item.ImgUrl}}' mode="widthFix" lazy-load="true"></image>
         </view>
       </swiper-item>
     </block>
   </swiper>
-  <view class="dots">
-    <block wx:for="{{imgUrls}}" wx:key>
-      <view class="dot{{index == currentSwiper ? ' active' : ''}}"></view>
-    </block>
-  </view>
+  <view class="dots"> 
+      <block wx:for="{{imgUrls}}" wx:key="imgUrls"> 
+        <view class="dot{{index == current ? ' active' : ''}}"></view> 
+      </block> 
+    </view>
 </view>
 <view class='groupList'>
   <view class='groupItem' wx:for="{{groupList}}" wx:for-item="item" wx:key data-id='{{item.SheetId}}' bindtap='groupDetail'>
@@ -30,26 +30,27 @@
       <image src="{{item.SheetCoverImg}}" binderror="binding" class='leftImg' mode='widthFix' lazy-load='true'></image>
     </view>
     <view class='itemRight'>
-      <view class='title'>{{item.SheetName}}</view>
-      <view class='between'>
-        <view class='addr'>
-          <image src='../../images/ad1.png' class='ad1' mode='widthFix' lazy-load='true'></image>
-          <view>{{item.TradingAreaName}}</view>
+      <view class='title h40'>{{item.SheetName}}</view>
+      <view class='between h40'>
+        <view class='addr h40'>
+          <image src='../../images/ad1.png' class='ad1 h40' mode='widthFix' lazy-load='true'></image>
+          <view style='font-size:28rpx'>{{item.TradingAreaName}}</view>
         </view>
-        <view class='distance'>{{item.TradingAreaDistance}}Km</view>
+        <view class='distance' style='font-size:24rpx' wx:if="{{item.TradingAreaDistance<1}}">{{item.TradingAreaDistance}}m</view>
+        <view class='distance' style='font-size:24rpx' wx:else>{{item.TradingAreaDistance}}km</view>
       </view>
-      <view class='time'>活动截止时间：{{item.EndTime}}</view>
+      <view class='time h40'>活动截止时间：{{item.EndTime}}</view>
       <view class='tagList'>
-        <view class='tagItem' wx:for='{{item.TagList}}' wx:for-item="k" wx:key style='background:{{k.TagBgColor}};color:{{k.TagFontColor}}'>{{k.TagName}}</view>
+        <view class='tagItem' style='font-size:24rpx;margin-top:-10rpx;' wx:for='{{item.TagList}}' wx:for-item="k" wx:key style='background:{{k.TagBgColor}};color:{{k.TagFontColor}};border:2rpx solid {{k.BorColor}}'>{{k.TagName}}</view>
       </view>
-      <view class='bottom'>
+      <view class='bottom' style='margin-top:4rpx;'>
         <view class='bottom-left'>
           <view class='money'>￥{{item.SheetMinPrice}}</view>
           <view class='integral'>积分抵扣{{item.UseScoreRate/100}}%</view>
         </view>
         <view class='bottom-right'>
           <view class='number'>已售 {{item.SoldCount}}</view>
-          <image src='../../images/go.png' class='go' mode='widthFix'></image>
+          <image style='line-height:42rpx' src='../../images/go.png' class='go' mode='widthFix'></image>
         </view>
       </view>
     </view>

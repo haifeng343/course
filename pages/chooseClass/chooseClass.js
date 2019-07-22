@@ -14,6 +14,13 @@ Page({
     RelId: [],
     Remark: '',
     TotalPrice: -1,
+    imgUrls: [],
+    autoplay: true, //是否自动播放
+    indicatorDots: false, //指示点
+    circular: true,
+    interval: 5000, //图片切换间隔时间
+    duration: 500, //每个图片滑动速度,
+    current: 0, //初始化时第一个显示的图片 下标值（从0）index
   },
   onLoad(options) {
     let that = this;
@@ -38,6 +45,7 @@ Page({
 
       that.setData({
         detailCent: res.Data,
+        imgUrls: res.Data.SheetImgList,
       })
       for (let a of r) {
         if (a.MinCount != 0) {
@@ -47,8 +55,6 @@ Page({
         } else {
           a.text = "以下课程" + a.ItemList.length + '选' + a.MaxCount
         }
-
-
       }
       that.setData({
         GroupList: r
@@ -91,8 +97,15 @@ Page({
       }
     }); //调用get方法情就是户数
   },
+  swiperChangeTo: function (e) {
+    this.setData({
+      current: e.detail.current,
+
+    })
+  },
   //是否
   checkedTap: function(e) {
+    console.log(e)
     let index = e.currentTarget.dataset.index;
     let s = this.data.GroupList[index];
     let arr = e.detail.value;
@@ -130,6 +143,7 @@ Page({
   },
   paybtn: function() {
     for (let v of this.data.GroupList) {
+      console.log(v.checkedArr)
       if (v.checkedArr.length < v.MinCount || v.checkedArr.length > v.MaxCount) {
         wx.showToast({
           title: '请正确勾选',
@@ -139,6 +153,11 @@ Page({
     }
     wx.navigateTo({
       url: '/pages/payOrder/payOrder?Id=' + this.data.Id + '&ids=' + this.data.ids.join(','),
+    })
+  },
+  courseDetail(e) {
+    wx.navigateTo({
+      url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id,
     })
   },
   onShareAppMessage: function() {

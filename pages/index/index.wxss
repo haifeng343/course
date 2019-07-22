@@ -6,63 +6,73 @@
   top: 0;
   left: 0;
   height: 90rpx;
+  line-height: 90rpx;
   /* background: #c00; */
   z-index: 999;
   background: #fff;
+  display: flex;
+  align-items: center;
 }
 
 .navTop {
   float: left;
-  margin-top: 16rpx;
   font-weight: 600;
-  width: 320rpx;
-  height: 58rpx;
-  line-height: 58rpx;
+  width: 400rpx;
   overflow: hidden;
   box-sizing: border-box;
-  padding-left: 60rpx;
-  position: relative;
-  top: 5rpx;
+  padding-left: 30rpx;
   display: flex;
+  align-items: center;
   flex-wrap: nowrap;
   flex-direction: row;
   justify-content: flex-start;
 }
-.abs{
+
+.abs {
   width: 300rpx;
   font-size: 32rpx;
+  word-break: keep-all;
+  display: flex;
+  height: 58rpx;
+  overflow: hidden;
+  line-height: 58rpx;
+  flex-wrap: nowrap;
 }
-.navTop::after{
+
+.navTop::after {
   content: "";
   position: absolute;
-  width: 320rpx;
+  width: 400rpx;
   height: 58rpx;
   top: 0;
   left: 0;
-  box-shadow:inset -20rpx 0px 20rpx #fff;
+  box-shadow: inset -20rpx 0px 20rpx #fff;
   z-index: 1;
 }
+
 .navImg {
   width: 45rpx;
   height: 28rpx;
-  position: relative;
-  top: 11rpx;
+  display: flex;
+  align-items: center;
+  line-height: 58rpx;
 }
 
 /* 自定义导航栏结束 */
 
 .topInput {
   background: #fff;
+  width: 100%;
+  height: auto;
 }
 
-.search {
-  width: 90%;
-  height: 60rpx;
-  line-height: 60rpx;
+.SearchInput {
+  width: 92%;
+  margin: 0 auto;
   font-size: 28rpx;
+  height: 60rpx;
   text-align: center;
-  margin-left: 5%;
-  border: 1px solid #f2f2f2;
+  line-height: 60rpx;
   background: #f2f2f2;
   border-radius: 40rpx;
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjdGOTQ2Njc0OTI1QjExRTk5NDY3RjRBQ0U0RUE5RDQ5IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjdGOTQ2Njc1OTI1QjExRTk5NDY3RjRBQ0U0RUE5RDQ5Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6N0Y5NDY2NzI5MjVCMTFFOTk0NjdGNEFDRTRFQTlENDkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6N0Y5NDY2NzM5MjVCMTFFOTk0NjdGNEFDRTRFQTlENDkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7Dg7r3AAACNklEQVR42sSXyytEURzHjWdJSiHKsyy8kvIXzMpO3sZjy8IjJI9YzAozCnkusKS8m/wBsmalKEUegwgLYeX9PfW9dbvNnTl3HJz69Js7c+73e88595zfb2xOpzPkP1q4RJ80UAfsIBckgDdwBS7ADlgBZ6qMhaELVIMww29RIJsUg0Ga9wGvjHGoyfcl4ADUgg+wDhpAJk1jQQ6/E7+9s+8hY1AjbgdjfCgP6AYnhj6v4IgsgSwwAsp4nQTGrYy4hjd8gV4KnUgMQPQp5z2fYJRaUsZiTReADfRzBFabuGeAGgvUDGg8DGLAZpCmWnODDWq5AxmnAwfXrkPBNu2kVjW1TY0d/Cze0EsFxkJjjZoOf8Z2Ro/Cw8lj0PZpnM+4q9B4z6Dt0zie8Vah8Q1jgsw+jlRoHCGzjx8YkxUaa1r3/owPGQsUGhcatH0abzOWKjQuM2j7NF7hGVsFUhWYpoBKaq76Mz5nh0hmpp+2SWqtmRUI+rdaZJYXPmnPD0zbOc0vLAwCJglROTQyJQ4Fad7IlChaE2dSKh8v84C36bJMluSaiqw2xzJJPHyc1dJnglP1zOQutsMiqAAZPBiiWQaVs+I45T2PYJ4606DZarG3xTPWzdRWT8zaJ3dGF7gG+2CK5qLNWqkyvSzcenXlbR5IZHl7B465T5cN6znDaGouU1d7Wea6LL5ofs1Df/kPgzBv0615y18Za+atutGnyE61iiam+AkUaTn/r4xDuCUXtYtvAQYA+7l7mItUuwIAAAAASUVORK5CYII=');
@@ -73,9 +83,8 @@
 
 .banner {
   width: 100%;
-  height: 300rpx;
+  height: 310rpx;
   padding-top: 30rpx;
-  padding-left: 2.5%;
   box-sizing: border-box;
   position: relative;
   z-index: 0;
@@ -91,10 +100,10 @@ swiper-item {
 }
 
 swiper-item image {
-  width: 690rpx;
+  width: 92%;
   height: 240rpx;
   object-fit: cover;
-  border-radius: 30rpx;
+  border-radius: 15rpx;
 }
 
 .box {
@@ -109,35 +118,26 @@ swiper-item image {
 }
 
 .dots {
-  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20rpx;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 20rpx;
-  flex-direction: row;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 10rpx;
-  z-index: 1;
 }
 
-/*未选中时的小圆点样式 */
-
-.dot {
-  width: 10rpx;
-  height: 10rpx;
-  border-radius: 14rpx;
-  margin-right: 20rpx;
-  background-color: #fff;
+.dots .dot {
+  margin: 0 8rpx;
+  width: 14rpx;
+  height: 14rpx;
+  background: #ccc;
+  border-radius: 8rpx;
+  transition: all 0.6s;
 }
 
-/*选中以后的小圆点样式  */
-
-.active {
-  width: 30rpx;
-  height: 10rpx;
-  background-color: #fff;
+.dots .dot.active {
+  width: 14rpx;
+  background: #fff;
 }
 
 .groupList {
@@ -159,23 +159,41 @@ swiper-item image {
   justify-content: flex-start;
   box-sizing: border-box;
   flex-direction: row;
-  margin-top: 60rpx;
+  margin-top: 30rpx;
 }
 
 .itemImg {
-  width: 35%;
+  width: 32%;
   overflow: hidden;
   margin-right: 15rpx;
 }
 
+.h30 {
+  line-height: 30rpx;
+}
+
+.h40 {
+  line-height: 46rpx;
+  display: flex;
+  align-items: center;
+}
+
+.h50 {
+  line-height: 50rpx;
+}
+
 .leftImg {
-  width: 250rpx;
-  height: 250rpx;
-  border-radius: 10rpx;
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 15rpx;
+}
+
+.tagItem {
+  border-radius: 6rpx;
 }
 
 .itemRight {
-  width: 64%;
+  width: 68%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -189,21 +207,17 @@ swiper-item image {
 .ad1 {
   width: 35rpx;
   height: 28rpx;
-  position: relative;
-  top: 4rpx;
 }
 
 .addr {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  margin: 15rpx 0;
   font-size: 30rpx;
   color: #5b5b5b;
 }
 
 .distance {
-   margin: 15rpx 0;
   font-size: 30rpx;
   color: #5b5b5b;
 }
@@ -219,8 +233,6 @@ swiper-item image {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  margin-bottom: 5rpx;
-  margin-top: 15rpx;
 }
 
 .tagList::-webkit-scrollbar {
@@ -232,9 +244,10 @@ swiper-item image {
 .tagItem {
   word-break: keep-all;
   font-size: 24rpx;
-  padding: 2rpx 8rpx;
+  padding: 0rpx 8rpx;
   margin-right: 15rpx;
   margin-top: 0rpx;
+  border-radius: 5rpx;
   box-sizing: border-box;
 }
 
@@ -253,14 +266,18 @@ swiper-item image {
 }
 
 .money {
-  font-size: 34rpx;
+  font-size: 32rpx;
   color: #ed1c1d;
+}
+
+.number {
+  font-size: 24rpx;
 }
 
 .integral {
   font-size: 24rpx;
   color: #fe7860;
-  border: 1rpx solid #fe7860;
+  border: 2rpx solid #fe7860;
   border-radius: 6rpx;
   padding: 2rpx 6rpx;
   height: 34rpx;
@@ -271,14 +288,15 @@ swiper-item image {
 
 .bottom-right {
   display: flex;
+  height: 42rpx;
+  line-height: 42rpx;
   justify-content: flex-end;
   flex-direction: row;
   color: #aeaeae;
+  align-items: center;
 }
 
 .go {
   width: 30rpx;
   height: 28rpx;
-  position: relative;
-  top: 5rpx;
 }

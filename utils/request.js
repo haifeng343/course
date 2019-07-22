@@ -27,7 +27,7 @@ const baseUrl = "https://test.guditech.com/rocketclient/";
 function request(url, params, method, onSuccess, onFailed) {
   let moment = {};
   var that = this;
-  var usertoken = wx.getStorageSync('usertoken');//wx.getStorageSync(key)，获取本地缓存
+  var usertoken = wx.getStorageSync('usertoken'); //wx.getStorageSync(key)，获取本地缓存
 
   wx.request({
     url: baseUrl + url,
@@ -39,17 +39,19 @@ function request(url, params, method, onSuccess, onFailed) {
       'appVersion': '1.0.1',
       'userToken': usertoken,
     },
-    success: function (res) {
+    success: function(res) {
       if (res.data) {
         /** start 根据需求 接口的返回状态码进行处理 */
         if (res.data.ErrorCode == 0) {
           onSuccess(res.data); //request success
 
-        } else if (res.data.ErrorCode == 301){
-            wx.navigateTo({
-              url: '/pages/login/login',
-            })
+        } else if (res.data.ErrorCode == 301) {
+          wx.hideLoading();
+          wx.navigateTo({
+            url: '/pages/login/login',
+          })
         } else {
+          wx.hideLoading();
           wx.showToast({
             icon: 'none',
             title: res.data.ErrorMessage,
@@ -59,7 +61,7 @@ function request(url, params, method, onSuccess, onFailed) {
       }
     },
 
-    fail: function (error) {
+    fail: function(error) {
       onFailed(""); //failure for other reasons
     }
   })

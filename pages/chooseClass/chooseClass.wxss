@@ -1,10 +1,11 @@
 .title {
   width: 100%;
-  height: 100rpx;
-  line-height: 100rpx;
-  padding-left: 15rpx;
+  height: auto;
+  padding: 0 5%;
+  box-sizing: border-box;
+  line-height: 50rpx;
   background-color: #fff;
-  font-size: 30rpx;
+  font-size: 32rpx;
 }
 
 .courseList {
@@ -12,7 +13,7 @@
   width: 100%;
   height: auto;
   padding: 0 5%;
-  margin-bottom: 80rpx;
+  margin-bottom: 120rpx;
   box-sizing: border-box;
 }
 .courseList::-webkit-scrollbar {
@@ -21,15 +22,108 @@
   color: transparent;
 }
 
+.banner {
+  width: 100%;
+  height: 306rpx;
+  position: relative;
+  z-index: 0;
+  background-color: #fff;
+}
+
+swiper {
+  height: 100%;
+}
+
+swiper-item {
+  text-align: center;
+}
+
+.img1 {
+  width: 660rpx;
+  height: 300rpx;
+  object-fit: cover;
+  border-radius: 15rpx;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.dot {
+  position: absolute;
+  bottom: 8rpx;
+  right: 47rpx;
+  background: rgba(0, 0, 0, 0.1);
+  color: #c9c9c9;
+  font-size: 24rpx;
+  border-radius: 40rpx;
+  padding: 3rpx 20rpx;
+}
+
+.content {
+  background-color: #fff;
+  width: 90%;
+  padding: 30rpx 5% 10rpx;
+}
+
+.content .title {
+  padding: 0;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.title .heng {
+  width: 60rpx;
+  height: 3rpx;
+  background: #8d8d8d;
+  position: relative;
+  top: 22rpx;
+}
+
+.title .heng:first-child {
+  margin-right: 30rpx;
+}
+
+.title .heng:last-child {
+  margin-left: 30rpx;
+}
+
+.contents {
+  display: flex;
+  justify-content: space-between;
+}
+
+.money {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  font-size: 30rpx;
+  color: #e51b1a;
+}
+
+.sym {
+  font-size: 32rpx;
+  position: relative;
+  top: 7rpx;
+}
+
+.money .number {
+  font-size: 32rpx;
+}
+
+.contents .time {
+  font-size: 28rpx;
+  color: #8d8d8d;
+  line-height: 50rpx;
+}
+
+
 .courseItem {
-  padding-bottom: 30rpx;
   border-bottom: 1rpx solid #fbfbfb;
 }
-
-.courseItem:last-child {
-  border-bottom: none;
-}
-
 .courseItem .title {
   text-align: center;
   color: #8d8d8d;
@@ -37,19 +131,20 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 40rpx 0;
+  padding: 10rpx 0 0;
 }
 
 .check {
-  font-size: 26rpx;
+  font-size: 28rpx;
   height: 60rpx;
   line-height: 60rpx;
 }
 
 .courseCont {
   width: 100%;
+  position: relative;
   height: auto;
-  margin: 15rpx 0;
+  margin: 20rpx 0;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
@@ -90,7 +185,6 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  margin-bottom: 5rpx;
 }
 
 .tagList::-webkit-scrollbar {
@@ -101,8 +195,17 @@
 
 .relative {
   position: relative;
+  line-height: 40rpx;
 }
+.absolute{
+  position: absolute;
+  right: 0;
+  top:-10rpx;
+  z-index: 1;
 
+  display: flex;
+  justify-content: flex-end;
+}
 radio .wx-radio-input.wx-radio-input-checked::before {
   position: absolute;
   top: 22rpx;
@@ -115,6 +218,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   margin-right: 15rpx;
   margin-top: 0rpx;
   box-sizing: border-box;
+  border-radius: 5rpx;
 }
 
 .detail {
@@ -139,7 +243,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 }
 
 .addrLong {
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
 }
@@ -212,12 +316,15 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .totalNumber {
   line-height: 120rpx;
   margin-right: 30rpx;
+  font-size: 24rpx;
 }
-
+.kl{
+  font-size: 24rpx;
+}
 .paybtn {
   background-color: #29d9d6;
   color: #fff;
-  font-size: 26rpx;
+  font-size: 28rpx;
   width: 200rpx;
   height: 60rpx;
   line-height: 60rpx;
@@ -232,7 +339,6 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .payMoney {
   font-size: 32rpx;
   color: #e93a37;
-  font-weight: 600;
 }
 
 .symbol {

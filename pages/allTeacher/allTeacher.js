@@ -15,7 +15,7 @@ Page({
     that.setData({
       Id: options.Id
     })
-    that.getData(1);
+    that.getData();
   },
   getData: function () {
     var that = this;
@@ -47,7 +47,7 @@ Page({
   //上拉刷新
   onReachBottom: function () {
     let that = this;
-    that.getData(1);
+    that.getData();
   },
 
   onShareAppMessage: function () {
