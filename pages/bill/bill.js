@@ -1,4 +1,5 @@
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
   data: {
     date: '', //不填写默认今天日期，填写后是默认日期
@@ -33,8 +34,20 @@ Page({
       now: this.data.month + '月'
     })
   },
-  onLoad: function () {
-    this.getData();},
+  onLoad: function(options) {
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
+
+      })
+    })
+    this.getData();
+  },
   getData: function() {
     let that = this;
     var url = 'user/bill/list';
@@ -77,14 +90,14 @@ Page({
         date: '全部',
         year: '全部',
         month: '全部',
-        page:1
+        page: 1
       })
     } else {
       this.setData({
         date: this.data.array[0][index[0]] + '-' + this.data.array[1][index[1]],
         year: this.data.array[0][index[0]],
         month: this.data.array[1][index[1]],
-        page:1
+        page: 1
       })
     }
     this.getData();
@@ -126,7 +139,18 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
-  onShareAppMessage: function() {
-
-  }
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

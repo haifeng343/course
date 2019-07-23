@@ -1,4 +1,5 @@
 
+var netUtil = require("../../utils/request.js"); //require引入
 
 Page({
 
@@ -123,6 +124,9 @@ Page({
           v.checked = true;
         }
       } else {
+        for(let v of s.ItemList) {
+          v.checked = false;
+        }
         arr3 = [];
       }
       arr = arr3;
@@ -143,7 +147,7 @@ Page({
               v.checked = false;
             }
           }
-          return
+          
         }
       }
       this.setData({

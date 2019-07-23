@@ -10,6 +10,11 @@ Page({
     recommandCode: '',
     userInfo: {},
   },
+  onLoad: function() {
+    this.setData({
+      recommandCode: wx.getStorageSync('recommand')
+    })
+  },
   getUserInfo: function(e) {
     var that = this;
     // 查看是否授权
@@ -24,7 +29,7 @@ Page({
                   var params = {
                     Code: res.code,
                     EncryptedData: e.encryptedData,
-                    RecommandCode: that.recommandCode,
+                    RecommandCode: that.data.recommandCode,
                     Iv: e.iv,
                     RawData: e.rawData,
                     Signature: e.signature
@@ -33,7 +38,7 @@ Page({
                   netUtil.postRequest(url, params, that.onSuccess, that.onFailed); //调用get方法情就是户数
                 }
               });
-            } 
+            }
           }
         });
       }

@@ -41,7 +41,12 @@ Page({
       url: '/pages/selectAddress/selectAddress'
     })
   },
-
+  bindBannerTo:function(e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/WebView/WebView?path=' + e.currentTarget.dataset.path,
+    })
+  },
   swiperChangeTo:function(e) {
     this.setData({
       current:e.detail.current

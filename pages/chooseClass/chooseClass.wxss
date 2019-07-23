@@ -169,6 +169,7 @@ swiper-item {
 }
 
 .courseTitle {
+  width: 85%;
   font-size: 28rpx;
   font-weight: 600;
 }

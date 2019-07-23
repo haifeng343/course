@@ -1,14 +1,15 @@
 
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
+
 Page({
 
   data: {
-    contents: '684784785',
     List:[],
+    Info:{},
   },
   //复制微信号
   copyText: function (e) {
-    console.log(e)
     wx.setClipboardData({
       data: e.currentTarget.dataset.text,
       success: function (res) {
@@ -22,7 +23,18 @@ Page({
       }
     })
   },
-  onLoad:function(){
+  onLoad:function(options){
+    if (options.recommand) {                                                                                                                               
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
+
+      })
+    })
     this.getData();
   },
   getData: function () {
@@ -33,7 +45,8 @@ Page({
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       console.log(res)
       that.setData({
-        List :res.Data
+        List :res.Data.List,
+        Info:res.Data
       })
     }, function (msg) { //onFailed失败回调
       wx.hideLoading();
@@ -44,7 +57,18 @@ Page({
       }
     }); //调用get方法情就是户数
   },
-  onShareAppMessage: function () {
-
-  }
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

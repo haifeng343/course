@@ -11,7 +11,7 @@
 <view class='banner'>
   <swiper bindanimationfinish="swiperChangeTo" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1'>
     <block>
-      <swiper-item wx:for="{{imgUrls}}" wx:key data-path="{{item.ImgPath}}">
+      <swiper-item wx:for="{{imgUrls}}" wx:key data-path="{{item.ImgPath}}" bindtap="bindBannerTo">
         <view class='box'>
           <image src='{{item.ImgUrl}}' mode="widthFix" lazy-load="true"></image>
         </view>
