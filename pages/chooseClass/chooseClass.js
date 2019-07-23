@@ -147,7 +147,15 @@ Page({
               v.checked = false;
             }
           }
-          
+        } else {
+          console.log(arr);
+          for (let v of s.ItemList) {
+            if (arr.indexOf(v.RelId.toString()) != -1) {
+              v.checked = true;
+            } else {
+              v.checked = false;
+            }
+          }
         }
       }
       this.setData({
