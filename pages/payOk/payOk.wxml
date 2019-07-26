@@ -6,12 +6,12 @@
 </view>
 <view class='detail'>
   <view class='title'>{{detail.SheetName}}</view>
-  <view>券码: {{detail.TicketNumber}}</view>
+  <view class='codeNumber'>券码: {{detail.TicketNumber}}</view>
   <view class='code'>
     <image class='codeImg' src='{{detail.QRCodeAccessUrl}}' mode='widthFix' lazy-load='true'></image>
   </view>
 </view>
 <view class='around'>
-  <button class='btnd' bindtap='navto'>订单详情</button>
-  <button class='btnd btnd1' bindtap='groupTo'>返回团单</button>
+  <button class='btnd btnd1' bindtap='navto'>订单详情</button>
+  <button class='btnd' bindtap='groupTo'>返回团单</button>
 </view>

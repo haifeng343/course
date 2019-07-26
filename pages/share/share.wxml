@@ -1,4 +1,4 @@
 <view class="shareIt">
-  <image class='img' src='https://xgt.guditech.com/img/test/share.JPG' mode='widthFix' lazy-load='true'></image>
-  <button class="btn" data-id="shareBtn" open-type="share" bindtap='share'>分享好友</button>
+  <image class='img' src='{{Info.ShareUrlShow}}' mode='widthFix' lazy-load='true'></image>
+  <button wx:if="{{Info.IsShowShareButton==true}}" class="btn" data-id="shareBtn" style='background:{{Info.ShareButtonBgColor}};color:{{Info.ShareButtonFtColor}}' open-type="share" bindtap='share'>{{Info.ShareButtonTitle}}</button>
 </view>

@@ -19,7 +19,7 @@
     </view>
   </view>
   <view class='List mt20'>
-    <view class='item mt20' bindtap='setting' data-mobile="{{userInfo.Mobile}}">
+    <view class='item mt20' bindtap='setting' data-mobile="{{userInfo.Mobile}}" wx:if="{{buttons.setup==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/setting.png' mode='widthFix' lazy-load='true'></image>
         <view>设置</view>
@@ -28,7 +28,7 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item mt20 borb' bindtap='share' data-Id="{{recommandCode}}">
+    <view class='item mt20 borb' bindtap='share' data-Id="{{recommandCode}}" wx:if="{{buttons.share==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/a3.png' mode='widthFix' lazy-load='true'></image>
         <view>分享给好友</view>
@@ -37,7 +37,7 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item' bindtap='invite'>
+    <view class='item' bindtap='invite' wx:if="{{buttons.invitation==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/a4.png' mode='widthFix' lazy-load='true'></image>
         <view>推荐与邀请</view>
@@ -46,7 +46,7 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item mt20 borb' bindtap='aboutUs'>
+    <view class='item mt20 borb' bindtap='aboutUs' wx:if="{{buttons.aboutus==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/a1.png' mode='widthFix' lazy-load='true'></image>
         <view>关于我们</view>
@@ -55,7 +55,7 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item' bindtap='callUs'>
+    <view class='item' bindtap='callUs' wx:if="{{buttons.callus==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/a2.png' mode='widthFix' lazy-load='true'></image>
         <view>联系我们</view>
@@ -74,7 +74,7 @@
       <view class='align'>
         <view class='name'>{{userInfo.NickName}}</view>
         <view class='share start'>分享码：
-          <view class='code'>{{userInfo.RecommandCode}}</view>
+          <view class='code' bindtap='copyText' data-text="{{userInfo.RecommandCode}}">{{userInfo.RecommandCode}}</view>
         </view>
       </view>
     </view>
@@ -90,7 +90,7 @@
     </view>
   </view>
   <view class='List mt20'>
-    <view class='item mt20' bindtap='setting' data-mobile="{{userInfo.Mobile}}">
+    <view class='item mt20' bindtap='setting' data-mobile="{{userInfo.Mobile}}" wx:if="{{buttons.setup==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/setting.png' mode='widthFix' lazy-load='true'></image>
         <view>设置</view>
@@ -99,7 +99,7 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item mt20 borb' bindtap='share' data-Id="{{recommandCode}}">
+    <view class='item mt20 borb' bindtap='share' data-Id="{{recommandCode}}" wx:if="{{buttons.share==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/a3.png' mode='widthFix' lazy-load='true'></image>
         <view>分享给好友</view>
@@ -108,7 +108,7 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item' bindtap='invite'>
+    <view class='item' bindtap='invite' wx:if="{{buttons.invitation==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/a4.png' mode='widthFix' lazy-load='true'></image>
         <view>推荐与邀请</view>
@@ -117,7 +117,7 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item mt20 borb' bindtap='aboutUs'>
+    <view class='item mt20 borb' bindtap='aboutUs' wx:if="{{buttons.aboutus==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/a1.png' mode='widthFix' lazy-load='true'></image>
         <view>关于我们</view>
@@ -126,7 +126,7 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item' bindtap='callUs'>
+    <view class='item' bindtap='callUs' wx:if="{{buttons.callus==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/a2.png' mode='widthFix' lazy-load='true'></image>
         <view>联系我们</view>

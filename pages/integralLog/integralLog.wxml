@@ -1,13 +1,13 @@
-<view>
-  <view class='integral between' wx:if="{{usertoken}}">
-    <view class='start'>
-      <image class='avator' src='{{avator}}' mode='widthFix' lazy-load='true'></image>
-      <view class='integralTop'>
-        <view>积分总额</view>
-        <view class='number'>{{score}}</view>
+<view class='mtops'>
+  <view class='mTop' bindtap='balanceLog' wx:if="{{usertoken}}">
+    <image class='mTopImg' src='../../images/wallet.png' mode='widthFix' lazy-load='true'></image>
+    <view class='column mt10'>
+      <view class='Balance'>积分总额 </view>
+      <view class='b1'>
+        <text class='money'>{{score==''?'0':score}}</text>
       </view>
     </view>
-    <view class='rule'>积分规则</view>
+    <view class='rule' bindtap='jifen'>积分规则</view>
   </view>
   <view class='integral between' wx:else>
     <view class='start'>
@@ -19,22 +19,23 @@
     </view>
     <view class='rule'>积分规则</view>
   </view>
-
-  <view class='log'>
-    <view class='logTop between'>
-      <view class='start'>
-        <picker mode="multiSelector" value="{{date}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange">
-          <view class="picker">
-            {{date?date:now}}
-          </view>
-        </picker>
-        <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
+</view>
+<view class='logTop between'>
+  <view class='start'>
+    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange">
+      <view class="picker">
+        {{date?date:now}}
       </view>
-      <!-- <view class='math'>
-        <view>增加:100</view>
-        <view>减少:1200</view>
-      </view> -->
-    </view>
+    </picker>
+    <image src='../../images/select.png' class='select' mode='widthFix' lazy-load='true'></image>
+  </view>
+  <!-- <view class='math'>
+    <view>增加:100</view>
+    <view>减少:1200</view>
+  </view> -->
+</view>
+<view>
+  <view class='log'>
     <view class='nohasLog' wx:if="{{List.length<=0}}">
       <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
       <view>暂无积分记录</view>

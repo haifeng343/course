@@ -1,10 +1,11 @@
 .banner {
   width: 100%;
-  height: 304rpx;
+  height: 285rpx;
   position: relative;
   z-index: 0;
   background-color: #fff;
 }
+
 swiper {
   height: 100%;
 }
@@ -14,10 +15,10 @@ swiper-item {
 }
 
 .img1 {
-  width: 660rpx;
-  height: 300rpx;
+  width: 96%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 10rpx;
+  border-radius: 15rpx;
 }
 
 .box {
@@ -30,128 +31,150 @@ swiper-item {
 
 .dot {
   position: absolute;
-  bottom: 60rpx;
-  right: 70rpx;
+  bottom: 8rpx;
+  right: 52rpx;
   background: rgba(0, 0, 0, 0.1);
   color: #fff;
   font-size: 24rpx;
   border-radius: 40rpx;
   padding: 3rpx 20rpx;
 }
-.courseCont{
+
+.courseCont {
   background-color: #fff;
   padding-bottom: 15rpx;
   padding-top: 40rpx;
 }
-.courseLi{
+
+.courseLi {
   font-size: 32rpx;
   line-height: 45rpx;
 }
-.name{
+
+.name {
   font-weight: 600;
 }
-.howMoney{
-  color: #F8000F;
+
+.howMoney {
+  color: #f8000f;
   font-size: 32rpx;
 }
-.somebody{
+
+.somebody {
   font-size: 28rpx;
-  color: #ACACAC;
-  margin: 10rpx 0; 
+  color: #5b5b5b;
+  margin: 10rpx 0;
 }
-.courseRow{
+
+.courseRow {
   width: 100%;
   font-size: 28rpx;
-  height: 60rpx;
-  line-height:60rpx;
+  height: 50rpx;
+  line-height: 50rpx;
   box-sizing: border-box;
 }
-.courseRow:last-child{
+
+.courseRow:last-child {
   border: none;
 }
-.rowImg{
+
+.rowImg {
   width: 40rpx;
   height: 34rpx;
   margin-right: 10rpx;
   display: flex;
   align-items: center;
 }
-.courseRow .start{
+
+.courseRow .start {
   width: 100%;
 }
-.address{
+
+.address {
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: keep-all;
   height: 60rpx;
 }
-button{
+
+button {
   padding: 0;
 }
-.end{
+
+.end {
   display: flex;
   justify-content: flex-end;
 }
-.prompt{
+
+.prompt {
   margin-top: 20rpx;
 }
-.prompTitle{
+
+.prompTitle {
   font-size: 32rpx;
   font-weight: 600;
 }
-.promptText{
+
+.promptText {
   font-size: 28rpx;
   line-height: 35rpx;
   letter-spacing: 2rpx;
   margin-top: 20rpx;
 }
-.teacherList{
+
+.teacherList {
   width: 100%;
   height: auto;
   margin-top: 20rpx;
 }
-.tearcherTitle{
+
+.tearcherTitle {
   margin-bottom: 20rpx;
 }
-.teaNumber{
+
+.teaNumber {
   font-size: 32rpx;
   font-weight: 600;
 }
-.go{
+
+.go {
   position: relative;
   top: 8rpx;
 }
-.teaList{
+
+.teaList {
   display: flex;
   flex-direction: row;
   width: 100%;
   overflow-x: scroll;
 }
+
 .teaList::-webkit-scrollbar {
   width: 0;
   height: 0;
   color: transparent;
 }
-.teachers{
+
+.teachers {
   width: 200rpx;
   margin-right: 25rpx;
   text-align: center;
-  word-break:keep-all;
+  word-break: keep-all;
 }
-.teaImg{
+
+.teaImg {
   width: 150rpx;
   height: 150rpx;
   border-radius: 50%;
 }
-.teaName{
-  font-size: 30rpx;
+
+.teaName {
+  font-size: 28rpx;
 }
 
-.profession{
+.profession {
   color: #656565;
   font-size: 26rpx;
   word-break: keep-all;
 }
-
-

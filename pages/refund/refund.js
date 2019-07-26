@@ -1,5 +1,6 @@
 var netUtil = require("../../utils/request.js"); //require引入
-let baseUrl = "https://test.guditech.com/rocketclient/";
+var shareApi = require("../../utils/share.js");
+let baseUrl = "https://xgt.guditech.com/rocketclient/";
 Page({
   data: {
     array: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
@@ -20,12 +21,25 @@ Page({
     urlImgs: [],
   },
   onLoad: function(options) {
-    console.log(options)
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
+
+      })
+    })
     this.setData({
       orderId: options.OrderId,
       kmd: options.kmd || '',
       kd: options.kd || '',
     });
+    this.init();
+  },
+  init: function () {
     this.has();
   },
   getData: function() {
@@ -37,7 +51,8 @@ Page({
       ImgList: that.data.urlImgs,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      // console.log(res)
+      console.log(res.Data.RefundStatus)
+      var refundStatus = res.Data.RefundStatus;
       that.setData({
         List: res.Data
       })
@@ -50,7 +65,7 @@ Page({
         tempList.forEach(x => {
           x.list.forEach(item => {
             if (that.data.orderId == item.OrderId) {
-              item.UseStatus = 5;
+              item.UseStatus = refundStatus;
             }
           })
         })
@@ -60,7 +75,7 @@ Page({
 
       } else if (that.data.kmd == 2) {
         let temp = prevPage.data.detail;
-        temp.UseStatus = 5;
+        temp.UseStatus = refundStatus;
         prevPage.setData({ //直接给上移页面赋值
           detail: temp,
         });
@@ -71,7 +86,7 @@ Page({
           temp.forEach(x => {
             x.list.forEach(item => {
               if (that.data.orderId == item.OrderId) {
-                item.UseStatus = 5;
+                item.UseStatus = refundStatus;
               }
             })
           })
@@ -80,9 +95,15 @@ Page({
           });
         }
       }
-      wx.navigateBack({
-        delta: 1
-      });
+      wx.showModal({
+        title: '您已成功申请退款',
+        showCancel:false,
+        success: function () {
+          wx.navigateBack({
+            delta: 1
+          });
+        }
+      })
     }, function(msg) { //onFailed失败回调
       wx.hideLoading();
       if (msg) {
@@ -219,5 +240,19 @@ Page({
       index: e.detail.value,
       Reason: this.data.array[index]
     })
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
   },
 })

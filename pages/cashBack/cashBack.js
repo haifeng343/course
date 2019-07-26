@@ -1,9 +1,11 @@
 
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
 
   data: {
     date: '', //不填写默认今天日期，填写后是默认日期
+    date2:[],
     dataStart: '', //有效日期
     dataEnd: '', //
     showError: false,
@@ -33,14 +35,17 @@ Page({
     arr1 = ['全部', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     this.setData({
       array: [arr, arr1],
-      now: this.data.month + '月'
+      now: this.data.year + '-' + this.data.month,
+      date2: [arr.indexOf(this.data.year), arr1.indexOf(this.data.month + '')]
     })
+    this.init();
+  },
+  init: function () {
     this.getData();
   },
-  onLoad: function () { },
   getData: function () {
     let that = this;
-    var url = 'user/cash/record/list';
+    var url = 'user/cashback/record/list';
     var params = {
       Year: that.data.year,
       Month: that.data.month,
@@ -137,7 +142,31 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
-  onShareAppMessage: function () {
+  onLoad(options) {
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
 
-  }
+      })
+    })
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

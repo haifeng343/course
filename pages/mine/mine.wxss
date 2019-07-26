@@ -53,7 +53,10 @@ color: #ccc;
   margin-right: 20rpx;
 }
 .name{
-  font-size: 30rpx;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
 }
 .share{
   font-size: 28rpx;
@@ -63,7 +66,10 @@ color: #ccc;
   font-size: 24rpx;
 }
 .align{
-  padding-top: 35rpx;
+  display: flex;
+  /* align-items: center; */
+  flex-direction: column;
+  text-align: left;
 }
 .List{
   width: 100%;
@@ -83,8 +89,8 @@ color: #ccc;
   border-bottom: 1rpx solid #f9f9f9;
 }
 .icon1{
-  width: 40rpx;
-  height: 34rpx;
+  width: 32rpx;
+  height: 32rpx;
   margin: 0rpx 15rpx 0 0;
 }
 

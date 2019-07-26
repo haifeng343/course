@@ -1,5 +1,6 @@
 
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 
 Page({
 
@@ -26,10 +27,24 @@ Page({
   },
   onLoad(options) {
     let that = this;
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      that.setData({
+        obj: res.Data,
+
+      })
+    })
     that.setData({
       Id: options.Id
     })
-    that.getData();
+    that.init();
+  },
+  init: function () {
+    this.getData();
   },
   getData: function() {
     var that = this;
@@ -51,11 +66,15 @@ Page({
       })
       for (let a of r) {
         if (a.MinCount != 0) {
-          a.text = "最多选" + a.MaxCount + '个，最少' + a.MinCount + '个'
+          if (a.MaxCount == a.ItemList.length && a.MinCount == 1) {
+            a.text = "以下课程可选任意门数"
+          } else {
+            a.text = "以下课程至少选" + a.MinCount + '门，最多选' + a.MaxCount + '门'
+          }
         } else if (a.MaxCount >= a.ItemList.length) {
           a.text = "以下课程包含全部"
         } else {
-          a.text = "以下课程" + a.ItemList.length + '选' + a.MaxCount
+          a.text = "以下课程必选" + a.MaxCount + '门,不可多选'
         }
       }
       that.setData({
@@ -140,7 +159,8 @@ Page({
       } else if (s.MaxCount > 1) {
         if (arr.length > s.MaxCount) {
           wx.showToast({
-            title: '请正确勾选',
+            icon:'none',
+            title: '请正确勾选(' + s.GroupName + ')',
           })
           for (let v of s.ItemList) {
             if (v.RelId == arr[arr.length - 1]) {
@@ -148,7 +168,6 @@ Page({
             }
           }
         } else {
-          console.log(arr);
           for (let v of s.ItemList) {
             if (arr.indexOf(v.RelId.toString()) != -1) {
               v.checked = true;
@@ -172,7 +191,8 @@ Page({
     for (let v of this.data.GroupList) {
       if (v.checkedArr.length < v.MinCount || v.checkedArr.length > v.MaxCount) {
         wx.showToast({
-          title: '请正确勾选',
+          icon:'none',
+          title: '请正确勾选(' + v.GroupName+')',
         })
         return;
       }
@@ -187,7 +207,22 @@ Page({
       url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id,
     })
   },
-  onShareAppMessage: function() {
-
-  }
+  onPullDownRefresh:function() {
+    this.getData();
+    wx.stopPullDownRefresh()
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

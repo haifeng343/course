@@ -8,14 +8,17 @@ page{
 .go {
   width: 24rpx;
   height: 24rpx;
-  margin-top: 10rpx;
+  
+  display: flex;
+  align-items: center;
+  margin: auto 0;
   margin-left: 15rpx;
 }
-
 .md {
-  width: 95%;
-  margin-left: 2.5%;
-  bottom: 20rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .certificate {
@@ -50,6 +53,7 @@ page{
 
 .image image {
   width: 136rpx;
+  height: 136rpx;
   margin: 10px;
   float: left;
 }

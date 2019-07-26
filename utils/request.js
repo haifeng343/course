@@ -22,7 +22,7 @@ function get(url, params, onStart, onSuccess, onFailed) {
  * @onFailed  失败回调
  */
 
-const baseUrl = "https://test.guditech.com/rocketclient/";
+const baseUrl = "https://xgt.guditech.com/rocketclient/";
 
 function request(url, params, method, onSuccess, onFailed) {
   let moment = {};
@@ -62,7 +62,11 @@ function request(url, params, method, onSuccess, onFailed) {
     },
 
     fail: function(error) {
-      onFailed(""); //failure for other reasons
+      wx.hideLoading();
+      wx.showToast({
+        icon: 'none',
+        title: '网络错误',
+      }) //failure for other reasons
     }
   })
 }

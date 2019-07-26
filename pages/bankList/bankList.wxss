@@ -3,17 +3,15 @@
   height: 100vh;
   background-color: #fff;
   overflow-y: scroll;
+  box-sizing: border-box;
+  padding-bottom: 120rpx;
 }
 .item{
   position: relative;
   width: 100%;
-  margin-top: 30rpx;
+  margin-top: 10rpx;
   color: #fff;
   box-sizing: border-box;
-  /* height: 200rpx; */
-  /* border-radius: 10rpx; */
-  /* box-shadow: 0 2rpx 5rpx #f1f1f1; */
-  /* background-position:center center; */
 }
 .bgImg{
   width: 100%;

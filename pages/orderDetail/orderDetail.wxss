@@ -1,10 +1,21 @@
 
 .status{
-  font-size: 30rpx;
+  font-size: 28rpx;
   color: #000;
-  font-weight: 600;
   width: 140rpx;
   text-align: right;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.zan-dialog__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: 370rpx;
 }
 .kl{
   border-bottom: 1rpx solid #F4F4F4;
@@ -45,6 +56,7 @@
 }
 .Right{
   width: 75%;
+  height: auto;
   overflow: hidden;
 }
 .activity{
@@ -56,39 +68,53 @@
   text-overflow: ellipsis;
 }
 .topImg{
-  width: 150rpx;
-  height: 150rpx;
-  border-radius: 10rpx;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 15rpx;
 }
 .courseRow{
   width: 100%;
   font-size: 24rpx;
-  height: 40rpx;
   line-height: 40rpx;
   box-sizing: border-box;
+}
+.mt1{
+  margin-top: 5rpx;
 }
 .courseRow:last-child{
   border: none;
 }
 .rowImg{
-  width: 40rpx;
+  width: 34rpx;
   height: 34rpx;
   margin-right: 5rpx;
-  margin-top: 0rpx;
+  display: flex;
+  align-items: center;
+  line-height: 40rpx;
+  margin-top:4rpx;
+}
+.ml15{
+  margin-left: 15rpx;
+}
+.starts{
+  display: flex;
+  justify-content: flex-start;
 }
 .courseRow .start{
   width: 60%;
 }
 .startd{
-  width: 80%;
+  width: 100%;
+  height: auto;
+  line-height: 40rpx;
+  color: #5b5b5b;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .address{
   width: 90%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: keep-all;
+  line-height: 40rpx;
+  color: #5b5b5b;
 }
 .bt1{
   font-size: 28rpx;
@@ -99,10 +125,11 @@
   color: red;
 }
 .bt2{
-  font-size: 30rpx;
+  font-size: 28rpx;
 }
 .money{
-  font-weight: 600;
+  color: red;
+  font-size: 32rpx;
 }
 .use{
   width: 100rpx;
@@ -114,7 +141,7 @@
 .pay .btnd2{
   background-color: #fff;
   color: #29D9D6;
-  border: 1rpx solid #29D9D6;
+  border: 2rpx solid #29D9D6;
 }
 .end{
   position: absolute;
@@ -123,10 +150,41 @@
 .dialog-title{
   font-size: 32rpx;
   margin-bottom: 25rpx;
+  text-align: center;
 }
 .dialog-code{
   font-size: 28rpx;
+  text-align: center;
   margin-bottom: 20rpx;
+}
+.pay{
+  display: flex;
+  align-items: center;
+}
+.r1{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 5%;
+  margin: auto 0;
+}
+.r2{
+  position: absolute;
+  right: 32%;
+}
+.btnd{
+  width: 180rpx;
+  border:2rpx solid #29D9D6;
+  box-sizing: border-box;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: transparent;
+  font-size: 28rpx;
+  color: #29D9D6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
 }
 .codeImg{
   width: 50%;

@@ -1,4 +1,5 @@
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
 
   /**
@@ -26,8 +27,19 @@ Page({
 
   },
   onLoad(options) {
-    let that = this;
     console.log(options)
+    let that = this;
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      that.setData({
+        obj: res.Data,
+
+      })
+    })
     if (options.ids == 1) {
       that.setData({
         ids: options.ids
@@ -50,6 +62,8 @@ Page({
       })
     }
   },
+  init: function () {
+  },
   //编辑
   editSure: function () {
     let that = this;
@@ -70,27 +84,26 @@ Page({
       })
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      // console.log(res)
-      that.setData({
-        List: res.Data
+      let pages = getCurrentPages(); //当前页面
+      let prevPage = pages[pages.length - 2]; //上一页面
+      let arrTemp = prevPage.data.items;
+      arrTemp.forEach(item=>{
+        if (item.AddressId == that.data.addressId){
+          item.AddressDetails = that.data.address;
+          item.AddressName = that.data.InputValue;
+          item.DoorNumber = that.data.houseNumber;
+          item.Latitude = that.data.lat;
+          item.Longitude = that.data.lng;
+          item.Tag = that.data.tag;
+        }
+      });
+      prevPage.setData({ //直接给上移页面赋值
+        items: arrTemp
+      });
+      wx.navigateBack({
+        dleta :1
       })
-      wx.showToast({
-        icon: "none",
-        title: '编辑成功',
-      })
-      setTimeout(() => {
-        wx.redirectTo({
-          url: '/pages/address/address',
-        })
-      }, 500)
-    }, function (msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
+    });
   },
   houseName: function (e) {
     this.setData({
@@ -127,29 +140,26 @@ Page({
       })
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      // console.log(res)
-      that.setData({
-        List: res.Data
+      let pages = getCurrentPages(); //当前页面
+      let prevPage = pages[pages.length - 2]; //上一页面
+      prevPage.init();
+      wx.navigateBack({
+        dleta: 1
       })
-        wx.showToast({
-          icon: "none",
-          title: '提交成功',
-        })
-      setTimeout(()=>{
-        wx.navigateTo({
-          url: '/pages/address/address',
-        })
-      },500)
-    }, function (msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
-  onShareAppMessage: function () {
-
-  }
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

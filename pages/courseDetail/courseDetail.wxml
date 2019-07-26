@@ -3,7 +3,7 @@
     <block wx:for="{{imgUrls}}" wx:key>
       <swiper-item>
         <view class='box'>
-          <image class='img1' src='{{item}}' mode="widthFix" lazy-load="true"></image>
+          <image class='img1' src='{{item}}' mode="scaleToFill" lazy-load="true"></image>
         </view>
       </swiper-item>
     </block>
@@ -17,7 +17,7 @@
 <view class='courseCont'>
   <view class='between well courseLi'>
     <view class='name'>{{List.ItemName}}</view>
-    <view class='howMoney'>价值：￥{{Price}}</view>
+    <view class='howMoney'>￥{{Price}}</view>
   </view>
   <view class='somebody well'>
     {{List.SoldCount}}人已参与 | 剩余名额 {{List.RemainCount}} 个
@@ -33,7 +33,7 @@
     </view>
     <!-- <view class='end'>{{List.Distance}}km</view> -->
   </view>
-  <button class='courseRow start well' bindtap='callPhone'>
+  <button class='courseRow start well' bindtap='callPhone' wx:if="{{mobile}}">
     <image class='rowImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
     <view>{{mobile}}</view>
   </button>
@@ -55,7 +55,7 @@
   </view>
   <view class='teaList'>
     <view class='teachers' wx:for="{{teaList}}" wx:key>
-      <image class='teaImg' src='{{item.HeadUrl}}' lazy-load='true'></image>
+      <image class='teaImg' src='{{item.HeadUrl}}' mode='aspectFill' lazy-load='true'></image>
       <view class='teaName'>{{item.Name}}</view>
       <!-- <view class='profession'>{{item.Honor}}</view>
       <view class='profession'>{{item.TeachingAge}}</view> -->

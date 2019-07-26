@@ -31,18 +31,17 @@
                 <view class='happening' wx:if="{{item.UseStatus==9}}">取消退款</view>
               </view>
               <view class='orderContent' data-Id="{{item.OrderId}}" data-kd="3" data-status="{{item.UseStatus}}" bindtap='orderDetail'>
-                <image class='orderImg' src='{{item.SheerCoverImg}}' mode='widthFix' lazy-load='true'></image>
+                <image class='orderImg' src='{{item.SheerCoverImg}}' mode='aspectFill' lazy-load='true'></image>
                 <view class='Right'>
                   <view class='between'>
                     <view class='name'>明志书院</view>
                     <view class='money'>￥{{item.PayAmount*1.0/100}}</view>
                   </view>
-                  <view class='start hl'>
-                    <image class='icon' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+                  <view class='start'>
                     <view class='address'>{{item.TradingAreaName}}</view>
                   </view>
                   <view class='test'>购买时间:{{item.PayTime}}</view>
-                  <view class='test'>有效期:{{item.ExpriesTime==null?'/':item.ExpriesTime}}</view>
+                  <view class='test' wx:if="{{!item.UseStatus==8}}">有效期至:{{item.ExpriesTime==null?'/':item.ExpriesTime}}</view>
                   <view class='test' wx:if="{{item.UseStatus==4}}">已过期:({{item.ExpriesDays}})天{{item.ExpriesTime}}</view>
                   <view class='test' wx:if="{{item.UseStatus==8}}">退款时间:{{item.RefundTime}}</view>
                 </view>
@@ -72,33 +71,16 @@
     </view>
   </view>
 </view>
-<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
-  <view class="zan-dialog__mask" bindtap="toggleDialog" />
-  <view class="zan-dialog__container">
-    <view class='zan-title'>提示</view>
-    <view class='zan-content'>此处是填充的布局代码</view>
-    <view class='know' bindtap='closed'>知道了</view>
-  </view>
-</view>
 
-<!--退款失败原因提示弹出框-->
-<view class="zan-dialog {{ showError ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
-  <view class="zan-dialog__mask" bindtap="toggleDialog" />
-  <view class="zan-dialog__container">
-    <view class='zan-title'>失败原因</view>
-    <view class='zan-content'>失败原因：{{RefundFailReason}}</view>
-    <view class='know' bindtap='closeds'>知道了</view>
-  </view>
-</view>
 <!--退款成功提示弹出框-->
 <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
   <view class="zan-dialog__mask" bindtap="toggleDialog" />
   <view class="zan-dialog__container">
     <view class='zan-title'>退款成功</view>
-    <view class='le zan-til'>已退款{{PayAmount*1.0/100}}元</view>
-    <view class='zan-content align-left le'>交易编号: {{OrderSn}}</view>
-    <view class='zan-content align-left le'>退款时间: {{RefundTime}}</view>
-    <view class='zan-content align-left le' wx:if="{{RefundArrivalTime==''}}">到账时间: {{RefundArrivalTime}}</view>
+    <view class='zan-content align-left le'>交易编号：{{OrderSn}}</view>
+    <view class='le zan-til'>退款金额：{{PayAmount}}元</view>
+    <view class='zan-content align-left le'>退款时间：{{RefundTime}}</view>
+    <view class='zan-content align-left le' wx:if="{{!RefundArrivalTime==''}}">到账时间：{{RefundArrivalTime}}</view>
     <view class='know' bindtap='closeded'>知道了</view>
   </view>
 </view>

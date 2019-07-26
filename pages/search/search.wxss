@@ -17,6 +17,9 @@ page{
   margin-top: 30rpx;
 }
 
+.search-placeholder {
+  font-size: 28rpx;
+}
 .search {
   width: 95%;
   height: 60rpx;

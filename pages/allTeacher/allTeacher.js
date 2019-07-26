@@ -27,7 +27,10 @@ Page({
     that.setData({
       Id: options.Id
     })
-    that.getData();
+    this.init();
+  },
+  init:function() {
+    this.getData();
   },
   getData: function () {
     var that = this;

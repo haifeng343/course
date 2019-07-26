@@ -269,6 +269,9 @@ Page({
       })
     })
   },
+  init: function () {
+
+  },
   onShareAppMessage: function (res) {
 
     return {

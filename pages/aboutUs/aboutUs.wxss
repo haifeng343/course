@@ -1,13 +1,15 @@
 page{
   background-color: #fff;
+  box-sizing: border-box;
+  padding: 0 5%;
 }
 .logo{
-  width: 150rpx;
-  height: 150rpx;
+  width: 130rpx;
+  height: 130rpx;
   border-radius: 15rpx;
   display: flex;
   justify-content: center;
-  margin: 20rpx auto;
+  margin: 30rpx auto 20rpx;
 }
 .manaText{
   width: 100%;
@@ -15,5 +17,6 @@ page{
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;
-  font-weight: bold;
+  color: #5b5b5b;
+  margin-bottom: 20rpx;
 }

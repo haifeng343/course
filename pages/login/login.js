@@ -25,6 +25,7 @@ Page({
             if (v.authSetting['scope.userInfo']) {
               wx.getUserInfo({
                 success: function(e) {
+                  console.log(that.data.recommandCode)
                   var url = 'user/login/wechat';
                   var params = {
                     Code: res.code,
@@ -64,6 +65,9 @@ Page({
     var params = {}
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       wx.setStorageSync('wallet', res.Data);
+      var pages = getCurrentPages();
+      var beforePage = pages[pages.length - 2];
+      beforePage.init();
       wx.navigateBack({
         delta: 1
       })

@@ -1,4 +1,5 @@
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
 
   /**
@@ -44,7 +45,28 @@ Page({
     usertoken: ""
   },
   onShow() {
+    if (this.data.modelList[this.data.navbarActiveIndex].status == 0) {
+      this.init();
+    }
+    
+  },
+  onLoad(options) {
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
+
+      })
+    })
+    this.init();
+  },
+  init: function() {
     let usertoken = wx.getStorageSync('usertoken');
+    console.log(usertoken)
     this.setData({
       usertoken: usertoken
     });
@@ -52,19 +74,17 @@ Page({
       this.getData();
     }
   },
-  onLoad() {
-
-  },
   bindLogin: function() {
     wx.navigateTo({
       url: '/pages/login/login',
     })
   },
   lookEor: function(e) {
-    console.log(e)
-    this.setData({
-      showError: true,
-      RefundFailReason: e.currentTarget.dataset.item.RefundFailReason
+    let that = this;
+    wx.showModal({
+      title: '退款失败详情',
+      content: e.currentTarget.dataset.item.RefundFailReason,
+      showCancel: false,
     })
   },
   toggleDialog: function() {
@@ -75,14 +95,28 @@ Page({
   lookDetails: function(e) {
     this.setData({
       showSuccess: true,
-      PayAmount: e.currentTarget.dataset.item.PayAmount,
+      PayAmount: Number(e.currentTarget.dataset.item.PayAmount/100).toFixed(2),
       OrderSn: e.currentTarget.dataset.item.OrderSn,
       RefundTime: e.currentTarget.dataset.item.RefundTime,
       RefundArrivalTime: e.currentTarget.dataset.item.RefundArrivalTime,
     })
+    // wx.showModal({
+    //   title: '退款成功',
+    //   content: '交易编号:' + e.currentTarget.dataset.item.OrderSn + '\r\n' + 
+    //   '退款金额:' + Number(e.currentTarget.dataset.item.PayAmount / 100).toFixed(2) + '\r\n' +
+    //   '交易时间:' + e.currentTarget.dataset.item.RefundTime,
+    //   showCancel:false,
+    //   confirmText:'知道了',
+    //   confirmColor:'#3CD5CF'
+    // })
   },
   getData: function() {
     let that = this;
+    let tempModelList = that.data.modelList;
+    tempModelList[that.data.navbarActiveIndex].status = 1; //设置状态为已刷新
+    that.setData({
+      modelList: tempModelList
+    })
     var url = 'order/list';
     var params = {
       Status: that.data.navbarActiveIndex + 1,
@@ -90,8 +124,6 @@ Page({
       PageIndex: that.data.modelList[that.data.navbarActiveIndex].pageIndex,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      let tempModelList = that.data.modelList;
-      tempModelList[that.data.navbarActiveIndex].status = 1; //设置状态为已刷新
       let arr = res.Data;
       let arr1 = [];
       if (tempModelList[that.data.navbarActiveIndex].pageIndex == 1) {
@@ -107,13 +139,7 @@ Page({
         modelList: tempModelList
       })
       wx.hideLoading();
-    }, function(msg) { //onFailed失败回调
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
+    });
   },
   //取消订单
   cancelOrder: function(e) {
@@ -164,21 +190,19 @@ Page({
 
     if (this.data.usertoken) {
       if (this.data.modelList[navbarTapIndex].status == 0) {
-        this.getData();
+        this.init();
       }
     }
   },
   //下拉刷新
   onPullDownRefresh: function() {
-    if(this.data.usertoken){
-      let that = this;
-      let temp = that.data.modelList;
-      temp[that.data.navbarActiveIndex].pageIndex = 1;
-      that.setData({
-        modelList: temp
-      })
-      that.getData();
-    }
+    let that = this;
+    let temp = that.data.modelList;
+    temp[that.data.navbarActiveIndex].pageIndex = 1;
+    that.setData({
+      modelList: temp
+    })
+    that.init();
     wx.stopPullDownRefresh();
   },
   //上拉加载更多
@@ -189,7 +213,7 @@ Page({
     that.setData({
       modelList: temp
     })
-    that.getData();
+    that.init();
   },
   orderDetail: function(e) {
     wx.navigateTo({
@@ -206,32 +230,24 @@ Page({
   },
   //删除
   delete: function(e) {
+    let that = this;
     wx.showModal({
       title: '提示',
       content: '确定要删除吗？',
       success: function(sm) {
         if (sm.confirm) {
-          let that = this;
           var url = 'order/delete';
           var params = {
             Id: e.currentTarget.dataset.id,
           }
           netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-            this.getData();
-          }, function(msg) { //onFailed失败回调
-            wx.hideLoading();
-            if (msg) {
-              wx.showToast({
-                title: msg,
-              })
-            }
+            that.init();
           }); //调用get方法情就是户数
         } else if (sm.cancel) {
 
         }
       }
     })
-
   },
   closeds: function() {
     this.setData({
@@ -242,5 +258,19 @@ Page({
     this.setData({
       showSuccess: !this.data.showSuccess
     });
+  },
+  onShareAppMessage: function(res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
   },
 })

@@ -1,16 +1,18 @@
-<view class='item between mt20' wx:if="{{MyRecommandAccountId>0}}">
-  <view>我的邀请人</view>
+<view class='heng'></view>
+<view class='item between' wx:if="{{MyRecommandAccountId>0}}">
+  <view>我的推荐人</view>
   <view class='plase start'>
     <image class='person' src='{{MyRecommandAccountHeadImgUrl}}' mode='widthFix' lazy-load='true'></image>
     <view class='name'>{{MyRecommandAccountName}}</view>
   </view>
 </view>
-<view class='item between mt20' bindtap='recommendation' wx:else>
-  <view>我的邀请人</view>
+<view class='item between' bindtap='recommendation' wx:else>
+  <view>我的推荐人</view>
   <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
 </view>
-<view class='myTitle'>我的邀请</view>
-<view class='logList'>
+<view class='heng'></view>
+<view class='myTitle'>我的邀请人</view>
+<view class='logList' wx:if="{{List.length>0}}">
   <view class='logItem between' wx:for="{{List}}" wx:key>
     <view class='start w100'>
     <image class='avator' src='{{item.RecommandAccountHeadImgUrl}}' mode='widthFix' lazy-load='true'></image>
@@ -19,17 +21,21 @@
           <view>{{item.RecommandAccountName}}</view>
           <view class='time'>{{item.CreateTime}}</view>
         </view>
-        <view class='fraction' wx:if="{{item.Score!=0 && item.Amount!=0}}">
+        <view class='fraction' wx:if="{{item.Score>0 && item.Amount>0}}">
           <view>+ {{item.Score}} 积分</view>
           <view>+ ￥{{item.item.Amount}}</view>
         </view>
-        <view class='kepl' wx:if="{{item.Score!=0}}">
+        <view class='kepl' wx:if="{{item.Amount>0}}">
           <view>+ {{item.Score}} 积分</view>
         </view>
-        <view class='kepl' wx:if="{{item.Amount!=0}}">
-          <view>+ ￥{{item.item.Amount}}</view>
+        <view class='kepl' wx:if="{{item.Score>0}}">
+          <view>+ ￥{{item.Amount}}</view>
         </view>
       </view>
     </view>
   </view>
+</view>
+
+<view wx:else class='notPeople' bindtap='shareSth'>
+  暂无邀请人，点击分享给好友
 </view>

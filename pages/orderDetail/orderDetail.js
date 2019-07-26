@@ -1,4 +1,5 @@
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
 
   /**
@@ -6,21 +7,36 @@ Page({
    */
   data: {
     showCode: true, //条形码弹窗
-    showDialog: false, //退款失败 查看原因弹窗
+    showDialog: true, //退款失败 查看原因弹窗
     showSuccess: false, //退款详情 成功弹窗
     Id: '',
     Status: '',
     kd: '',
     ItemList: [],
     detail: {},
+    PayAmount:'',
+    RefundFailReason:'',
   },
   onLoad(options) {
-    console.log(options)
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
+
+      })
+    })
     this.setData({
       Id: options.Id,
       Status: options.status,
       kd: options.kd
     })
+    this.init();
+  },
+  init: function () {
     this.getData();
   },
   getData: function() {
@@ -35,6 +51,8 @@ Page({
       that.setData({
         detail: res.Data,
         ItemList: res.Data.ItemList,
+        PayAmount: Number(res.Data.PayAmount/100).toFixed(2),
+        RefundFailReason: res.Data.RefundFailReason
       })
 
     }, function(msg) { //onFailed失败回调
@@ -62,8 +80,10 @@ Page({
   //退款失败 查看原因弹窗
   errorShow: function() {
     let that = this;
-    that.setData({
-      showDialog: true
+    wx.showModal({
+      title: '退款失败详情',
+      content: that.data.RefundFailReason,
+      showCancel:false,
     })
   },
   //取消退款
@@ -125,12 +145,27 @@ Page({
       showSuccess: true
     })
   },
+  onPullDownRefresh:function() {
+    this.getData();
+    wx.stopPullDownRefresh();
+  },
   closeded: function() {
     this.setData({
       showSuccess: !this.data.showSuccess
     });
   },
-  onShareAppMessage: function() {
-
-  }
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

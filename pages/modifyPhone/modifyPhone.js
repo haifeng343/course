@@ -39,6 +39,9 @@ Page({
       })
     }
   },
+  init: function () {
+    
+  },
   // 验证码输入
   yanLoveInput: function(e) {
     // let that = this;

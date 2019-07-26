@@ -1,4 +1,5 @@
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
 
   data: {
@@ -19,16 +20,26 @@ Page({
   closeAlert: function() {
 
   },
-  getCode:function(e) {
+  getCode: function(e) {
     this.setData({
-      Mobile:e.detail.value
+      Mobile: e.detail.value
     })
   },
   onLoad(options) {
     var that = this;
-    console.log(options)
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      that.setData({
+        obj: res.Data,
+
+      })
+    })
     that.setData({
-      Mobile: options.phone,
+      // Mobile: options.phone,
       ids: options.ids
     })
     if (options.ids == 1) {
@@ -40,6 +51,9 @@ Page({
         title: '绑定手机号',
       })
     }
+  },
+  init: function () {
+    
   },
   codeyan: function() {
     let that = this;
@@ -84,13 +98,13 @@ Page({
       VerifyCode: val
     })
   },
- 
+
   codetime() { // 点击获取验证码
 
     var _this = this
-    var coden = 60 
+    var coden = 60
     var codeV = setInterval(function() {
-      _this.setData({ 
+      _this.setData({
         btntext: '重新获取' + (--coden) + 's'
       })
       if (coden >= 0) {
@@ -205,5 +219,19 @@ Page({
     that.setData({
       isShow: false,
     })
-  }
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

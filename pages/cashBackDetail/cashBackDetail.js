@@ -11,6 +11,9 @@ Page({
   onLoad: function (options) {
 
   },
+  init: function () {
+    // this.getData();
+  },
   onShareAppMessage: function () {
 
   }

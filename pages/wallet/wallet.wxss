@@ -1,28 +1,37 @@
 .mTop{
-  width: 100%;
+  width: 95%;
   background-color: #fff;
-  padding:40rpx 0 40rpx;
+  margin: 20rpx 2.5%;
+  padding: 40rpx;
+  box-sizing: border-box;
+  border-radius: 15rpx;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  flex-direction: row;
   align-items: center;
-  flex-direction: column;
+  position: relative;
 }
 .mTopImg{
-  width: 120rpx;
-  height: 120rpx;
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 15rpx;
+}
+.rule{
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  padding: 5rpx 15rpx;
+  border-radius: 25rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background-color: #9F9F9F;
 }
 .Balance{
   font-size: 28rpx;
   color: #747474;
-  margin-top: 10rpx;
-}
-.b1{
-  font-size: 24rpx;
-  font-weight: 600;
 }
 .money{
-  font-size: 42rpx;
-  font-weight: 700;
+  font-size: 32rpx;
 }
 .List{
   width: 100%;
@@ -33,6 +42,7 @@
   box-sizing: border-box;
   padding: 0 5%;
   height: 80rpx;
+  font-size: 28rpx;
   line-height: 80rpx;
   display: flex;
   justify-content: space-between;
@@ -41,12 +51,14 @@
 .icon1{
   width: 40rpx;
   height: 34rpx;
-  margin: 18rpx 15rpx 0 0;
+  margin: 0rpx 15rpx 0 0;
 }
 .go{
-  margin: 25rpx 0 0 15rpx;
+  margin: 0 0 0 15rpx;
 }
-
+.borb{
+  border-bottom: 1rpx solid #f9f9f9;
+}
 
 
 

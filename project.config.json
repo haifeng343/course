@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 41,
+			"current": 10,
 			"list": [
 				{
 					"id": -1,
@@ -90,14 +90,14 @@
 					"id": 5,
 					"name": "courseDetail",
 					"pathName": "pages/courseDetail/courseDetail",
-					"query": "Id=29",
+					"query": "Id=32",
 					"scene": null
 				},
 				{
 					"id": 6,
 					"name": "allTeacher",
 					"pathName": "pages/allTeacher/allTeacher",
-					"query": "Id=49",
+					"query": "Id=32",
 					"scene": null
 				},
 				{
@@ -125,7 +125,7 @@
 					"id": 10,
 					"name": "orderDetail",
 					"pathName": "pages/orderDetail/orderDetail",
-					"query": "Id=35&Status=1",
+					"query": "Id=61&status=4&kd=3",
 					"scene": null
 				},
 				{
@@ -139,7 +139,7 @@
 					"id": 12,
 					"name": "payOrder",
 					"pathName": "pages/payOrder/payOrder",
-					"query": "Id=15&ids=28,27",
+					"query": "Id=20&ids=70",
 					"scene": null
 				},
 				{
@@ -343,6 +343,13 @@
 					"name": "aboutUs",
 					"pathName": "pages/aboutUs/aboutUs",
 					"query": "Id=15",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "wait",
+					"pathName": "pages/wait/wait",
+					"query": "Id=32",
 					"scene": null
 				}
 			]

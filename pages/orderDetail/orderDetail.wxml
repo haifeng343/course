@@ -7,7 +7,7 @@
     <view class='status' wx:if="{{detail.UseStatus==4}}">已过期</view>
     <view class='status' wx:if="{{detail.UseStatus==5}}">申请退款</view>
     <view class='status' wx:if="{{detail.UseStatus==6}}">退款中</view>
-    <view class='status' wx:if="{{detail.UseStatus==7}}">退款失败</view>
+    <view class='status red' wx:if="{{detail.UseStatus==7}}">退款失败</view>
     <view class='status' wx:if="{{detail.UseStatus==8}}">退款成功</view>
     <view class='status' wx:if="{{detail.UseStatus==9}}">取消退款</view>
   </view>
@@ -38,31 +38,48 @@
   </view>
 </view>
 <view class='Top'>
-  <view class="keep start kl {{ detail.UseStatus==4 ? 'gray' : '' }}" wx:for="{{ItemList}}" wx:key>
+  <view class="keep startd kl {{ detail.UseStatus==4 ? 'gray' : '' }}" wx:for="{{ItemList}}" wx:key>
     <view class='leftImg'>
-      <image class='topImg' src='{{item.ItemCoverImg}}' mode='widthFix' lazy-load='true'></image>
+      <image class='topImg' src='{{item.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
     </view>
     <view class='Right'>
       <view class='activity'>{{item.ItemName}}</view>
       <image wx:if="{{detail.UseStatus==4}}" class="use" src='../../images/used.png' mode='widthFix' lazy-load='true'></image>
-      <view class='courseRow start well'>
-        <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+      <view class='courseRow startd well'>
+        <view>
+            <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+          </view>
         <view>{{item.SellerName}}</view>
       </view>
       <view class='courseRow between well'>
         <view class='startd'>
-          <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+          <view>
+            <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+          </view>
           <view class='address'>{{item.StoreAddress}}</view>
         </view>
         <view class='end'></view>
       </view>
-      <view class='courseRow start well'>
-        <view class='start'>
-          <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+      <view class='courseRow between well' wx:if="{{item.Mobile}}">
+        <view class='startd'>
+          <view>
+            <image class='rowImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+          </view>
+          <view class='address'>{{item.Mobile}}</view>
+        </view>
+        <view class='end'></view>
+      </view>
+      <view class='courseRow startd well'>
+        <view class='starts'>
+          <view>
+            <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+          </view>
           <view>课程数量{{item.CoursesNumber}}节</view>
         </view>
-        <view class='start'>
-          <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+        <view class='starts ml15'>
+          <view>
+            <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+          </view>
           <view >单节课时{{item.SingleTime}}min</view>
         </view>
       </view>
@@ -85,25 +102,15 @@
     <image class='codeImg' src='{{detail.QRCodeUrl}}' mode='widthFix' lazy-load='true'></image>
   </view>
 </view>
-<!--退款失败原因提示弹出框-->
-<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
-  <view class="zan-dialog__mask" bindtap="toggleDialog" />
-  <view class="zan-dialog__container">
-  <view class='zan-title'>失败原因</view>
-    <view class='zan-content date'>退款处理日期： {{detail.RefundTime}}</view>
-    <view class='zan-content'>失败原因：{{detail.RefundFailReason}}</view>
-    <view class='know' bindtap='closed'>知道了</view>
-  </view>
-</view>
 <!--退款成功提示弹出框-->
 <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
   <view class="zan-dialog__mask" bindtap="toggleDialog" />
   <view class="zan-dialog__container">
-  <view class='zan-title'>退款成功</view>
-    <view class='le zan-til'>已退款{{detail.PayAmount*1.0/100}}元</view>
-    <view class='zan-content align-left le'>交易编号: {{detail.OrderSn}}</view>
-    <view class='zan-content align-left le'>退款时间: {{detail.RefundTime}}</view>
-    <view class='zan-content align-left le' wx:if="{{detail.RefundFailReason==''}}">到账时间: {{detail.RefundFailReason}}</view>
+    <view class='zan-title'>退款成功</view>
+    <view class='zan-content align-left le'>交易编号：{{detail.OrderSn}}</view>
+    <view class='le zan-til'>退款金额：{{PayAmount}}元</view>
+    <view class='zan-content align-left le'>退款时间：{{detail.RefundTime}}</view>
+    <view class='zan-content align-left le' wx:if="{{detail.RefundArrivalTime}}">到账时间：{{detail.RefundArrivalTime}}</view>
     <view class='know' bindtap='closeded'>知道了</view>
   </view>
 </view>
@@ -111,9 +118,9 @@
 <view class='pay' wx:if="{{detail.UseStatus==1}}">
   <button class='btnd end' bindtap='Refund' data-OrderId="{{Id}}">申请退款</button>
 </view>
-<view class='pay start' wx:if="{{detail.UseStatus==7 || detail.UseStatus==9}}">
-  <button class='btnd' bindtap='errorShow'>查看原因</button>
-  <button class='btnd btnd2' wx:if="{{detail.UseStatus==7}}">重新退款</button>
+<view class='pay' wx:if="{{detail.UseStatus==7 || detail.UseStatus==9}}">
+  <button class='btnd r2' bindtap='errorShow'>查看原因</button>
+  <button class='btnd btnd2 r1' wx:if="{{detail.UseStatus==7}}">重新退款</button>
 </view>
 <view class='pay' wx:if="{{detail.UseStatus==9}}">
   <button class='btnd end' bindtap='Refund' data-OrderId="{{Id}}">重新退款</button>

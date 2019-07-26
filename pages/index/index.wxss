@@ -51,10 +51,11 @@
 }
 
 .navImg {
-  width: 45rpx;
-  height: 28rpx;
+  width: 30rpx;
+  height: 36rpx;
   display: flex;
   align-items: center;
+  margin-right: 5rpx;
   line-height: 58rpx;
 }
 
@@ -83,9 +84,9 @@
 
 .banner {
   width: 100%;
-  height: 310rpx;
+  height: 300rpx;
   padding-top: 30rpx;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   position: relative;
   z-index: 0;
   background: #fff;
@@ -101,7 +102,7 @@ swiper-item {
 
 swiper-item image {
   width: 92%;
-  height: 240rpx;
+  height: 100%;
   object-fit: cover;
   border-radius: 15rpx;
 }
@@ -193,7 +194,7 @@ swiper-item image {
 }
 
 .itemRight {
-  width: 68%;
+  width: 67%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -215,8 +216,16 @@ swiper-item image {
   flex-direction: row;
   font-size: 30rpx;
   color: #5b5b5b;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
 }
-
+.address{
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .distance {
   font-size: 30rpx;
   color: #5b5b5b;
@@ -224,7 +233,7 @@ swiper-item image {
 
 .time {
   font-size: 28rpx;
-  color: #b1b1b1;
+  color: #5b5b5b;
 }
 
 .tagList {
@@ -244,7 +253,7 @@ swiper-item image {
 .tagItem {
   word-break: keep-all;
   font-size: 24rpx;
-  padding: 0rpx 8rpx;
+  padding: 2rpx 8rpx;
   margin-right: 15rpx;
   margin-top: 0rpx;
   border-radius: 5rpx;
@@ -292,7 +301,7 @@ swiper-item image {
   line-height: 42rpx;
   justify-content: flex-end;
   flex-direction: row;
-  color: #aeaeae;
+  color: #5b5b5b;
   align-items: center;
 }
 

@@ -41,7 +41,9 @@
     "pages/login/login",
     "pages/share/share",
     "pages/WebView/WebView",
-    "pages/aboutUs/aboutUs"
+    "pages/aboutUs/aboutUs",
+    "pages/wait/wait",
+    "pages/jifen/jifen"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -53,6 +55,9 @@
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
+  },
+  "networkTimeout": {
+    "request": 10000
   },
   "sitemapLocation": "sitemap.json",
   "tabBar": {

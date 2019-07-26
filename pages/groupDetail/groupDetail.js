@@ -1,5 +1,6 @@
 
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
 
   data: {
@@ -21,6 +22,17 @@ Page({
 
   onLoad: function (options) {
     var that = this;
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      that.setData({
+        obj: res.Data,
+
+      })
+    })
     that.content = options
     var url = 'sheet/details';
     var params = {
@@ -64,6 +76,9 @@ Page({
       }
     }); //调用get方法情就是户数
   },
+  init: function () {
+    this.getData();
+  },
   swiperChangeTo: function (e) {
     this.setData({
       current: e.detail.current,
@@ -80,7 +95,18 @@ Page({
       url: '/pages/courseDetail/courseDetail?Id='+e.currentTarget.dataset.id,
     })
   },
-  onShareAppMessage: function () {
-
-  }
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

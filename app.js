@@ -1,4 +1,5 @@
 const app = getApp();
+var netUtil = require("utils/request.js"); //require引入
 App({
   // 头部导航栏的高度
   onLaunch: function() {
@@ -46,6 +47,8 @@ App({
         }
       },
     })
+
+    that.getKeyWord();
   },
   onLoad() {
     wx.loadFontFace({ //微信小程序平方字体
@@ -55,49 +58,21 @@ App({
       source: 'url("https://www.your-server.com/PingFangSC-Medium.ttf")',
 
       success: function() {
-        console.log('load font success')
+        
       }
 
     })
   },
-  share: function(title, path, imageUrl) {
-    //设置一个默认分享背景图片
-    let defaultImageUrl = '//upload.jianshu.io/admin_banners/web_images/4613/e96eece16a9e3ae1699dd4bd0002666c571c30f5.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/1250/h/540';
-    this.globalData.userInfo && this.globalData.userInfo.IsReferral && (path += "&ReferralUserId=" + this.globalData.userInfo.UserId)
-    return {
-      title: title || '加入VIP，能省会赚，最高返40%！',
-      path: path,
-      imageUrl: imageUrl || defaultImageUrl,
-      // success(res) {
-      //     console.log("转发成功！");
-      //     if (!res.shareTickets) {
-      //         //分享到个人
-      //         api.shareFriend().then(() => {
-      //             console.warn("shareFriendSuccess!");
-      //             //执行转发成功以后的回调函数
-      //             callback && callback();
-      //         });
-      //     } else {
-      //         //分享到群
-      //         let st = res.shareTickets[0];
-      //         wx.getShareInfo({
-      //             shareTicket: st,
-      //             success(res) {
-      //                 let iv = res.iv
-      //                 let encryptedData = res.encryptedData;
-      //                 api.groupShare(encryptedData, iv).then(() => {
-      //                     console.warn("groupShareSuccess!");
-      //                     //执行转发成功以后的回调函数
-      //                     callback && callback();
-      //                 });
-      //             }
-      //         });
-      //     }
-      // },
-      // fail: function(res) {
-      //     console.log("转发失败！");
-      // }
-    };
+  getKeyWord:function() {
+    let that = this;
+    var url = 'user/place/key';
+    var params = {
+      
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      // console.log(res)
+      wx.setStorageSync('keyword', res.Data.Keyword)
+    }); 
   },
   globalData: {
     userInfo: null

@@ -30,7 +30,7 @@
   <view style='background-color:#fff;height:400rpx;'>
     <view class="image" wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
       <!-- 图片预览 -->
-      <image src="{{item}}" class='onload' data-index="{{index}}" bindtap="previewImg" mode='widthFix' lazy-load='true'></image>
+      <image src="{{item}}" class='onload' data-index="{{index}}" bindtap="previewImg" mode='scaleToFill' lazy-load='true'></image>
       <view class="deleteImage" data-index="{{index}}" catchtap="deleteImg">
         <!-- 图片删除 -->
         <image src='../../images/cha.png' class='cha' mode='widthFix' lazy-load='true'></image>
@@ -41,4 +41,6 @@
     </view>
   </view>
 </view>
-<button class='btnd pay md' data-status="{{status}}" bindtap='submit'>提交</button>
+<view class='pay'>
+  <button class='btnd md' data-status="{{status}}" bindtap='submit'>提交</button>
+</view>

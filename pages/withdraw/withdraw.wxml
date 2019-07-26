@@ -14,7 +14,7 @@
       </view>
     </view>
   </view>
-  <view class='List mt20' wx:if="{{wihdraw!=''||wihdraw!=null}}">
+  <view class='List mt20' wx:if="{{wihdraw}}">
     <view class='item between' data-item="{{wihdraw}}" data- bindtap='changeCard'>
       <view class='start align'>
         <image class='bankIcon' src='{{wihdraw.BankIconUrl}}' mode='widthFix' lazy-load='true'></image>
@@ -33,11 +33,11 @@
     <view class='start'>
       <text class='moneyTxt'>￥</text>
       <input class='money' type='digit' bindinput='amoutChange' value='{{amount}}'></input>
-      <text class='moneyTxt' bindtap='all'>全部</text>
+      <text class='moneyTxt end' bindtap='all'>全部</text>
     </view>
   </view>
   <view class='item2 bor'>
-    <view  wx:if="{{amount!=''&&amount!=null}}">额外扣除￥0.1 服务费（费率0.10%）</view>
+    <view  wx:if="{{amount!=''&&amount!=null }}">额外扣除￥0.1 服务费（费率0.10%）</view>
     <view wx:else>可用余额￥{{money}}</view>
   </view>
 

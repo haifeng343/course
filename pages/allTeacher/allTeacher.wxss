@@ -1,4 +1,4 @@
-.keep{
+.keep {
   width: 100%;
   height: auto;
   background-color: #fff;
@@ -7,45 +7,70 @@
   display: flex;
   font-size: 24rpx;
 }
-.leftImg{
-  width:23%;
+
+.leftImg {
+  width: 23%;
   margin-right: 15rpx;
 }
-.topImg{
+
+.topImg {
   width: 150rpx;
   height: 128rpx;
   border-radius: 10rpx;
 }
-.rowImg{
-  width: 40rpx;
-  height: 40rpx;
+
+.rowImg {
+  width: 32rpx;
+  height: 24rpx;
+  position: relative;
+  top: 5rpx;
+  right: 5rpx;
 }
-.activity{
+.mt1{
+  margin-top: 2rpx;
+}
+.activity {
   font-size: 28rpx;
+  font-weight: 600;
 }
-.right{
+
+.right {
   width: 77%;
 }
-.h50{
+
+.h50 {
   line-height: 45rpx;
 }
-.h40{
-  line-height: 48rpx;
+
+.h40 {
+  line-height: 40rpx;
   display: flex;
   align-items: center;
+  word-break: break-all;
+  flex-wrap: wrap;
 }
-.w100{
+
+.w100 {
   width: 100%;
 }
-.address{
+
+.address {
   width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: keep-all;
 }
-.ml40{
+
+.ml40 {
   margin-left: 40rpx;
 }
+.courseRow{
+  width: 100%;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  box-sizing: border-box;
+}
+.address1{
+  width: 100%;
+}
+
 /* .keep{
   width: 100%;
   background-color: #fff;
@@ -107,57 +132,67 @@
   text-overflow: ellipsis;
   word-break: keep-all;
 } */
-.teacher{
+
+.teacher {
   margin-top: 20rpx;
   background-color: #fff;
 }
-.teaTitle{
+
+.teaTitle {
   font-size: 32rpx;
   font-weight: 600;
 }
-.gray{
-  color: #7A7A7A;
+
+.grayd {
   margin-left: 5rpx;
 }
-.teacherList{
+
+.teacherList {
   height: auto;
   display: flex;
   flex-direction: column;
 }
-.teacherItem{
+
+.teacherItem {
   margin-top: 40rpx;
 }
-.avator{
+
+.avator {
   width: 150rpx;
   height: 150rpx;
   margin-right: 20rpx;
+  border-radius: 50%;
 }
-.teaRight{
+
+.starts {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.teaRight {
   width: 75%;
   height: auto;
   font-size: 26rpx;
 }
-.mylog{
+
+.mylog {
   height: 60rpx;
   line-height: 60rpx;
 }
-.name{
+
+.name {
   font-size: 28rpx;
   color: #000;
 }
-.profession{
+
+.profession {
   font-size: 24rpx;
   color: #969696;
   margin-left: 20rpx;
 }
-.mylogText{
+
+.mylogText {
   color: #717171;
   font-size: 24rpx;
 }
-
-
-
-
-
-
-

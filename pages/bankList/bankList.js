@@ -37,10 +37,13 @@ Page({
 
       })
     })
-    this.getData();
+    this.init();
     this.setData({
       item: options.item || {}
     })
+  },
+  init: function () {
+    this.getData();
   },
   navtoWith: function(e) {
 
@@ -96,6 +99,10 @@ Page({
         })
       }
     }); //调用get方法情就是户数
+  },
+  onPullDownRefresh:function(){
+    this.getData();
+    wx.stopPullDownRefresh();
   },
   onShareAppMessage: function (res) {
     return {

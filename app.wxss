@@ -7,11 +7,11 @@ page::-webkit-scrollbar {
   height: 0;
   color: transparent;
 }
-image{
-  will-change: transform;
-}
 picker{
   z-index: 9999;
+}
+.know{
+  color: #3CD5CF!important;
 }
 .container {
   height: 100%;
@@ -25,12 +25,16 @@ picker{
 .mt10{
   margin-top: 10rpx;
 }
+.select{
+  width: 30rpx;
+  height: 30rpx;
+}
 .clear{
-  width: 40rpx;
-  height: 40rpx;
+  width: 28rpx;
+  height: 28rpx;
   position: absolute;
-  right: 15rpx;
-  top:10rpx;
+  right:17rpx;
+  top:17rpx;
   z-index: 55;
 }
 .nohasLog{
@@ -53,7 +57,7 @@ picker{
   height: 400rpx;
   display: flex;
   justify-content: center;
-  margin:0 auto;
+  margin:-100rpx auto 0;
 }
 .loginBtnd{
   font-size: 28rpx;
@@ -67,11 +71,12 @@ picker{
   line-height: 100rpx;
   text-align: center;
   color: #42DFDE;
-  font-size: 28rpx;
+  font-size: 32rpx;
   position: fixed;
   background-color: #fff;
   bottom: 0;
-  box-shadow: 0 0 15rpx #F9F9F9;
+  box-shadow:0 -8rpx 15rpx rgba(0, 0, 0, 0.1);
+
 }
 .Top{
   width: 95%;
@@ -84,7 +89,7 @@ picker{
 }
 .List{
   font-size: 28rpx;
-  color: #393939;
+  color: #000;
   height: 50rpx;
   line-height: 50rpx;
 }
@@ -223,7 +228,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   width: 100%;
   height: 120rpx;
   background-color: #fff;
-  box-shadow: 0 -4rpx 10rpx #eee;
+  box-shadow:0 -8rpx 15rpx rgba(0, 0, 0, 0.1);
   padding: 0 30rpx;
   box-sizing: border-box;
 }
@@ -236,7 +241,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.4);
   z-index: 99;
 }
 
@@ -264,7 +269,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   right: 0;
   bottom: 0;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.4);
   display: none;
 }
 
@@ -277,7 +282,6 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
   margin-left: 50rpx;
   background: #fff;
   transform: translateY(300%);
-  transition: all 0.4s ease;
   z-index: 12;
   border-radius: 20rpx;
 }
@@ -316,7 +320,6 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 }
 .zan-content{
   font-size: 28rpx;
-  color: #434343;
   line-height: 40rpx;
 }
 .align-left{
@@ -324,9 +327,7 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
 }
 .zan-til{
   text-align: left;
-  font-weight: 600;
   font-size: 28rpx;
-  line-height: 60rpx;
 }
 .le{
   padding: 0 50rpx;

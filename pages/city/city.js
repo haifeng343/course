@@ -1,16 +1,31 @@
 const app = getApp()
+var shareApi = require("../../utils/request.js");
+var shareApi = require("../../utils/share.js");
 
 Page({
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
+
+      })
+    })
     if (this.data.cityResults == null) {
       this.setData({
         cityResults: this.data.citys
       })
     }
+  },
+  init: function () {
+    
   },
   bindAZ: function (e) {
     var currentCityName = e.currentTarget.dataset.id;
@@ -41,9 +56,9 @@ Page({
         }
       })
     }
-  wx.navigateTo({
-    url: '/pages/selectAddress/selectAddress?address' + currentCityName,
-  })
+  // wx.navigateTo({
+  //   url: '/pages/selectAddress/selectAddress?address' + currentCityName,
+  // })
   },
   onPageScroll: function (e) { // 获取滚动条当前位置
     this.setData({
@@ -59,7 +74,11 @@ Page({
   },
   citySelected: function (e) {
     var cityNameTemp = e.currentTarget.dataset.cityname
-    wx.setStorageSync("address", cityNameTemp);
+    let pages = getCurrentPages(); //当前页面
+    let prevPage = pages[pages.length - 2]; //上一页面
+    prevPage.setData({ //直接给上移页面赋值
+      ads: cityNameTemp
+    });
     if (this.data.cityType == 'begin') {
       app.globalData.trainBeginCity = cityNameTemp
     }
@@ -67,8 +86,9 @@ Page({
     if (this.data.cityType == "end") {
       app.globalData.trainEndCity = cityNameTemp
     }
-
-    wx.navigateBack()
+    wx.navigateBack({
+      delta: 1
+    });
   },
   bindSarchInput: function (e) {
     wx.pageScrollTo({
@@ -115,7 +135,20 @@ Page({
   onShow: function () {
 
   },
-
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -147,12 +180,7 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }, /**
+   /**
    * 页面的初始数据
    */
   data: {

@@ -1,4 +1,5 @@
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 const app = getApp();
 Page({
 
@@ -9,11 +10,28 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: {},
     recommandCode: '',
-    money:'',
-    score:'',
-    usertoken:""
+    money: '',
+    score: '',
+    usertoken: "",
+    buttons: {}
+  },
+  //复制微信号
+  copyText: function (e) {
+    wx.setClipboardData({
+      data: e.currentTarget.dataset.text,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            wx.showToast({
+              title: '复制成功'
+            })
+          }
+        })
+      }
+    })
   },
   onShow() {
+    this.ButtonShow();
     let usertoken = wx.getStorageSync('usertoken');
     this.setData({
       usertoken: usertoken
@@ -27,34 +45,94 @@ Page({
       })
     }
   },
-  bindLogin:function() {
+  ButtonShow: function() {
+    var that = this;
+    var url = 'user/page/show/my'
+    var params = {}
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
+      var temp = {};
+      if (res.Data.indexOf("setup")>=0) {
+        temp.setup = true;
+      } else {
+        temp.setup = false;
+      }
+      if (res.Data.indexOf("aboutus") >= 0) {
+        temp.aboutus = true;
+      } else {
+        temp.aboutus = false;
+      }
+      if (res.Data.indexOf("callus") >= 0) {
+        temp.callus = true;
+      } else {
+        temp.callus = false;
+      }
+      if (res.Data.indexOf("share") >= 0) {
+        temp.share = true;
+      } else {
+        temp.share = false;
+      }
+      if (res.Data.indexOf("invitation") >= 0) {
+        temp.invitation = true;
+      } else {
+        temp.invitation = false;
+      }
+      if (res.Data.indexOf("address") >= 0) {
+        temp.address = true;
+      } else {
+        temp.address = false;
+      }
+      if (res.Data.indexOf("modifyphone") >= 0) {
+        temp.modifyphone = true;
+      } else {
+        temp.modifyphone = false;
+      }
+      that.setData({
+        buttons: temp
+      })
+      wx.setStorageSync('buttons', temp);
+
+    });
+  },
+  bindLogin: function() {
     wx.navigateTo({
       url: '/pages/login/login',
     })
   },
-  aboutUs:function(){
+  aboutUs: function() {
     wx.navigateTo({
       url: '/pages/aboutUs/aboutUs',
     })
   },
-  walletd: function () {
+  walletd: function() {
     let that = this;
     var url = 'user/wallet';
-    var params = {
-    }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+    var params = {}
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       that.setData({
         money: Number(res.Data.Money / 100).toFixed(2),
-        score:res.Data.Score
+        score: res.Data.Score
       })
       wx.setStorageSync('wallet', res.Data)
     });
   },
-  onLoad() {
-  },
+  onLoad(options) {
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
 
+      })
+    })
+  },
+  init: function () {
+    
+  },
   integral: function(e) {
-    if(this.data.usertoken){
+    if (this.data.usertoken) {
       wx.navigateTo({
         url: '/pages/integralLog/integralLog',
       })
@@ -70,18 +148,18 @@ Page({
     })
   },
   setting: function() {
-    if(this.data.usertoken){
+    if (this.data.usertoken) {
       wx.navigateTo({
         url: '/pages/setting/setting?mobile=' + this.data.userInfo.Mobile + '&ids=' + 1,
       })
-    }else{
+    } else {
       wx.navigateTo({
         url: '/pages/login/login',
       })
     }
   },
   invite: function() {
-    if(this.data.usertoken){
+    if (this.data.usertoken) {
       wx.navigateTo({
         url: '/pages/invite/invite',
       })
@@ -92,7 +170,7 @@ Page({
     }
   },
   share: function(e) {
-    if(this.data.usertoken){
+    if (this.data.usertoken) {
       wx.navigateTo({
         url: '/pages/share/share?Id=' + e.currentTarget.dataset.id,
       })
@@ -103,7 +181,7 @@ Page({
     }
   },
   wallet: function() {
-    if(this.data.usertoken){
+    if (this.data.usertoken) {
       wx.navigateTo({
         url: '/pages/wallet/wallet',
       })
@@ -116,7 +194,7 @@ Page({
   getUserInfo: function(e) {
     var that = this;
     // 查看是否授权
-    
+
     wx.getSetting({
       success: function(res) {
         if (res.authSetting['scope.userInfo']) {
@@ -158,7 +236,7 @@ Page({
     wx.setStorageSync('userInfo', that.userInfo);
     wx.setStorageSync('usertoken', res.Data.UserToken);
     that.setData({
-      userInfo:res.Data
+      userInfo: res.Data
     })
   },
   onFailed: function() { //onFailed失败回调
@@ -167,7 +245,18 @@ Page({
       title: res.Data.ErrorMessage,
     })
   },
-  onShareAppMessage: function() {
-
-  }
+  onShareAppMessage: function(res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

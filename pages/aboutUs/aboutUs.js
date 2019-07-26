@@ -3,7 +3,7 @@ var shareApi = require("../../utils/share.js");
 Page({
 
   data: {
-    html: '<div class="div_class" style="padding:0 5%;">Hello&nbsp;World!</div>'
+    html: ''
   },
   onLoad(options) {
     if (options.recommand) {
@@ -17,6 +17,20 @@ Page({
 
       })
     })
+    this.init();
+  },
+  init: function () {
+    let that = this;
+    var url = 'banner/page/content';
+    var params = {
+      Code: 'AboutUs'
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      // console.log(res)
+      that.setData({
+        html:res.Data.Content
+      })
+    });
   },
   onShareAppMessage: function (res) {
 

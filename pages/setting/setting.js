@@ -1,13 +1,31 @@
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
 
   data: {
     mobile: '',
     name: '修改手机号',
     ids: 1,
+    buttons:{},
+  },
+  onShow:function() {
+    this.setData({
+      buttons:wx.getStorageSync('buttons')
+    })
+    console.log(this.data.buttons)
   },
   onLoad(options) {
-    console.log(options)
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
+
+      })
+    })
     if (options.mobile) {
       this.setData({
         mobile: options.mobile,
@@ -19,42 +37,13 @@ Page({
       })
     }
   },
-  getPhoneNumber: function(e) {
-    wx.login({
-      success: res => {
-        if (res.code) {
+  init:function() {
 
-          if (e.detail.errMsg == "getPhoneNumber:fail user deny") return;
-          //用户授权获取手机号码
-
-          //3. 解密手机号码信息
-          var self = this
-
-          var url = 'user/wechatdecrypt';
-          var params = {
-            encryptedData: e.detail.encryptedData,
-            iv: e.detail.iv,
-            code: res.code
-          }
-          console.log(params)
-          netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-            console.log(res.Data);
-            wx.redirectTo({
-              url: '/pages/binding/binding?phone=' + res.Data.phoneNumber,
-            })
-          }, function(msg) { //onFailed失败回调
-            wx.hideLoading();
-            if (msg) {
-              wx.showToast({
-                title: msg,
-              })
-            }
-          }); //调用get方法情就是户数
-        }
-      }
+  },
+  binding:function() {
+    wx.navigateTo({
+      url: '/pages/binding/binding?phone=' + this.data.mobile + '&ids=' + 2,
     })
-    console.log(e);
-
   },
   modify: function() {
     wx.navigateTo({
@@ -80,7 +69,18 @@ Page({
       url: '/pages/address/address',
     })
   },
-  onShareAppMessage: function() {
-
-  }
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

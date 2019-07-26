@@ -11,6 +11,12 @@ Page({
     wx.navigateTo({
       url: 'https://www.baidu.com',
     })
+    wx.setNavigationBarTitle({
+      title: '',
+    })
+  },
+  init: function () {
+
   },
   /**
    * 生命周期函数--监听页面加载

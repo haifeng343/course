@@ -1,18 +1,18 @@
+<view class='logTop between'>
+  <view class='start'>
+    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange">
+      <view class="picker">
+        {{date?date:now}}
+      </view>
+    </picker>
+    <image src='../../images/select.png' class='select' mode='widthFix' lazy-load='true'></image>
+  </view>
+  <view class='math'>
+    <!-- <view> 提现￥100.00</view> -->
+  </view>
+</view>
 <view>
   <view class='log'>
-    <view class='logTop between'>
-      <view class='start'>
-        <picker mode="multiSelector" value="{{date}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange">
-          <view class="picker">
-            {{date?date:now}}
-          </view>
-        </picker>
-        <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
-      </view>
-      <view class='math'>
-        <!-- <view> 提现￥100.00</view> -->
-      </view>
-    </view>
     <view class='nohasLog' wx:if="{{List.length<=0}}">
       <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
       <view>暂无提现记录</view>

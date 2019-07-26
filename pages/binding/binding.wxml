@@ -2,11 +2,11 @@
   <view class="accountLogin">
     <view class="loginInput">
       <view class="subtitle">手机号</view>
-      <input type="number" placeholder="请输入手机号" value="{{Mobile}}" bindinput="getCode" />
+      <input type="number" placeholder="请输入新手机号" value="{{Mobile}}" bindinput="getCode" />
     </view>
     <view class="loginInput">
       <view class="subtitle">验证码</view>
-      <input type="number" placeholder="请输入验证码" value="{{VerifyCode}}" bindinput='cendCode' placeholder-style="color:#ccc;" />
+      <input type="number" placeholder="请输入验证码" value="{{VerifyCode}}" bindinput='cendCode' />
       <button class="imgCoded" bindtap='codeyan' wx:if="{{NumberCountDown==0}}" disabled='{{notEdit}}'>{{btntext}}</button>
       <view class="imgCoded" wx:if="{{NumberCountDown==-1}}">次数已到</view>
     </view>

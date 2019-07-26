@@ -1,4 +1,5 @@
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
 
   /**
@@ -21,6 +22,20 @@ Page({
     })
   },
   onLoad(options) {
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
+
+      })
+    })
+    this.init();
+  },
+  init:function() {
     this.carList();
   },
   changeCard: function(e) {
@@ -60,6 +75,10 @@ Page({
         that.setData({
           wihdraw: res.Data[0],
           CardNumber: wihdraw.CardNumber.substring(wihdraw.CardNumber.length - 4)
+        })
+      }else{
+        that.setData({
+          wihdraw:null
         })
       }
     }, function(msg) { //onFailed失败回调
@@ -123,7 +142,18 @@ Page({
       url: '/pages/addBank/addBank',
     })
   },
-  onShareAppMessage: function() {
-
-  }
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

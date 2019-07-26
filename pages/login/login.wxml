@@ -1,5 +1,6 @@
 <view class="container">
   <view class="content">
+  <view class='welcome'>WELCOME</view>
     <image src="../../images/login_img.png" class="login_img" mode='widthFix' lazy-load='true' alt=""></image>
     <button class="loginBtn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">登录</button>
   </view>

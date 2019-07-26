@@ -35,6 +35,9 @@ Page({
 
       })
     })
+    this.init();
+  },
+  init: function () {
     this.getData();
   },
   getData: function () {

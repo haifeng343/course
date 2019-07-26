@@ -1,6 +1,7 @@
 // 引入SDK核心类
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 
 const app = getApp();
 
@@ -37,15 +38,17 @@ Page({
     })
   },
   address: function() {
+    const that = this;
     wx.navigateTo({
-      url: '/pages/selectAddress/selectAddress'
+      url: '/pages/selectAddress/selectAddress?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude
     })
   },
   bindBannerTo:function(e) {
-    console.log(e)
-    wx.navigateTo({
-      url: '/pages/WebView/WebView?path=' + e.currentTarget.dataset.path,
-    })
+    if (e.currentTarget.dataset.path!=''){
+      wx.navigateTo({
+        url: '/pages/WebView/WebView?path=' + e.currentTarget.dataset.path,
+      })
+    }
   },
   swiperChangeTo:function(e) {
     this.setData({
@@ -82,7 +85,6 @@ Page({
       that.setData({
         imgUrls: res.Data
       })
-      console.log(res)
     })
   },
   func: function() {
@@ -140,10 +142,24 @@ Page({
       }); //调用get方法情就是户数
   },
   onLoad: function(options) {
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj: res.Data,
+
+      })
+    })
     var res = wx.getSystemInfoSync();
     this.setData({
       winWidth : res.windowWidth
     })
+    this.init();
+  },
+  init: function () {
     this.getLocation();
   },
   getLocation() {
@@ -153,7 +169,8 @@ Page({
       key: 'IDXBZ-GUJCF-2QKJB-NXK2V-VRZXE-MGFUI' // 必填
     });
     wx.getLocation({
-      type: 'wgs84',
+      type: 'gcj02',
+      altitude: true, //高精度定位
       success: (res) => {
         var latitude = res.latitude
         var longitude = res.longitude
@@ -249,8 +266,19 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
-  onShareAppMessage: function() {
-
-  }
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 
 })

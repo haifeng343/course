@@ -4,6 +4,7 @@ Page({
 
   data: {
     date: '', //不填写默认今天日期，填写后是默认日期
+    date2:[],
     dataStart: '', //有效日期
     dataEnd: '', //
     showError: false,
@@ -32,7 +33,8 @@ Page({
     arr1 = ['全部', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     this.setData({
       array: [arr, arr1],
-      now: this.data.month + '月'
+      now:this.data.year + '-' + this.data.month,
+      date2: [arr.indexOf(this.data.year), arr1.indexOf(this.data.month+'')]
     })
   },
   onLoad: function(options) {
@@ -47,6 +49,9 @@ Page({
 
       })
     })
+    this.init();
+  },
+  init:function() {
     this.getData();
   },
   getData: function() {

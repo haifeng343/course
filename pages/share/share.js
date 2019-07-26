@@ -1,3 +1,4 @@
+var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 Page({
 
@@ -5,30 +6,72 @@ Page({
    * 页面的初始数据
    */
   data: {
+    Info: {}
+  },
+  onShow: function() {
+    this.getData();
+  },
+  init:function() {
 
   },
-  onLoad(options){
-    if(options.recommand){
+  getData: function() {
+    let that = this;
+    var url = 'user/page/share';
+    var params = {}
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+      that.setData({
+        Info: res.Data
+      })
+      if (that.data.Info.IsShowShareTitle == true) {
+        wx.setNavigationBarTitle({
+          title: that.data.Info.ShareTitle,
+        })
+      }
+    }); //调用get方法情就是户数
+  },
+  onLoad(options) {
+    if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;//我的分享码
     shareApi.getShare().then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
-        obj: res.Data,
+        obj1: res.Data,
+
+      })
+    });
+    shareApi.getShare("myPage").then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      this.setData({
+        obj2: res.Data,
 
       })
     })
   },
   onShareAppMessage: function(res) {
+    if (res.from == 'button') {
+      return {
+        title: this.data.obj2.Title,
+        path: this.data.obj2.SharePath,
+        desc: this.data.obj2.ShareDes,
+        imageUrl: this.data.obj2.ShareImgUrl,
+        success: (res) => {
+          wx.showToast({
+            icon: 'none',
+            title: '分享成功',
+          })
+        }
+      }
+    }
     return {
-      title: this.data.obj.Title,
-      path: this.data.obj.SharePath,
-      desc: this.data.obj.ShareDes,
-      imageUrl: this.data.obj.ShareImgUrl,
+      title: this.data.obj1.Title,
+      path: this.data.obj1.SharePath,
+      desc: this.data.obj1.ShareDes,
+      imageUrl: this.data.obj1.ShareImgUrl,
       success: (res) => {
         wx.showToast({
-          icon:'none',
+          icon: 'none',
           title: '分享成功',
         })
       }
