@@ -2,7 +2,7 @@
 <view>
   <view class='keep starts' wx:for="{{ItemList}}" wx:key>
     <view class='leftImg'>
-      <image class='topImg' src='{{item.ItemCoverImg}}' mode='widthFix' lazy-load='true'></image>
+      <image class='topImg' src='{{item.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
     </view>
     <view class='right'>
       <view class='activity'>{{item.ItemName}}</view>

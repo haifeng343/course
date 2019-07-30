@@ -27,12 +27,12 @@ Page({
 
     console.log(options)
     that.setData({
-      orderId: options.OrderId,
-      ordersn: options.ordersn,
-      payamount: options.money
+      orderId: options.OrderId || '',
+      ordersn: options.ordersn || '',
+      payamount: options.money || ''
     })
     var setTime = setTimeout(function () {
-      that.payok(function (res) {
+      that.payok(false, function (res) {
         if (res.IsPay) {
           clearTimeout(setTime);
           wx.redirectTo({
@@ -46,7 +46,7 @@ Page({
 
   },
   //支付成功
-  payok: function (onSuccess) {
+  payok: function (isShowLoading, onSuccess) {
     var that = this;
     var url = 'order/pay/issuccess'
     var params = {
@@ -57,7 +57,10 @@ Page({
         orderContent: res.Data
       })
       onSuccess(res.Data);
-    });
+    },
+    '', 
+    isShowLoading,
+    isShowLoading);
   },
   groupTo:function() {
     wx.switchTab({
@@ -66,7 +69,7 @@ Page({
   },
   bindPayok:function() {
     let that = this;
-    that.payok(function (res) {
+    that.payok(true, function (res) {
       if (res.IsPay) {
         clearTimeout(setTime);
         wx.redirectTo({

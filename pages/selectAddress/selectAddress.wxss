@@ -79,6 +79,7 @@ page {
   z-index: 9999;
   max-height: 90vh;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .addItem {
@@ -185,6 +186,7 @@ page {
   padding-right: 5%;
   box-sizing: border-box;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .addressItem {

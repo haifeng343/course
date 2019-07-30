@@ -1,6 +1,6 @@
 <view class='Top'>
   <view class='List between'>
-    <view class="start" style='width:100%'>订单编号: <text class='ml ml10'>{{detail.OrderSn}}</text></view>
+    <view class="start" style='width:100%'>订单编号：<text class='ml ml10'>{{detail.OrderSn}}</text></view>
     <view class='status' wx:if="{{detail.UseStatus==1}}">未使用</view>
     <view class='status' wx:if="{{detail.UseStatus==2}}">部分使用</view>
     <view class='status' wx:if="{{detail.UseStatus==3}}">已完成</view>
@@ -12,28 +12,34 @@
     <view class='status' wx:if="{{detail.UseStatus==9}}">取消退款</view>
   </view>
   <view class='List'>
-    <view>创建订单: <text class='ml10'>{{detail.CreateTime}}</text></view>
+    <view>创建订单：<text class='ml10'>{{detail.CreateTime}}</text></view>
   </view>
   <view class='List'>
-    <view>支付时间: <text class='ml10'>{{detail.PayTime}}</text></view>
+    <view>支付时间：<text class='ml10'>{{detail.PayTime}}</text></view>
   </view>
-  <view class='List kl' wx:if="{{detail.UseStatus==1}}">
-    <view>有效期至:<text class='ml10'>{{detail.ExpriesTime}}</text></view>
+  <view class='List kl' wx:if="{{detail.UseStatus==1 || detail.UseStatus==2 || detail.UseStatus==7}}">
+    <view>有效期至：<text class='ml10'>{{detail.ExpriesTime}}</text></view>
+  </view>
+  <view class='List kl' wx:if="{{detail.UseStatus==3}}">
+    <view>最后使用：<text class='ml10'>{{detail.LastUseTime}}</text></view>
   </view>
   <view class='List kl' wx:if="{{detail.UseStatus==4}}">
-    <view>已过期: {{detail.ExpriesDays}}天(<text class='ml10'>{{detail.ExpriesTime}}</text>)</view>
+    <view>截止日期：<text class='ml10'>{{detail.ExpriesTime}}</text></view>
   </view>
-  <view class='List kl' wx:if="{{detail.UseStatus==8}}">
-    <view>退款时间: <text class='ml10'>{{detail.RefundTime}}</text></view>
+  <view class='List kl' wx:if="{{detail.UseStatus==5 || detail.UseStatus==6}}">
+    <view>申请日期：<text class='ml10'>{{detail.RefundTime}}</text></view>
+  </view>
+  <view class='List kl' wx:if="{{detail.UseStatus==8 || detail.UseStatus==9}}">
+    <view>退款时间：<text class='ml10'>{{detail.RefundTime}}</text></view>
   </view>
   <view class='List'>
-    <view>团单名称: <text class='ml10'>{{detail.SheetName}}</text></view>
+    <view>团单名称：<text class='ml10'>{{detail.SheetName}}</text></view>
   </view>
   <view class='List'>
-    <view>购买类型: <text class='ml10' wx:if="{{detail.BuyType==1}}">团购</text></view>
+    <view>购买类型：<text class='ml10' wx:if="{{detail.BuyType==1}}">团购</text></view>
   </view>
   <view class='List between'>
-    <view>券码: {{detail.TicketNumber}}</view>
+    <view>券码：{{detail.TicketNumber}}</view>
     <image class='code' src='../../images/code.png' mode='widthFix' lazy-load='true' bindtap='codeShow'></image>
   </view>
 </view>

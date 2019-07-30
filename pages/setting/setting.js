@@ -15,6 +15,7 @@ Page({
     console.log(this.data.buttons)
   },
   onLoad(options) {
+    console.log(options)
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }

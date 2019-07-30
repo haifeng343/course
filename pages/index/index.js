@@ -9,8 +9,6 @@ Page({
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
     Acount: {},
-    Latitude: '',
-    Longitude: '',
     Id: 0,
     articles: [],
     imgUrls: [],
@@ -24,71 +22,97 @@ Page({
     bgcolor: '#EDFBFB',
     groupList: [],
     locationName: '正在定位...',
+    longitude: '',
+    latitude: '',
     page: 1,
     pageCount: 20,
     locationAgain: true,
-    winWidth:'',
+    winWidth: '',
+    isLoaded: false,
+  },
+  onLoad: function(options) {
+    var that = this;
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare().then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    var res = wx.getSystemInfoSync();
+    that.setData({
+      winWidth: res.windowWidth
+    })
+
+    that.banner();
+    that.init();
+
+    that.data.isLoaded = true;
   },
   groupDetail: function(e) {
     const that = this;
     that.Id = parseInt(e.currentTarget.dataset.id)
     wx.navigateTo({
-      // url: '/pages/groupDetail/groupDetail?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude + '&Id=' + that.Id,
       url: '/pages/chooseClass/chooseClass?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude + '&Id=' + that.Id,
     })
   },
   address: function() {
     const that = this;
     wx.navigateTo({
-      url: '/pages/selectAddress/selectAddress?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude
+      url: '/pages/selectAddress/selectAddress?Longitude=' + that.data.longitude + '&Latitude=' + that.data.latitude
     })
   },
-  bindBannerTo:function(e) {
-    if (e.currentTarget.dataset.path!=''){
+  bindBannerTo: function(e) {
+    if (e.currentTarget.dataset.path != '') {
       wx.navigateTo({
         url: '/pages/WebView/WebView?path=' + e.currentTarget.dataset.path,
       })
     }
   },
-  swiperChangeTo:function(e) {
+  swiperChangeTo: function(e) {
     this.setData({
-      current:e.detail.current
+      current: e.detail.current
     })
-  },
-  onShow() {
-    var _this = this;
-    _this.banner();
-    wx.getStorage({
-      key: 'loc',
-      success: function(res) {
-        _this.setData({
-          longitude: res.data.lng,
-          latitude: res.data.lat,
-          locationName: res.data.title,
-        });
-        _this.func();
-      },
-    });
   },
   searchTo: function() {
     wx.navigateTo({
       url: '/pages/search/search',
     })
   },
-  banner:function() {
+  banner: function() {
     let that = this;
     var url = 'banner/list';
     var params = {
       BannerCode: 'IndexTop',
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      that.setData({
-        imgUrls: res.Data
-      })
-    })
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+        that.setData({
+          imgUrls: res.Data
+        })
+      },
+      null,
+      false,
+      false,
+      false)
   },
-  func: function() {
+
+  refreshList: function() {
     let that = this;
+    wx.getStorage({
+      key: 'loc',
+      success: function(res) {
+        that.setData({
+          longitude: res.data.lng,
+          latitude: res.data.lat,
+          locationName: res.data.title
+        })
+      }
+    })
+
     var url = 'sheet/near/list';
     var params = {
       SearchName: '',
@@ -99,71 +123,80 @@ Page({
       PageIndex: that.data.page,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-        that.setData({
-          locationName: res.Data.LocationName
-        })
-        let arr = res.Data.List;
-        if (arr.length > 0) {
-          arr.forEach(item => {
-            item.TradingAreaDistance = (parseInt(item.TradingAreaDistance) / 1000).toFixed(1);
-          })
-          var temp = [];
-          if (that.data.page == 1) { //刷新
-            temp = arr;
-          } else { //加载更多
-            temp = that.data.groupList;
-            temp = temp.concat(arr);
-          }
-          let loc = that.data.locationName;
-          if (!loc) {
-            loc = res.Data.LocationName;
-          }
-          temp.forEach(item => {
-            item.SheetMinPrice = Number(item.SheetMinPrice / 100).toFixed(2);
-          })
-          that.setData({
-            groupList: temp,
-            Acount: res.Data,
-            locationName: loc
-          })
-          that.Longitude = res.Data.Longitude;
-          that.Latitude = res.Data.Latitude;
-
-        }
-        wx.hideLoading();
-      },
-      function(msg) { //onFailed失败回调
-        wx.hideLoading();
-        if (msg) {
-          wx.showToast({
-            title: msg,
-          })
-        }
-      }); //调用get方法情就是户数
-  },
-  onLoad: function(options) {
-    if (options.recommand) {
-      wx.setStorageSync("recommand", options.recommand)
-    }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare().then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      this.setData({
-        obj: res.Data,
-
+      that.setData({
+        locationName: res.Data.LocationName,
+        longitude: res.Data.Longitude,
+        latitude: res.Data.Latitude
       })
-    })
-    var res = wx.getSystemInfoSync();
-    this.setData({
-      winWidth : res.windowWidth
-    })
-    this.init();
+
+      let arr = res.Data.List;
+      if (arr.length > 0) {
+        arr.forEach(item => {
+          item.TradingAreaDistance = (parseInt(item.TradingAreaDistance) / 1000).toFixed(1);
+        })
+        var temp = [];
+        if (that.data.page == 1) { //刷新
+          temp = arr;
+        } else { //加载更多
+          temp = that.data.groupList;
+          temp = temp.concat(arr);
+        }
+        let loc = that.data.locationName;
+        if (!loc) {
+          loc = res.Data.LocationName;
+        }
+        temp.forEach(item => {
+          item.SheetMinPrice = Number(item.SheetMinPrice / 100).toFixed(2);
+        })
+        that.setData({
+          groupList: temp,
+          Acount: res.Data,
+          locationName: loc
+        })
+      }
+    }); //调用get方法情就是户数
   },
-  init: function () {
-    this.getLocation();
+
+  onShow: function() {
+    if (!this.data.isLoaded) {
+      return;
+    }
+
+    let that = this;
+    wx.getStorage({
+      key: 'loc',
+      success: function(res) {
+        if (that.data.locationName != res.data.title) {
+          that.setData({
+            locationName: res.data.title,
+            longitude: res.data.lng,
+            latitude: res.data.lat
+          });
+
+          that.refreshList();
+        }
+      },
+    });
   },
+  init: function() {
+    let that = this;
+    wx.getStorage({
+      key: 'loc',
+      success: function(res) {
+        that.setData({
+          locationName: res.data.title,
+          longitude: res.data.lng,
+          latitude: res.data.lat
+        });
+      }
+    });
+
+    that.getLocation();
+  },
+
   getLocation() {
-    var that = this
+    var that = this;
+
     // 实例化腾讯地图API核心类
     var qqmapsdk = new QQMapWX({
       key: 'IDXBZ-GUJCF-2QKJB-NXK2V-VRZXE-MGFUI' // 必填
@@ -172,14 +205,11 @@ Page({
       type: 'gcj02',
       altitude: true, //高精度定位
       success: (res) => {
-        var latitude = res.latitude
-        var longitude = res.longitude
-        var speed = res.speed
-        var accuracy = res.accuracy
         that.setData({
-          latitude: latitude,
-          longitude: longitude,
+          latitude: res.latitude,
+          longitude: res.longitude,
         });
+
         qqmapsdk.reverseGeocoder({
           location: {
             latitude: res.latitude,
@@ -189,12 +219,18 @@ Page({
             that.setData({
               locationName: res.result.formatted_addresses.recommend
             })
-            that.func();
+
+            wx.setStorageSync('loc', {
+              lat: that.data.latitude,
+              lng: that.data.longitude,
+              title: that.data.locationName
+            });
+
+            that.refreshList();
           },
         });
       },
       fail: function(res) {
-        console.log(res)
         wx.getSetting({
           success: function(res) {
             var statu = res.authSetting;
@@ -207,24 +243,16 @@ Page({
                     wx.openSetting({
                       success: function(data) {
                         if (data.authSetting["scope.userLocation"] === true) {
-                          wx.showToast({
-                            title: '授权成功',
-                            icon: 'success',
-                            duration: 1000
-                          })
                           //授权成功之后，再调用chooseLocation选择地方
                           that.getLocation();
                         } else {
-                          wx.showToast({
-                            title: '授权失败',
-                            icon: 'success',
-                            duration: 1000
-                          })
+                          that.refreshList();
                         }
                       }
                     })
+                  } else {
+                    that.refreshList();
                   }
-                  that.func();
                 }
               })
             }
@@ -235,38 +263,36 @@ Page({
               icon: 'success',
               duration: 1000
             })
+
+            that.refreshList();
           }
         });
       }
     })
   },
+
   //上拉加载更多
   onReachBottom: function() {
     let that = this;
-    wx.showLoading({
-      title: '玩命加载中',
-    });
     var temp_page = this.data.page;
     temp_page++;
     this.setData({
       page: temp_page
     });
-    that.func();
 
+    that.refreshList();
   },
   //下拉刷新
   onPullDownRefresh: function() {
-    wx.showLoading({
-      title: "玩命加载中",
-    });
     this.setData({
       page: 1
     });
-    this.func();
+
+    this.refreshList();
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,
@@ -280,5 +306,4 @@ Page({
       }
     }
   },
-
 })

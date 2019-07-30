@@ -1,5 +1,0 @@
-<view class="bodyHeight">
-  <image class="logoImg" src="../../images/logo.png" lazy-load='true' mode='widthFix'></image>
-  <p class="gray">请完成微信授权以继续使用</p>
-  <button class="userInfo_login" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">获取用户信息</button>
-</view>

@@ -21,11 +21,11 @@
       <view class='itemLeft column'>
         <view class='between k1'>
           <view class='share'>{{item.Description}}</view>
-          <view class='time'>￥{{item.Amount}}</view>
+          <view class='share'>￥{{item.Amount}}</view>
         </view>
         <view class='between k1'>
-          <view class='share'>{{item.CreateTime}}</view>
-          <view class='time1'>{{item.Type==1?'验券返现':'推荐返现'}}</view>
+          <view class='time'>{{item.CreateTime}}</view>
+          <view class='time'>{{item.Type==1?'验券返现':'推荐返现'}}</view>
         </view>
       </view>
     </view>

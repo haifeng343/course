@@ -1,6 +1,7 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 Page({
+
   data: {
     date: '', //不填写默认今天日期，填写后是默认日期
     date2: [],
@@ -15,8 +16,7 @@ Page({
     statusdes: '',
     List: [],
   },
-
-  initPicker: function() {
+  initPicker: function () {
     var date = new Date();
     let arr = [],
       arr1 = [];
@@ -38,7 +38,7 @@ Page({
       date2: [arr.indexOf(this.data.year), arr1.indexOf(this.data.month + '')],
     })
   },
-  onLoad: function(options) {
+  onLoad: function (options) {
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
@@ -53,24 +53,22 @@ Page({
     this.initPicker();
     this.init();
   },
-  init: function() {
+  init: function () {
     this.getData();
   },
-  getData: function() {
+  getData: function () {
     let that = this;
-    var url = 'user/bill/list';
+    var url = 'user/wallet/change/list';
     var params = {
       Year: that.data.year,
       Month: that.data.month,
       PageCount: that.data.pagecount,
       PageIndex: that.data.page,
+      Type: 1
     }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       let arr = res.Data;
       var arr1 = [];
-      arr.forEach(item => {
-        item.Amount = Number(item.Amount / 100).toFixed(2);
-      })
       if (that.data.page == 1) {
         arr1 = arr;
       } else {
@@ -82,7 +80,7 @@ Page({
       })
     }); //调用get方法情就是户数
   },
-  bindDateChange: function(e) {
+  bindDateChange: function (e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
     let index = e.detail.value;
     if (index[0] == 0 && index[1] == 0) {
@@ -102,19 +100,19 @@ Page({
     }
     this.getData();
   },
-  showEor: function(e) {
+  showEor: function (e) {
     this.setData({
       statusdes: e.currentTarget.dataset.statusdes,
       showError: true
     })
   },
-  closed: function() {
+  closed: function () {
     this.setData({
       showError: false
     })
   },
   //上拉加载更多
-  onReachBottom: function() {
+  onReachBottom: function () {
     let that = this;
     var temp_page = this.data.page;
     temp_page++;
@@ -125,7 +123,7 @@ Page({
 
   },
   //下拉刷新
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     this.setData({
       page: 1
     });
@@ -133,7 +131,7 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
-  onShareAppMessage: function(res) {
+  onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

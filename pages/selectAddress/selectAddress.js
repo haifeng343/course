@@ -8,7 +8,7 @@ Page({
   data: {
     nearList: [],
     addressList: [],
-    ads: "杭州市",
+    ads: "",
     show: false,
     searchAdr: '', //搜索地址
     items: [],
@@ -18,6 +18,7 @@ Page({
     keyword: '',//搜索keyword
   },
   onLoad: function(options) {
+    console.log(options)
     let hasword = wx.getStorageSync('keyword');
     this.setData({
       keyword: hasword
@@ -64,14 +65,11 @@ Page({
       that.setData({
         items: res.Data
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
+    },
+    null, 
+    false, 
+    false,
+    false); //调用get方法情就是户数
   },
   //逆解析
   NijieXi: function (longitude, latitude) {

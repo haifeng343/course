@@ -33,39 +33,16 @@
     <view class='start'>
       <text class='moneyTxt'>￥</text>
       <input class='money' type='digit' bindinput='amoutChange' value='{{amount}}'></input>
-      <text class='moneyTxt end' bindtap='all'>全部</text>
+      <image src='../../images/clear.png' class='clears' wx:if="{{amount}}" bindtap='clear' mode='widthFix'></image>
+      <text class='moneyTxt end' bindtap='all' wx:if="{{money>=0}}">全部</text>
+      <text class='moneyTxt end' wx:else>全部</text>
     </view>
   </view>
   <view class='item2 bor'>
-    <view  wx:if="{{amount!=''&&amount!=null }}">额外扣除￥0.1 服务费（费率0.10%）</view>
+    <view  wx:if="{{amount>0 && feeMoney>0}}">额外扣除￥{{feeMoney}} 服务费（费率{{fee}}%）</view>
     <view wx:else>可用余额￥{{money}}</view>
   </view>
 
-  <view class='btn1' bindtap='GetApply' wx:if="{{amount!=''&&amount!=null}}">提现</view>
+  <view class='btn1' bindtap='GetApply' wx:if="{{amount>0 && wihdraw}}">提现</view>
   <view class='btn1 g1' wx:else>提现</view>
-
-  <!--确认提现提示弹出框-->
-
-  <view class="zan-dialog {{ showSure ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
-    <view class="zan-dialog__mask" bindtap="toggleDialog" />
-    <view class="zan-dialog__container">
-      <view class='zan-title'>确认提现</view>
-      <view class='le zan-til'></view>
-      <view class='zan-content'>提现</view>
-      <view class='zan-content le'>￥{{amount}}</view>
-      <view class='btnSubmit' bindtap='submitTo'>确认提现</view>
-    </view>
-  </view>
-
-  <!--提现申请成功提示弹出框-->
-  <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
-    <view class="zan-dialog__mask" />
-    <view class="zan-dialog__container">
-      <image class='success1' src='../../images/success1.png' mode='widthFix' lazy-load='true'></image>
-      <view class='le zan-til'></view>
-      <view class='zan-content le1'>提现申请成功，等待银行处理</view>
-      <view class='zan-content'>预计一个工作日内到账</view>
-      <view class='know' bindtap='closeded'>知道了</view>
-    </view>
-  </view>
 </view>

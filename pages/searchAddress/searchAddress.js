@@ -65,14 +65,11 @@ Page({
       that.setData({
         items: res.Data
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
+    },
+    null, 
+    false, 
+    false, 
+    false); //调用get方法情就是户数
   },
   //逆解析
   NijieXi: function(longitude, latitude) {
@@ -138,7 +135,6 @@ Page({
             })
           }
         })
-
       }
     });
     qqmapsdk.search({

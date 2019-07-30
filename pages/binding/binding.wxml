@@ -3,6 +3,7 @@
     <view class="loginInput">
       <view class="subtitle">手机号</view>
       <input type="number" placeholder="请输入新手机号" value="{{Mobile}}" bindinput="getCode" />
+      <image src='../../images/clear.png' wx:if="{{Mobile}}" bindtap='clear' class='cleard'></image>
     </view>
     <view class="loginInput">
       <view class="subtitle">验证码</view>
@@ -21,7 +22,7 @@
       <icon class="delete" type="clear" size="15" bindtap="closeAlert" />
     </view>
     <view class="inputBox">
-      <input type="text" class='codeNumber' placeholder="请输入" value="{{PicVerifycode}}" bindinput='codeText' placeholder-style="color:#ccc;" />
+      <input type="text" class='codeNumber' placeholder="请输入" value="{{PicVerifycode}}" bindinput='codeText' cursor-spacing='118rpx' placeholder-style="color:#ccc;" />
       <image src="{{PicUrl}}" class='codeImg' alt="failed" bindtap="codeyan" alt=""></image>
     </view>
     <view class="loginBtns" bindtap="getSMSCode">确定</view>

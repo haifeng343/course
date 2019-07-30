@@ -72,13 +72,6 @@ Page({
         UseScoreAmount: Number(res.Data.UseScoreAmount / 100).toFixed(2),
         TotalAmountFen: Number((res.Data.TotalAmount - res.Data.UseScoreAmount) / 100).toFixed(2)
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   swich: function() {
@@ -86,27 +79,6 @@ Page({
     this.setData({
       "checked": !checked
     })
-  },
-  //支付成功
-  payok: function(onSuccess) {
-    var that = this;
-    var url = 'order/pay/issuccess'
-    var params = {
-      OrderId: that.data.OrderId,
-    }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
-      that.setData({
-        orderContent: res.Data
-      })
-      onSuccess(res.Data);
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
   },
   oderPay: function() {
     var that = this;
@@ -150,13 +122,6 @@ Page({
           });
         },
       });
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   //用户取消支付
@@ -166,9 +131,7 @@ Page({
     var params = {
       Id: that.data.OrderId,
     }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
-
-    });
+    netUtil.postRequest(url, params, function(res){}, '',false,false,false);
   },
   paySure: function() {
     wx.showLoading({
@@ -183,14 +146,13 @@ Page({
       UseScore: that.data.checked,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
-      wx.hideLoading();
       that.setData({
         OrderId: res.Data.OrderId,
         OrderSn: res.Data.OrderSn,
         PayAmount: res.Data.PayAmount
       })
       that.oderPay();
-    });
+    },'',false);
 
   },
   onShareAppMessage: function(res) {

@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -83,7 +83,7 @@
 					"id": 4,
 					"name": "groupDetail",
 					"pathName": "pages/groupDetail/groupDetail",
-					"query": "Longitude=120.13026&Latitude=30.25961&Id=15",
+					"query": "Longitude=0.0&Latitude=0.0&Id=0",
 					"scene": null
 				},
 				{
@@ -139,7 +139,7 @@
 					"id": 12,
 					"name": "payOrder",
 					"pathName": "pages/payOrder/payOrder",
-					"query": "Id=20&ids=70",
+					"query": "Id=24&ids=93",
 					"scene": null
 				},
 				{

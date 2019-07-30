@@ -32,7 +32,7 @@
 }
 .ml{
   display: block;
-  width: 76%;
+  width: 70%;
   overflow: hidden;
   word-break: break-keep;
   text-overflow: ellipsis;
@@ -68,8 +68,8 @@
   text-overflow: ellipsis;
 }
 .topImg{
-  width: 160rpx;
-  height: 160rpx;
+  width: 155rpx;
+  height: 198rpx;
   border-radius: 15rpx;
 }
 .courseRow{

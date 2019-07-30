@@ -4,7 +4,7 @@ Page({
 
   data: {
     date: '', //不填写默认今天日期，填写后是默认日期
-    date2:[],
+    date2: [],
     dataStart: '', //有效日期
     dataEnd: '', //
     showError: false,
@@ -16,13 +16,13 @@ Page({
     statusdes: '',
     List: [],
   },
-  onShow: function() {
+  initPicker: function() {
     var date = new Date();
     let arr = [],
       arr1 = [];
     this.setData({
-      year: date.getFullYear(),
-      month: date.getMonth() + 1
+      year: '全部', //date.getFullYear(),
+      month: '全部' //date.getMonth() + 1
     })
 
     var year = date.getFullYear();
@@ -30,11 +30,12 @@ Page({
     for (var i = year; i > 1970; i--) {
       arr.push(i)
     }
+
     arr1 = ['全部', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     this.setData({
       array: [arr, arr1],
-      now:this.data.year + '-' + this.data.month,
-      date2: [arr.indexOf(this.data.year), arr1.indexOf(this.data.month+'')]
+      now: (this.data.year == '全部' && this.data.month == '全部') ? '全部' : (this.data.year + '-' + this.data.month),
+      date2: [arr.indexOf(this.data.year), arr1.indexOf(this.data.month + '')],
     })
   },
   onLoad: function(options) {
@@ -49,9 +50,10 @@ Page({
 
       })
     })
+    this.initPicker();
     this.init();
   },
-  init:function() {
+  init: function() {
     this.getData();
   },
   getData: function() {
@@ -82,14 +84,6 @@ Page({
       that.setData({
         List: arr1
       })
-      wx.hideLoading();
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   bindDateChange: function(e) {
@@ -126,9 +120,6 @@ Page({
   //上拉加载更多
   onReachBottom: function() {
     let that = this;
-    wx.showLoading({
-      title: '玩命加载中',
-    });
     var temp_page = this.data.page;
     temp_page++;
     this.setData({
@@ -139,9 +130,6 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh: function() {
-    wx.showLoading({
-      title: "玩命加载中",
-    });
     this.setData({
       page: 1
     });
@@ -149,7 +137,7 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

@@ -57,25 +57,24 @@ App({
 
       source: 'url("https://www.your-server.com/PingFangSC-Medium.ttf")',
 
-      success: function() {
-        
+      success: function() { 
       }
-
     })
   },
   getKeyWord:function() {
     let that = this;
     var url = 'user/place/key';
-    var params = {
-      
-    }
+    var params = {}
+    
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      // console.log(res)
       wx.setStorageSync('keyword', res.Data.Keyword)
-    }); 
+    },
+    null,
+    false,
+    false,
+    false); 
   },
   globalData: {
     userInfo: null
   },
-
 })

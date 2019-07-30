@@ -51,13 +51,6 @@ Page({
         List :res.Data.List,
         Info:res.Data
       })
-    }, function (msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   onShareAppMessage: function (res) {

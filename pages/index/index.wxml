@@ -6,7 +6,7 @@
   </view>
 </view>
 <view style="padding-top:{{statusBarHeight+45/375*winWidth}}px" class='topInput'>
-  <input class='SearchInput' bindtap='searchTo' disabled placeholder='新品上架'></input>
+  <input class='SearchInput' bindtap='searchTo' disabled placeholder='机构名称/课程'></input>
 </view>
 <view class='banner' wx:if="{{imgUrls.length>0}}">
   <swiper bindanimationfinish="swiperChangeTo" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1'>
@@ -38,7 +38,7 @@
         <view class='distance' style='font-size:24rpx' wx:if="{{item.TradingAreaDistance<1}}">{{item.TradingAreaDistance}}m</view>
         <view class='distance' style='font-size:24rpx' wx:else>{{item.TradingAreaDistance}}km</view>
       </view>
-      <view class='time h40'>活动截止：{{item.EndTime}}</view>
+      <view class='time h40'>截止时间：{{item.EndTime}}</view>
       <view class='tagList'>
         <view class='tagItem' style='font-size:24rpx;margin-top:-10rpx;' wx:for='{{item.TagList}}' wx:for-item="k" wx:key style='background:{{k.TagBgColor}};color:{{k.TagFontColor}};border:2rpx solid {{k.BorColor}}'>{{k.TagName}}</view>
       </view>

@@ -17,14 +17,13 @@ Page({
     statusdes: '',
     List: [],
   },
-  onShow: function () {
-    
+  initPicker: function () {
     var date = new Date();
     let arr = [],
       arr1 = [];
     this.setData({
-      year: date.getFullYear(),
-      month: date.getMonth() + 1
+      year: '全部', //date.getFullYear(),
+      month: '全部' //date.getMonth() + 1
     })
 
     var year = date.getFullYear();
@@ -32,13 +31,13 @@ Page({
     for (var i = year; i > 1970; i--) {
       arr.push(i)
     }
+
     arr1 = ['全部', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     this.setData({
       array: [arr, arr1],
-      now: this.data.year + '-' + this.data.month,
-      date2: [arr.indexOf(this.data.year), arr1.indexOf(this.data.month + '')]
+      now: (this.data.year == '全部' && this.data.month == '全部') ? '全部' : (this.data.year + '-' + this.data.month),
+      date2: [arr.indexOf(this.data.year), arr1.indexOf(this.data.month + '')],
     })
-    this.init();
   },
   init: function () {
     this.getData();
@@ -67,14 +66,6 @@ Page({
       that.setData({
         List: arr1
       })
-      wx.hideLoading();
-    }, function (msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   cashbackDetail: function () {
@@ -118,23 +109,16 @@ Page({
   },
   //上拉加载更多
   onReachBottom: function () {
-    let that = this;
-    wx.showLoading({
-      title: '玩命加载中',
-    });
     var temp_page = this.data.page;
     temp_page++;
     this.setData({
       page: temp_page
     });
-    that.getData();
 
+    this.getData();
   },
   //下拉刷新
   onPullDownRefresh: function () {
-    wx.showLoading({
-      title: "玩命加载中",
-    });
     this.setData({
       page: 1
     });
@@ -146,14 +130,17 @@ Page({
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
+    
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
     shareApi.getShare().then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
         obj: res.Data,
-
       })
     })
+
+    this.initPicker();
+    this.init();
   },
   onShareAppMessage: function (res) {
     return {

@@ -20,6 +20,11 @@ Page({
   closeAlert: function() {
 
   },
+  clear:function() {
+    this.setData({
+      Mobile:''
+    })
+  },
   getCode: function(e) {
     this.setData({
       Mobile: e.detail.value
@@ -73,13 +78,6 @@ Page({
           imgCodeShow: true,
         })
       }
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   //图片验证码 
@@ -87,7 +85,8 @@ Page({
     let that = this;
     var val = e.detail.value;
     that.setData({
-      PicVerifycode: val
+      PicVerifycode: val,
+
     })
   },
   //获取验证码
@@ -137,13 +136,6 @@ Page({
       that.setData({
         ActionCode: res.Data
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   getSMSCode: function() {
@@ -168,13 +160,6 @@ Page({
         that.codetime();
         that.sendCode();
       }
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
     // that.setData({
     //   imgCodeShow: false,
@@ -190,22 +175,24 @@ Page({
       ActionCode: that.data.ActionCode
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      wx.showToast({
-        icon: 'none',
-        title: that.data.ids == 1 ? "修改成功!" : "绑定成功!"
+      wx.showModal({
+        title: that.data.ids == 1 ? "成功修改手机号" : "成功绑定手机号",
+        content: '',
+        showCancel:false,
+        success:function(res){
+          let pages = getCurrentPages(); //当前页面
+          let prevPage = pages[pages.length - 2]; //上一页面
+          prevPage.setData({
+            mobile: that.data.Mobile,
+          })
+          let userInfo = wx.getStorageSync('userInfo');
+          userInfo.Mobile = that.data.Mobile;
+          wx.setStorageSync('userInfo', userInfo);
+          wx.navigateBack({
+            delta: 1
+          })
+        }
       })
-      setTimeout(() => {
-        wx.navigateBack({
-          delta: 1
-        })
-      }, 500)
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   closeAlert: function() {

@@ -61,7 +61,7 @@ Page({
         obj: res.Data,
 
       })
-    })
+    });
     this.init();
   },
   init: function() {
@@ -138,10 +138,9 @@ Page({
       that.setData({
         modelList: tempModelList
       })
-      wx.hideLoading();
     });
   },
-  //取消订单
+  //取消退款
   cancelOrder: function(e) {
     let that = this;
     var url = 'order/refund/cancel';
@@ -168,13 +167,6 @@ Page({
       that.setData({
         modelList: tempList
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   /**

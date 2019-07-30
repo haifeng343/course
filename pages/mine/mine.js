@@ -90,8 +90,12 @@ Page({
         buttons: temp
       })
       wx.setStorageSync('buttons', temp);
-
-    });
+    },
+    null,
+    false,
+    true,
+    false
+    );
   },
   bindLogin: function() {
     wx.navigateTo({
@@ -113,7 +117,11 @@ Page({
         score: res.Data.Score
       })
       wx.setStorageSync('wallet', res.Data)
-    });
+    }, 
+    null,
+    false, 
+    false, 
+    false);
   },
   onLoad(options) {
     if (options.recommand) {
@@ -216,7 +224,7 @@ Page({
                     key: 'code',
                     data: res.code,
                   });
-                  netUtil.postRequest(url, params, that.onSuccess, that.onFailed); //调用get方法情就是户数
+                  netUtil.postRequest(url, params, that.onSuccess); //调用get方法情就是户数
                 }
               });
             }
@@ -237,12 +245,6 @@ Page({
     wx.setStorageSync('usertoken', res.Data.UserToken);
     that.setData({
       userInfo: res.Data
-    })
-  },
-  onFailed: function() { //onFailed失败回调
-    wx.showToast({
-      icon: 'none',
-      title: res.Data.ErrorMessage,
     })
   },
   onShareAppMessage: function(res) {

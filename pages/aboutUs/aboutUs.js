@@ -26,7 +26,6 @@ Page({
       Code: 'AboutUs'
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      // console.log(res)
       that.setData({
         html:res.Data.Content
       })

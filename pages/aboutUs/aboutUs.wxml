@@ -1,4 +1,4 @@
 
 <image class='logo' src='../../images/logo.png' mode='widthFix'></image>
-<view class='manaText'>版本号v1.0.5</view>
+<view class='manaText'>版本号v1.0.3</view>
 <rich-text nodes="{{html}}"></rich-text>

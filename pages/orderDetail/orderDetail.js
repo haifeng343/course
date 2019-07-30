@@ -54,14 +54,6 @@ Page({
         PayAmount: Number(res.Data.PayAmount/100).toFixed(2),
         RefundFailReason: res.Data.RefundFailReason
       })
-
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   //条形码弹窗
@@ -114,18 +106,10 @@ Page({
         prevPage.setData({ //直接给上移页面赋值
           modelList: tempList,
         });
-
       }
       wx.navigateBack({
         delta: 1
       });
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   //重新退款

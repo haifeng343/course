@@ -13,9 +13,11 @@
 }
 
 .imgCoded {
-  font-size: 28rpx;
+  font-size: 24rpx;
   margin: 0;
   position: absolute;
+  box-sizing: border-box;
+  padding: 0 10rpx;
   right: 5%;
 }
 
@@ -27,6 +29,15 @@
   display: flex;
   align-items: center;
   border-bottom: 1rpx solid #f6f6f6;
+  position: relative;
+}
+
+.cleard {
+  width: 28rpx;
+  height: 28rpx;
+  position: absolute;
+  right: 5%;
+  z-index: 55;
 }
 
 .subtitle {
@@ -153,6 +164,7 @@ input {
 
 .codeNumber {
   text-align: left;
+  color: #000;
 }
 
 .delete {

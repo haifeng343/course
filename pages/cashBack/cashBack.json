@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "返现记录"
+  "navigationBarTitleText": "返现记录",
+  "enablePullDownRefresh": true
 }

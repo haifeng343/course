@@ -10,7 +10,28 @@ page{
   background-color: #fff;
   font-size: 32rpx;
 }
-
+.groupDetail{
+  width: 100%;
+  height: auto;
+  padding: 0rpx 5%;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.groupDetail_title{
+  font-size: 32rpx;
+  color: #000;
+  line-height: 60rpx;
+}
+.exList{
+  padding:20rpx 0;
+  background-color:#fff;
+  margin-top: 20rpx
+}
+.groupDetail_content{
+  font-size: 28rpx;
+  color: #5b5b5b;
+  line-height: 45rpx;
+}
 .courseList {
   background-color: #fff;
   width: 100%;
@@ -162,7 +183,8 @@ swiper-item {
 
 .cover {
   width: 210rpx;
-  height: 210rpx;
+  height: 268rpx;
+  border-radius: 15rpx;
 }
 
 .rightContent {

@@ -12,15 +12,18 @@ function getShare(pageCode, details) {
     PageCode: pageCode,
     Details: details
   }
+  
   return new Promise((resolve, reject) => {
     netUtil.postRequest(url,params, function (res) { //onSuccess成功回调、
       resolve(res)
     }, function (msg) { //onFailed失败回调
       reject(msg)
-    }); //调用get方法情就是户数
+    }, 
+    false,
+    false,
+    false); //调用get方法情就是户数
   })
 }
-
 
 module.exports = {
   getShare: getShare,

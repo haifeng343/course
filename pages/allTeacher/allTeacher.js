@@ -49,20 +49,13 @@ Page({
         TeacherCount: res.Data.TeacherCount,
         teacherList: res.Data.TeacherList,
       })
-      console.log(that.data.teaList);
-    }, function (msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   //上拉刷新
   onReachBottom: function () {
     let that = this;
     that.getData();
+    wx.stopPullDownRefresh();
   },
 
   onShareAppMessage: function (res) {

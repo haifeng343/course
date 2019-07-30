@@ -6,19 +6,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    showSure: false,
-    showSuccess: false, //提现申请成功
     amount: '', //提现金额
     money: '', //可提现金额
-    show: false,
-    showEor: true,
     wihdraw: {},
     CardNumber: '',
+    fee:'',//服务费
+    feeMoney:'',//额外扣除
+    CashServiceFeeRate:'',
   },
   onShow: function() {
     let wallet = wx.getStorageSync('wallet');
+    let CashServiceFeeRate = wx.getStorageSync('userInfo').CashServiceFeeRate;
     this.setData({
-      money: Number(wallet.Money / 100).toFixed(2)
+      money: Number(wallet.Money / 100).toFixed(2),
+      fee: Number(CashServiceFeeRate/100).toFixed(2),
+      CashServiceFeeRate: CashServiceFeeRate
     })
   },
   onLoad(options) {
@@ -38,25 +40,23 @@ Page({
   init:function() {
     this.carList();
   },
+  clear:function() {
+    this.setData({
+      amount:''
+    })
+  },
   changeCard: function(e) {
     wx.navigateTo({
-      url: '/pages/bankList/bankList?item=' + e.currentTarget.dataset.item,
+      url: '/pages/bankList/bankList?item=' + e.currentTarget.dataset.item+'&ibd=true',
     })
   },
   amoutChange: function(e) {
-    this.setData({
-      amount: e.detail.value
-    })
-    if(this.data.amount!=''){
-      this.setData({
-        show:true,
-        showEor:false
-      })
-    }
+    this.doChange(e.detail.value);
   },
-  toggleDialog: function() {
+  doChange: function(value) {
     this.setData({
-      showSure: false
+      amount: value,
+      feeMoney: (Number(value) * this.data.CashServiceFeeRate / 10000).toFixed(2)
     })
   },
   submitTo: function() {
@@ -81,19 +81,18 @@ Page({
           wihdraw:null
         })
       }
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   //点击提现
   GetApply: function() {
-    this.setData({
-      showSure: true,
+    let that = this;
+    wx.showModal({
+      title: '请确认提现￥' + this.data.amount,
+      success:function(res) {
+        if(res.confirm){
+          that.getData();
+        }
+      }
     })
   },
   //提现
@@ -102,35 +101,26 @@ Page({
     var url = 'user/cash/apply';
     var params = {
       BankCardId: that.data.wihdraw.BankCardId,
-      Amount: that.data.amount * 100,
+      Amount: Math.floor(that.data.amount * 100),
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      that.setData({
-        showSure: false,
-        showSuccess: true,
-        amount: '',
+      wx.showModal({
+        title: '提现成功',
+        content: '提现申请成功，等待银行处理' +'\r\n'+'预计 1 个工作日内到账',
+        showCancel: false,
+        confirmColor: '#3DD6D1',
+        confirmText: '知道了',
+        success:function(res){
+          that.setData({
+            amount:''
+          })
+        }
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
+    }); 
   },
   //点击全部
   all: function() {
-    this.setData({
-      amount: this.data.money,
-      show: true,
-      showEor: false
-    })
-  },
-  closeded: function() {
-    this.setData({
-      showSuccess: false,
-    })
+    this.doChange(this.data.money);
   },
   withdrawLog: function() {
     wx.navigateTo({

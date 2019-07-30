@@ -6,7 +6,7 @@ page{
   height: 260rpx;
   display: flex;
   justify-content: center;
-  margin: 0rpx auto 0;
+  margin: 40rpx auto 0;
 }
 .text{
   font-size: 32rpx;

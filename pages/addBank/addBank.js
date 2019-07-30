@@ -21,10 +21,21 @@ Page({
     ActionCode:'',//操作码
     tips:false,//验证码发送提示
     carShowSuccess:false,//绑定成功
+    codePhone:'',//验证码发送的手机号
   },
   navtoCard: function() {
     wx.navigateTo({
       url: '/pages/keepCarList/keepCarList',
+    })
+  },
+  clear:function() {
+    this.setData({
+      CardNumber:'',
+    })
+  },
+  cleard:function() {
+    this.setData({
+      phoneNumber:''
     })
   },
   //设置name
@@ -49,19 +60,12 @@ Page({
       CardNumber: that.data.CardNumber
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-
       that.setData({
         next: false,
         bankName: res.Data.BankName + res.Data.CardBreed,
         Icar: res.Data,
+        BankIconUrl: res.Data.BankIconUrl
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   //获取图片验证码
@@ -73,19 +77,11 @@ Page({
       CodeType: 2,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      if (res.ErrorCode == 0) {
-        that.setData({
-          imgCodeShow: true,
-          imgCodeUrl:res.Data
-        })
-      }
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
+      that.setData({
+        imgCodeShow: true,
+        imgCodeUrl:res.Data,
+        PicVerifycode:'',
+      })
     }); //调用get方法情就是户数
   },
   //发送验证码
@@ -101,13 +97,10 @@ Page({
       that.setData({
         ActionCode: res.Data
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
+      wx.showToast({
+        icon:'none',
+        title: '验证码已发送',
+      })
     }); //调用get方法情就是户数
   },
   codetime() { // 点击获取验证码
@@ -154,21 +147,12 @@ Page({
         that.setData({
           imgCodeShow: false,
           tips:true,
+          codePhone:that.data.phoneNumber,
         })
         that.codetime();
         that.sendCode();
       }
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
-    // that.setData({
-    //   imgCodeShow: false,
-    // })
+    }); 
   },
   //下一步
   next: function() {
@@ -201,26 +185,21 @@ Page({
       ActionCode: that.data.ActionCode
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      wx.showToast({
-        icon: 'none',
-        title: "绑定成功!"
+      wx.showModal({
+        title: '绑定成功',
+        showCancel:false,
+        confirmColor: '#3DD6D1',
+        confirmText: '知道了',
+        success: function (res) {
+          var pages = getCurrentPages();
+          var beforePage = pages[pages.length - 2];
+          beforePage.init();
+          wx.navigateBack({
+            delta: 1
+          })
+        }
       })
-      setTimeout(() => {
-        wx.navigateBack({
-          delta: 1
-        })
-        that.setData({
-          carShowSuccess:true,
-        })
-      }, 500)
-    }, function (msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
+    }); 
   },
   //设置手机号
   getPhoneNumber: function(e) {
@@ -241,19 +220,19 @@ Page({
     })
   },
   Description: function() {
-    this.setData({
-      showSuccess: true
-    })
-  },
-  closeded: function() {
-    this.setData({
-      showSuccess: false
+    wx.showModal({
+      title: '持卡人说明',
+      content: '为了资金安全，只能绑定当前持卡人的银行卡',
+      showCancel: false,
+      confirmColor: '#3DD6D1',
+      confirmText: '知道了',
     })
   },
   //关闭图片验证码弹窗
   closeAlert: function() {
     this.setData({
       imgCodeShow: false,
+      PicVerifycode:false,
     })
   },
   onLoad(options) {
@@ -265,7 +244,6 @@ Page({
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
         obj: res.Data,
-
       })
     })
   },
@@ -273,7 +251,6 @@ Page({
 
   },
   onShareAppMessage: function (res) {
-
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

@@ -1,6 +1,6 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-let baseUrl = "https://xgt.guditech.com/rocketclient/";
+let baseUrl = "https://test.guditech.com/rocketclient/";
 Page({
   data: {
     array: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
@@ -104,13 +104,6 @@ Page({
           });
         }
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   chooseImg: function(e) {
@@ -190,13 +183,6 @@ Page({
       that.setData({
         lpm: res.Data
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     });
   },
   /*提交*/

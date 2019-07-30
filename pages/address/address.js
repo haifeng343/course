@@ -9,12 +9,7 @@ Page({
   },
   edit: function(e) {
     let that = this;
-    console.log(e)
-    // console.log(e)
     let item = e.currentTarget.dataset;
-    // wx.navigateTo({
-    //   url: '/pages/editAddress/editAddress?address=' + item.address + '&title=' + item.title + '&lat=' + item.lat + '&lng=' + item.lng + '&tag=' + item.tag + '&addressId=' + item.addressid + '&doornumber=' + item.doornumber,
-    // })
     wx.showActionSheet({
       itemList: ['编辑', '删除'],
       success: function (e) {
@@ -85,40 +80,6 @@ Page({
   onPullDownRefresh:function() {
     this.getData();
     wx.stopPullDownRefresh();
-  },
-  //删除事件
-
-  del: function(e) {
-    let that = this;
-    wx.showModal({
-      title: '地址管理',
-      content: '确定要删除此地址吗？',
-      success: function(sm) {
-        if (sm.confirm) {
-          var url = 'user/address/delete';
-          var params = {
-            Id: e.currentTarget.dataset.id
-          }
-          netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-            wx.showToast({
-              icon: "none",
-              title: '删除成功',
-            });
-            that.init();
-          });
-        } else if (sm.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    });
-    //调用get方法情就是户数
-    // this.data.items.splice(e.currentTarget.dataset.index, 1)
-    // this.setData({
-
-    //   items: this.data.items
-
-    // })
-
   },
 
   onShareAppMessage: function(res) {

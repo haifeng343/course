@@ -29,7 +29,6 @@ page {
 .center {
   font-size: 26rpx;
 }
-
 .loginBtn {
   width: 80%;
   font-size: 32rpx;

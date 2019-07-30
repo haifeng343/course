@@ -6,6 +6,7 @@ page {
 .container {
   max-height: 100%;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   padding: 20rpx 0rpx 100rpx;
 }
 .center{
@@ -83,6 +84,7 @@ page {
   padding: 0 0 0 5%;
   box-sizing: border-box;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
   padding-bottom: 100rpx;
 }
 

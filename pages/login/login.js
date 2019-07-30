@@ -36,7 +36,7 @@ Page({
                     Signature: e.signature
                   }
                   // console.log(params);return;
-                  netUtil.postRequest(url, params, that.onSuccess, that.onFailed); //调用get方法情就是户数
+                  netUtil.postRequest(url, params, that.onSuccess); //调用get方法情就是户数
                 }
               });
             }
@@ -53,12 +53,6 @@ Page({
     wx.setStorageSync('usertoken', res.Data.UserToken);
     that.walletd();
   },
-  onFailed: function() { //onFailed失败回调
-    wx.showToast({
-      icon: 'none',
-      title: res.Data.ErrorMessage,
-    })
-  },
   walletd: function() {
     let that = this;
     var url = 'user/wallet';
@@ -71,9 +65,10 @@ Page({
       wx.navigateBack({
         delta: 1
       })
-    });
+    },
+    null,
+    false,
+    false,
+    false);
   },
-  onShareAppMessage: function() {
-
-  }
 })

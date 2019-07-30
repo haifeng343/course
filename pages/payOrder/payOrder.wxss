@@ -40,15 +40,15 @@ page {
 .activity {
   font-size: 28rpx;
   font-weight: 600;
-  line-height: 40rpx;
+  line-height: 35rpx;
   word-break: keep-all;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .topImg {
-  width: 150rpx;
-  height: 150rpx;
+  width: 155rpx;
+  height: 198rpx;
   border-radius: 10rpx;
 }
 
@@ -78,10 +78,10 @@ page {
 }
 
 .mt1 {
-  margin-top: 4rpx;
+  margin-top: 0rpx;
 }
 .mt2{
-  margin-top: 4rpx;
+  margin-top: 0rpx;
 }
 
 .ml15 {
@@ -99,7 +99,7 @@ page {
   height: auto;
   font-size: 24rpx;
   color: #5b5b5b;
-  line-height: 40rpx;
+  line-height: 35rpx;
 }
 
 .rowImg {
@@ -128,7 +128,7 @@ page {
   text-overflow: ellipsis; */
   color: #5b5b5b;
   height: auto;
-  line-height: 40rpx;
+  line-height: 35rpx;
 }
 
 .payTitle {

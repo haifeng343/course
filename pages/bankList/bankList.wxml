@@ -1,17 +1,19 @@
 <view class='List' wx:if="{{List.length>0}}">
-  <view class='item' wx:for="{{List}}" wx:key data-item="{{item}}" bindtap='navtoWith'>
-    <image class='bgImg' src='{{item.BackgroundUrl}}' mode='widthFix' lazy-load='true'></image>
-    <view class='between abso'>
-      <view class='start'>
-        <image class='bankIcon' src='{{item.BankIconUrl}}' mode='widthFix' lazy-load='true'></image>
-        <view class='column'>
-          <view class='t1'>{{item.BankName}}</view>
-          <view class='t2'>{{item.CardBreed}}</view>
-          <view class='t3'>{{item.CardNumber}}</view>
+  <view class='item' wx:for="{{List}}" wx:key>
+    <view bindtap='navtoWith' data-item="{{item}}">
+      <image class='bgImg' src='{{item.BackgroundUrl}}' mode='widthFix' lazy-load='true'></image>
+      <view class='between abso'>
+        <view class='start'>
+          <image class='bankIcon' src='{{item.BankIconUrl}}' mode='widthFix' lazy-load='true'></image>
+          <view class='column'>
+            <view class='t1'>{{item.BankName}}</view>
+            <view class='t2'>{{item.CardBreed}}</view>
+            <view class='t3'>{{item.CardNumber}}</view>
+          </view>
         </view>
       </view>
-      <view class='delete' data-id="{{item.BankCardId}}" bindtap='deleted'>解绑</view>
     </view>
+    <view class='delete' data-id="{{item.BankCardId}}" bindtap='deleted'>解绑</view>
   </view>
 </view>
 <view class='nohasLog' wx:else>

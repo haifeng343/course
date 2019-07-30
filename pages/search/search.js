@@ -133,13 +133,6 @@ Page({
           title: '暂无相关信息',
         })
       }
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   //删除历史搜索

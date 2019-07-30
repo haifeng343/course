@@ -13,5 +13,5 @@
 </view>
 <view class='around'>
   <button class='btnd btnd1' bindtap='navto'>订单详情</button>
-  <button class='btnd' bindtap='groupTo'>返回团单</button>
+  <button class='btnd' bindtap='groupTo'>返回首页</button>
 </view>

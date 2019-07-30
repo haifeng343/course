@@ -2,10 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/mine/mine",
-    "pages/authorization/authorization",
-    "pages/gobind/gobind",
     "pages/binding/binding",
-    "pages/groupDetail/groupDetail",
     "pages/courseDetail/courseDetail",
     "pages/allTeacher/allTeacher",
     "pages/selectAddress/selectAddress",
@@ -35,7 +32,6 @@
     "pages/bankList/bankList",
     "pages/addBank/addBank",
     "pages/searchAddress/searchAddress",
-    "pages/demo/demo",
     "pages/search/search",
     "pages/keepCarList/keepCarList",
     "pages/login/login",
@@ -43,7 +39,8 @@
     "pages/WebView/WebView",
     "pages/aboutUs/aboutUs",
     "pages/wait/wait",
-    "pages/jifen/jifen"
+    "pages/jifen/jifen",
+    "pages/integralList/integralList"
   ],
   "window": {
     "backgroundTextStyle": "dark",

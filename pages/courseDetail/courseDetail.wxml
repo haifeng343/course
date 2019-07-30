@@ -20,7 +20,7 @@
     <view class='howMoney'>￥{{Price}}</view>
   </view>
   <view class='somebody well'>
-    {{List.SoldCount}}人已参与 | 剩余名额 {{List.RemainCount}} 个
+    {{List.SoldCount}}人已参与 | {{List.RemainCount}} 剩余名额
   </view>
   <view class='courseRow start well'>
     <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
@@ -40,11 +40,11 @@
   <view class='courseRow start well'>
     <view class='start'>
       <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-      <view>课程数量 {{List.CoursesNumber}} 节</view>
+      <view>共有 {{List.CoursesNumber}} 节课</view>
     </view>
     <view class='start'>
       <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
-      <view>单节课时 {{List.SingleTime}} min</view>
+      <view> {{List.SingleTime}} min/课时</view>
     </view>
   </view>
 </view>

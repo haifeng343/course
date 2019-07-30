@@ -80,13 +80,6 @@ Page({
       that.setData({
         GroupList: r
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
     }); //调用get方法情就是户数
   },
   //计算团单项目选择购买价格
@@ -109,19 +102,13 @@ Page({
         Remark: res.Data.Remark,
         TotalPrice: res.Data.TotalPrice == -1 ? -1 : res.Data.TotalPrice * 1.0 / 100,
       })
-    }, function(msg) { //onFailed失败回调
-      wx.hideLoading();
-      if (msg) {
-        wx.showToast({
-          title: msg,
-        })
-      }
-    }); //调用get方法情就是户数
+    },
+    '',
+    false);
   },
   swiperChangeTo: function(e) {
     this.setData({
-      current: e.detail.current,
-
+      current: e.detail.current
     })
   },
   //是否
