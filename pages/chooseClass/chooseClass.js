@@ -1,4 +1,3 @@
-
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 
@@ -43,7 +42,7 @@ Page({
     })
     that.init();
   },
-  init: function () {
+  init: function() {
     this.getData();
   },
   getData: function() {
@@ -98,13 +97,13 @@ Page({
       RelId: ids
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
-      that.setData({
-        Remark: res.Data.Remark,
-        TotalPrice: res.Data.TotalPrice == -1 ? -1 : res.Data.TotalPrice * 1.0 / 100,
-      })
-    },
-    '',
-    false);
+        that.setData({
+          Remark: res.Data.Remark,
+          TotalPrice: res.Data.TotalPrice == -1 ? -1 : res.Data.TotalPrice * 1.0 / 100,
+        })
+      },
+      '',
+      false);
   },
   swiperChangeTo: function(e) {
     this.setData({
@@ -113,6 +112,7 @@ Page({
   },
   //是否
   checkedTap: function(e) {
+    let success = true;
     let index = e.currentTarget.dataset.index;
     let s = this.data.GroupList[index];
     let arr = e.detail.value;
@@ -130,7 +130,7 @@ Page({
           v.checked = true;
         }
       } else {
-        for(let v of s.ItemList) {
+        for (let v of s.ItemList) {
           v.checked = false;
         }
         arr3 = [];
@@ -145,8 +145,9 @@ Page({
         arr = [arr[arr.length - 1]]
       } else if (s.MaxCount > 1) {
         if (arr.length > s.MaxCount) {
+          success = false;
           wx.showToast({
-            icon:'none',
+            icon: 'none',
             title: '请正确勾选(' + s.GroupName + ')',
           })
           for (let v of s.ItemList) {
@@ -172,14 +173,16 @@ Page({
     this.setData({
       [a]: arr
     });
-    this.hasMoney();
+    if (success) {
+      this.hasMoney();
+    }
   },
   paybtn: function() {
     for (let v of this.data.GroupList) {
       if (v.checkedArr.length < v.MinCount || v.checkedArr.length > v.MaxCount) {
         wx.showToast({
-          icon:'none',
-          title: '请正确勾选(' + v.GroupName+')',
+          icon: 'none',
+          title: '请正确勾选(' + v.GroupName + ')',
         })
         return;
       }
@@ -194,11 +197,11 @@ Page({
       url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id,
     })
   },
-  onPullDownRefresh:function() {
+  onPullDownRefresh: function() {
     this.getData();
     wx.stopPullDownRefresh()
   },
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

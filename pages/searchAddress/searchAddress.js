@@ -116,8 +116,8 @@ Page({
         //2、根据坐标获取当前位置名称，显示在顶部:腾讯地图逆地址解析
         qqmapsdk.reverseGeocoder({
           location: {
-            latitude: res.latitude,
-            longitude: res.longitude
+            latitude: 120.159862,
+            longitude: 30.176061
           },
           success: function(addressRes) {
             var address = addressRes.result.formatted_addresses.recommend;

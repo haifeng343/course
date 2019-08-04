@@ -53,6 +53,43 @@ Page({
 
     that.data.isLoaded = true;
   },
+  //坐标转换
+  reverseLocation: function (latitude, longitude, locationType, onsuccess, onfail, oncomplete) {
+    if (locationType == 0){
+      onsuccess({
+        lat: latitude,
+        lng: longitude
+      });
+
+      oncomplete();
+      return;
+    }
+
+    var that = this;
+    // 实例化API核心类
+    var geocoder = new QQMapWX({
+      key: 'IDXBZ-GUJCF-2QKJB-NXK2V-VRZXE-MGFUI' // 必填
+    });
+
+    // 调用接口
+    geocoder.reverseGeocoder({
+      location: {
+        latitude: latitude,
+        longitude: longitude
+      },
+      coord_type: 3, //baidu经纬度
+      success: function (res) {
+        onsuccess(res.result.ad_info.location);
+      },
+      fail: function() {
+        onfail();
+      },
+      complete: function() {
+        oncomplete();
+      }
+    });
+
+  },
   groupDetail: function(e) {
     const that = this;
     that.Id = parseInt(e.currentTarget.dataset.id)
@@ -123,37 +160,50 @@ Page({
       PageIndex: that.data.page,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      that.setData({
-        locationName: res.Data.LocationName,
-        longitude: res.Data.Longitude,
-        latitude: res.Data.Latitude
-      })
-
-      let arr = res.Data.List;
-      if (arr.length > 0) {
-        arr.forEach(item => {
-          item.TradingAreaDistance = (parseInt(item.TradingAreaDistance) / 1000).toFixed(1);
-        })
-        var temp = [];
-        if (that.data.page == 1) { //刷新
-          temp = arr;
-        } else { //加载更多
-          temp = that.data.groupList;
-          temp = temp.concat(arr);
-        }
-        let loc = that.data.locationName;
-        if (!loc) {
-          loc = res.Data.LocationName;
-        }
-        temp.forEach(item => {
-          item.SheetMinPrice = Number(item.SheetMinPrice / 100).toFixed(2);
-        })
-        that.setData({
-          groupList: temp,
-          Acount: res.Data,
-          locationName: loc
-        })
-      }
+      let tempRes=res;
+      that.reverseLocation(res.Data.Latitude, res.Data.Longitude, res.Data.LocationType, function(res) {
+        console.log(tempRes);
+        console.log(res);
+          wx.setStorageSync('loc', {
+            lat: res.lat,
+            lng: res.lng,
+            title: tempRes.Data.LocationName
+          });
+        },
+        function () {
+          wx.setStorageSync('loc', {
+            lat: tempRes.Data.Latitude,
+            lng: tempRes.Data.Longitude,
+            title: tempRes.Data.LocationName
+          });
+        },
+        function () {
+          let arr = tempRes.Data.List;
+          if (arr.length > 0) {
+            arr.forEach(item => {
+              item.TradingAreaDistance = (parseInt(item.TradingAreaDistance) / 1000).toFixed(1);
+            })
+            var temp = [];
+            if (that.data.page == 1) { //刷新
+              temp = arr;
+            } else { //加载更多
+              temp = that.data.groupList;
+              temp = temp.concat(arr);
+            }
+            let loc = that.data.locationName;
+            if (!loc) {
+              loc = tempRes.Data.LocationName;
+            }
+            temp.forEach(item => {
+              item.SheetMinPrice = Number(item.SheetMinPrice / 100).toFixed(2);
+            })
+            that.setData({
+              groupList: temp,
+              Acount: tempRes.Data,
+              locationName: loc
+            })
+          }
+        });
     }); //调用get方法情就是户数
   },
 
@@ -178,6 +228,7 @@ Page({
       },
     });
   },
+  
   init: function() {
     let that = this;
     wx.getStorage({
@@ -190,13 +241,11 @@ Page({
         });
       }
     });
-
     that.getLocation();
   },
 
   getLocation() {
     var that = this;
-
     // 实例化腾讯地图API核心类
     var qqmapsdk = new QQMapWX({
       key: 'IDXBZ-GUJCF-2QKJB-NXK2V-VRZXE-MGFUI' // 必填
@@ -209,7 +258,6 @@ Page({
           latitude: res.latitude,
           longitude: res.longitude,
         });
-
         qqmapsdk.reverseGeocoder({
           location: {
             latitude: res.latitude,
@@ -257,7 +305,7 @@ Page({
               })
             }
           },
-          fail: function(res) {
+          fail: function (res) {
             wx.showToast({
               title: '调用授权窗口失败',
               icon: 'success',

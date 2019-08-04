@@ -13,7 +13,7 @@ page{
 }
 .manaText{
   width: 100%;
-  font-size: 24rpx;
+  font-size: 28rpx;
   height: 50rpx;
   line-height: 50rpx;
   text-align: center;

@@ -96,7 +96,7 @@
     <view class='deduction'>-￥{{detail.ScoreAmount*1.0/100}}</view>
   </view>
   <view class='between bt2'>
-    <view class='tel'>实付款</view>
+    <view class='tel'>实付</view>
     <view class='money'>￥{{(detail.PayAmount-detail.ScoreAmount)*1.0/100}}</view>
   </view>
 </view>

@@ -22,7 +22,7 @@ function get(url, params, onSuccess, onFailed, isShowLoading = true, isShowError
  * @onFailed  失败回调
  */
 
-const baseUrl = "https://xgt.guditech.com/rocketclient/";
+const baseUrl = "https://test.guditech.com/rocketclient/";
 
 function request(url, params, method, onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin) {
   if (isShowLoading) {

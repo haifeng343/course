@@ -45,7 +45,7 @@ Page({
     })
     that.setData({
       // Mobile: options.phone,
-      ids: options.ids
+      ids: options.ids || ''
     })
     if (options.ids == 1) {
       wx.setNavigationBarTitle({

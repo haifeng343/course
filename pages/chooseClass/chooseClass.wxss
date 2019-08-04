@@ -166,11 +166,16 @@ swiper-item {
   width: 100%;
   position: relative;
   height: auto;
-  margin: 20rpx 0;
+  margin: 25rpx 0;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
+  border-bottom: 1rpx solid #f7f7f7;
+  padding-bottom: 15rpx;
+}
+.courseCont:last-child{
+  border: none;
 }
 
 .leftImg {

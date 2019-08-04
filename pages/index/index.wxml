@@ -49,7 +49,7 @@
         </view>
         <view class='bottom-right'>
           <view class='number'>已售 {{item.SoldCount}}</view>
-          <image style='line-height:42rpx' src='../../images/go.png' class='go' mode='aspectFill'></image>
+          <!-- <image style='line-height:42rpx' src='../../images/go.png' class='go' mode='aspectFill'></image> -->
         </view>
       </view>
     </view>

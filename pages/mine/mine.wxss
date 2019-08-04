@@ -17,7 +17,7 @@
 .more{
   font-size: 24rpx;
   margin-left: 15rpx;
-color: #ccc;
+  color: #ccc;
 }
 .paypag{
   width: 100%;

@@ -1,6 +1,6 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-let baseUrl = "https://test.guditech.com/rocketclient/";
+let baseUrl = "https://xgt.guditech.com/rocketclient/";
 Page({
   data: {
     array: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
@@ -53,6 +53,7 @@ Page({
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       console.log(res.Data.RefundStatus)
       var refundStatus = res.Data.RefundStatus;
+      var refundTime = res.Data.RefundTime;
       that.setData({
         List: res.Data
       })
@@ -66,6 +67,7 @@ Page({
           x.list.forEach(item => {
             if (that.data.orderId == item.OrderId) {
               item.UseStatus = refundStatus;
+              item.RefundTime = refundTime;
             }
           })
         })
@@ -76,6 +78,7 @@ Page({
       } else if (that.data.kmd == 2) {
         let temp = prevPage.data.detail;
         temp.UseStatus = refundStatus;
+        temp.RefundTime = refundTime;
         prevPage.setData({ //直接给上移页面赋值
           detail: temp,
         });
@@ -87,6 +90,7 @@ Page({
             x.list.forEach(item => {
               if (that.data.orderId == item.OrderId) {
                 item.UseStatus = refundStatus;
+                item.RefundTime = refundTime;
               }
             })
           })

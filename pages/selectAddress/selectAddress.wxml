@@ -26,8 +26,8 @@
 </view>
 <view class='line'></view>
 <view class='about'>
-  <view class='now md' wx:if="{{items}}">我的地址</view>
-  <view class='List' wx:if="{{items}}">
+  <view class='now md' wx:if="{{items.length>0}}">我的地址</view>
+  <view class='List' wx:if="{{items.length>0}}">
     <view class='item between' wx:for="{{items}}" wx:key data-title='{{item.AddressName}}' data-lat="{{item.Latitude}}" data-lng="{{item.Longitude}}" bindtap='navToIndex'>
       <view class='column'>
         <view class='start'>
@@ -40,8 +40,8 @@
       </view>
     </view>
   </view>
-  <view class='now md mt20 mb20' wx:if="{{nearList}}">附近地址</view>
-  <view class='addressList' wx:if="{{nearList}}">
+  <view class='now md mt20 mb20' wx:if="{{nearList.length>0}}">附近地址</view>
+  <view class='addressList' wx:if="{{nearList.length>0}}">
     <view class='addressItem' wx:for="{{nearList}}" wx:key bindtap='adsChange' data-title='{{item.title}}' data-location="{{item.location}}">{{item.title}}</view>
   </view>
 </view>

@@ -160,7 +160,13 @@ swiper-item image {
   justify-content: flex-start;
   box-sizing: border-box;
   flex-direction: row;
-  margin-top: 30rpx;
+  margin-top: 40rpx;
+  border-bottom: 1rpx solid #f7f7f7;
+  padding-bottom:15rpx;
+  margin-bottom:-15rpx;
+}
+.groupItem:last-child{
+  border: none;
 }
 
 .itemImg {

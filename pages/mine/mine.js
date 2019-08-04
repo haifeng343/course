@@ -10,10 +10,11 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: {},
     recommandCode: '',
-    money: '',
-    score: '',
+    money: 0,
+    score: 0,
     usertoken: "",
-    buttons: {}
+    buttons: {},
+    IsSalesman:'',
   },
   //复制微信号
   copyText: function (e) {
@@ -41,6 +42,7 @@ Page({
       let userInfo = wx.getStorageSync('userInfo');
       this.setData({
         userInfo: userInfo,
+        IsSalesman: userInfo.IsSalesman || '',
         recommandCode: userInfo.RecommandCode || '',
       })
     }
@@ -107,11 +109,16 @@ Page({
       url: '/pages/aboutUs/aboutUs',
     })
   },
+  bindIsSalesman:function() {
+    wx.navigateTo({
+      url: '/pages/map/map',
+    })
+  },
   walletd: function() {
     let that = this;
     var url = 'user/wallet';
     var params = {}
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function(res) { 
       that.setData({
         money: Number(res.Data.Money / 100).toFixed(2),
         score: res.Data.Score
@@ -127,7 +134,8 @@ Page({
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    var userInfo = wx.getStorageSync('userInfo');
+    var recommand = userInfo.RecommandCode;
     shareApi.getShare().then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({

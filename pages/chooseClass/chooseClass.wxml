@@ -88,7 +88,7 @@
     </checkbox-group>
   </view>
 </view>
-<view class='exList'>
+<view class='exList' wx:if="{{detailCent.ExtraList.length>0}}">
   <view class='groupDetail' wx:for="{{detailCent.ExtraList}}" wx:key wx:for-item="x">
     <view class='groupDetail_title' wx:if="{{x.Title}}">{{x.Title}}</view>
     <view class='groupDetail_content' wx:if="{{x.Title}}">{{x.Content}}</view>

@@ -40,7 +40,9 @@
     "pages/aboutUs/aboutUs",
     "pages/wait/wait",
     "pages/jifen/jifen",
-    "pages/integralList/integralList"
+    "pages/integralList/integralList",
+    "pages/map/map",
+    "pages/maps/maps"
   ],
   "window": {
     "backgroundTextStyle": "dark",
