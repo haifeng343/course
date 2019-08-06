@@ -1,0 +1,89 @@
+<view wx:if="{{next==true}}">
+  <view class="tip between">
+    <view>请绑定持卡人本人的银行卡</view>
+    <view class='lookd' bindtap='navtoCard'>查看支持的银行卡</view>
+  </view>
+  <view class='kep between'>
+    <view class='start'>
+      <view class='title'>持卡人</view>
+      <input placeholder='持卡人姓名' value='{{Name}}' bindinput='setName'></input>
+    </view>
+    <image class='Description' bindtap='Description' src='../../images/js.png' mode='widthFix' lazy-load='true'></image>
+  </view>
+  <view class='kep'>
+    <view class='start'>
+      <view class='title'>卡号</view>
+      <input type='number' value='{{CardNumber}}' placeholder='请输入银行卡卡号' bindinput='carNumberChange'></input>
+      <image src='../../images/clear.png' bindtap='clear' wx:if="{{CardNumber}}" class='cleard'></image>
+    </view>
+  </view>
+
+  <view class='next' bindtap='next'>下一步</view>
+
+  <!--说明提示弹出框-->
+  <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}">
+    <view class="zan-dialog__mask" />
+    <view class="zan-dialog__container">
+      <view class='le zan-til'>持卡人说明</view>
+      <view class='zan-content'>为了资金安全，只能绑定当前持卡人的银行卡</view>
+      <view class='know' bindtap='closeded'>知道了</view>
+    </view>
+  </view>
+</view>
+
+
+<!--下一步之后的内容-->
+<view wx:else>
+  <view class='kep between mt20'>
+    <view class='start'>
+      <view class='del'>银行卡类型:</view>
+      <image class='bankIcon' mode='WidthFix' src='{{BankIconUrl}}'></image>
+      <input class='noned' value='{{bankName}}' disabled></input>
+    </view>
+  </view>
+  <view class='keps mt20'>
+    <view class='start'>
+      <view>银行预留手机号:</view>
+      <input type='number' value='{{phoneNumber}}' bindinput='getPhoneNumber'></input>
+      <image src='../../images/clear.png' class='cleard' wx:if="{{phoneNumber}}" bindtap='cleard'></image>
+    </view>
+  </view>
+  <view class='keps'>
+    <view class='between'>
+      <view class='start'>
+        <view class='code'>手机号验证码:</view>
+        <input type='number' value='{{phoneCode}}' bindinput='getPhoneCode'></input>
+      </view>
+      <!-- <text class="imgCoded" bindtap='codeyan' disabled='{{notEdit}}'>获取验证码</text> -->
+      <button class="imgCoded  {{notEdit==true?'imgLoad':''}}" bindtap='codeyan' disabled='{{notEdit}}'>{{btntext}}</button>
+    </view>
+  </view>
+    <view class='end' wx:if="{{tips==true}}">验证码已发送至{{codePhone}}</view>
+</view>
+  <view class='next' bindtap='binding' wx:if="{{next==false}}">绑定</view>
+<!-- 图形验证码弹框 -->
+<view class="masks" wx:if="{{imgCodeShow}}">
+  <view class="imgCode">
+    <view class="imgCodeTitle">
+      请输入图片验证码
+      <icon class="delete" type="clear" size="15" bindtap="closeAlert" />
+    </view>
+    <view class="inputBox">
+      <input type="text" class='codeNumber' placeholder="请输入" value="{{PicVerifycode}}" cursor-spacing='115rpx' bindinput='codeText' />
+      <image src="{{imgCodeUrl}}" class='codeImg' alt="failed" bindtap="codeyan" alt=""></image>
+    </view>
+    <view class="loginBtns" bindtap="getSMSCode">确定</view>
+  </view>
+</view>
+
+<!--绑定成功提示弹出框-->
+<view class="zan-dialog {{ carShowSuccess ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" />
+  <view class="zan-dialog__container">
+    <image class='success1' src='../../images/success1.png' mode='widthFix' lazy-load='true'></image>
+    <view class='le zan-til'></view>
+    <view class='zan-content le1'>绑定银行卡成功</view>
+    <view class='zan-content'>恭喜你！绑定银行卡成功！</view>
+    <view class='btnSubmit' bindtap='closeded'>知道了</view>
+  </view>
+</view>

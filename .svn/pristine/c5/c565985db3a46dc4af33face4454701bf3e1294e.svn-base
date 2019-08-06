@@ -1,0 +1,7 @@
+<view class="absolute">
+  <view class="dialog">
+    <image src="../../images/gobind.png" class="binding" lazy-load='true' mode='widthFix'></image>
+    <p>账号须绑定手机号才可登录</p>
+    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">去绑定</button>
+  </view>
+</view>

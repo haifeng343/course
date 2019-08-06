@@ -1,12 +1,16 @@
 var netUtil = require("../../utils/request.js"); //require引入
 // 引用百度地图微信小程序JSAPI模块 
 var bmap = require('../../utils/bmap-wx.min.js');
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var wxMarkerData = [];
 var markers_knew = [];
 var wxGetData = [];
 var timer;
 var BMap = new bmap.BMapWX({
-  ak: 'gwaVx3IXRfm0NI8xG0wUXdO5vMAN3p86'
+  ak: 'CiceW6DVlaDR8WEDf1FcpFHL9fBp1LXA'
+});
+var qqmapsdk = new QQMapWX({
+  key: 'SLNBZ-QF5H3-WYD3P-YANNA-SOFVV-RMBUN' // 必填
 });
 Page({
   data: {
@@ -41,6 +45,32 @@ Page({
     },
     //年龄范围
     array: [],
+    showAge: false,//年龄弹窗是否显示
+    showId:'3',
+    showId1:'6',
+    arr :[
+      { id: 0, name: '0'}, 
+      { id: 1, name: '1'}, 
+      { id: 2, name: '2'}, 
+      { id: 3, name: '3'}, 
+      { id: 4, name: '4'}, 
+      { id: 5, name: '5'}, 
+      { id: 6, name: '6'}, 
+      { id: 7, name: '7'}, 
+      { id: 8, name: '8'}, 
+      { id: 9, name: '9'}, 
+      { id: 10, name: '10'}, 
+      { id: 11, name: '11'}, 
+      { id: 12, name: '12'}, 
+      { id: 13, name: '13'}, 
+      { id: 14, name: '14'}, 
+      { id: 15, name: '15'}, 
+      { id: 16, name: '16'}, 
+      { id: 17, name: '17'}, 
+      { id: 18, name: '18'}, 
+      { id: 19, name: '19'}, 
+      { id: 20, name: '20'}, 
+      ],
     //半径列表数据
     array1: ['1公里', '2公里', '3公里', '4公里', '5公里', '6公里', '7公里', '8公里', '9公里', '10公里'],
     address: '', //钉子地址
@@ -81,6 +111,26 @@ Page({
       village_name: '',
     },
   },
+  //切换选中样式
+  changeActive:function(e) {
+    this.setData({
+      showId:e.currentTarget.dataset.id
+    })
+  },
+  changeActive1:function(e) {
+    this.setData({
+      showId1:e.currentTarget.dataset.id
+    })
+  },
+  
+  //年龄弹窗取消
+  ageCancel:function() {
+    this.setData({
+      showId:3,
+      showId1:6,
+      showAge:false,
+    })
+  },
   //点击小区
   makertap: function(e) {
     var id = e.markerId;
@@ -117,32 +167,8 @@ Page({
     });
   },
   onLoad: function() {
+    
     var that = this;
-    that.getMyLocation(function(res) {
-      console.log(res)
-      that.setData({
-        //设置中心点
-        centerLocation: {
-          longitude: res.longitude,
-          latitude: res.latitude
-        },
-        //设置我的位置
-        sourceLocation: {
-          longitude: res.longitude,
-          latitude: res.latitude
-        },
-        //钉子（订下去）初始化
-        locationMarker: {
-          latitude: res.latitude,
-          longitude: res.longitude,
-          height: "30",
-          alpha: 1,
-          iconPath: '../../images/marks.png',
-          width: '18',
-          id: 99999
-        }
-      })
-    });
     let arr = [],
       arr1 = [];
     arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'];
@@ -151,7 +177,6 @@ Page({
       array: [arr, arr1],
     })
     var res = wx.getSystemInfoSync();
-    // console.log(res.windowHeight *0.6)
     that.setData({
       //钉子（浮起来）初始化
       control: {
@@ -170,13 +195,15 @@ Page({
     that.setData({
       controls: [that.data.control]
     });
+    that.findLocation();
+    
   },
   init() {
 
   },
   //返回中心点
-  backToLocation:function(){
-    var that=this;
+  backToLocation: function() {
+    var that = this;
     that.setData({
       //设置中心点
       centerLocation: {
@@ -197,10 +224,10 @@ Page({
     });
     if (that.data.controls.length <= 0) {
       var tempMarks = that.data.markers;
-      var tempMark=tempMarks.filter(item=>{
-        return item.id==99999;
+      var tempMark = tempMarks.filter(item => {
+        return item.id == 99999;
       });
-      tempMarks.splice(tempMarks.indexOf(tempMark[0]),1);
+      tempMarks.splice(tempMarks.indexOf(tempMark[0]), 1);
       tempMarks.push(that.data.locationMarker);
       that.setData({
         markers: tempMarks
@@ -212,10 +239,16 @@ Page({
     var that = this;
     var page_num = 0;
     wxMarkerData = [];
+    if (that.data.IsGoing) {
+      wxMarkerData.push(that.data.locationMarker)
+    }
+
     that._search(page_num, function(res) {
       that.setData({
         markers: wxMarkerData
       });
+
+      console.log(that.data.markers)
     });
   },
 
@@ -277,13 +310,24 @@ Page({
     this.setData({
       seachDialog: false,
       showMol: false,
-      controls: [this.data.control],
+      controls: [],
       markers: [],
       titleShow: false,
     })
+
     if (timer != null) {
       clearInterval(timer);
     }
+    if (this.data.IsGoing) {
+      this.setData({
+        markers: [this.data.locationMarker]
+      });
+    } else {
+      this.setData({
+        controls: [this.data.control]
+      });
+    }
+
   },
   //性别选择
   radioChange: function(e) {
@@ -296,7 +340,7 @@ Page({
     let index = e.detail.value
     if (index.length == 2) {
       this.setData({
-        'searchCondition.age': this.data.array[0][index[0]] + '-' + this.data.array[1][index[1]] + '',
+        'searchCondition.age': this.data.array[0][index[0]] + '-' + this.data.array[1][index[1]],
       })
     }
   },
@@ -318,13 +362,12 @@ Page({
       Range: parseInt(that.data.searchCondition.range) + 1,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      console.log(res);
       that.setData({
         resultLocation: {
           longitude: that.data.locationMarker.longitude,
           latitude: that.data.locationMarker.latitude,
           address: that.data.address,
-          range: parseInt(that.data.range) + 1,
+          range: parseInt(that.data.searchCondition.range) + 1,
           totalCount: res.Data.TotalCount,
           womenCount: res.Data.WomenCount,
           menCount: res.Data.MenCount,
@@ -366,17 +409,22 @@ Page({
               }
             });
             // 发起regeocoding检索请求 
-            BMap.regeocoding({
-              location: that.data.centerLocation.latitude + ',' + that.data.centerLocation.longitude,
-              fail: function(res) {
-                // console.log(res)
+            qqmapsdk.reverseGeocoder({
+              location: {
+                latitude: that.data.centerLocation.latitude,
+                longitude: that.data.centerLocation.longitude
               },
-              success: function(res) {
+              success: function (res) {
                 that.setData({
-                  address: res.originalData.result.formatted_address
+                  address: (res.result.formatted_addresses == null) ? res.result.address : res.result.formatted_addresses.recommend
                 })
+                console.log(res)
+              },
+              fail: function (res) {
+                console.log(res)
               },
             });
+
           }
         }
       });
@@ -398,35 +446,38 @@ Page({
           latitude: res.latitude
         },
       });
+      
+      if (!that.data.IsGoing) {
+        that.setData({
+          //钉子（订下去）
+          locationMarker: {
+            latitude: that.data.sourceLocation.latitude,
+            longitude: that.data.sourceLocation.longitude,
+            height: "30",
+            alpha: 1,
+            iconPath: '../../images/marks.png',
+            width: '18',
+            id: 99999
+          }
+        });
+        // 发起regeocoding检索请求 
+        qqmapsdk.reverseGeocoder({
+          location: {
+            latitude: that.data.sourceLocation.latitude,
+            longitude: that.data.sourceLocation.longitude
+          },
+          success: function (res) {
+            that.setData({
+              address: (res.result.formatted_addresses == null) ? res.result.address : res.result.formatted_addresses.recommend
+            })
+            console.log(res)
+          },
+          fail: function (res) {
+            console.log(res)
+          },
+        });
+      }
     });
-    if (that.data.controls.length > 0) {
-      that.setData({
-        //钉子（订下去）
-        locationMarker: {
-          latitude: this.data.sourceLocation.latitude,
-          longitude: this.data.sourceLocation.longitude,
-          height: "30",
-          alpha: 1,
-          iconPath: '../../images/marks.png',
-          width: '18',
-          id: 99999
-        }
-      });
-
-      // 发起regeocoding检索请求 
-      BMap.regeocoding({
-        location: that.data.sourceLocation.latitude + ',' + that.data.sourceLocation.longitude,
-        fail: function(res) {
-          console.log(res)
-        },
-        success: function(res) {
-          console.log(res)
-          that.setData({
-            address: res.originalData.result.formatted_address
-          })
-        },
-      });
-    }
   },
   //获取我的定位
   getMyLocation: function(onSuccess) {
@@ -438,8 +489,7 @@ Page({
       success(res) {
         onSuccess({
           longitude: res.longitude,
-          latitude: res.latitude,
-          address: ""
+          latitude: res.latitude
         });
       },
       fail(error) {
@@ -447,8 +497,7 @@ Page({
         console.log(location)
         onSuccess({
           longitude: location.lng,
-          latitude: location.lat,
-          address: location.title
+          latitude: location.lat
         });
       }
     });
@@ -457,9 +506,11 @@ Page({
   findLastPosition: function() {
     var temp = this.data.markers;
     if (this.data.IsGoing) { //浮起来
-      var index = temp.indexOf(this.data.locationMarker);
-      console.log(index)
-      temp.splice(index, 1);
+      var tempArr = temp.filter(item => {
+        return item.id == 99999;
+      });
+      console.log(tempArr)
+      temp.splice(temp.indexOf(tempArr[0]), 1);
       var centerLocation = {
         longitude: this.data.locationMarker.longitude,
         latitude: this.data.locationMarker.latitude
@@ -482,20 +533,6 @@ Page({
         markers: temp,
         controls: [],
         IsGoing: true,
-      });
-      let that = this;
-      // 发起regeocoding检索请求 
-      BMap.regeocoding({
-        location: that.data.locationMarker.latitude + ',' + that.data.locationMarker.longitude,
-        fail: function(res) {
-          console.log(res)
-        },
-        success: function(res) {
-          console.log(res)
-          that.setData({
-            address: res.originalData.result.formatted_address
-          })
-        },
       });
     }
   },

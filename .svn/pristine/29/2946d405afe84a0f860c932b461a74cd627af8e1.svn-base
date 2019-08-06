@@ -1,0 +1,95 @@
+<view class='payTitle'>您已选择以下课程</view>
+<view>
+  <view class='keep starts' wx:for="{{ItemList}}" wx:key>
+    <view class='leftImg'>
+      <image class='topImg' src='{{item.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
+    </view>
+    <view class='right'>
+      <view class='activity'>{{item.ItemName}}</view>
+      <view class='detail start well'>
+        <view class='startd'>
+          <view>
+            <image class='detailImg mt1' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+          </view>
+          <view class='name'>{{item.SellerName}}</view>
+        </view>
+      </view>
+      <view class='detail between well'>
+        <view class='startd'>
+          <view>
+            <image class='detailImg mt1' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+          </view>
+          <view class='name address'>{{item.StoreAddress}}</view>
+        </view>
+        <!-- <view class='end'>{{item.Distance}}km</view> -->
+      </view>
+      <view class='detail' wx:if="{{item.Mobile}}">
+        <view class='startd'>
+          <view>
+            <image class='detailImg mt1' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+          </view>
+          <view class='name'>{{item.Mobile}}</view>
+        </view>
+      </view>
+      <view class='detail start well'>
+        <view class='start'>
+          <view class='startd'>
+            <view>
+              <image class='detailImg mt2' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name'>课程数量{{item.CoursesNumber}}节</view>
+          </view>
+        </view>
+        <view class='start ml15'>
+          <view class='startd'>
+            <view>
+              <image class='detailImg mt2' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name'>单节课时{{item.SingleTime}}min</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='flex-end keep count'>
+    <view>共{{ItemList.length}}门课程</view>
+    <view class='money'>合计:</view>
+    <view class='numberD'>￥{{TotalAmount}}</view>
+  </view>
+</view>
+<view class='keep low between' wx:if="{{UseScore>0}}" bindtap='swich' style='overflow-x:hidden'>
+  <view class='column'>
+    <view>使用积分</view>
+    <view class='start txt'>{{UseScore}}积分抵{{UseScoreAmount}}元
+      <view class='txt1'>现有积分{{TotalScore}}</view>
+    </view>
+  </view>
+  <checkbox class='mt20' checked='{{checked}}'></checkbox>
+</view>
+<view class='pay between' style='overflow-x:hidden'>
+  <view class='kl' wx:if="{{checked==true && UseScoreAmount>0}}">
+    <view class='total'>已优惠{{UseScoreAmount}}元</view>
+    <view class='again'>￥{{TotalAmount}}</view>
+  </view>
+  <view class='kld'></view>
+  <view class='flex-end'>
+    <view class='totalNumber' wx:if="{{a==true}}">合计:暂无价格</view>
+    <view class='totalNumber start' wx:else>需付款:
+      <view class='payMoney start' wx:if="{{checked==true}}">
+        <view class='symbol'>￥{{TotalAmountFen}}</view>
+      </view>
+      <view class='payMoney start' wx:else>
+        <view class='symbol'>￥</view>{{TotalAmount}}</view>
+    </view>
+    <button class='paybtn' data-orderId="{{OrderId}}" data-ordersn="{{OrderSn}}" data-payamount="{{PayAmount}}" bindtap='paySure' disabled='{{!((checked==true&&(TotalAmount-UseScoreAmount)>0) || (checked==false&&TotalAmount>0))}}'>去支付</button>
+  </view>
+</view>
+
+<view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+    <view class='zan-title'>失败原因</view>
+    <view class='zan-content'>失败原因：{{RefundFailReason}}</view>
+    <view class='know' bindtap='closeds'>知道了</view>
+  </view>
+</view>

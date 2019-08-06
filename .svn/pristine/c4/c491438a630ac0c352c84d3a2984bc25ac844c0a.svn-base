@@ -1,0 +1,50 @@
+.callUS{
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  padding-top: 60rpx;
+}
+.erCode{
+  width: 180rpx;
+  height: 180rpx;
+}
+.mel{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.wechat{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 20rpx 0 40rpx;
+  font-size: 28rpx;
+}
+.copy{
+  margin-left: 30rpx;
+  text-decoration: underline;
+  color: #57E0DF;
+}
+.List{
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+}
+.item{
+  width: 100%;
+  padding: 20rpx 5%;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #F9F9F9;
+}
+.content{
+  font-size: 28rpx;
+}
+
+
+
+
+

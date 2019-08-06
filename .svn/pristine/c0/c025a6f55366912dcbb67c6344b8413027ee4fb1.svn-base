@@ -1,0 +1,31 @@
+<view class='addressForm'>
+  <view class='item between' bindtap='searchAddress'>
+    <view class='start'>
+      <view class='adName'>地址</view>
+      <view class='InputValue'>{{InputValue}}</view>
+    </view>
+    <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+  </view>
+  <view class='item between'>
+    <view class='start'>
+      <view class='adName'>门牌号</view>
+      <input class='InputValue mg' type='text' value='{{houseNumber}}' bindinput='houseName'></input>
+    </view>
+    <!-- <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image> -->
+  </view>
+  <!-- <view class='item between'>
+   <view class='start'>
+    <view class='adName'>标签</view>
+    <input class='InputValue' type='text' value='{{tag}}'></input>
+   </view>
+   <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+  </view> -->
+  <view class='around kl item'>
+  <view class='tagName'>标签</view>
+    <view data-name="家" class="tagHome {{tag == '家' ? 'active' : ''}}" bindtap="menuClick">家</view>
+    <view data-name="公司" class="tagHome {{tag == '公司' ? 'active' : ''}}" bindtap="menuClick">公司</view>
+    <view data-name="学校" class="tagHome {{tag == '学校' ? 'active' : ''}}" bindtap="menuClick">学校</view>
+  </view>
+  <view class='sure' wx:if="{{ids==1}}" bindtap='submitSure'>提交</view>
+  <view class='sure' wx:else bindtap='editSure'>确定</view>
+</view>

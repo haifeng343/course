@@ -1,0 +1,283 @@
+.content {
+  box-sizing: border-box;
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+.accountLogin {
+  background: #fff;
+  font-size: 30rpx;
+  color: #333;
+  padding: 0 30rpx;
+  margin-top: 20rpx;
+}
+
+.imgCoded {
+  font-size: 24rpx;
+  margin: 0;
+  position: absolute;
+  box-sizing: border-box;
+  padding: 0 10rpx;
+  right: 5%;
+}
+
+.loginInput {
+  height: 100rpx;
+  padding: 30rpx 0;
+  box-sizing: border-box;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #f6f6f6;
+  position: relative;
+}
+
+.cleard {
+  width: 28rpx;
+  height: 28rpx;
+  position: absolute;
+  right: 5%;
+  z-index: 55;
+}
+
+.subtitle {
+  width: 100rpx;
+  min-width: 100rpx;
+  font-size: 30rpx;
+  color: #333;
+  text-align: center;
+}
+
+input {
+  border: none;
+  margin-left: 30rpx;
+  font-size: 28rpx;
+}
+
+.imgCode {
+  width: 180rpx;
+  min-width: 180rpx;
+  height: 60rpx;
+  background: #e65248;
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  color: #fff;
+  border-radius: 5rpx;
+}
+
+.codeImg {
+  width: 175rpx;
+  height: 100rpx;
+}
+
+.weixin-btn {
+  margin-top: 20rpx;
+}
+
+.loginBtn {
+  width: 690rpx;
+  height: 80rpx;
+  border-radius: 10rpx;
+  background: #999;
+  text-align: center;
+  line-height: 80rpx;
+  margin: 30rpx;
+  color: #fff;
+  font-size: 30rpx;
+}
+
+.loginBtnState {
+  background: #29d9d6;
+}
+
+.forget {
+  font-size: 24rpx;
+  color: #999;
+  margin-left: 30rpx;
+  width: 100rpx;
+  height: 30rpx;
+}
+
+.mesTips {
+  font-size: 22rpx;
+  color: #e65248;
+  margin: 30rpx;
+}
+
+.otherLogin {
+  position: fixed;
+  bottom: 249rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  color: #ccc;
+}
+
+.lines {
+  width: 116rpx;
+  height: 1rpx;
+  background: #ccc;
+}
+
+.words {
+  margin: 0 10rpx;
+}
+
+.masks {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 503;
+}
+
+.imgCode {
+  width: 570rpx;
+  height: 400rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  background: #fff;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.imgCodeTitle {
+  height: 90rpx;
+  text-align: center;
+  line-height: 90rpx;
+  position: relative;
+  color: #000;
+  font-size: 34rpx;
+}
+
+.codeNumber {
+  text-align: left;
+  color: #000;
+}
+
+.delete {
+  width: 26rpx;
+  height: 26rpx;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.inputBox {
+  width: 500rpx;
+  height: 100rpx;
+  border: 1rpx solid #ddd;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+}
+
+input {
+  width: 300rpx;
+  height: 100%;
+  border: none;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+
+img {
+  width: 200rpx;
+  height: 100%;
+}
+
+.loginBtns {
+  width: 500rpx;
+  height: 88rpx;
+  border-radius: 10rpx;
+  background: #29d9d6;
+  color: #fff;
+  font-size: 32rpx;
+  text-align: center;
+  line-height: 88rpx;
+}
+
+.absolute {
+  position: absolute;
+  width: 100%;
+  height: 100vh !important;
+  z-index: 9;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.fiexed {
+  position: fixed;
+  width: 80%;
+  height: 550rpx;
+  z-index: 10;
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 15rpx;
+}
+
+.img_er {
+  width: 250rpx;
+  height: 250rpx;
+  object-fit: cover;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto 10px;
+  background-color: #fff;
+}
+
+.er_text {
+  font-size: 14px;
+  text-align: center;
+}
+
+.copy {
+  color: red;
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.close {
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  right: 0;
+  bottom: -70rpx;
+  margin: 0 auto;
+  z-index: 99;
+}
+
+.please {
+  text-align: center;
+  width: 80%;
+  margin-left: 10%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 32rpx;
+  color: red;
+  line-height: 40rpx;
+  margin-top: 15rpx;
+  max-height: 78rpx;
+  overflow: hidden;
+}

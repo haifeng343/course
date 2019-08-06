@@ -1,0 +1,31 @@
+<view class='logTop between'>
+  <view class='start'>
+    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange">
+      <view class="picker">
+        {{date?date:now}}
+      </view>
+    </picker>
+    <image src='../../images/select.png' class='select' mode='widthFix' lazy-load='true'></image>
+  </view>
+  <view class='math'>
+    <!-- <view> 支出￥100.00</view> -->
+  </view>
+</view>
+<view class='log'>
+  <view class='nohasLog' wx:if="{{List.length<=0}}">
+    <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+    <view>暂无账单记录</view>
+  </view>
+  <view class='logList' wx:else>
+    <view class='logItem between' wx:for="{{List}}" wx:key>
+      <view class='itemLeft start'>
+        <image class='avator' src='{{item.SheetCoverImg}}' mode='aspectFill' lazy-load='true'></image>
+        <view>
+          <view class='share'>琴咖网卡</view>
+          <view class='time'>{{item.CreateTime}}</view>
+        </view>
+      </view>
+      <view class='fraction'>￥{{item.Amount}}</view>
+    </view>
+  </view>
+</view>

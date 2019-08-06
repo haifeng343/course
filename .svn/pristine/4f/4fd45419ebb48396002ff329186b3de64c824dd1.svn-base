@@ -1,0 +1,155 @@
+page {
+}
+
+.mtops {
+  width: 100%;
+  background-color: #ececec;
+  position: relative;
+}
+
+.List {
+  width: 100%;
+  height: auto;
+}
+
+.item {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 5%;
+  height: 80rpx;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.icon1 {
+  width: 40rpx;
+  height: 34rpx;
+  margin: 0rpx 15rpx 0 0;
+}
+
+.mTop {
+  width: 95%;
+  background-color: #fff;
+  margin: 20rpx 2.5%;
+  padding: 40rpx;
+  box-sizing: border-box;
+  border-radius: 15rpx;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  z-index: 999;
+  position: relative;
+}
+
+.mTopImg {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 15rpx;
+}
+
+.Balance {
+  font-size: 28rpx;
+  color: #747474;
+}
+
+.money {
+  font-size: 32rpx;
+}
+
+.integral {
+  width: 95%;
+  height: auto;
+  margin: 20rpx 2.5%;
+  background-color: #fff;
+  border-radius: 15rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.avator {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+}
+
+.integralTop {
+  font-size: 28rpx;
+  padding-top: 35rpx;
+}
+
+.number {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.rule {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  padding: 5rpx 15rpx;
+  border-radius: 25rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background-color: #9f9f9f;
+  z-index: 9999;
+}
+
+.log {
+  width: 100%;
+  background-color: #fff;
+  padding: 0 5%;
+  box-sizing: border-box;
+  margin-top: 270rpx;
+}
+
+.logTop {
+  width: 100%;
+  font-size: 28rpx;
+  align-items: center;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 5%;
+  position: fixed;
+  z-index: 999;
+  top: 210rpx;
+  background-color: #e9e9e9;
+}
+
+.go {
+  margin-top: 6rpx;
+}
+
+.math {
+  font-size: 24rpx;
+  color: #2f2f2f;
+}
+
+.logList {
+  width: 100%;
+  height: auto;
+  font-size: 32rpx;
+}
+
+.logItem {
+  border-top: 1rpx solid #f9f9f9;
+  border-bottom: 1rpx solid #f9f9f9;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+  font-size: 28rpx;
+}
+
+.time {
+  font-size: 24rpx;
+  line-height: 40rpx;
+  color: #717171;
+}
+
+.fraction {
+  line-height: 90rpx;
+}

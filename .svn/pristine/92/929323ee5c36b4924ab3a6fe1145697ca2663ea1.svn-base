@@ -1,0 +1,106 @@
+.card{
+  width: 98%;
+  margin-left: 1%;
+  padding: 0 4%;
+  box-sizing: border-box;
+  height: auto;
+  background-color: #fff;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+  padding-bottom: 40rpx;
+}
+.ml{
+  padding-top: 30rpx;
+}
+.bankIcon{
+  width: 70rpx;
+  height: 70rpx;
+  margin-right: 10rpx;
+}
+.bankName{
+  font-size: 28rpx;
+  font-weight: 600;
+  line-height: 70rpx;
+}
+.money{
+  font-size: 40rpx;
+  font-weight: 600;
+  padding: 40rpx 0 5rpx;
+}
+.status{
+  font-size: 26rpx;
+  color: #949494;
+  margin-bottom: 40rpx;
+}
+.go{
+  margin: 15rpx 0 0 10rpx;
+}
+.between{
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+}
+.between .k1{
+  color: #888888;
+}
+.between:last-child{
+  border-top: 1rpx solid #f9f9f9;
+}
+.k{
+  width: 46%;
+}
+.zhou{
+  width: 54%;
+  height: auto;
+}
+.icons{
+  width: 55rpx;
+  height: 55rpx;
+  margin-right: 5rpx;
+}
+.betweend{
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #BABABA;
+  line-height: 50rpx;
+}
+.column{
+  position: relative;
+  margin: 25rpx 0;
+}
+.column::after{
+  position: absolute;
+  content: "";
+  width: 1rpx;
+  height: 40rpx;
+  background-color: #7BD5D4;
+  top: 45rpx;
+  left: 25rpx;
+}
+.column:last-child::after{
+  content: none;
+}
+.statusd{
+  color: #7BD5D4;
+}
+.time1{
+  width: 40%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

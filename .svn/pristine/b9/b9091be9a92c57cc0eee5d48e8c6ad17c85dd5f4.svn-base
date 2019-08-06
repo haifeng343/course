@@ -1,0 +1,30 @@
+page{
+  background-color: #fff;
+}
+.shareIt{
+  height: 100vh;
+  width: 100%;
+  padding-bottom: 90rpx;
+  position: absolute;
+}
+.img{
+  width: 750rpx;
+  height: 750rpx;
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+.btn{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 0;
+  border: none;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+
+

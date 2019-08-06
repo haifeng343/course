@@ -22,7 +22,7 @@ function get(url, params, onSuccess, onFailed, isShowLoading = true, isShowError
  * @onFailed  失败回调
  */
 
-const baseUrl = "https://test.guditech.com/rocketclient/";
+const baseUrl = "https://xgt.guditech.com/rocketclient/";
 
 function request(url, params, method, onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin) {
   if (isShowLoading) {
@@ -57,6 +57,9 @@ function request(url, params, method, onSuccess, onFailed, isShowLoading, isShow
             onSuccess(res.data); //request success
           }
         } else if (res.data.ErrorCode == 301) {
+          wx.clearStorageSync('userInfo');
+          wx.clearStorageSync('usertoken');
+          wx.clearStorageSync('wallet');
           if (isnavigateToLogin) {
             wx.navigateTo({
               url: '/pages/login/login',
