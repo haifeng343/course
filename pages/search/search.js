@@ -119,14 +119,14 @@ Page({
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       let arr = [];
       wx.setStorageSync('search', that.data.SearchName);
+
+      res.Data.List.forEach(item => {
+        item.TradingAreaDistance = (parseInt(item.TradingAreaDistance) / 1000).toFixed(1);;
+        item.SheetMinPrice = Number(item.SheetMinPrice / 100).toFixed(2);
+      })
       that.setData({
         groupList: res.Data.List
       })
-      if (that.data.SearchName == '') {
-        that.setData({
-          groupList: []
-        })
-      }
       if (that.data.groupList.length <= 0) {
         wx.showToast({
           icon: 'none',
@@ -146,8 +146,9 @@ Page({
   groupDetail: function(e) {
     const that = this;
     that.Id = parseInt(e.currentTarget.dataset.id)
+    let loc = wx.getStorageSync('loc');
     wx.navigateTo({
-      url: '/pages/groupDetail/groupDetail?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude + '&Id=' + that.Id,
+      url: '/pages/chooseClass/chooseClass?Longitude=' + loc.lng + '&Latitude=' + loc.lat + '&Id=' + that.Id,
     })
   },
   /**

@@ -55,7 +55,7 @@ Page({
       that.setData({
         List : res.Data,
         mobile: res.Data.Mobile,
-        Price: res.Data.Price*1.0/100,
+        Price: Number(res.Data.Price/100).toFixed(2),
         teaList: res.Data.TeacherList,
         imgUrls: res.Data.ItemImgList
       })

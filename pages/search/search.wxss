@@ -137,14 +137,10 @@ page{
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  margin: 15rpx 0;
-  font-size: 30rpx;
   color: #5b5b5b;
 }
 
 .distance {
-  margin: 15rpx 0;
-  font-size: 30rpx;
   color: #5b5b5b;
 }
 
@@ -159,8 +155,6 @@ page{
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-  margin-bottom: 5rpx;
-  margin-top: 15rpx;
 }
 
 .tagList::-webkit-scrollbar {
@@ -222,11 +216,158 @@ page{
   top: 5rpx;
 }
 
+/* 自定义导航栏开始 */
 
+.custom {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 90rpx;
+  line-height: 90rpx;
+  /* background: #c00; */
+  z-index: 999;
+  background: #fff;
+  display: flex;
+  align-items: center;
+}
 
+.navTop {
+  float: left;
+  font-weight: 600;
+  width: 400rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-left: 30rpx;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: flex-start;
+}
 
+.abs {
+  width: 300rpx;
+  font-size: 32rpx;
+  word-break: keep-all;
+  display: flex;
+  height: 58rpx;
+  overflow: hidden;
+  line-height: 58rpx;
+  flex-wrap: nowrap;
+}
 
+.navTop::after {
+  content: "";
+  position: absolute;
+  width: 400rpx;
+  height: 58rpx;
+  top: 0;
+  left: 0;
+  box-shadow: inset -20rpx 0px 20rpx #fff;
+  z-index: 1;
+}
 
+.navImg {
+  width: 30rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+  margin-right: 5rpx;
+  line-height: 58rpx;
+}
+
+.groupList {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2.5%;
+  padding-bottom: 30rpx;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.groupItem {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  flex-direction: row;
+  margin-top: 40rpx;
+  border-bottom: 1rpx solid #f7f7f7;
+  padding-bottom:15rpx;
+  margin-bottom:-15rpx;
+}
+.groupItem:last-child{
+  border: none;
+}
+
+.itemImg {
+  width: 32%;
+  overflow: hidden;
+  margin-right: 15rpx;
+}
+
+.h30 {
+  line-height: 30rpx;
+}
+
+.h40 {
+  line-height: 46rpx;
+  display: flex;
+  align-items: center;
+}
+
+.h50 {
+  line-height: 50rpx;
+}
+
+.leftImg {
+  width: 220rpx;
+  height: 220rpx;
+  border-radius: 15rpx;
+}
+
+.tagItem {
+  border-radius: 6rpx;
+}
+
+.itemRight {
+  width: 67%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.ad1 {
+  width: 35rpx;
+  height: 28rpx;
+}
+
+.addr {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  font-size: 30rpx;
+  color: #5b5b5b;
+  width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+}
+.address{
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 
 

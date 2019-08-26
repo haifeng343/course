@@ -1,6 +1,6 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-let baseUrl = "https://xgt.guditech.com/rocketclient/";
+let baseUrl = "https://qxbclient.guditech.com/";
 Page({
   data: {
     array: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
@@ -19,6 +19,7 @@ Page({
     Reason: '拍错/不想拍',
     lpm: {},
     urlImgs: [],
+    PayAmount:'',
   },
   onLoad: function(options) {
     if (options.recommand) {
@@ -185,7 +186,8 @@ Page({
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       // console.log(res)
       that.setData({
-        lpm: res.Data
+        lpm: res.Data,
+        PayAmount: Number(res.Data.PayAmount/100).toFixed(2)
       })
     });
   },

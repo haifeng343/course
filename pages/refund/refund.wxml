@@ -7,7 +7,7 @@
   </view>
   <view class='List start'>
     <view>退回金额:</view>
-    <view class='red'> ￥{{lpm.PayAmount*1.0/100}}</view>
+    <view class='red'> ￥{{PayAmount}}</view>
   </view>
   <view class='List start'>
     <view>退回积分: </view>

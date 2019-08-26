@@ -31,10 +31,10 @@ Page({
       ordersn: options.ordersn || '',
       payamount: options.money || ''
     })
-    var setTime = setTimeout(function () {
+    var setTime = setInterval(function () {
       that.payok(false, function (res) {
         if (res.IsPay) {
-          clearTimeout(setTime);
+          clearInterval(setTime);
           wx.redirectTo({
             url: '/pages/payOk/payOk?OrderId=' + that.data.orderId,
           })
@@ -71,7 +71,7 @@ Page({
     let that = this;
     that.payok(true, function (res) {
       if (res.IsPay) {
-        clearTimeout(setTime);
+        clearInterval(setTime);
         wx.redirectTo({
           url: '/pages/payOk/payOk?OrderId=' + that.data.orderId,
         })
