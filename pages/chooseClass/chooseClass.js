@@ -71,6 +71,11 @@ Page({
       let r = res.Data.GroupList;
       for (let v of r) {
         v.checkedArr = [];
+        for (let a of v.StoreList) {
+          if (a.ItemList[0].RemainCount > 0) {
+            a.checked2 = 0;
+          }
+        }
       }
 
       that.setData({
@@ -134,25 +139,40 @@ Page({
     let a = 'GroupList[' + index + '].checkedArr';
     let c = 'GroupList[' + index + '].checked';
     let d = 'GroupList[' + index + '].ItemList';
+    let f = 'GroupList[' + index + '].StoreList';
 
     let arr3 = [];
     if (s.MaxCount >= s.ItemList.length && s.MinCount == 0) {
       let addCount = 0;
       if (s.checkedArr.length == 0) {
-        for (let v of s.ItemList) {
-          arr3.push(v.RelId);
-          v.checked = true;
+        if (this.data.type == 2) {
+          for (let v of s.StoreList) {
+            arr3.push(v.StoreId);
+            v.checked = true;
+          }
+        } else {
+          for (let v of s.ItemList) {
+            arr3.push(v.RelId);
+            v.checked = true;
+          }
         }
       } else {
-        for (let v of s.ItemList) {
-          v.checked = false;
+        if (this.data.type == 2) {
+          for (let v of s.StoreList) {
+            v.checked = false;
+          }
+        } else {
+          for (let v of s.ItemList) {
+            v.checked = false;
+          }
         }
         arr3 = [];
       }
       arr = arr3;
       this.setData({
         [c]: arr,
-        [d]: s.ItemList
+        [d]: s.ItemList,
+        [f]: s.StoreList || '',
       });
     } else {
       if (s.MaxCount == 1 && arr.length > 0) {
@@ -164,30 +184,64 @@ Page({
             icon: 'none',
             title: '请按 ' + s.GroupName +' 规则选择课程',
           })
-          for (let v of s.ItemList) {
-            if (v.RelId == arr[arr.length - 1]) {
-              v.checked = false;
+          if (this.data.type == 2) {
+            for (let v of s.StoreList) {
+              if (v.StoreId == arr[arr.length - 1]) {
+                v.checked = false;
+              }
+            }
+          } else {
+            for (let v of s.ItemList) {
+              if (v.RelId == arr[arr.length - 1]) {
+                v.checked = false;
+              }
             }
           }
         } else {
-          for (let v of s.ItemList) {
-            if (arr.indexOf(v.RelId.toString()) != -1) {
-              v.checked = true;
-            } else {
-              v.checked = false;
+          if (this.data.type == 2) {
+            for (let v of s.StoreList) {
+              if (arr.indexOf(v.StoreId.toString()) != -1) {
+                v.checked = true;
+              } else {
+                v.checked = false;
+              }
+            }
+          } else {
+            for (let v of s.ItemList) {
+              if (arr.indexOf(v.RelId.toString()) != -1) {
+                v.checked = true;
+              } else {
+                v.checked = false;
+              }
             }
           }
         }
       }
       this.setData({
         [c]: arr,
-        [d]: s.ItemList
+        [d]: s.ItemList,
+        [f]: s.StoreList || '',
       });
     }
     this.setData({
       [a]: arr
     });
-    if (success) {
+    if (success && this.data.type == 1) {
+      this.hasMoney();
+    }
+  },
+  checkItem: function(e) {
+    console.log(e);
+    let { itemindex, storeindex, groupindex } = e.currentTarget.dataset;
+    console.log(itemindex, storeindex, groupindex);
+    let str = 'GroupList[' + groupindex + '].StoreList[' + storeindex +'].checked2';
+    let a = 'GroupList[' + groupindex + '].checkedArr';
+    if (itemindex === this.data.GroupList[groupindex].StoreList[storeindex].checked2) {
+      this.setData({ [str]: '-1', [a]: [] });
+    } else {
+      this.setData({ [str]: itemindex, [a]: [this.data.GroupList[groupindex].StoreList[storeindex].StoreId] });
+    }
+    if (this.data.type == 2 && this.data.GroupList[groupindex].StoreList[storeindex].ItemList[itemindex].RemainCount > 0) {
       this.hasMoney();
     }
   },

@@ -106,58 +106,59 @@
       <view class='heng'></view>
     </view>
     <checkbox-group bindchange='checkedTap' data-index='{{index}}'>
-      <view class="courseCont {{k.RemainCount<=0?'gray':''}}" wx:for="{{item.StoreList}}" wx:key wx:for-item="k" wx:for-index='index1'>
-        <view class='leftImg' style='width:21%;' data-Id="{{k.RelId}}" wx:key bindtap='courseDetail'>
-          <image class='coverd' src='{{k.StoreCoverImg}}' mode='aspectFill' lazy-load='true'></image>
-        </view>
-        <view>
-          <checkbox class="absolute {{k.RemainCount<=0?'none':''}}" disabled='{{k.RemainCount<=0}}' value='{{k.RelId}}' checked='{{k.checked}}'></checkbox>
-        </view>
-        <view class='rightContent' data-Id="{{k.RelId}}" wx:key bindtap='courseDetail'>
-          <view class='between relative'>
-            <view class='courseTitle'>{{k.ItemName}}</view>
-          </view>
-          <view class='detail around'>
-            <view class='addrLong'>
-              <view>
-                <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
-              </view>
-              <view class='name address' style='width:91%'>{{k.StoreAddress}}</view>
-            </view>
-          </view>
-          <view class='detail' wx:if="{{k.Mobile}}">
-            <view>
-              <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
-            </view>
-            <view class='name'>{{k.Mobile}}</view>
-          </view>
-          <view class='detail'>
-            <view class='ring'>
-              <view>
-                <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-              </view>
-              <view class='name'>语文课，共{{k.CoursesNumber}}门体验课</view>
-            </view>
-          </view>
-        </view>
-      </view>
-      <view class='column'>
-        <radio-group class="start">
-          <radio></radio>
+      <view class="courseCont-box {{k.RemainCount<=0?'gray':''}}" wx:for="{{item.StoreList}}" wx:key wx:for-item="k" wx:for-index='storeIndex'>
+        <view class="courseCont">
           <view class='leftImg' style='width:21%;' data-Id="{{k.RelId}}" wx:key bindtap='courseDetail'>
-            <image class='coverc' src='{{k.StoreCoverImg}}' mode='aspectFill' lazy-load='true'></image>
+            <image class='coverd' src='{{k.StoreCoverImg}}' mode='aspectFill' lazy-load='true'></image>
           </view>
-          <view class='right'>
-            <view>语文课</view>
-            <view>课程数量1节，单节课时60min</view>
-            <view class='tagList'>
-            <view class='tagItm' wx:for="{{k.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
-            <view>717人已参与 | 剩余名额 13个</view>
+          <view>
+            <checkbox class="absolute" value='{{k.StoreId}}' checked='{{k.checked}}'></checkbox>
           </view>
+          <view class='rightContent' data-Id="{{k.StoreId}}" bindtap='courseDetail'>
+            <view class='between relative'>
+              <view class='courseTitle'>{{k.ItemName}}</view>
+            </view>
+            <view class='detail around'>
+              <view class='addrLong'>
+                <view>
+                  <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+                </view>
+                <view class='name address' style='width:91%'>{{k.StoreAddress}}</view>
+              </view>
+            </view>
+            <view class='detail' wx:if="{{k.Mobile}}">
+              <view>
+                <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+              </view>
+              <view class='name'>{{k.Mobile}}</view>
+            </view>
+            <view class='detail'>
+              <view class='ring'>
+                <view>
+                  <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+                </view>
+                <view class='name'>语文课，共{{k.CoursesNumber}}门体验课</view>
+              </view>
+            </view>
           </view>
-        </radio-group>
-      </view>
-      <view>
+      
+        </view>
+        <view class='column' wx:for="{{k.ItemList}}" wx:for-item="c" wx:for-index="itemIndex" wx:if="{{item.checked[storeIndex]}}">
+          <view class="start">
+            <view class="rad {{itemIndex == k.checked2 ? 'on' : ''}}" data-itemIndex="{{itemIndex}}" data-storeIndex="{{storeIndex}}" data-groupIndex="{{index}}" catchtap="checkItem" wx:if="{{c.RemainCount > 0}}"></view>
+            <view class='leftImg' style='width:21%;'>
+              <image class='coverc' src='{{c.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
+            </view>
+            <view class='right'>
+              <view>{{c.ItemName}}</view>
+              <view>课程数量{{c.CoursesNumber}}节，单节课时{{c.SingleTime}}min</view>
+              <view class='tagList'>
+                <view class='tagItm' wx:for="{{c.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
+              </view>
+              <view>{{c.SoldCount}}人已参与 | 剩余名额 {{c.RemainCount}}个</view>
+            </view>
+          </view>
+        </view>
       </view>
     </checkbox-group>
   </view>
