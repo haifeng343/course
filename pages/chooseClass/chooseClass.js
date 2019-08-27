@@ -25,6 +25,7 @@ Page({
     interval: 5000, //图片切换间隔时间
     duration: 500, //每个图片滑动速度,
     current: 0, //初始化时第一个显示的图片 下标值（从0）index
+    type:'',//1团单 2商圈
   },
   onLoad(options) {
     let that = this;
@@ -41,8 +42,18 @@ Page({
     })
     that.setData({
       Id: options.Id || '',
-      name:options.name || ''
+      name:options.name || '',
+      type : options.type || '',
     })
+    // if (that.data.type==1){
+    //   wx.setNavigationBarTitle({
+    //     title: '选择课程',
+    //   })
+    // }else{
+    //   wx.setNavigationBarTitle({
+    //     title: '商圈详情',
+    //   })
+    // }
     that.init();
   },
   init: function() {
@@ -151,7 +162,7 @@ Page({
           success = false;
           wx.showToast({
             icon: 'none',
-            title: '请正确勾选(' + s.GroupName + ')',
+            title: '请按 ' + s.GroupName +' 规则选择课程',
           })
           for (let v of s.ItemList) {
             if (v.RelId == arr[arr.length - 1]) {

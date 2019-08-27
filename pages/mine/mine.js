@@ -114,6 +114,11 @@ Page({
       url: '/pages/map/map',
     })
   },
+  bindInquire:function() {
+    wx.navigateTo({
+      url:'/pages/inquire/inquire'
+    })
+  },
   walletd: function() {
     let that = this;
     var url = 'user/wallet';

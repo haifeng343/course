@@ -94,7 +94,7 @@ Page({
     const that = this;
     that.Id = parseInt(e.currentTarget.dataset.id)
     wx.navigateTo({
-      url: '/pages/chooseClass/chooseClass?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude + '&Id=' + that.Id+'&name='+e.currentTarget.dataset.name,
+      url: '/pages/chooseClass/chooseClass?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude + '&Id=' + that.Id+'&name='+e.currentTarget.dataset.name+'&type='+e.currentTarget.dataset.type,
     })
   },
   address: function() {

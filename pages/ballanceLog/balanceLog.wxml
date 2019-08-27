@@ -1,10 +1,10 @@
 <view class='logTop between'>
   <view class='start'>
-    <picker mode="multiSelector" value="{{date2}}"  range='{{array}}' fields="month" bindchange="bindDateChange">
-        <view class="picker">
-          {{date?date:now}}
-        </view>
-      </picker>
+    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' fields="month" bindchange="bindDateChange">
+      <view class="picker">
+        {{date?date:now}}
+      </view>
+    </picker>
     <image src='../../images/select.png' class='select' mode='widthFix' lazy-load='true'></image>
   </view>
   <view class='math'>
@@ -14,9 +14,9 @@
 </view>
 <view class='log'>
   <view class='nohasLog' wx:if="{{List.length<=0}}">
-  <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
-  <view>暂无余额变更记录</view>
-</view>
+    <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+    <view>暂无余额变更记录</view>
+  </view>
   <view class='logList' wx:else>
     <view class='logItem column' wx:for="{{List}}" wx:key bindtap='withdrawDetail'>
       <view class='between'>

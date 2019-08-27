@@ -135,10 +135,19 @@
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item mt20' bindtap='bindIsSalesman' wx:if="{{IsSalesman==true}}">
+    <view class='item borb mt20' bindtap='bindIsSalesman' wx:if="{{IsSalesman==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/ss1.png' mode='widthFix' lazy-load='true'></image>
         <view>数据统计</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class='item' bindtap='bindInquire' wx:if="{{IsSalesman==true}}">
+      <view class='start'>
+        <image class='icon1' src='../../images/chaxun.png' mode='widthFix' lazy-load='true'></image>
+        <view>数据查询</view>
       </view>
       <view class='start'>
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>

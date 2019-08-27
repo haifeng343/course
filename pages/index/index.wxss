@@ -162,10 +162,11 @@ swiper-item image {
   flex-direction: row;
   margin-top: 40rpx;
   border-bottom: 1rpx solid #f7f7f7;
-  padding-bottom:15rpx;
-  margin-bottom:-15rpx;
+  padding-bottom: 15rpx;
+  margin-bottom: -15rpx;
 }
-.groupItem:last-child{
+
+.groupItem:last-child {
   border: none;
 }
 
@@ -182,7 +183,6 @@ swiper-item image {
 .h40 {
   line-height: 46rpx;
   display: flex;
-  align-items: center;
 }
 
 .h50 {
@@ -225,13 +225,15 @@ swiper-item image {
   width: 80%;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space:nowrap;
+  white-space: nowrap;
 }
-.address{
+
+.address {
   width: 90%;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .distance {
   font-size: 30rpx;
   color: #5b5b5b;
@@ -273,11 +275,17 @@ swiper-item image {
   font-size: 28rpx;
   margin-top: 15rpx;
 }
-
+.mechanism{
+  z-index: 22;
+}
 .bottom-left {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
+  height: 42rpx;
+  line-height: 42rpx;
+  color: #5b5b5b;
+  align-items: center;
 }
 
 .money {

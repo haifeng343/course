@@ -41,7 +41,10 @@
     "pages/wait/wait",
     "pages/jifen/jifen",
     "pages/integralList/integralList",
-    "pages/map/map"
+    "pages/map/map",
+    "pages/inquire/inquire",
+    "pages/mechanism/mechanism",
+    "pages/demo/demo"
   ],
   "window": {
     "backgroundTextStyle": "dark",
