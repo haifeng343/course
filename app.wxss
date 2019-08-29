@@ -13,6 +13,9 @@ picker{
 .know{
   color: #3CD5CF!important;
 }
+.tagList{
+  line-height: 40rpx!important;
+}
 .bb{
   color: #5b5b5b;
 }

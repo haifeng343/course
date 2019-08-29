@@ -20,30 +20,40 @@
     <!-- <view class='howMoney'>￥{{Price}}</view> -->
   </view>
   <view class='somebody well'>
-    {{List.SoldCount}}人已参与 | {{List.RemainCount}} 剩余名额
+    {{List.ItemDes==null?'暂无课程简介':List.ItemDes}}
   </view>
-  <view class='courseRow start well'>
-    <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+  <view class='courseRow startd well'>
+    <view class='center'>
+      <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+    </view>
     <view>{{List.SellerName}}</view>
   </view>
   <view class='courseRow between well'>
-    <view class='start'>
-      <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+    <view class='startd'>
+      <view class='center'>
+        <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+      </view>
       <view class='address'>{{List.StoreAddress}}</view>
     </view>
     <!-- <view class='end'>{{List.Distance}}km</view> -->
   </view>
-  <button class='courseRow start well' bindtap='callPhone' wx:if="{{mobile}}">
-    <image class='rowImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+  <button class='courseRow startd well' bindtap='callPhone' wx:if="{{mobile}}">
+    <view class='center'>
+      <image class='rowImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+    </view>
     <view>{{mobile}}</view>
   </button>
-  <view class='courseRow start well'>
-    <view class='start'>
-      <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+  <view class='courseRow startd well'>
+    <view class='startd'>
+      <view class='center'>
+        <image class='rowImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+      </view>
       <view>共有 {{List.CoursesNumber}} 节课</view>
     </view>
-    <view class='start'>
-      <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+    <view class='startd ml40'>
+      <view class='center'>
+        <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+      </view>
       <view> {{List.SingleTime}} min/课时</view>
     </view>
   </view>
@@ -65,6 +75,6 @@
 <view class='prompt boxd' wx:for="{{List.OtherList}}" wx:key>
   <view class='prompTitle'>{{item.Title}}</view>
   <view class='promptText'>
-  <rich-text nodes="{{item.Content}}"></rich-text>
+    <rich-text nodes="{{item.Content}}"></rich-text>
   </view>
 </view>

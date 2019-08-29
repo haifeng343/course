@@ -90,7 +90,7 @@
 					"id": 5,
 					"name": "courseDetail",
 					"pathName": "pages/courseDetail/courseDetail",
-					"query": "Id=32",
+					"query": "Id=29",
 					"scene": null
 				},
 				{
@@ -104,7 +104,7 @@
 					"id": 7,
 					"name": "chooseClass",
 					"pathName": "pages/chooseClass/chooseClass",
-					"query": "Longitude=undefined&Latitude=undefined&Id=15&name=西湖银泰城商圈&type=2",
+					"query": "Longitude=undefined&Latitude=undefined&Id=20&name=拱墅区城西银泰城商圈&type=1",
 					"scene": null
 				},
 				{
@@ -139,7 +139,7 @@
 					"id": 12,
 					"name": "payOrder",
 					"pathName": "pages/payOrder/payOrder",
-					"query": "Id=24&ids=93",
+					"query": "Id=20&ids=90",
 					"scene": null
 				},
 				{
@@ -374,10 +374,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 46,
 					"name": "mechanism",
 					"pathName": "pages/mechanism/mechanism",
-					"query": "",
+					"query": "groupId=17&storeId=6",
 					"scene": null
 				},
 				{
@@ -385,6 +385,13 @@
 					"name": "demo",
 					"pathName": "pages/demo/demo",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "car",
+					"pathName": "pages/car/car",
+					"query": "groupId=17&storeId=6",
 					"scene": null
 				}
 			]

@@ -13,8 +13,10 @@ swiper {
 swiper-item {
   text-align: center;
 }
-.center{
+.centers{
   display: flex;
+  height: 60rpx;
+  line-height: 60rpx;
   align-items: center;
 }
 .mb20{
@@ -85,17 +87,12 @@ swiper-item {
 }
 
 .move {
-  height: 60rpx;
   font-size: 28rpx;
   line-height: 60rpx;
-  overflow: hidden;
 }
 
 .addr {
   width: 625rpx;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: keep-all;
 }
 .List{
   background-color: #fff;
@@ -108,7 +105,7 @@ swiper-item {
   width: 100%;
   box-sizing: border-box;
   padding-bottom: 15rpx;
-  margin-bottom: 15rpx;
+  margin-bottom: 20rpx;
   border-bottom: 1rpx solid #f4f4f4;
 }
 .item:last-child{
@@ -124,14 +121,52 @@ swiper-item {
   justify-content: flex-start;
 }
 .topImg {
-  width: 155rpx;
-  height: 198rpx;
-  border-radius: 15rpx;
+  width:126rpx;
+height:161rpx;
+border-radius:15rpx;
+
 }
 .right{
+  width: 86%;
   font-size: 24rpx;
   color: #5b5b5b;
 }
+.kl{
+  line-height: 45rpx;
+}
 .course{
   font-size: 28rpx;
+  color: #000;
+  font-weight: 600;
+}
+
+.tagList {
+  width: 100%;
+  overflow-x: scroll;
+  display: flex;
+    height: 36rpx;
+  line-height: 36rpx;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.tagList::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.tagItm {
+  word-break: keep-all;
+  font-size: 24rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  display: flex;
+  align-items: center;
+  padding: 0rpx 8rpx;
+  margin-right: 15rpx;
+  margin-top: 0rpx;
+  box-sizing: border-box;
+  border-radius: 5rpx;
 }

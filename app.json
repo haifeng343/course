@@ -44,7 +44,8 @@
     "pages/map/map",
     "pages/inquire/inquire",
     "pages/mechanism/mechanism",
-    "pages/demo/demo"
+    "pages/demo/demo",
+    "pages/car/car"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -77,6 +78,12 @@
         "iconPath": "images/order.png",
         "pagePath": "pages/order/order",
         "text": "订单"
+      },
+      {
+        "selectedIconPath": "images/cars.png",
+        "iconPath": "images/car.png",
+        "pagePath": "pages/car/car",
+        "text": "购物车"
       },
       {
         "selectedIconPath": "images/mines.png",

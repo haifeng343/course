@@ -20,6 +20,12 @@
         <view class='address h40'>{{otherList.Mobile}}</view>
       </view>
     </view>
+    <view class='courseRow starts w100' wx:else>
+      <view class='starts w100'>
+        <image class='rowImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+        <view class='address h40'>暂无联系方式</view>
+      </view>
+    </view>
     <view class='courseRow starts'>
       <view class='starts'>
         <image class='rowImg mt1' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>

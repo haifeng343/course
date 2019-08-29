@@ -152,7 +152,11 @@ swiper-item image {
   box-sizing: border-box;
   background: #fff;
 }
-
+.groupDetail{
+  border-bottom: 1rpx solid #f7f7f7;
+  padding-bottom: 15rpx;
+  margin-bottom: -15rpx;
+}
 .groupItem {
   width: 100%;
   height: auto;
@@ -161,12 +165,9 @@ swiper-item image {
   box-sizing: border-box;
   flex-direction: row;
   margin-top: 40rpx;
-  border-bottom: 1rpx solid #f7f7f7;
-  padding-bottom: 15rpx;
-  margin-bottom: -15rpx;
 }
 
-.groupItem:last-child {
+.groupDetail:last-child {
   border: none;
 }
 
@@ -248,6 +249,9 @@ swiper-item image {
   width: 100%;
   overflow-x: scroll;
   display: flex;
+  height: 36rpx;
+  line-height: 36rpx;
+  align-items: center;
   justify-content: flex-start;
   flex-direction: row;
 }
@@ -261,7 +265,11 @@ swiper-item image {
 .tagItem {
   word-break: keep-all;
   font-size: 24rpx;
-  padding: 2rpx 8rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  display: flex;
+  align-items: center;
+  padding: 0rpx 8rpx;
   margin-right: 15rpx;
   margin-top: 0rpx;
   border-radius: 5rpx;

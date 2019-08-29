@@ -1,60 +1,70 @@
-<view class='payTitle'>您已选择以下课程</view>
 <view>
-  <view class='keep starts' wx:for="{{ItemList}}" wx:key>
-    <view class='leftImg'>
-      <image class='topImg' src='{{item.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
-    </view>
-    <view class='right'>
-      <view class='activity'>{{item.ItemName}}</view>
-      <view class='detail start well'>
-        <view class='startd'>
-          <view>
-            <image class='detailImg mt1' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
-          </view>
-          <view class='name'>{{item.SellerName}}</view>
-        </view>
+  <view class='keep column pd0' wx:for="{{ItemList}}" wx:key>
+    <view class='payTitle'>您已选择以下课程</view>
+    <view class='starts'>
+      <view class='leftImg'>
+        <image class='topImg' src='{{item.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
       </view>
-      <view class='detail between well'>
-        <view class='startd'>
-          <view>
-            <image class='detailImg mt1' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
-          </view>
-          <view class='name address'>{{item.StoreAddress}}</view>
-        </view>
-        <!-- <view class='end'>{{item.Distance}}km</view> -->
-      </view>
-      <view class='detail' wx:if="{{item.Mobile}}">
-        <view class='startd'>
-          <view>
-            <image class='detailImg mt1' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
-          </view>
-          <view class='name'>{{item.Mobile}}</view>
-        </view>
-      </view>
-      <view class='detail start well'>
-        <view class='start'>
+      <view class='right'>
+        <view class='activity'>{{item.ItemName}}</view>
+        <view class='detail start well'>
           <view class='startd'>
             <view>
-              <image class='detailImg mt2' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+              <image class='detailImg mt1' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
             </view>
-            <view class='name'>课程数量{{item.CoursesNumber}}节</view>
+            <view class='name'>{{item.SellerName}}</view>
           </view>
         </view>
-        <view class='start ml15'>
+        <view class='detail between well'>
           <view class='startd'>
             <view>
-              <image class='detailImg mt2' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+              <image class='detailImg mt1' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
             </view>
-            <view class='name'>单节课时{{item.SingleTime}}min</view>
+            <view class='name address'>{{item.StoreAddress}}</view>
+          </view>
+          <!-- <view class='end'>{{item.Distance}}km</view> -->
+        </view>
+        <view class='detail' wx:if="{{item.Mobile}}">
+          <view class='startd'>
+            <view>
+              <image class='detailImg mt1' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name'>{{item.Mobile}}</view>
+          </view>
+        </view>
+        <view class='detail' wx:if="{{item.Mobile}}">
+          <view class='startd'>
+            <view>
+              <image class='detailImg mt1' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name'>暂无联系方式</view>
+          </view>
+        </view>
+        <view class='detail start well'>
+          <view class='start'>
+            <view class='startd'>
+              <view>
+                <image class='detailImg mt2' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+              </view>
+              <view class='name'>课程数量{{item.CoursesNumber}}节</view>
+            </view>
+          </view>
+          <view class='start ml15'>
+            <view class='startd'>
+              <view>
+                <image class='detailImg mt2' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+              </view>
+              <view class='name'>单节课时{{item.SingleTime}}min</view>
+            </view>
           </view>
         </view>
       </view>
     </view>
-  </view>
-  <view class='flex-end keep count'>
-    <view>共{{ItemList.length}}门课程</view>
+  <view class='flex-end keep count mb0'>
+    <view>共选择{{ItemList.length}}门课程</view>
     <view class='money'>合计:</view>
     <view class='numberD'>￥{{TotalAmount}}</view>
+  </view>
   </view>
 </view>
 <view class='keep low between' wx:if="{{UseScore>0}}" bindtap='swich' style='overflow-x:hidden'>
@@ -67,7 +77,7 @@
   <checkbox class='mt20' checked='{{checked}}'></checkbox>
 </view>
 <view class='pay between' style='overflow-x:hidden'>
-  <view class='kl' wx:if="{{checked==true && UseScoreAmount>0}}">
+  <view class='kl'>
     <view class='total'>已优惠{{UseScoreAmount}}元</view>
     <view class='again'>￥{{TotalAmount}}</view>
   </view>

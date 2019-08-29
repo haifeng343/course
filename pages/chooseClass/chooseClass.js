@@ -15,8 +15,8 @@ Page({
     text: "",
     RelId: [],
     Remark: '',
-    Id:'',
-    name:'',
+    Id: '',
+    name: '',
     TotalPrice: -1,
     imgUrls: [],
     autoplay: true, //是否自动播放
@@ -25,7 +25,15 @@ Page({
     interval: 5000, //图片切换间隔时间
     duration: 500, //每个图片滑动速度,
     current: 0, //初始化时第一个显示的图片 下标值（从0）index
-    type:'',//1团单 2商圈
+    type: '', //1团单 2商圈
+    hideBaitiao: true, //弹窗是否隐藏
+    dialogRadio: [], //单选 多选 弹窗列表
+    dialogStoreName: '', //单选 多选 弹窗门店名称
+    dialogStoreIndex: '', //单选 多选 弹窗门店index
+    dialogGroupIndex: '', //单选 多选 弹窗分组index
+    hideBaitiaos: true, //全部 弹窗
+    totalDialog_storeList: [], // 全部弹窗 ，门店列表
+    totalDialog_totalItem: 0, //全部弹窗 ，课程总数量
   },
   onLoad(options) {
     let that = this;
@@ -42,18 +50,9 @@ Page({
     })
     that.setData({
       Id: options.Id || '',
-      name:options.name || '',
-      type : options.type || '',
+      name: options.name || '',
+      type: options.type || '',
     })
-    // if (that.data.type==1){
-    //   wx.setNavigationBarTitle({
-    //     title: '选择课程',
-    //   })
-    // }else{
-    //   wx.setNavigationBarTitle({
-    //     title: '商圈详情',
-    //   })
-    // }
     that.init();
   },
   init: function() {
@@ -71,6 +70,11 @@ Page({
       let r = res.Data.GroupList;
       for (let v of r) {
         v.checkedArr = [];
+        for (let a of v.StoreList) {
+          if (a.ItemList[0].RemainCount > 0) {
+            a.checked2 = 1;
+          }
+        }
       }
 
       that.setData({
@@ -79,15 +83,15 @@ Page({
       })
       for (let a of r) {
         if (a.MinCount != 0) {
-          if (a.MaxCount == a.ItemList.length && a.MinCount == 1) {
-            a.text = "以下课程可选任意门数"
+          if (a.MaxCount >= a.TotalCount && a.MinCount == 1) {
+            a.text = "任选"
           } else {
-            a.text = "以下课程至少选" + a.MinCount + '门，最多选' + a.MaxCount + '门'
+            a.text = "最少选" + a.MinCount + '门，最多选' + a.MaxCount + '门'
           }
-        } else if (a.MaxCount >= a.ItemList.length) {
-          a.text = "以下课程包含全部"
+        } else if (a.MaxCount == a.TotalCount) {
+          a.text = "全选"
         } else {
-          a.text = "以下课程必选" + a.MaxCount + '门,不可多选'
+          a.text = "必选" + a.MaxCount + '门，不可多选'
         }
       }
       that.setData({
@@ -134,25 +138,40 @@ Page({
     let a = 'GroupList[' + index + '].checkedArr';
     let c = 'GroupList[' + index + '].checked';
     let d = 'GroupList[' + index + '].ItemList';
+    let f = 'GroupList[' + index + '].StoreList';
 
     let arr3 = [];
-    if (s.MaxCount >= s.ItemList.length && s.MinCount == 0) {
+    if (s.MaxCount >= s.TotalCount && s.MinCount == 0) {
       let addCount = 0;
       if (s.checkedArr.length == 0) {
-        for (let v of s.ItemList) {
-          arr3.push(v.RelId);
-          v.checked = true;
+        if (this.data.type == 2) {
+          // for (let v of s.StoreList) {
+          //   arr3.push(v.StoreId);
+          //   v.checked = true;
+          // }
+        } else {
+          for (let v of s.ItemList) {
+            arr3.push(v.RelId);
+            v.checked = true;
+          }
         }
       } else {
-        for (let v of s.ItemList) {
-          v.checked = false;
+        if (this.data.type == 2) {
+          // for (let v of s.StoreList) {
+          //   v.checked = false;
+          // }
+        } else {
+          for (let v of s.ItemList) {
+            v.checked = false;
+          }
         }
         arr3 = [];
       }
       arr = arr3;
       this.setData({
         [c]: arr,
-        [d]: s.ItemList
+        [d]: s.ItemList,
+        [f]: s.StoreList || '',
       });
     } else {
       if (s.MaxCount == 1 && arr.length > 0) {
@@ -162,38 +181,219 @@ Page({
           success = false;
           wx.showToast({
             icon: 'none',
-            title: '请按 ' + s.GroupName +' 规则选择课程',
+            title: '请按 ' + s.GroupName + ' 规则选择课程',
           })
-          for (let v of s.ItemList) {
-            if (v.RelId == arr[arr.length - 1]) {
-              v.checked = false;
+          if (this.data.type == 2) {
+            // for (let v of s.StoreList) {
+            //   if (v.StoreId == arr[arr.length - 1]) {
+            //     v.checked = false;
+            //   }
+            // }
+          } else {
+            for (let v of s.ItemList) {
+              if (v.RelId == arr[arr.length - 1]) {
+                v.checked = false;
+              }
             }
           }
         } else {
-          for (let v of s.ItemList) {
-            if (arr.indexOf(v.RelId.toString()) != -1) {
-              v.checked = true;
-            } else {
-              v.checked = false;
+          if (this.data.type == 2) {
+            // for (let v of s.StoreList) {
+            //   if (arr.indexOf(v.StoreId.toString()) != -1) {
+            //     v.checked = true;
+            //   } else {
+            //     v.checked = false;
+            //   }
+            // }
+          } else {
+            for (let v of s.ItemList) {
+              if (arr.indexOf(v.RelId.toString()) != -1) {
+                v.checked = true;
+              } else {
+                v.checked = false;
+              }
             }
           }
         }
       }
       this.setData({
         [c]: arr,
-        [d]: s.ItemList
+        [d]: s.ItemList,
+        [f]: s.StoreList || '',
       });
     }
     this.setData({
       [a]: arr
     });
-    if (success) {
+    if (success && this.data.type == 1) {
       this.hasMoney();
     }
   },
+  //团单加入购物车
+  addcar:function() {
+    var that = this;
+    var url = 'cart/add';
+    let ids = [];
+    for (let v of this.data.GroupList) {
+      ids = ids.concat(v.checkedArr);
+    }
+    this.setData({
+      ids: ids
+    });
+    var params = {
+      SheetId: that.data.Id,
+      RelId: ids
+    }
+    for (let v of this.data.GroupList) {
+      if (v.checkedArr.length > 0 && (v.checkedArr.length < v.MinCount || v.checkedArr.length > v.MaxCount || (v.MinCount == 0 && v.MaxCount != v.checkedArr.length))) {
+        wx.showToast({
+          icon: 'none',
+          title: '请正确勾选(' + v.GroupName + ')',
+        })
+        return;
+      }
+
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
+      wx.showToast({
+        icon:'none',
+        title: '已成功添加课程至购物车',
+      })
+    },
+      '',
+      false);
+  },
+  checkItem: function(e) {
+    let itemindex = e.currentTarget.dataset.itemindex;
+    let tempArr = this.data.dialogRadio;
+    let checkedIndex = -1;
+    tempArr.forEach((x, index) => {
+      if (x.checked == true) {
+        checkedIndex = index;
+      }
+      x.checked = false;
+    });
+    let source_storeItemSet = 'GroupList[' + this.data.dialogGroupIndex + '].StoreList[' + this.data.dialogStoreIndex + '].ItemList';
+    this.setData({
+      dialogRadio: tempArr,
+      [source_storeItemSet]: tempArr
+    });
+
+    let storeCheckedSet = 'GroupList[' + this.data.dialogGroupIndex + '].StoreList[' + this.data.dialogStoreIndex + '].checked';
+    let storeCheckedNameSet = 'GroupList[' + this.data.dialogGroupIndex + '].StoreList[' + this.data.dialogStoreIndex + '].checkedName';
+    let source_itemCheckedSet = 'GroupList[' + this.data.dialogGroupIndex + '].StoreList[' + this.data.dialogStoreIndex + '].ItemList[' + itemindex + '].checked';
+    if (checkedIndex != itemindex) {
+      //设置课程选中
+      let itemCheckedSet = 'dialogRadio[' + itemindex + '].checked';
+      this.setData({
+        [itemCheckedSet]: true,
+        [storeCheckedSet]: true,
+        [storeCheckedNameSet]: this.data.GroupList[this.data.dialogGroupIndex].StoreList[this.data.dialogStoreIndex].ItemList[itemindex].ItemName,
+        [source_itemCheckedSet]: true,
+      });
+    } else {
+      this.setData({
+        [storeCheckedSet]: false,
+        [storeCheckedNameSet]: "",
+        [source_itemCheckedSet]: false,
+      });
+    }
+
+    let source_groupCheckedSet = 'GroupList[' + this.data.dialogGroupIndex + '].checkedArr';
+    let checkedResult = [];
+    this.data.GroupList[this.data.dialogGroupIndex].StoreList.forEach(y => {
+      let tempCheckedArr = y.ItemList.filter(z => {
+        return z.checked == true;
+      })
+      if (tempCheckedArr.length > 0) {
+        checkedResult.push(tempCheckedArr[0].RelId);
+      }
+    })
+    this.setData({
+      hideBaitiao: true,
+      [source_groupCheckedSet]: checkedResult
+    })
+    this.hasMoney();
+  },
+  checkItem_total: function(e) {
+    let storeIndex = e.currentTarget.dataset.storeindex;
+    let itemIndex = e.currentTarget.dataset.itemindex;
+    let tempStoreList = this.data.totalDialog_storeList;
+    //清空该门店下课程选中
+    let checkedIndex = -1;
+    tempStoreList[storeIndex].ItemList.forEach((item, index) => {
+      if (item.checked == true) {
+        checkedIndex = index;
+      }
+      item.checked = false;
+    });
+    this.setData({
+      totalDialog_storeList: tempStoreList
+    });
+    //取消选中
+    if (itemIndex == checkedIndex) {
+
+    } else {
+      let itemCheckedSet = 'totalDialog_storeList[' + storeIndex + '].ItemList[' + itemIndex + '].checked';
+      this.setData({
+        [itemCheckedSet]: true
+      });
+    }
+  },
+  //全部弹窗确定
+  sureChecked: function() {
+    let checkedResult = [];
+    this.data.totalDialog_storeList.forEach((item, index) => {
+      let tempCheckedArr = item.ItemList.filter(z => {
+        return z.checked == true;
+      })
+      if (tempCheckedArr.length > 0) {
+        let storeCheckedNameSet = 'GroupList[' + this.data.dialogGroupIndex + '].StoreList[' + index + '].checkedName';
+        let itemCheckedSet = 'GroupList[' + this.data.dialogGroupIndex + '].StoreList[' + index + '].ItemList';
+        checkedResult.push(tempCheckedArr[0].RelId);
+
+        let itemCheckedList = this.data.GroupList[this.data.dialogGroupIndex].StoreList[index].ItemList;
+        itemCheckedList.forEach(x => {
+          if (x.RelId == tempCheckedArr[0].RelId) {
+            x.checked = true;
+          } else {
+            x.checked = false;
+          }
+        });
+        this.setData({
+          [storeCheckedNameSet]: tempCheckedArr[0].ItemName,
+          [itemCheckedSet]: itemCheckedList
+        });
+      }
+    });
+    if (checkedResult.length != this.data.totalDialog_totalItem) {
+      wx.showToast({
+        icon: 'none',
+        title: '每家门店必须选择一门课程',
+      })
+      return;
+    }
+    let source_groupCheckedSet = 'GroupList[' + this.data.dialogGroupIndex + '].checkedArr';
+    this.setData({
+      [source_groupCheckedSet]: checkedResult
+    })
+    let storeCheckedSet = 'GroupList[' + this.data.dialogGroupIndex + '].StoreList'
+    let storeListChecked = this.data.GroupList[this.data.dialogGroupIndex].StoreList;
+    storeListChecked.forEach(x => {
+      x.checked = true;
+    });
+    this.setData({
+      [storeCheckedSet]: storeListChecked,
+      hideBaitiaos: true,
+    })
+    this.hasMoney();
+  },
+  cancelChecked: function() {
+
+  },
   paybtn: function() {
     for (let v of this.data.GroupList) {
-      if (v.checkedArr.length < v.MinCount || v.checkedArr.length > v.MaxCount) {
+      if (v.checkedArr.length > 0 && (v.checkedArr.length < v.MinCount || v.checkedArr.length > v.MaxCount || (v.MinCount == 0 && v.MaxCount != v.checkedArr.length))) {
         wx.showToast({
           icon: 'none',
           title: '请正确勾选(' + v.GroupName + ')',
@@ -213,7 +413,137 @@ Page({
   },
   onPullDownRefresh: function() {
     this.getData();
+    this.setData({
+      TotalPrice: -1
+    })
     wx.stopPullDownRefresh()
+  },
+  //取消/选中
+  changeCheck: function(e) {
+    let dialogGroupIndex = e.currentTarget.dataset.groupindex;
+    let dialogStoreIndex = e.currentTarget.dataset.storeindex;
+    this.setData({
+      dialogStoreIndex: dialogStoreIndex,
+      dialogGroupIndex: dialogGroupIndex,
+      totalDialog_totalItem: e.currentTarget.dataset.total
+    })
+    if (this.data.GroupList[dialogGroupIndex].MaxCount == this.data.GroupList[dialogGroupIndex].TotalCount && this.data.GroupList[dialogGroupIndex].MinCount == 0) {
+      if (this.data.GroupList[dialogGroupIndex].StoreList[dialogStoreIndex].checked == true) { //取消选中
+        let storeCheckedSet = 'GroupList[' + dialogGroupIndex + '].StoreList'
+        let storeListChecked = this.data.GroupList[dialogGroupIndex].StoreList;
+        storeListChecked.forEach(x => {
+          x.checked = false;
+          x.ItemList.forEach(y => {
+            y.checked = false;
+          })
+        });
+        this.setData({
+          [storeCheckedSet]: storeListChecked
+        })
+
+        let source_groupCheckedSet = 'GroupList[' + dialogGroupIndex + '].checkedArr';
+        let checkedResult = [];
+        this.data.GroupList[dialogGroupIndex].StoreList.forEach(y => {
+          let tempCheckedArr = y.ItemList.filter(z => {
+            return z.checked == true;
+          })
+          if (tempCheckedArr.length > 0) {
+            checkedResult.push(tempCheckedArr[0].RelId);
+          }
+        })
+        console.log(checkedResult)
+        this.setData({
+          [source_groupCheckedSet]: checkedResult
+        })
+        this.hasMoney();
+      } else {
+        this.setData({
+          hideBaitiaos: false,
+          totalDialog_storeList: e.currentTarget.dataset.storelist
+        })
+      }
+    } else {
+      let storeCheckedSet = 'GroupList[' + dialogGroupIndex + '].StoreList[' + dialogStoreIndex + '].checked';
+      let storeCheckedNameSet = 'GroupList[' + dialogGroupIndex + '].StoreList[' + dialogStoreIndex + '].checkedName';
+      if (this.data.GroupList[dialogGroupIndex].StoreList[dialogStoreIndex].checked == true) {
+        let storeItemListSet = 'GroupList[' + dialogGroupIndex + '].StoreList[' + dialogStoreIndex + '].ItemList';
+        let tempArr = this.data.GroupList[dialogGroupIndex].StoreList[dialogStoreIndex].ItemList;
+        tempArr.forEach(x => {
+          x.checked = false;
+        });
+        this.setData({
+          [storeCheckedSet]: false,
+          storeCheckedNameSet: "",
+          [storeItemListSet]: tempArr
+        });
+
+        let source_groupCheckedSet = 'GroupList[' + dialogGroupIndex + '].checkedArr';
+        let checkedResult = [];
+        this.data.GroupList[dialogGroupIndex].StoreList.forEach(y => {
+          let tempCheckedArr = y.ItemList.filter(z => {
+            return z.checked == true;
+          })
+          if (tempCheckedArr.length > 0) {
+            checkedResult.push(tempCheckedArr[0].RelId);
+          }
+        })
+        this.setData({
+          [source_groupCheckedSet]: checkedResult
+        })
+        this.hasMoney();
+      } else {
+        this.setData({
+          hideBaitiao: false,
+          dialogRadio: e.currentTarget.dataset.item,
+          dialogStoreName: e.currentTarget.dataset.name,
+          dialogStoreIndex: dialogStoreIndex,
+          dialogGroupIndex: dialogGroupIndex,
+        })
+      }
+    }
+  },
+  showDialog(e) {
+    let dialogGroupIndex = e.currentTarget.dataset.groupindex;
+    let dialogStoreIndex = e.currentTarget.dataset.storeindex;
+    //如果是全部分组
+    if (this.data.GroupList[dialogGroupIndex].MaxCount == this.data.GroupList[dialogGroupIndex].TotalCount && this.data.GroupList[dialogGroupIndex].MinCount == 0) {
+      this.setData({
+        hideBaitiaos: false,
+        totalDialog_storeList: e.currentTarget.dataset.storelist,
+        totalDialog_totalItem: e.currentTarget.dataset.total,
+        dialogStoreIndex: dialogStoreIndex,
+        dialogGroupIndex: dialogGroupIndex,
+      })
+    } else {
+      this.setData({
+        hideBaitiao: false,
+        dialogRadio: e.currentTarget.dataset.item,
+        dialogStoreName: e.currentTarget.dataset.name,
+        dialogStoreIndex: dialogStoreIndex,
+        dialogGroupIndex: dialogGroupIndex,
+      })
+    }
+  },
+  dialogHide: function(e) {
+    this.setData({
+      hideBaitiao: true,
+    })
+  },
+  dialogHides: function(e) {
+    this.setData({
+      hideBaitiaos: true,
+    })
+  },
+  cancelChecked: function() {
+    this.setData({
+      hideBaitiaos: true
+    })
+  },
+  mechanismDetail: function(e) {
+    console.log(e)
+    wx.navigateTo({
+      url: '/pages/mechanism/mechanism?groupId=' + e.currentTarget.dataset.groupid + '&storeId=' + e.currentTarget.dataset.storeid,
+    })
   },
   onShareAppMessage: function(res) {
     return {

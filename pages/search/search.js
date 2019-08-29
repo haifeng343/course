@@ -124,8 +124,15 @@ Page({
         item.TradingAreaDistance = (parseInt(item.TradingAreaDistance) / 1000).toFixed(1);;
         item.SheetMinPrice = Number(item.SheetMinPrice / 100).toFixed(2);
       })
+      let arr1 = that.data.groupList;
+      let arr2 = res.Data.List
+      if(that.data.page==1){
+        arr1 = arr2
+      }else{
+        arr1 = arr.concat(arr2);
+      }
       that.setData({
-        groupList: res.Data.List
+        groupList: arr1
       })
       if (that.data.groupList.length <= 0) {
         wx.showToast({
@@ -151,18 +158,14 @@ Page({
       url: '/pages/chooseClass/chooseClass?Longitude=' + loc.lng + '&Latitude=' + loc.lat + '&Id=' + that.Id,
     })
   },
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
 
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
   onReachBottom: function() {
-
+    let temp = this.data.page;
+    temp++;
+    this.setData({
+      page: temp
+    })
+    this.search();
   },
 
   onShareAppMessage: function(res) {

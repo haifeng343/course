@@ -21,7 +21,7 @@ Page({
     color: '#59B8B3',
     bgcolor: '#EDFBFB',
     groupList: [],
-    locationName: '正在定位...',
+    locationName: '',
     longitude: '',
     latitude: '',
     page: 1,
@@ -162,8 +162,6 @@ Page({
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       let tempRes=res;
       that.reverseLocation(res.Data.Latitude, res.Data.Longitude, res.Data.LocationType, function(res) {
-        console.log(tempRes);
-        console.log(res);
           wx.setStorageSync('loc', {
             lat: res.lat,
             lng: res.lng,
@@ -220,7 +218,7 @@ Page({
             longitude: res.data.lng,
             latitude: res.data.lat
           });
-
+          that.data.page=1;
           that.refreshList();
         }
       },
@@ -232,6 +230,7 @@ Page({
     wx.getStorage({
       key: 'loc',
       success: function(res) {
+        console.log(res)
         that.setData({
           locationName: res.data.title,
           longitude: res.data.lng,

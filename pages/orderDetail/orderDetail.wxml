@@ -44,13 +44,13 @@
   </view>
 </view>
 <view class='Top'>
-  <view class="keep startd kl {{ detail.UseStatus==4 ? 'gray' : '' }}" wx:for="{{ItemList}}" wx:key>
+  <view class="keep startd kl" wx:for="{{ItemList}}" wx:key>
     <view class='leftImg'>
       <image class='topImg' src='{{item.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
     </view>
     <view class='Right'>
       <view class='activity'>{{item.ItemName}}</view>
-      <image wx:if="{{detail.UseStatus==4}}" class="use" src='../../images/used.png' mode='widthFix' lazy-load='true'></image>
+      <image wx:if="{{item.UseStatus==2}}" class="use" src='../../images/used.png' mode='widthFix' lazy-load='true'></image>
       <view class='courseRow startd well'>
         <view>
             <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
@@ -82,7 +82,7 @@
           </view>
           <view>课程数量{{item.CoursesNumber}}节</view>
         </view>
-        <view class='starts ml15'>
+        <view class='starts ml40'>
           <view>
             <image class='rowImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
           </view>

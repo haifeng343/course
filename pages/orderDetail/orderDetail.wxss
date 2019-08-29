@@ -8,6 +8,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.ml40{
+  margin-left: 40rpx;
+}
 .zan-dialog__container {
   position: fixed;
   top: 0;
