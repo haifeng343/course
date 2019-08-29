@@ -1,0 +1,172 @@
+.banner {
+  width: 100%;
+  height: 285rpx;
+  position: relative;
+  z-index: 0;
+  background-color: #fff;
+}
+
+swiper {
+  height: 100%;
+}
+
+swiper-item {
+  text-align: center;
+}
+.centers{
+  display: flex;
+  height: 60rpx;
+  line-height: 60rpx;
+  align-items: center;
+}
+.mb20{
+  margin-bottom: 20rpx;
+}
+.img1 {
+  width: 96%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15rpx;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.dot {
+  position: absolute;
+  bottom: 8rpx;
+  right: 52rpx;
+  background: rgba(0, 0, 0, 0.1);
+  color: #c9c9c9;
+  font-size: 24rpx;
+  border-radius: 40rpx;
+  padding: 3rpx 20rpx;
+}
+
+.content {
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30rpx 5% 10rpx;
+}
+
+.contentText {
+  font-size: 28rpx;
+  color: #5b5b5b;
+  margin-top: 20rpx;
+  padding-bottom: 10rpx;
+}
+
+.borb {
+  border-bottom: 1rpx solid #f4f4f4;
+}
+
+.icon {
+  width: 34rpx;
+  height: 34rpx;
+  margin-right: 15rpx;
+}
+
+.title {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.end {
+  width: 10%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.move {
+  font-size: 28rpx;
+  line-height: 60rpx;
+}
+
+.addr {
+  width: 625rpx;
+}
+.List{
+  background-color: #fff;
+  height: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.item{
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 15rpx;
+  margin-bottom: 20rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+}
+.item:last-child{
+  border: none;
+}
+.leftImg{
+  width: 23%;
+  margin-right: 15rpx;
+  display: flex;
+}
+.startd{
+  display: flex;
+  justify-content: flex-start;
+}
+.topImg {
+  width:126rpx;
+height:161rpx;
+border-radius:15rpx;
+
+}
+.right{
+  width: 86%;
+  font-size: 24rpx;
+  color: #5b5b5b;
+}
+.kl{
+  line-height: 45rpx;
+}
+.course{
+  font-size: 28rpx;
+  color: #000;
+  font-weight: 600;
+}
+
+.tagList {
+  width: 100%;
+  overflow-x: scroll;
+  display: flex;
+    height: 36rpx;
+  line-height: 36rpx;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.tagList::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.tagItm {
+  word-break: keep-all;
+  font-size: 24rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  display: flex;
+  align-items: center;
+  padding: 0rpx 8rpx;
+  margin-right: 15rpx;
+  margin-top: 0rpx;
+  box-sizing: border-box;
+  border-radius: 5rpx;
+}

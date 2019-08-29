@@ -1,0 +1,77 @@
+<view>
+  <scroll-view scroll-y="true">
+    <view class='bg'>
+      <view class='keep keep1' wx:for="{{List}}" wx:key>
+        <view class='keep pd0'>
+          <view class='between'>
+          <view class='startd che1'>
+            <checkbox class='gou'></checkbox>
+            <view class='groupName'>{{item.SheetModel==1?item.SheetName:item.TradingareaName}}</view>
+            <view class='centers'>
+              <image src='../../images/go.png' class='go' mode='apsectFill'></image>
+            </view>
+          </view>
+          <view class='centers del'>
+            <image src='../../images/delete.png' data-Id="{{item.CartId}}" bindtap='deleteCard' class='delete' mode='aspectFill'></image>
+          </view>
+          </view>
+
+          <view>
+            <view class='Item'>
+              <view class='leftImg'>
+                <image src='https://file.guditech.com/Item/Main/20190718211951334_fcfe2555a6854444bd262506448023ef.png' mode='apsectFill' class='topImg'></image>
+              </view>
+              <view class='rights'>
+                <view class='course'>樱花日语培训</view>
+                <view>课程描述</view>
+                <view>课程数量 {{item.CoursesNumber}} 1节，单节课时 1{{item.SingleTime}} min</view>
+                <view>{{item.SoldCount}}1人已参与 | 剩余名额 {{item.RemainCount}} 1个</view>
+              </view>
+            </view>
+            <view class='Item'>
+              <view class='leftImg'>
+                <image src='https://file.guditech.com/Item/Main/20190718211951334_fcfe2555a6854444bd262506448023ef.png' mode='apsectFill' class='topImg'></image>
+              </view>
+              <view class='rights'>
+                <view class='course'>樱花日语培训</view>
+                <view>课程描述</view>
+                <view>课程数量 {{item.CoursesNumber}} 1节，单节课时 1{{item.SingleTime}} min</view>
+                <view>{{item.SoldCount}}1人已参与 | 剩余名额 {{item.RemainCount}} 1个</view>
+              </view>
+            </view>
+          </view>
+
+        </view>
+        <view class='flex-end count'>
+          <view>共{{ItemList.length}}2门课程</view>
+          <view class='money'>小计:</view>
+          <view class='numberD'>￥{{TotalAmount}}100</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<!-- <view class='keep low between mt0' bindtap='swich' style='overflow-x:hidden'>
+  <view class='column'>
+    <view>使用积分</view>
+    <view class='start txt'>{{UseScore}}100积分抵1{{UseScoreAmount}}元
+      <view class='txt1'>现有积分{{TotalScore}}1000</view>
+    </view>
+  </view>
+  <checkbox class='' checked='{{checked}}'></checkbox>
+</view> -->
+
+<view class='pay'>
+  <view class='between'>
+    <checkbox class='allcheck' checked='' value=''>全选</checkbox>
+    <view class='right'>
+      <view class='all'>合计:
+        <text class='payMoney'>￥240</text>
+      </view>
+      <view>
+        <text class='settlment'>结算<text>(2)</text></text>
+      </view>
+    </view>
+  </view>
+</view>
