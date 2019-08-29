@@ -46,15 +46,17 @@ Page({
   //删除购物车
   deleteCard:function(e){
     let that = this;
-    console.log(e)
+    let item = e.currentTarget.dataset;
+    let a = that.data.List[item.index]
+    console.log(e);
     wx.showModal({
-      title: '确认删除',
-      content: '是否删除该订单？',
+      title: '是否删除',
+      content: '确认删除该' + (a.SheetModel == 1 ? a.SheetName : a.TradingareaName) +'？',
       success:function(res) {
         if(res.confirm){
           var url = 'cart/delete';
           var params = {
-            Id: e.currentTarget.dataset.id,
+            Id: item.id,
           }
           netUtil.postRequest(url, params, function (res) {
             wx.showToast({
@@ -63,7 +65,7 @@ Page({
             })
             let thisList = that.data.List;
             let tempArr = thisList.filter(f=>{
-              return f.CartId == e.currentTarget.dataset.id
+              return f.CartId == item.id
             });
             if (tempArr.length>0){
               let tempIndex = thisList.indexOf(tempArr[0]);
