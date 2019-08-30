@@ -5,41 +5,17 @@
   </view>
 </view>
 <view class='orderList'>
-  <view class='detail'>
-    <view class='title'>{{detail.SheetName}}</view>
+  <view class='detail' wx:for="{{detail.List}}" wx:key>
+    <view class='title'>{{item.SheetName}}</view>
     <view class='between'>
-      <view class='codeNumber'>券码: 111111111111111111{{detail.TicketNumber}}</view>
-      <view>去<text class='theme'> 订单详情 </text>查看</view>
+      <view class='codeNumber'>券码:{{item.TicketNumber}}</view>
+      <view>去<text class='theme' data-Id="{{item.OrderId}}" bindtap='navto'> 订单详情 </text>查看</view>
     </view>
     <view class='code'>
-      <image class='codeImg' src='{{detail.QRCodeAccessUrl}}' mode='widthFix' lazy-load='true'></image>
-    </view>
-  </view>
-  <view class='detail'>
-    <view class='title'>{{detail.SheetName}}</view>
-    <view class='codeNumber'>券码: {{detail.TicketNumber}}</view>
-    <view class='code'>
-      <image class='codeImg' src='{{detail.QRCodeAccessUrl}}' mode='widthFix' lazy-load='true'></image>
-    </view>
-  </view>
-  <view class='detail'>
-    <view class='title'>{{detail.SheetName}}</view>
-    <view class='codeNumber'>券码: {{detail.TicketNumber}}</view>
-    <view class='code'>
-      <image class='codeImg' src='{{detail.QRCodeAccessUrl}}' mode='widthFix' lazy-load='true'></image>
-    </view>
-  </view>
-  <view class='detail'>
-    <view class='title'>{{detail.SheetName}}</view>
-    <view class='codeNumber'>券码: {{detail.TicketNumber}}</view>
-    <view class='code'>
-      <image class='codeImg' src='{{detail.QRCodeAccessUrl}}' mode='widthFix' lazy-load='true'></image>
+      <image class='codeImg' src='{{item.QRCodeAccessUrl}}' mode='widthFix' lazy-load='true'></image>
     </view>
   </view>
 </view>
-<!-- <view class='around'>
-  <button class='btnd btnd1' bindtap='navto'>订单详情</button>
-</view> -->
 
 <view class='pay'>
   <button class='btnd' bindtap='groupTo'>返回首页</button>

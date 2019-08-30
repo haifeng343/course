@@ -147,8 +147,7 @@ Page({
     var that = this;
     var url = 'order/create'
     var params = {
-      SheetId: that.data.Id,
-      RelId: that.data.relId,
+      List: that.data.parmasItem,
       UseScore: that.data.checked,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、

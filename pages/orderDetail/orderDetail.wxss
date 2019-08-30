@@ -1,4 +1,6 @@
-
+page{
+  padding-bottom: 140rpx;
+}
 .status{
   font-size: 28rpx;
   color: #000;

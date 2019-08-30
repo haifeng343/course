@@ -139,7 +139,7 @@
 					"id": 12,
 					"name": "payOrder",
 					"pathName": "pages/payOrder/payOrder",
-					"query": "checkItem=[{\"SheetId\":15,\"RelId\":[26]},{\"SheetId\":15,\"RelId\":[26]},{\"SheetId\":15,\"RelId\":[26]}]",
+					"query": "checkItem=[{\"SheetId\":15,\"CartId\":90,\"RelId\":[28,41]},{\"SheetId\":15,\"CartId\":89,\"RelId\":[28,41]},{\"SheetId\":15,\"CartId\":88,\"RelId\":[28,41]},{\"SheetId\":15,\"CartId\":87,\"RelId\":[42]}]",
 					"scene": null
 				},
 				{

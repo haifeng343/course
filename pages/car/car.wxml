@@ -1,10 +1,10 @@
-<view>
+<view wx:if="{{List.length>0}}">
   <scroll-view scroll-y="true">
     <view class='bg'>
       <checkbox-group bindchange='checkedTap'>
         <view class='keep keep1' wx:for="{{List}}" wx:key>
           <view class='keep pd0'>
-            <view class='between'>
+            <view class='between marginBootom'>
               <view class='startd che1'>
                 <checkbox class='gou' value='{{item.CartId}}' checked='{{item.checked}}'></checkbox>
                 <view class='groupName'>{{item.SheetModel==1?item.SheetName:item.TradingareaName}}</view>
@@ -13,7 +13,7 @@
                 </view>
               </view>
               <view class='centers del'>
-                <image src='../../images/delete.png' data-index="{{index}}" data-Id="{{item.CartId}}" bindtap='deleteCard' class='delete' mode='aspectFill'></image>
+                <image src='../../images/delete1.png' data-index="{{index}}" data-Id="{{item.CartId}}" bindtap='deleteCard' class='delete' mode='aspectFill'></image>
               </view>
             </view>
 
@@ -24,9 +24,43 @@
                 </view>
                 <view class='rights'>
                   <view class='course'>{{item1.ItemName}}</view>
-                  <view>{{item1.ItemDes==null?'暂无课程简介':item1.ItemDes}}</view>
-                  <view>课程数量 {{item1.CoursesNumber}} 1节，单节课时 1{{item1.SingleTime}} min</view>
-                  <view>{{item1.SoldCount}}1人已参与 | 剩余名额 {{item1.RemainCount}} 1个</view>
+                  <view class='detail start well'>
+                    <view class='startd'>
+                      <view class='centerd'>
+                        <image src='../../images/house.png' class='detailImg' mode='apsectFill'></image>
+                      </view>
+                      <view class='name'>{{item1.SellerName}}</view>
+                    </view>
+                  </view>
+                  <view class='detail start well'>
+                    <view class='startd'>
+                      <view class='centerd'>
+                        <image src='../../images/ad1.png' class='detailImg' mode='apsectFill'></image>
+                      </view>
+                      <view class='name'>{{item1.StoreAddress}}</view>
+                    </view>
+                  </view>
+                  <view class='detail start well'>
+                    <view class='startds'>
+                      <view class='centerd'>
+                        <image src='../../images/couse.png' class='detailImg' mode='apsectFill'></image>
+                      </view>
+                      <view class='name'>课程数量 {{item1.CoursesNumber}} 节</view>
+                    </view>
+                    <view class='startds ml40'>
+                      <view class='centerd'>
+                        <image src='../../images/time.png' class='detailImg' mode='apsectFill'></image>
+                      </view>
+                      <view class='name'>单节课时 {{item1.SingleTime}} min</view>
+                    </view>
+                  </view>
+                  <view class='detail start well'>
+                    <view class='startd'>
+                      <view class='name'>{{item1.SoldCount}} 人已参与，剩余名额 {{item1.RemainCount}} 个</view>
+                    </view>
+                  </view>
+                  <!-- <view>课程数量 {{item1.CoursesNumber}} 节，单节课时 {{item1.SingleTime}} min</view>
+                  <view>{{item1.SoldCount}} 人已参与 | 剩余名额 {{item1.RemainCount}} 个</view> -->
                 </view>
               </view>
             </view>
@@ -42,6 +76,11 @@
     </view>
   </scroll-view>
 </view>
+<view class='nohasLog' wx:else>
+  <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+  <view>您的购物车空空如也~</view>
+  <view class='btnd' bindtap='goHome'>去逛逛</view>
+</view>
 
 <!-- <view class='keep low between mt0' bindtap='swich' style='overflow-x:hidden'>
   <view class='column'>
@@ -53,16 +92,18 @@
   <checkbox class='' checked='{{checked}}'></checkbox>
 </view> -->
 
-<view class='pay'>
+<view class='pay' wx:if="{{List.length>0}}">
   <view class='between'>
     <checkbox class='allcheck' bindtap='allChecked' checked='{{totalChecked}}'>全选</checkbox>
     <view class='right'>
       <view class='all'>合计:
         <text class='payMoney'>￥{{money==0?0:money}}</text>
       </view>
-      <view>
-        <text class='settlment' bindtap='settlement' data-item="{{checkItem}}" wx:if="{{money>0}}">结算<text>({{totalCount}})</text></text>
-        <text class='settlment settlmentd' wx:else>结算</text>
+      <view class='center'>
+        <view class='settlment' bindtap='settlement' data-item="{{checkItem}}" wx:if="{{money>0}}">结算
+          <text>({{totalCount}})</text>
+        </view>
+        <view class='settlment settlmentd' wx:else>结算</view>
       </view>
     </view>
   </view>

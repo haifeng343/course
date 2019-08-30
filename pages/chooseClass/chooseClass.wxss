@@ -31,7 +31,7 @@ page {
 
 .paycar {
   color: #26d7df !important;
-  border: 1rpx solid #26d7df;
+  border: 2rpx solid #26d7df;
   background-color: #fff !important;
   margin-right: 20rpx !important;
 }
@@ -451,10 +451,10 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .paybtn {
   background-color: #29d9d6;
   color: #fff;
-  font-size: 32rpx;
+  font-size: 28rpx;
   width: 200rpx;
-  height: 64rpx;
-  line-height: 64rpx;
+  height: 60rpx;
+  line-height: 60rpx;
   text-align: center;
   border-radius: 40rpx;
   margin: auto 0;

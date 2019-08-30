@@ -35,13 +35,13 @@ Page({
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
       that.setData({
-        detail:res.Data
+        detail: res.Data,
       })
     }); //调用get方法情就是户数
   },
-  navto: function() {
+  navto: function(e) {
     wx.navigateTo({
-      url: '/pages/orderDetail/orderDetail?Id=' + this.data.orderId +'&Status='+1,
+      url: '/pages/orderDetail/orderDetail?Id=' + e.currentTarget.dataset.id +'&Status='+1,
     })
   },
   groupTo: function() {

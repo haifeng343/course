@@ -16,6 +16,38 @@ picker{
 .tagList{
   line-height: 40rpx!important;
 }
+
+.tagList {
+  width: 100%;
+  overflow-x: scroll;
+  display: flex;
+  height: 36rpx;
+  line-height: 36rpx;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.tagList::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.tagItem {
+  word-break: keep-all;
+  font-size: 24rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  display: flex;
+  align-items: center;
+  padding: 0rpx 8rpx;
+  margin-right: 15rpx;
+  margin-top: 0rpx;
+  border-radius: 5rpx;
+  box-sizing: border-box;
+}
+
 .bb{
   color: #5b5b5b;
 }

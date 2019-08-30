@@ -1,32 +1,54 @@
 <view>
   <view class='keep column pd0' wx:for="{{ItemList}}" wx:key>
-    <view class='payTitle'>{{item.SheetModel==1?item.SheetName:item.TradingareaName}}</view>
-    <view class='starts' wx:for="{{item.ItemList}}" wx:key wx:for-item="k">
-      <view class='leftImg'>
-        <image class='topImg' src='{{k.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
-      </view>
-      <view class='right'>
-        <view class='activity'>{{k.ItemName}}</view>
-        <view class='detail start well'>
-          <view class='startd'>
-            <view class='name'>{{k.ItemDes==null?'暂无课程简介':k.ItemDes}}</view>
-          </view>
+    <view class='ItemContent'>
+      <view class='payTitle'>{{item.SheetModel==1?item.SheetName:item.TradingareaName}}</view>
+      <view class='starts' wx:for="{{item.ItemList}}" wx:key wx:for-item="k">
+        <view class='leftImg'>
+          <image class='topImg' src='{{k.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
         </view>
-        <view class='detail start well'>
-          <view class='start'>
+        <view class='right'>
+          <view class='activity'>{{k.ItemName}}</view>
+          <view class='detail start well'>
             <view class='startd'>
-              <view class='name'>课程数量{{k.CoursesNumber}}节，单节课时{{k.SingleTime}}min</view>
+              <view class='centers'>
+                <image src='../../images/house.png' class='detailImg' mode='apsectFill'></image>
+              </view>
+              <view class='name'>{{k.SellerName}}</view>
             </view>
           </view>
-        </view>
-        <view class='detail start well'>
-          <view class='startd'>
-            <view class='name'>{{k.SoldCount}} 人已参与，剩余名额 {{k.RemainCount}} 个</view>
+          <view class='detail start well'>
+            <view class='start'>
+              <view class='startd'>
+                <view class='centers'>
+                  <image src='../../images/ad1.png' class='detailImg' mode='apsectFill'></image>
+                </view>
+                <view class='name'>{{k.StoreAddress}}</view>
+              </view>
+            </view>
+          </view>
+          <view class='detail start well'>
+            <view class='startds'>
+              <view class='centers'>
+                <image src='../../images/couse.png' class='detailImg' mode='apsectFill'></image>
+              </view>
+              <view class='name'>课程数量 {{k.CoursesNumber}} 节</view>
+            </view>
+            <view class='startds ml40'>
+              <view class='centers'>
+                <image src='../../images/time.png' class='detailImg' mode='apsectFill'></image>
+              </view>
+              <view class='name'>单节课时 {{k.SingleTime}} min</view>
+            </view>
+          </view>
+          <view class='detail start well'>
+            <view class='startd'>
+              <view class='name'>{{k.SoldCount}} 人已参与，剩余名额 {{k.RemainCount}} 个</view>
+            </view>
           </view>
         </view>
       </view>
     </view>
-    <view class='flex-end keep count mb0'>
+    <view class='flex-end count mb0'>
       <view>共选择{{item.ItemCount}}门课程</view>
       <view class='money'>合计:</view>
       <view class='numberD'>￥{{item.Price}}</view>

@@ -5,14 +5,58 @@
   font-size: 24rpx;
   color: #5b5b5b;
 }
+
 .rights {
   width: 85%;
   font-size: 24rpx;
   color: #5b5b5b;
   line-height: 42rpx;
 }
-.pd0{
-  padding-bottom: 0!important;
+
+.ml40 {
+  margin-left: 40rpx;
+}
+
+.startds {
+  font-size: 24rpx;
+  display: flex;
+  justify-content: flex-start;
+}
+.startd {
+  width: 100%;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.detailImg {
+  width: 28rpx;
+  height: 28rpx;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+}
+.well {
+  padding: 0;
+}
+.detail {
+  width: 100%;
+  line-height: 40rpx;
+  display: flex;
+  justify-content: flex-start;
+}
+.pd0 {
+  padding-bottom: 0 !important;
+}
+
+.btnd {
+  border-radius: 40rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 28rpx;
+  display: flex;
+  justify-content: center;
+  margin: 25rpx auto 0;
 }
 
 .course {
@@ -20,11 +64,17 @@
   font-weight: 600;
   color: #000;
 }
-.settlmentd{
-  background-color: #ccc!important;
-  color: #f4f4f4!important;
+
+.settlmentd {
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  background-color: #ccc !important;
+  color: #f4f4f4 !important;
+  text-align: center;
 }
-.bg{
+
+.bg {
   padding-bottom: 120rpx;
 }
 
@@ -32,15 +82,13 @@
   font-size: 32rpx;
   color: red;
 }
-.del{
-  margin-right: -15rpx;
-}
-.delete{
-  width: 40rpx;
-  height: 40rpx;
+
+.delete {
+  width: 34rpx;
+  height: 34rpx;
   line-height: 50rpx;
-  margin-right: -15rpx;
 }
+
 .all {
   margin-right: 30rpx;
   font-size: 24rpx;
@@ -52,41 +100,71 @@
   height: auto;
   border-radius: 15rpx;
   margin: 20rpx 2.5%;
-  padding: 20rpx 5%;
+  padding: 10rpx 2.5%;
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
 }
-.leftImg{
-  width: 28%;
+
+.leftImg {
+  width: 21%;
   margin-right: 10rpx;
 }
-.che1{
-  width: 94%;
+
+.marginBootom {
+  margin-bottom: 25rpx;
 }
-.groupName{
+
+.che1 {
+  width: 90%;
+}
+
+.centerd {
+  width: 34rpx;
+  height: 34rpx;
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  width: 100%;
+  height: auto;
+  font-size: 24rpx;
+  color: #5b5b5b;
+  line-height: 35rpx;
+}
+
+.groupName {
   max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 28rpx;
   line-height: 50rpx;
-  margin-left: 9.5%;
+  margin-left: 10.5%;
 }
-.centers{
+
+.centers {
   display: flex;
   height: 50rpx;
   line-height: 50rpx;
-  align-items:center;
+  align-items: center;
   z-index: 11;
 }
-.pay{
+
+.pay {
   z-index: 22;
 }
-.gou{
+
+.gou {
   position: absolute;
-  left: 2.5%;
+  left: 1.5%;
 }
-.go{
+
+.go {
   margin-left: 15rpx;
 }
+
 .topImg {
   width: 126rpx;
   height: 161rpx;
@@ -96,12 +174,17 @@
 .Item {
   width: 100%;
   box-sizing: border-box;
-  padding-left:60rpx; 
   display: flex;
   justify-content: flex-start;
   margin-top: 20rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+  padding-bottom: 20rpx;
+  margin-bottom: 20rpx;
 }
-
+.Item:last-child{
+  border: none;
+  margin-bottom:0;
+}
 .startd {
   display: flex;
   justify-content: flex-start;
@@ -119,9 +202,9 @@
 .count {
   width: 100%;
   box-sizing: border-box;
-  border-top: 1rpx solid #f4f4f4;
   padding: 0 5%;
   height: 80rpx;
+  border-top: 1rpx solid #f4f4f4;
   line-height: 80rpx;
   display: flex;
   align-items: center;
@@ -157,12 +240,17 @@
 }
 
 .settlment {
-  font-size: 24rpx;
+  font-size: 28rpx;
   color: #fff;
+  width: 200rpx;
   height: 60rpx;
+  line-height: 60rpx;
   background-color: #29d9d6;
-  padding: 15rpx 40rpx;
   border-radius: 45rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0;
 }
 
 .allcheck {

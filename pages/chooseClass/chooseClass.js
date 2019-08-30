@@ -252,13 +252,13 @@ Page({
       RelId: ids
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
-        that.init();
-        that.setData({
-          TotalPrice: -1,
-        })
+        // that.init();
+        // that.setData({
+        //   TotalPrice: -1,
+        // })
         wx.showToast({
           icon: 'none',
-          title: '已成功添加课程至购物车',
+          title: '已成功添加课程至购物车'
         })
       },
       '',

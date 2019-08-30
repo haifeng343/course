@@ -11,7 +11,9 @@ Page({
     totalChecked: false, //全选是否选中
     checkItem:[],
   },
-
+  onShow: function () {
+    this.init();
+  },
   onLoad: function(options) {
     let that = this;
     if (options.recommand) {
@@ -25,7 +27,6 @@ Page({
 
       })
     })
-    that.init();
   },
   init: function() {
     let that = this;
@@ -58,14 +59,13 @@ Page({
           that.allCheckedHandler();
         }
       }
-    })
+    },null,false,false,false)
   },
   //删除购物车
   deleteCard: function(e) {
     let that = this;
     let item = e.currentTarget.dataset;
     let a = that.data.List[item.index]
-    console.log(e);
     wx.showModal({
       title: '是否删除',
       content: '确认删除该' + (a.SheetModel == 1 ? a.SheetName : a.TradingareaName) + '？',
@@ -81,20 +81,40 @@ Page({
               title: '成功删除',
             })
             let thisList = that.data.List;
-            let tempArr = thisList.filter(f => {
-              return f.CartId == item.id
+            console.log(thisList)
+            let money = 0;
+            let totalCount = 0;
+            let deleteIndex=0;//刪除數據下表
+            thisList.forEach((f,index)=>{
+              if (f.CartId == item.id){
+                deleteIndex = index;
+              }else{
+                if (f.checked==true){
+                  money = money + Number(f.Price);
+                  totalCount = totalCount + 1;
+                }
+              }
             });
-            if (tempArr.length > 0) {
-              let tempIndex = thisList.indexOf(tempArr[0]);
-              thisList.splice(tempIndex, 1);
-            }
+            thisList.splice(deleteIndex, 1);
 
             that.setData({
-              List: thisList
+              List: thisList,
+              money: money.toFixed(2),
+              totalCount: totalCount
             });
+            if (thisList.length<=0){
+              that.setData({
+                totalChecked: false,
+              });
+            }
           })
         }
       }
+    })
+  },
+  goHome:function() {
+    wx.switchTab({
+      url: '/pages/index/index',
     })
   },
   //勾选
@@ -104,7 +124,6 @@ Page({
     that.setData({
       totalChecked: checkCartId.length >= that.data.List.length
     })
-    console.log(e);
     //查找选中数据
     let money = 0;
     let totalCount = 0;
@@ -160,6 +179,7 @@ Page({
     tempArr.forEach(item=>{
       checkedList.push({
         SheetId:item.SheetId,
+        CartId: item.CartId == null ? 0 : item.CartId,
         RelId:item.ItemList.map(e=>{
           return e.RelId;
         })
