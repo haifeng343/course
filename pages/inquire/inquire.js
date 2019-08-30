@@ -76,7 +76,7 @@ Page({
       if (that.data.page == 1) {
         arr = arr1
       } else {
-        arr = arr.concat(arr1)
+        arr.List = arr.List.concat(arr1.List)
       }
       that.setData({
         List: arr

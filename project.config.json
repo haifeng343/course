@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 12,
 			"list": [
 				{
 					"id": -1,
@@ -104,7 +104,7 @@
 					"id": 7,
 					"name": "chooseClass",
 					"pathName": "pages/chooseClass/chooseClass",
-					"query": "Longitude=undefined&Latitude=undefined&Id=20&name=拱墅区城西银泰城商圈&type=1",
+					"query": "Longitude=undefined&Latitude=undefined&Id=15&name=西湖银泰城商圈&type=2",
 					"scene": null
 				},
 				{
@@ -139,7 +139,7 @@
 					"id": 12,
 					"name": "payOrder",
 					"pathName": "pages/payOrder/payOrder",
-					"query": "Id=20&ids=90",
+					"query": "checkItem=[{\"SheetId\":15,\"RelId\":[26]},{\"SheetId\":15,\"RelId\":[26]},{\"SheetId\":15,\"RelId\":[26]}]",
 					"scene": null
 				},
 				{

@@ -65,12 +65,15 @@
   z-index: 2;
 }
 .title{
+  width: 100%;
+  background-color: #ECECEC;
   font-size: 24rpx;
   position: fixed;
   height: 60rpx;
   line-height: 60rpx;
   top: 80rpx;
-  margin-left: 5%;
+  padding-left: 5%;
+  z-index: 99;
 }
 .List{
   position: absolute;

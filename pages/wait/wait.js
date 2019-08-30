@@ -1,10 +1,9 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
+var setTime;
 Page({
 
-  /**
-   * 页面的初始数据
-   */
+
   data: {
     orderId:'',
     ordersn:'',
@@ -31,7 +30,7 @@ Page({
       ordersn: options.ordersn || '',
       payamount: options.money || ''
     })
-    var setTime = setInterval(function () {
+    setTime = setInterval(function () {
       that.payok(false, function (res) {
         if (res.IsPay) {
           clearInterval(setTime);
@@ -66,6 +65,9 @@ Page({
     wx.switchTab({
       url: '/pages/index/index',
     })
+  },
+  onUnload  :function() {
+    clearInterval(setTime);
   },
   bindPayok:function() {
     let that = this;

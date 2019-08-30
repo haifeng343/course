@@ -20,6 +20,10 @@
   font-weight: 600;
   color: #000;
 }
+.settlmentd{
+  background-color: #ccc!important;
+  color: #f4f4f4!important;
+}
 .bg{
   padding-bottom: 120rpx;
 }
@@ -71,6 +75,10 @@
   height: 50rpx;
   line-height: 50rpx;
   align-items:center;
+  z-index: 11;
+}
+.pay{
+  z-index: 22;
 }
 .gou{
   position: absolute;

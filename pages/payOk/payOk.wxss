@@ -1,5 +1,6 @@
 page{
   background-color: #fff;
+  padding-bottom: 120rpx;
 }
 .payTop{
   width: 100%;
@@ -27,11 +28,21 @@ page{
   padding: 30rpx 5%;
   box-sizing: border-box;
   font-size: 26rpx;
+  border-bottom:8rpx solid #F8F8F8;
+}
+.detail:last-child{
+  border-bottom:#fff; 
+}
+.orderList:last-child{
+  margin-bottom: 120rpx;
 }
 .title{
   font-size: 28rpx;
-  text-align: center;
+  text-align: left;
   margin-bottom: 10rpx;
+}
+.theme{
+  color: #3CD5D1;
 }
 .codeNumber{
   text-align: center;
@@ -55,7 +66,15 @@ page{
   padding-top: 10rpx;
   margin-left: 2.5%;
 }
-
+.pay {
+  padding: 0;
+}
+.btnd{
+  width: 98%;
+  height: 80rpx;
+  margin-top: 20rpx;
+  line-height: 80rpx;
+}
 
 
 

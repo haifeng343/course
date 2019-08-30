@@ -15,6 +15,10 @@ page {
   border-top: 1rpx solid #f6f6f6;
 }
 
+.klds {
+  line-height: 120rpx;
+}
+
 .well {
   padding: 0;
 }
@@ -24,7 +28,7 @@ page {
 }
 
 .leftImg {
-  width: 23%;
+  width: 19%;
   margin-right: 15rpx;
 }
 
@@ -49,9 +53,9 @@ page {
 }
 
 .topImg {
-  width: 155rpx;
-  height: 198rpx;
-  border-radius: 10rpx;
+  width: 126rpx;
+  height: 161rpx;
+  border-radius: 15rpx;
 }
 
 .courseRow {
@@ -82,7 +86,8 @@ page {
 .mt1 {
   margin-top: 0rpx;
 }
-.mt2{
+
+.mt2 {
   margin-top: 0rpx;
 }
 
@@ -94,6 +99,9 @@ page {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
+  width: 100%;
+  height: auto;
+  padding-bottom: 20rpx;
 }
 
 .name {
@@ -140,12 +148,15 @@ page {
   margin-bottom: 20rpx;
   box-sizing: border-box;
 }
-.mb0{
-  margin: 0!important;
+
+.mb0 {
+  margin: 0 !important;
 }
-.pd0{
-  padding-bottom: 0!important;
+
+.pd0 {
+  padding-bottom: 0 !important;
 }
+
 .count {
   width: 100%;
   height: 80rpx;
@@ -206,7 +217,7 @@ radio {
 }
 
 .totalNumber {
- line-height: 120rpx;
+  line-height: 120rpx;
   margin-right: 30rpx;
   font-size: 24rpx;
 }
@@ -219,7 +230,7 @@ radio {
   height: 64rpx;
   line-height: 64rpx;
   border-radius: 40rpx;
-  margin:auto 0;
+  margin: auto 0;
 }
 
 .kl .total {

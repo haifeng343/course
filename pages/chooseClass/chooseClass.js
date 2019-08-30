@@ -230,21 +230,12 @@ Page({
     }
   },
   //团单加入购物车
-  addcar:function() {
+  addcar: function() {
     var that = this;
     var url = 'cart/add';
     let ids = [];
-    for (let v of this.data.GroupList) {
+    for (let v of that.data.GroupList) {
       ids = ids.concat(v.checkedArr);
-    }
-    this.setData({
-      ids: ids
-    });
-    var params = {
-      SheetId: that.data.Id,
-      RelId: ids
-    }
-    for (let v of this.data.GroupList) {
       if (v.checkedArr.length > 0 && (v.checkedArr.length < v.MinCount || v.checkedArr.length > v.MaxCount || (v.MinCount == 0 && v.MaxCount != v.checkedArr.length))) {
         wx.showToast({
           icon: 'none',
@@ -252,14 +243,24 @@ Page({
         })
         return;
       }
-
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
-      wx.showToast({
-        icon:'none',
-        title: '已成功添加课程至购物车',
-      })
-    },
+    that.setData({
+      ids: ids
+    });
+    var params = {
+      SheetId: that.data.Id,
+      RelId: ids
+    }
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
+        that.init();
+        that.setData({
+          TotalPrice: -1,
+        })
+        wx.showToast({
+          icon: 'none',
+          title: '已成功添加课程至购物车',
+        })
+      },
       '',
       false);
   },
@@ -402,8 +403,15 @@ Page({
       }
 
     }
+
+    let checkedList = [];
+    checkedList.push({
+      SheetId: this.data.Id,
+      RelId: this.data.ids
+    });
+
     wx.navigateTo({
-      url: '/pages/payOrder/payOrder?Id=' + this.data.Id + '&ids=' + this.data.ids.join(','),
+      url: '/pages/payOrder/payOrder?checkItem=' + JSON.stringify(checkedList),
     })
   },
   courseDetail(e) {
