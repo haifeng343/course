@@ -1,0 +1,191 @@
+<view class='topInput'>
+  <input class='SearchInput' bindtap='searchTo' disabled placeholder='幼儿英语'></input>
+</view>
+<view class='categoryTitle'>
+  <view class='start'>
+    <view>全部商圈</view>
+    <image src='../../images/xia.png' mode='apsectFill' class='icon1'></image>
+  </view>
+  <view class='start'>
+    <view>全部分类</view>
+    <image src='../../images/xia.png' mode='apsectFill' class='icon1'></image>
+  </view>
+</view>
+
+
+<!-- <view>
+  <view class='father'></view>
+  <view class='allList'>
+    <view class='allItem on' bindtap='changeType'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+    <view class='allItem'>全部</view>
+  </view>
+</view> -->
+
+<!-- <view>
+  <view class='father'></view>
+  <view class='adsList'>
+    <scroll-view scroll-y="true" class='adsLeft' scroll-with-animation="true">
+      <view class='adsLeftItem active'>附近</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+      <view class='adsLeftItem'>上城区</view>
+    </scroll-view>
+    <scroll-view scroll-y="true" class='adsRight' scroll-with-animation="true">
+      <view class='adsRightItem'>附近(只能范围搜索)</view>
+      <view class='adsRightItem'>500米</view>
+      <view class='adsRightItem'>1000米</view>
+      <view class='adsRightItem'>1500米</view>
+    </scroll-view>
+  </view>
+</view> -->
+
+<view class='classList'>
+  <view class='classTitle'>西溪商圈</view>
+  <view class='content-box'>
+    <view class='classContent'>
+      <view class='left'>
+        <image src='https://file.guditech.com/Item/Main/20190718211938225_ec634635a64c4e46aab162a94a24212a.png' mode='apsectFill' class='leftImg'></image>
+      </view>
+      <view class='rightContent' data-Id="{{b.RelId}}" wx:key bindtap='courseDetail'>
+        <view class='between relative'>
+          <view class='courseTitle'>{{b.ItemName}}幼儿英语</view>
+        </view>
+        <view class='detail'>
+          <view class='centers'>
+            <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+          </view>
+          <view class='name'>{{b.SellerName}}UUIDA教育</view>
+        </view>
+        <view class='detail around'>
+          <view class='centers'>
+            <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+          </view>
+          <view class='name address'>{{b.StoreAddress}}西湖区三顿</view>
+        </view>
+        <view class='detail'>
+          <view class='ring'>
+            <view class='centers'>
+              <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name'>共有{{b.CoursesNumber}}5节课</view>
+          </view>
+          <view class='ring'>
+            <view class='centers'>
+              <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name'>{{b.SingleTime}} 60min/课时</view>
+          </view>
+        </view>
+        <view class='tagList'>
+          <view class='tagItm' wx:for="{{b.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
+        </view>
+        <view class='coursePeople'>{{b.SoldCount}}138人已参与 | 22{{b.RemainCount}}剩余名额</view>
+      </view>
+    </view>
+  </view>
+  <view class='content-box'>
+    <view class='classContent'>
+      <view class='left'>
+        <image src='https://file.guditech.com/Item/Main/20190718211938225_ec634635a64c4e46aab162a94a24212a.png' mode='apsectFill' class='leftImg'></image>
+      </view>
+      <view class='rightContent' data-Id="{{b.RelId}}" wx:key bindtap='courseDetail'>
+        <view class='between relative'>
+          <view class='courseTitle'>{{b.ItemName}}幼儿英语</view>
+        </view>
+        <view class='detail'>
+          <view class='centers'>
+            <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+          </view>
+          <view class='name'>{{b.SellerName}}UUIDA教育</view>
+        </view>
+        <view class='detail around'>
+          <view class='centers'>
+            <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+          </view>
+          <view class='name address'>{{b.StoreAddress}}西湖区三顿</view>
+        </view>
+        <view class='detail'>
+          <view class='ring'>
+            <view class='centers'>
+              <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name'>共有{{b.CoursesNumber}}5节课</view>
+          </view>
+          <view class='ring'>
+            <view class='centers'>
+              <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name'>{{b.SingleTime}} 60min/课时</view>
+          </view>
+        </view>
+        <view class='tagList'>
+          <view class='tagItm' wx:for="{{b.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
+        </view>
+        <view class='coursePeople'>{{b.SoldCount}}138人已参与 | 22{{b.RemainCount}}剩余名额</view>
+      </view>
+    </view>
+  </view>
+  <view class='content-box'>
+    <view class='classContent'>
+      <view class='left'>
+        <image src='https://file.guditech.com/Item/Main/20190718211938225_ec634635a64c4e46aab162a94a24212a.png' mode='apsectFill' class='leftImg'></image>
+      </view>
+      <view class='rightContent' data-Id="{{b.RelId}}" wx:key bindtap='courseDetail'>
+        <view class='between relative'>
+          <view class='courseTitle'>{{b.ItemName}}幼儿英语</view>
+        </view>
+        <view class='detail'>
+          <view class='centers'>
+            <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+          </view>
+          <view class='name'>{{b.SellerName}}UUIDA教育</view>
+        </view>
+        <view class='detail around'>
+          <view class='centers'>
+            <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+          </view>
+          <view class='name address'>{{b.StoreAddress}}西湖区三顿</view>
+        </view>
+        <view class='detail'>
+          <view class='ring'>
+            <view class='centers'>
+              <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name'>共有{{b.CoursesNumber}}5节课</view>
+          </view>
+          <view class='ring'>
+            <view class='centers'>
+              <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name'>{{b.SingleTime}} 60min/课时</view>
+          </view>
+        </view>
+        <view class='tagList'>
+          <view class='tagItm' wx:for="{{b.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
+        </view>
+        <view class='coursePeople'>{{b.SoldCount}}138人已参与 | 22{{b.RemainCount}}剩余名额</view>
+      </view>
+    </view>
+  </view>
+</view>

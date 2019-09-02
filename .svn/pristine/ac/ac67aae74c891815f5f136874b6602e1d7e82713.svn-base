@@ -5,7 +5,7 @@
         <view class='keep keep1' wx:for="{{List}}" wx:key>
           <view class='keep pd0'>
             <view class='between marginBootom'>
-              <view class='startd che1' data-Id="{{item.SheetId}}" data-type="{{item.SheetModel}}" bindtap='navSheet'>
+              <view class='startd che1'>
                 <checkbox class='gou' value='{{item.CartId}}' checked='{{item.checked}}'></checkbox>
                 <view class='groupName'>{{item.SheetModel==1?item.SheetName:item.TradingareaName}}</view>
                 <view class='centers'>

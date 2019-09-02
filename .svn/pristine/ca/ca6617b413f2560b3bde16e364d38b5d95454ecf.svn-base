@@ -151,11 +151,6 @@ Page({
       UseScore: that.data.checked,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
-      let pages = getCurrentPages(); //当前页面
-      let prevPage = pages[pages.length - 2]; //上一页面
-      prevPage.setData({ //直接给上移页面赋值
-        load : true
-      });
       that.setData({
         OrderId: res.Data.OrderId,
         OrderSn: res.Data.OrderSn,

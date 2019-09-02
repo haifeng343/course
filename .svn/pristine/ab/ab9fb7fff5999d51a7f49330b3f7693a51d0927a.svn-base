@@ -33,6 +33,7 @@ page {
   color: #26d7df !important;
   border: 2rpx solid #26d7df;
   background-color: #fff !important;
+  margin-right: 20rpx !important;
 }
 
 .none {
@@ -396,9 +397,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .ring {
   display: flex;
   justify-content: flex-start;
-}
-.ring:first-child{
-  margin-right: 40rpx;
+  margin-right: 25rpx;
 }
 
 .disclaimerList {
@@ -453,34 +452,12 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   background-color: #29d9d6;
   color: #fff;
   font-size: 28rpx;
-  width: 180rpx;
+  width: 200rpx;
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
+  border-radius: 40rpx;
   margin: auto 0;
-}
-.centersd{
-  height: 120rpx;
-  display: flex;
-  align-items: center;
-  margin-right: 25rpx;
-}
-.cart{
-  width: 48rpx;
-  height: 48rpx;
-  border-radius: 50%;
-}
-.paybtn{
-  border-top-right-radius: 40rpx;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 40rpx;
-}
-.paycar{
-  border-top-right-radius: 0;
-  border-top-left-radius: 40rpx;
-  border-bottom-left-radius: 40rpx;
-  border-bottom-right-radius: 0;
 }
 
 .kl .total {
@@ -651,7 +628,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 }
 
 .courseContainer {
-  height: 100%;
+  height: auto;
   max-height: 606rpx;
   margin-top: 80rpx;
 }

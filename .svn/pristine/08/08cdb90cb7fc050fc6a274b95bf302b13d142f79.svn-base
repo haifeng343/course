@@ -161,6 +161,10 @@
   left: 1.5%;
 }
 
+.go {
+  margin-left: 15rpx;
+}
+
 .topImg {
   width: 126rpx;
   height: 161rpx;

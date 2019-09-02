@@ -9,7 +9,7 @@
     <view class='title'>{{item.SheetName}}</view>
     <view class='between'>
       <view class='codeNumber'>券码:{{item.TicketNumber}}</view>
-      <view><text class='theme' data-Id="{{item.OrderId}}" bindtap='navto'> 订单详情 </text></view>
+      <view>去<text class='theme' data-Id="{{item.OrderId}}" bindtap='navto'> 订单详情 </text>查看</view>
     </view>
     <view class='code'>
       <image class='codeImg' src='{{item.QRCodeAccessUrl}}' mode='widthFix' lazy-load='true'></image>
