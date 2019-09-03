@@ -1,4 +1,4 @@
-<view>
+<scroll-view scroll-y="true" scroll-into-view="NUV{{storeIdGoto}}" style='height:100%'>
   <view class='banner'>
     <swiper bindanimationfinish="swiperChangeTo" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1' next-margin='35rpx' previous-margin='35rpx'>
       <block wx:for="{{imgUrls}}" wx:key wx:for-item="a">
@@ -113,7 +113,7 @@
         <view class='heng'></view>
       </view>
       <checkbox-group bindchange='checkedTap' data-index='{{index}}'>
-        <view class="courseCont-box allCont {{k.RemainCount<=0?'gray':''}}" wx:for="{{item.StoreList}}" wx:key wx:for-item="k" wx:for-index='storeIndex'>
+        <view class="courseCont-box allCont {{k.RemainCount<=0?'gray':''}}" wx:for="{{item.StoreList}}" wx:key wx:for-item="k" wx:for-index='storeIndex' id="NUV{{k.StoreId}}NUV{{item.GroupId}}">
           <view class="courseCont">
             <view class='leftImg' style='width:21%;' data-groupId="{{item.GroupId}}" data-storeId="{{k.StoreId}}" bindtap='mechanismDetail'>
               <image class='coverd' src='{{k.StoreCoverImg}}' mode='aspectFill' lazy-load='true'></image>
@@ -323,4 +323,4 @@
       <button class='paybtn' bindtap='paybtn' disabled='{{TotalPrice==-1 ||TotalPrice==0}}'>立即购买</button>
     </view>
   </view>
-</view>
+</scroll-view>

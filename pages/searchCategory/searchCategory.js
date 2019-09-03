@@ -4,16 +4,13 @@ Page({
 
 
   data: {
-    SearchName: '',
-    searchRecord: [],
-    pagecount: 20,
+    setSearchName: '',
+    pageCount: 10,
     page: 1,
-    show: true,
-    noShow: false,
     List: [],
-  },
-  onShow: function() {
-
+    typeId:'',//分类Id
+    longitude:'',
+    latitude:'',
   },
   onLoad: function(options) {
     if (options.recommand) {
@@ -24,11 +21,16 @@ Page({
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
         obj: res.Data,
+        typeId: options.typeId || '',
+        longitude: options.longitude || '',
+        latitude: options.latitude || '',
       })
     })
   },
-  init: function () {
-    this.search();
+  cheoose:function(e){
+    wx.navigateTo({
+      url: '/pages/chooseClass/chooseClass?storeId=' + e.currentTarget.dataset.storeid + '&Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&relId=' + e.currentTarget.dataset.relid,
+    })
   },
   clear: function() {
     this.setData({
@@ -40,66 +42,56 @@ Page({
     this.setData({
       SearchName: e.detail.value
     })
-    if (e.detail.value == '' || e.detail.value == null) {
-      this.setData({
-        show: true,
-        noShow: false,
-        List: []
-      })
-    } else {
-      this.setData({
-        show: false,
-        noShow: true
-      })
-    }
   },
   //点击搜索
   search: function() {
     let that = this;
-    var url = 'map/data/search';
-    var params = {
-      QueryKey: that.data.SearchName,
-      PageCount: that.data.pagecount,
-      PageIndex: that.data.page,
-    }
-    if (that.data.SearchName == '') {
+    if(!that.data.SearchName){
       wx.showToast({
-        icon: 'none',
-        title: "请输入查询内容"
+        icon:'none',
+        title: '请输入查询课程名称',
       })
       return false;
     }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      let arr = that.data.List;
+    var url = 'sheet/search/list';
+    var params = {
+      SearchKey: that.data.SearchName,
+      TradingareaId: 0,
+      TypeId: that.data.typeId,
+      Longitude: that.data.longitude,
+      Latitude: that.data.latitude,
+      PageCount: that.data.pageCount,
+      PageIndex: that.data.page,
+    }
+    netUtil.postRequest(url, params, function(res) {
+      res.Data.forEach(item => {
+        item.Distance = (parseInt(item.Distance) / 1000).toFixed(1);
+      })
       let arr1 = res.Data;
+      let arr = that.data.List;
       if (that.data.page == 1) {
         arr = arr1
       } else {
-        arr.List = arr.List.concat(arr1.List)
+        arr = arr.concat(arr1);
       }
       that.setData({
-        List: arr
+        List: arr,
       })
-      if (that.data.List.List.length <= 0) {
+      if(arr.length<=0){
         wx.showToast({
-          icon: 'none',
-          title: '暂无相关信息',
+          icon:'none',
+          title: '暂无查询结果',
         })
       }
     })
   },
-
-  onPullDownRefresh: function() {
-
-  },
-
-  onReachBottom: function () {
+  onReachBottom: function() {
     let temp = this.data.page;
     temp++;
     this.setData({
       page: temp
     })
-    this.init();
+    this.search();
   },
   onShareAppMessage: function(res) {
     return {

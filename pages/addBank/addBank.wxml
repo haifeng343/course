@@ -37,7 +37,10 @@
   <view class='kep between mt20'>
     <view class='start'>
       <view class='del'>银行卡类型:</view>
-      <image class='bankIcon' mode='WidthFix' src='{{BankIconUrl}}'></image>
+      
+      <view>
+      <image class='bankIcon' mode='apsectFill' src='{{BankIconUrl}}'></image>
+      </view>
       <input class='noned' value='{{bankName}}' disabled></input>
     </view>
   </view>

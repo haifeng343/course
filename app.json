@@ -46,7 +46,8 @@
     "pages/mechanism/mechanism",
     "pages/demo/demo",
     "pages/car/car",
-    "pages/category/category"
+    "pages/category/category",
+    "pages/searchCategory/searchCategory"
   ],
   "window": {
     "backgroundTextStyle": "dark",

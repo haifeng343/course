@@ -17,10 +17,14 @@
 
             <view class='titles'>选择课程-全选</view>
             <scroll-view class="tui-city-scroll-y" scroll-y="true" scroll-into-view="NAV{{status}}">
-              <view wx:for="{{navList}}" wx:key="">
-                <view id="NAV{{index}}" class="tui-list-head">{{item}}</view>
-                <view class="tui-list-li">{{item}} 列表 {{index}}</view>
-              </view>
+              <checkbox-group>
+                <view>
+                  <view wx:for="{{navList}}" wx:key="">
+                    <view id="NAV{{index}}" class="tui-list-head">{{item}}</view>
+                    <view class="tui-list-li">{{item}} 列表 {{index}}</view>
+                  </view>
+                </view>
+              </checkbox-group>
             </scroll-view>
           </view>
         </view>

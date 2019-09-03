@@ -15,7 +15,7 @@ Page({
     text: "",
     RelId: [],
     Remark: '',
-    Id: '',
+    Id: '', //团单Id
     name: '',
     TotalPrice: -1,
     imgUrls: [],
@@ -35,6 +35,8 @@ Page({
     totalDialog_storeList: [], // 全部弹窗 ，门店列表
     totalDialog_totalItem: 0, //全部弹窗 ，课程总数量
     totalDialog_storeId: 0, //全部弹窗 选中门店Id
+    storeIdGotoTemp: 0, //临时定位到门店Id
+    storeIdGoto: 0, //定位到门店Id
   },
   onLoad(options) {
     let that = this;
@@ -53,6 +55,7 @@ Page({
       Id: options.Id || '',
       name: options.name || '',
       type: options.type || '',
+      storeIdGotoTemp: options.storeId||""
     })
     that.init();
   },
@@ -101,7 +104,8 @@ Page({
         }
       }
       that.setData({
-        GroupList: r
+        GroupList: r,
+        storeIdGoto: that.data.storeIdGotoTemp
       })
     }, null, hideLoding, true, true); //调用get方法情就是户数
   },
@@ -606,7 +610,7 @@ Page({
   },
 
   navtoCar: function() {
-    wx.setStorageSync('load',true );
+    wx.setStorageSync('load', true);
     wx.switchTab({
       url: '/pages/car/car',
     });

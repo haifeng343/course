@@ -7,6 +7,10 @@
   box-sizing: border-box;
   border-radius: 15rpx;
 }
+.ml2{
+  line-height: 45rpx;
+  font-size: 32rpx;
+}
 .please{
   color: #000;
   padding: 5rpx 10rpx;

@@ -17,7 +17,7 @@
   <view class='List mt20' wx:if="{{wihdraw}}">
     <view class='item between' data-item="{{wihdraw}}" data- bindtap='changeCard'>
       <view class='start align'>
-        <image class='bankIcon' src='{{wihdraw.BankIconUrl}}' mode='widthFix' lazy-load='true'></image>
+        <image class='bankIcon' src='{{wihdraw.BankIconUrl}}' mode='apsectFill' lazy-load='true'></image>
         <view class='bankText'>
           <view class='bankTitle'>{{wihdraw.BankName}}</view>
           <view class='bankTxt'>尾号 {{CardNumber}} 的{{wihdraw.CardBreed}}</view>

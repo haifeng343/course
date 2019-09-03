@@ -19,21 +19,21 @@
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjdGOTQ2Njc0OTI1QjExRTk5NDY3RjRBQ0U0RUE5RDQ5IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjdGOTQ2Njc1OTI1QjExRTk5NDY3RjRBQ0U0RUE5RDQ5Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6N0Y5NDY2NzI5MjVCMTFFOTk0NjdGNEFDRTRFQTlENDkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6N0Y5NDY2NzM5MjVCMTFFOTk0NjdGNEFDRTRFQTlENDkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7Dg7r3AAACNklEQVR42sSXyytEURzHjWdJSiHKsyy8kvIXzMpO3sZjy8IjJI9YzAozCnkusKS8m/wBsmalKEUegwgLYeX9PfW9dbvNnTl3HJz69Js7c+73e88595zfb2xOpzPkP1q4RJ80UAfsIBckgDdwBS7ADlgBZ6qMhaELVIMww29RIJsUg0Ga9wGvjHGoyfcl4ADUgg+wDhpAJk1jQQ6/E7+9s+8hY1AjbgdjfCgP6AYnhj6v4IgsgSwwAsp4nQTGrYy4hjd8gV4KnUgMQPQp5z2fYJRaUsZiTReADfRzBFabuGeAGgvUDGg8DGLAZpCmWnODDWq5AxmnAwfXrkPBNu2kVjW1TY0d/Cze0EsFxkJjjZoOf8Z2Ro/Cw8lj0PZpnM+4q9B4z6Dt0zie8Vah8Q1jgsw+jlRoHCGzjx8YkxUaa1r3/owPGQsUGhcatH0abzOWKjQuM2j7NF7hGVsFUhWYpoBKaq76Mz5nh0hmpp+2SWqtmRUI+rdaZJYXPmnPD0zbOc0vLAwCJglROTQyJQ4Fad7IlChaE2dSKh8v84C36bJMluSaiqw2xzJJPHyc1dJnglP1zOQutsMiqAAZPBiiWQaVs+I45T2PYJ4606DZarG3xTPWzdRWT8zaJ3dGF7gG+2CK5qLNWqkyvSzcenXlbR5IZHl7B465T5cN6znDaGouU1d7Wea6LL5ofs1Df/kPgzBv0615y18Za+atutGnyE61iiam+AkUaTn/r4xDuCUXtYtvAQYA+7l7mItUuwIAAAAASUVORK5CYII=');
   background-size: 30rpx 30rpx;
   background-repeat: no-repeat;
-  background-position: 38% 50%;
+  background-position: 33% 50%;
   z-index: 22;
 }
 
 .categoryTitle {
   position: absolute;
   top: 60rpx;
+  height: 80rpx;
+  line-height: 80rpx;
   width: 100%;
   background-color: #fff;
-  padding: 20rpx 0;
   border-bottom: 1rpx solid #f4f4f4;
   display: flex;
   flex-direction: row;
-  box-sizing: border-box;
-  font-size: 32rpx;
+  font-size: 24rpx;
   justify-content: space-around;
   z-index: 22;
 }
@@ -47,14 +47,13 @@
 .allList {
   width: 100%;
   height: auto;
-  padding: 0 3%;
+  padding: 20rpx 3% 40rpx;
   position: absolute;
-  top: 144rpx;
+  top: 140rpx;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   background-color: #fff;
-  padding-bottom: 20rpx;
   z-index: 22;
 }
 
@@ -64,9 +63,10 @@
   margin-top: 20rpx;
   box-sizing: border-box;
   font-size: 28rpx;
-  padding: 8rpx 0;
+  height: 60rpx;
+  line-height: 60rpx;
   text-align: center;
-  border-radius: 5rpx;
+  border-radius: 10rpx;
   margin-left: 4%;
 }
 
@@ -86,7 +86,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.1);
-  z-index: 0;
+  z-index: 21;
 }
 
 .adsList {
@@ -98,6 +98,7 @@
   max-height: 600rpx;
   display: flex;
   justify-content: flex-start;
+  z-index: 22;
 }
 
 .adsLeft {
@@ -109,7 +110,6 @@
 .adsLeftItem {
   box-sizing: border-box;
   padding-left: 10%;
-  height: 80rpx;
   line-height: 80rpx;
   font-size: 28rpx;
 }
@@ -119,20 +119,23 @@
   color: #3cd5cf;
   background-color: #f3f3f3;
 }
-
+.adsRightItem.active{
+  color: #3cd5cf;
+}
 .adsRight {
   width: 60%;
-  box-sizing: border-box;
-  padding-left: 5%;
   background-color: #f3f3f3;
   height: auto;
   max-height: 600rpx;
 }
 
 .adsRightItem {
-  height: 80rpx;
   line-height: 80rpx;
+  padding-left: 4%;
   font-size: 28rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .classList {
@@ -141,16 +144,51 @@
   left: 2.5%;
   width: 95%;
   height: auto;
+  z-index: 1;
+}
+.ListItem{
+  width: 100%;
+  height: auto;
   border-radius: 15rpx;
   background-color: #fff;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+}
+.tagList {
+  width: 100%;
+  overflow-x: scroll;
+  display: flex;
+  height: 36rpx;
+  line-height: 36rpx;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
 }
 
+.tagList::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.tagItem {
+  word-break: keep-all;
+  font-size: 24rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  display: flex;
+  align-items: center;
+  padding: 0rpx 8rpx;
+  margin-right: 15rpx;
+  margin-top: 0rpx;
+  border-radius: 5rpx;
+  box-sizing: border-box;
+}
 .classTitle {
   width: 100%;
   border-bottom: 1rpx solid #f4f4f4;
   font-size: 32rpx;
   font-weight: 600;
-  height: 80rpx;
   line-height: 80rpx;
   padding: 0 5%;
   box-sizing: border-box;
@@ -168,7 +206,7 @@
   display: flex;
   justify-content: flex-start;
 }
-.classList .content-box:last-child .classContent{
+.classList .content-box .classContent:last-child{
   border: none;
   padding-bottom: 0;
 }
@@ -187,8 +225,26 @@
 .ring:first-child{
   margin-right: 40rpx;
 }
+.w50{
+  width: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.titleTxt{
+  width: 80%;
+}
+.distance{
+  font-weight: 500;
+}
+.txt{
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .courseTitle {
-  width: 85%;
+  width: 86%;
   font-size: 28rpx;
   font-weight: 600;
 }

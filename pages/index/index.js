@@ -29,6 +29,7 @@ Page({
     locationAgain: true,
     winWidth: '',
     isLoaded: false,
+    typeList:[],//分类列表
   },
   onLoad: function(options) {
     var that = this;
@@ -50,8 +51,32 @@ Page({
 
     that.banner();
     that.init();
-
+    that.hasTypeList();
     that.data.isLoaded = true;
+  },
+  hasTypeList:function() {
+    let that = this;
+    var url = 'sheet/itemtype/list';
+    var params = {
+      PageCount:7,
+      PageIndex: 1,
+    }
+    netUtil.postRequest(url, params, function (res) { 
+      let arr = res.Data;
+      arr.push({ Id: 0, ImgUrlShow:'../../images/all.png',Name:'全部'});
+      that.setData({
+        typeList: arr,
+      })
+    },
+      null,
+      false,
+      false,
+      false)
+  },
+  navtoCategory:function(e){
+    wx.navigateTo({
+      url: '/pages/category/category?Id=' + e.currentTarget.dataset.id + '&name=' + e.currentTarget.dataset.name + '&Longitude=' + this.data.longitude + '&Latitude=' + this.data.latitude,
+    })
   },
   //坐标转换
   reverseLocation: function (latitude, longitude, locationType, onsuccess, onfail, oncomplete) {
@@ -261,6 +286,7 @@ Page({
             longitude: res.longitude
           },
           success: function(res) {
+            console.log(res)
             that.setData({
               locationName: res.result.formatted_addresses.recommend
             })

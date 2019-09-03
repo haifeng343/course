@@ -25,32 +25,12 @@
   </view>
 </view>
 
-<!-- <view class='categoryList'>
-  <view class='Item'>
-    <image src='../../images/ad1.png' mode='apsectFill' class='categoryImg'></image>
-    <view class='ategoryText'>语言类</view>
+<view class='categoryList' wx:if="{{typeList.length>0}}">
+  <view class='Item' wx:for="{{typeList}}" wx:key wx:for-item="k" data-Id="{{k.Id}}" data-name="{{k.Name}}" bindtap='navtoCategory'>
+    <image src='{{k.ImgUrlShow}}' mode='apsectFill' class='categoryImg'></image>
+    <view class='ategoryText'>{{k.Name}}</view>
   </view>
-  <view class='Item'>
-    <image src='../../images/ad1.png' mode='apsectFill' class='categoryImg'></image>
-    <view class='ategoryText'>语言类</view>
-  </view>
-  <view class='Item'>
-    <image src='../../images/ad1.png' mode='apsectFill' class='categoryImg'></image>
-    <view class='ategoryText'>语言类</view>
-  </view>
-  <view class='Item'>
-    <image src='../../images/ad1.png' mode='apsectFill' class='categoryImg'></image>
-    <view class='ategoryText'>语言类</view>
-  </view>
-  <view class='Item'>
-    <image src='../../images/ad1.png' mode='apsectFill' class='categoryImg'></image>
-    <view class='ategoryText'>语言类</view>
-  </view>
-  <view class='Item'>
-    <image src='../../images/ad1.png' mode='apsectFill' class='categoryImg'></image>
-    <view class='ategoryText'>语言类</view>
-  </view>
-</view> -->
+</view>
 
 <view class='groupList'>
   <view wx:for="{{groupList}}" wx:for-item="item" wx:key data-id='{{item.SheetId}}' data-type="{{item.ModelType}}" data-name="{{item.TradingAreaName}}" class='groupDetail' bindtap='groupDetail'>

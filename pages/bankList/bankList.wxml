@@ -4,7 +4,7 @@
       <image class='bgImg' src='{{item.BackgroundUrl}}' mode='widthFix' lazy-load='true'></image>
       <view class='between abso'>
         <view class='start'>
-          <image class='bankIcon' src='{{item.BankIconUrl}}' mode='widthFix' lazy-load='true'></image>
+          <image class='bankIcon' src='{{item.BankIconUrl}}' mode='apsectFill' lazy-load='true'></image>
           <view class='column'>
             <view class='t1'>{{item.BankName}}</view>
             <view class='t2'>{{item.CardBreed}}</view>

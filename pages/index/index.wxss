@@ -165,6 +165,7 @@ swiper-item image {
 
 .ategoryText {
   font-size: 28rpx;
+  line-height: 50rpx;
 }
 
 .categoryImg {

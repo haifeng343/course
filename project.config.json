@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 49,
+			"current": 7,
 			"list": [
 				{
 					"id": -1,
@@ -104,7 +104,7 @@
 					"id": 7,
 					"name": "chooseClass",
 					"pathName": "pages/chooseClass/chooseClass",
-					"query": "Longitude=undefined&Latitude=undefined&Id=15&name=西湖银泰城商圈&type=2",
+					"query": "storeId=41NUV34&Id=14&type=2&relId=69",
 					"scene": null
 				},
 				{
@@ -395,10 +395,17 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 49,
 					"name": "category",
 					"pathName": "pages/category/category",
-					"query": "",
+					"query": "Id=1&name=项目类型A&Longitude=120.13026&Latitude=30.25961",
+					"scene": null
+				},
+				{
+					"id": 50,
+					"name": "searchCategory",
+					"pathName": "pages/searchCategory/searchCategory",
+					"query": "latitude=30.25961&longitude=120.13026&typeId=0",
 					"scene": null
 				}
 			]
