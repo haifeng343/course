@@ -57,7 +57,7 @@
 
       <cover-view class="modale" wx:if="{{seachDialog&&(!showMol)}}">
         <cover-view class='title'>搜索条件</cover-view>
-        <cover-view class='column content'>
+        <cover-view class='content'>
           <cover-view class='start'>
             <cover-view class='label'>当前位置:</cover-view>
             <cover-view class='label-right bg'>{{address}}</cover-view>
@@ -90,7 +90,7 @@
 
       <cover-view class="modale" wx:if="{{seachDialog&&showMol}}">
         <cover-view class='title'>搜索结果</cover-view>
-        <cover-view class='column content'>
+        <cover-view class='content'>
           <cover-view class='start borb ky'>
             <cover-view class='Icon'>
               <cover-image class='icon' src='../../images/n1.png' mode="widthFix"></cover-image>

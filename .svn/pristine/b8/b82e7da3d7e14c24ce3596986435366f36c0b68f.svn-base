@@ -275,15 +275,8 @@ Page({
   checkItem: function(e) {
     console.log(e)
     let remaincount = e.currentTarget.dataset.remaincount; //剩余购买数量
-    if (remaincount <= 0) {
-      wx.showToast({
-        icon: 'none',
-        title: '体验课剩余名额不足',
-      })
-      return;
-    }
-
     let itemindex = e.currentTarget.dataset.itemindex;
+
     let tempArr = this.data.dialogRadio;
     let checkedIndex = -1;
     tempArr.forEach((x, index) => {
@@ -320,7 +313,18 @@ Page({
     //     [source_itemCheckedSet]: false,
     //   });
     // }
-
+    if (remaincount <= 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '体验课剩余名额不足',
+      })
+      this.setData({
+        [storeCheckedSet]: false,
+        [storeCheckedNameSet]: "",
+        [source_itemCheckedSet]: false,
+      });
+      return;
+    }
     let source_groupCheckedSet = 'GroupList[' + this.data.dialogGroupIndex + '].checkedArr';
     let checkedResult = [];
     this.data.GroupList[this.data.dialogGroupIndex].StoreList.forEach(y => {

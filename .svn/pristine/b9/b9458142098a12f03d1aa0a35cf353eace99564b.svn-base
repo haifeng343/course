@@ -25,7 +25,7 @@
   </view>
 </view>
 
-<view class='categoryList' wx:if="{{typeList.length>1}}">
+<view class='categoryList' wx:if="{{typeList.length>0}}">
   <view class='Item' wx:for="{{typeList}}" wx:key wx:for-item="k" data-Id="{{k.Id}}" data-name="{{k.Name}}" bindtap='navtoCategory'>
     <image src='{{k.ImgUrlShow}}' mode='apsectFill' class='categoryImg'></image>
     <view class='ategoryText'>{{k.Name}}</view>

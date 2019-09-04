@@ -17,6 +17,18 @@ picker{
   line-height: 40rpx!important;
 }
 
+.fixeded {
+  position: fixed;
+  width: 90%;
+  height: 800rpx;
+  background-color: #fff;
+  z-index: 99;
+  top: 50%;
+  border-radius: 15rpx;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:0 0 30rpx rgba(0, 0, 0, 0.4);
+}
 .tagList {
   width: 100%;
   overflow-x: scroll;

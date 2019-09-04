@@ -98,7 +98,7 @@
               </view>
             </view>
             <view class='tagList'>
-              <view class='tagItem' wx:for="{{b.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
+              <view class='tagItm' wx:for="{{b.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
             </view>
             <view class='coursePeople'>{{b.SoldCount}}人已参与 | {{b.RemainCount}}剩余名额</view>
           </view>
@@ -171,7 +171,7 @@
                   <view>{{c.ItemName}}</view>
                   <view>课程数量{{c.CoursesNumber}}节，单节课时{{c.SingleTime}}min</view>
                   <view class='tagList'>
-                    <view class='tagItem' wx:for="{{c.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
+                    <view class='tagItm' wx:for="{{c.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
                   </view>
                   <view>{{c.SoldCount}}人已参与 | 剩余名额 {{c.RemainCount}}个</view>
                 </view>
@@ -179,12 +179,12 @@
             </view>
           </view> -->
           <!-- 弹窗 -->
-          <!-- <view class='father' wx:if="{{hideBaitiao==false}}" catchtap='dialogHide' catchtouchmove='true'>
+          <view class='father' wx:if="{{hideBaitiao==false}}" catchtap='dialogHide' catchtouchmove='true'>
           </view>
-          <view class='fixeded' hidden='{{hideBaitiao}}' catchtouchmove='true'>
+          <view class='fixed' hidden='{{hideBaitiao}}' catchtouchmove='true'>
             <view class='titles'>选择课程-{{dialogStoreName}}</view>
             <scroll-view scroll-y="true" class='courseContainer'>
-              <view class="column {{c.RemainCount<=0?'gray':''}}" wx:for="{{dialogRadio}}" wx:key wx:for-item="c" wx:for-index="itemIndex" data-itemIndex="{{itemIndex}}" catchtap="checkItem" data-remainCount="{{c.RemainCount}}">
+              <view class='column' wx:for="{{dialogRadio}}" wx:key wx:for-item="c" wx:for-index="itemIndex" data-itemIndex="{{itemIndex}}" catchtap="checkItem" data-remainCount="{{c.RemainCount}}">
                 <view class="start">
                   <view class="rad {{c.checked==true ? 'on' : ''}}" wx:if="{{c.RemainCount > 0}}"></view>
                   <view class='choseItem'>
@@ -195,7 +195,7 @@
                       <view class='course'>{{c.ItemName}}</view>
                       <view>课程数量1节，单节课时10min</view>
                       <view class='tagList'>
-                        <view class='tagItem' wx:for="{{c.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
+                        <view class='tagItm' wx:for="{{c.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
                       </view>
                       <view>{{c.SoldCount}}人已参与 | 剩余名额 {{c.RemainCount}}个</view>
                     </view>
@@ -204,9 +204,79 @@
               </view>
             </scroll-view>
             <view class='footer' bindtap='dialogHide'>取消</view>
-          </view> -->
+          </view>
 
+          <!-- 全部弹窗 -->
+          <view class='fathers' wx:if="{{hideBaitiaos==false}}" catchtap='dialogHides' catchtouchmove='true'>
+          </view>
+          <view class='fixed' hidden='{{hideBaitiaos}}' catchtouchmove='true'>
+            <view class='titles'>选择课程-全选</view>
+            <scroll-view scroll-y="true" class='courseContainer' scroll-into-view="NAV{{totalDialog_storeId}}">
+              <view class="courseCont-box {{k.RemainCount<=0?'gray':''}}" wx:for="{{totalDialog_storeList}}" wx:key wx:for-item="k" wx:for-index='storeIndex'>
+                <view id="NAV{{k.StoreId}}" class="courseCont curseContent">
+                  <view class='leftImg' style='width:13%;'>
+                    <image class='coverd covers' src='{{k.StoreCoverImg}}' mode='aspectFill' lazy-load='true'></image>
+                  </view>
+                  <view>
+                    <!-- <checkbox class="absolute" value='{{k.StoreId}}' bindtap='changeCheck' checked='{{k.checked}}'></checkbox> -->
+                    <!-- <view wx:if="{{k.checked==true}}">
+                    <text class='sanjiao' bindtap='showDialog' data-storeindex="{{storeIndex}}" data-groupindex="{{index}}" data-name="{{k.StoreName}}" data-item="{{k.ItemList}}">{{k.checkedName}}</text>
+                  </view> -->
+                  </view>
+                  <view class='rightContent contentRight' data-Id="{{k.StoreId}}">
+                    <view class='between relative'>
+                      <view class='courseTitle'>{{k.StoreName}}</view>
+                    </view>
+                    <view class='detail around'>
+                      <view class='addrLong'>
+                        <view>
+                          <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+                        </view>
+                        <view class='name address' style='width:91%'>{{k.StoreAddress}}</view>
+                      </view>
+                    </view>
+                    <!-- <view class='detail' wx:if="{{k.Mobile}}">
+                      <view>
+                        <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+                      </view>
+                      <view class='name'>{{k.Mobile}}</view>
+                    </view>
+                    <view class='detail'>
+                      <view class='ring'>
+                        <view>
+                          <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+                        </view>
+                        <view class='name'>语文课，共{{k.CoursesNumber}}门体验课</view>
+                      </view>
+                    </view> -->
+                  </view>
+                </view>
 
+                <view class="column {{c.RemainCount<=0?'gray':''}}" wx:for="{{k.ItemList}}" wx:key wx:for-item="c" wx:for-index="itemIndex" data-itemIndex="{{itemIndex}}" data-storeindex="{{storeIndex}}" catchtap="{{c.RemainCount > 0?'checkItem_total':''}}">
+                  <view class="start">
+                    <view class="rad {{c.checked==true ? 'on' : ''}}" wx:if="{{c.RemainCount > 0}}"></view>
+                    <view class='choseItem'>
+                      <view class='leftImg leftImgItem'>
+                        <image class='coverc' src='{{c.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
+                      </view>
+                      <view class='right choseItemRight'>
+                        <view class='course'>{{c.ItemName}}</view>
+                        <view>课程数量1节，单节课时10min</view>
+                        <view class='tagList'>
+                          <view class='tagItm' wx:for="{{c.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
+                        </view>
+                        <view>{{c.SoldCount}}人已参与 | 剩余名额 {{c.RemainCount}}个</view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+            <view class='footer footer1'>
+              <view class='footItem' bindtap='cancelChecked'>取消</view>
+              <view class='footItem' bindtap='sureChecked'>确定</view>
+            </view>
+          </view>
         </view>
       </checkbox-group>
     </view>
@@ -254,101 +324,3 @@
     </view>
   </view>
 </scroll-view>
-
-<view class='father' wx:if="{{hideBaitiao==false}}" catchtap='dialogHide' catchtouchmove='true'>
-</view>
-<view class='fixeded' hidden='{{hideBaitiao}}' catchtouchmove='true'>
-  <view class='titles'>选择课程-{{dialogStoreName}}</view>
-  <scroll-view scroll-y="true" class='courseContainer'>
-    <view class="column {{c.RemainCount<=0?'gray':''}}" wx:for="{{dialogRadio}}" wx:key wx:for-item="c" wx:for-index="itemIndex" data-itemIndex="{{itemIndex}}" catchtap="checkItem" data-remainCount="{{c.RemainCount}}">
-      <view class="start">
-        <view class="rad {{c.checked==true ? 'on' : ''}}" wx:if="{{c.RemainCount > 0}}"></view>
-        <view class='choseItem'>
-          <view class='leftImg leftImgItem'>
-            <image class='coverc' src='{{c.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
-          </view>
-          <view class='right choseItemRight'>
-            <view class='course'>{{c.ItemName}}</view>
-            <view>课程数量1节，单节课时10min</view>
-            <view class='tagList'>
-              <view class='tagItem' wx:for="{{c.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
-            </view>
-            <view>{{c.SoldCount}}人已参与 | 剩余名额 {{c.RemainCount}}个</view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </scroll-view>
-  <view class='footer' bindtap='dialogHide'>取消</view>
-</view>
-<!-- 全部弹窗 -->
-<view class='fathers' wx:if="{{hideBaitiaos==false}}" catchtap='dialogHides' catchtouchmove='true'>
-</view>
-<view class='fixeded' hidden='{{hideBaitiaos}}' catchtouchmove='true'>
-  <view class='titles'>选择课程-全选</view>
-  <scroll-view scroll-y="true" class='courseContainer' scroll-into-view="NAV{{totalDialog_storeId}}">
-    <view class="courseCont-box {{k.RemainCount<=0?'gray':''}}" wx:for="{{totalDialog_storeList}}" wx:key wx:for-item="k" wx:for-index='storeIndex'>
-      <view id="NAV{{k.StoreId}}" class="courseCont curseContent">
-        <view class='leftImg' style='width:13%;'>
-          <image class='coverd covers' src='{{k.StoreCoverImg}}' mode='aspectFill' lazy-load='true'></image>
-        </view>
-        <view>
-          <!-- <checkbox class="absolute" value='{{k.StoreId}}' bindtap='changeCheck' checked='{{k.checked}}'></checkbox> -->
-          <!-- <view wx:if="{{k.checked==true}}">
-                    <text class='sanjiao' bindtap='showDialog' data-storeindex="{{storeIndex}}" data-groupindex="{{index}}" data-name="{{k.StoreName}}" data-item="{{k.ItemList}}">{{k.checkedName}}</text>
-                  </view> -->
-        </view>
-        <view class='rightContent contentRight' data-Id="{{k.StoreId}}">
-          <view class='between relative'>
-            <view class='courseTitle'>{{k.StoreName}}</view>
-          </view>
-          <view class='detail around'>
-            <view class='addrLong'>
-              <view>
-                <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
-              </view>
-              <view class='name address' style='width:91%'>{{k.StoreAddress}}</view>
-            </view>
-          </view>
-          <!-- <view class='detail' wx:if="{{k.Mobile}}">
-                      <view>
-                        <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
-                      </view>
-                      <view class='name'>{{k.Mobile}}</view>
-                    </view>
-                    <view class='detail'>
-                      <view class='ring'>
-                        <view>
-                          <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-                        </view>
-                        <view class='name'>语文课，共{{k.CoursesNumber}}门体验课</view>
-                      </view>
-                    </view> -->
-        </view>
-      </view>
-
-      <view class="column {{c.RemainCount<=0?'gray':''}}" wx:for="{{k.ItemList}}" wx:key wx:for-item="c" wx:for-index="itemIndex" data-itemIndex="{{itemIndex}}" data-storeindex="{{storeIndex}}" catchtap="{{c.RemainCount > 0?'checkItem_total':''}}">
-        <view class="start">
-          <view class="rad {{c.checked==true ? 'on' : ''}}" wx:if="{{c.RemainCount > 0}}"></view>
-          <view class='choseItem'>
-            <view class='leftImg leftImgItem'>
-              <image class='coverc' src='{{c.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
-            </view>
-            <view class='right choseItemRight'>
-              <view class='course'>{{c.ItemName}}</view>
-              <view>课程数量1节，单节课时10min</view>
-              <view class='tagList'>
-                <view class='tagItem' wx:for="{{c.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
-              </view>
-              <view>{{c.SoldCount}}人已参与 | 剩余名额 {{c.RemainCount}}个</view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
-  </scroll-view>
-  <view class='footer footer1'>
-    <view class='footItem' bindtap='cancelChecked'>取消</view>
-    <view class='footItem' bindtap='sureChecked'>确定</view>
-  </view>
-</view>

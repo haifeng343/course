@@ -1,0 +1,414 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"uglifyFileName": true,
+		"checkInvalidKey": true,
+		"coverView": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.7.4",
+	"appid": "wx9ff1317b41d4d09c",
+	"projectname": "API%E5%B0%8F%E7%A8%8B%E5%BA%8F",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 7,
+			"list": [
+				{
+					"id": -1,
+					"name": "authorization",
+					"pathName": "pages/authorization/authorization",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "gobind",
+					"pathName": "pages/gobind/gobind",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "binding",
+					"pathName": "pages/binding/binding",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "groupDetail",
+					"pathName": "pages/groupDetail/groupDetail",
+					"query": "Longitude=0.0&Latitude=0.0&Id=0",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "courseDetail",
+					"pathName": "pages/courseDetail/courseDetail",
+					"query": "Id=29",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "allTeacher",
+					"pathName": "pages/allTeacher/allTeacher",
+					"query": "Id=32",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "chooseClass",
+					"pathName": "pages/chooseClass/chooseClass",
+					"query": "storeId=41NUV34&Id=14&type=2&relId=69",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "selectAddress",
+					"pathName": "pages/selectAddress/selectAddress",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "order",
+					"pathName": "pages/order/order",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 10,
+					"name": "orderDetail",
+					"pathName": "pages/orderDetail/orderDetail",
+					"query": "Id=61&status=4&kd=3",
+					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "payOk",
+					"pathName": "pages/payOk/payOk",
+					"query": "OrderId=35&Ispay=true",
+					"scene": null
+				},
+				{
+					"id": 12,
+					"name": "payOrder",
+					"pathName": "pages/payOrder/payOrder",
+					"query": "checkItem=[{\"SheetId\":15,\"CartId\":90,\"RelId\":[28,41]},{\"SheetId\":15,\"CartId\":89,\"RelId\":[28,41]},{\"SheetId\":15,\"CartId\":88,\"RelId\":[28,41]},{\"SheetId\":15,\"CartId\":87,\"RelId\":[42]}]",
+					"scene": null
+				},
+				{
+					"id": 13,
+					"name": "refund",
+					"pathName": "pages/refund/refund",
+					"query": "OrderId=35",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "mine",
+					"pathName": "pages/mine/mine",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "integralLog",
+					"pathName": "pages/integralLog/integralLog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "callUs",
+					"pathName": "pages/callUs/callUs",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "setting",
+					"pathName": "pages/setting/setting",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "modifyPhone",
+					"pathName": "pages/modifyPhone/modifyPhone",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "invite",
+					"pathName": "pages/invite/invite",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "recommendation",
+					"pathName": "pages/recommendation/recommendation",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "address",
+					"pathName": "pages/address/address",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "editAddress",
+					"pathName": "pages/editAddress/editAddress",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "city",
+					"pathName": "pages/city/city",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "wallet",
+					"pathName": "pages/wallet/wallet",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "bill",
+					"pathName": "pages/bill/bill",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "withdraw",
+					"pathName": "pages/withdraw/withdraw",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "withdrawLog",
+					"pathName": "pages/withdrawLog/withdrawLog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "cashBack",
+					"pathName": "pages/cashBack/cashBack",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "cashBackDetail",
+					"pathName": "pages/cashBackDetail/cashBackDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "withdrawDetail",
+					"pathName": "pages/withdrawDetail/withdrawDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "ballanceLog",
+					"pathName": "pages/ballanceLog/balanceLog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "bankList",
+					"pathName": "pages/bankList/bankList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "addBank",
+					"pathName": "pages/addBank/addBank",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "searchAddress",
+					"pathName": "pages/searchAddress/searchAddress",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "demo",
+					"pathName": "pages/demo/demo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "search",
+					"pathName": "pages/search/search",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "keepCarList",
+					"pathName": "pages/keepCarList/keepCarList",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "login",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "share",
+					"pathName": "pages/share/share",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "WebView",
+					"pathName": "pages/WebView/WebView",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "aboutUs",
+					"pathName": "pages/aboutUs/aboutUs",
+					"query": "Id=15",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "wait",
+					"pathName": "pages/wait/wait",
+					"query": "Id=32",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "map",
+					"pathName": "pages/map/map",
+					"query": "Id=32",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "maps",
+					"pathName": "pages/maps/maps",
+					"query": "Id=32",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "inquire",
+					"pathName": "pages/inquire/inquire",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 46,
+					"name": "mechanism",
+					"pathName": "pages/mechanism/mechanism",
+					"query": "groupId=17&storeId=6",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "demo",
+					"pathName": "pages/demo/demo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "car",
+					"pathName": "pages/car/car",
+					"query": "groupId=17&storeId=6",
+					"scene": null
+				},
+				{
+					"id": 49,
+					"name": "category",
+					"pathName": "pages/category/category",
+					"query": "Id=1&name=项目类型A&Longitude=120.13026&Latitude=30.25961",
+					"scene": null
+				},
+				{
+					"id": 50,
+					"name": "searchCategory",
+					"pathName": "pages/searchCategory/searchCategory",
+					"query": "latitude=30.25961&longitude=120.13026&typeId=0",
+					"scene": null
+				}
+			]
+		}
+	}
+}

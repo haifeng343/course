@@ -151,16 +151,12 @@ Page({
       showId2: e.currentTarget.dataset.tradingareaid,
       tradingareaId: e.currentTarget.dataset.tradingareaid,
       ImgType1: true,
+      txt: e.currentTarget.dataset.name,
       page: 1,
     })
     if (this.data.tradingareaId==0){
       this.setData({
         txt: this.data.districtname
-      })
-    }
-    else {
-      this.setData({
-        txt: e.currentTarget.dataset.name,
       })
     }
     this.hasList();

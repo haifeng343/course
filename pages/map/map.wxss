@@ -69,7 +69,9 @@
   background-color: #fff;
   box-shadow: 0 0 20rpx rgba(0, 0, 0, 0.4);
 }
-
+cover-view{
+z-index: 9999;
+}
 .sexRadio {
   width: 120rpx;
   font-size: 28rpx;
@@ -229,7 +231,7 @@
 
 .content {
   width: 95%;
-  display: flex;
+  height: auto;
   margin: 0 auto;
 }
 

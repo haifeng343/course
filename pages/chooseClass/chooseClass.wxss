@@ -331,7 +331,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   top: 22rpx;
 }
 
-.tagItm {
+.tagItem {
   word-break: keep-all;
   font-size: 24rpx;
   height: 36rpx;
@@ -343,6 +343,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   margin-top: 0rpx;
   box-sizing: border-box;
   border-radius: 5rpx;
+  white-space: nowrap;
 }
 
 .detail {
@@ -598,6 +599,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   z-index: 88;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
+  background-color: transparent;
 }
 
 .curseContent {
@@ -612,18 +614,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   width: 80%;
 }
 
-.fixed {
-  position: fixed;
-  width: 90%;
-  height: 800rpx;
-  background-color: #fff;
-  z-index: 99;
-  top: 50%;
-  border-radius: 15rpx;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 35rpx rgba(0, 0, 0, 0.1);
-}
+
 
 .footer {
   width: 100%;
