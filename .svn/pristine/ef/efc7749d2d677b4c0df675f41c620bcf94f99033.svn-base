@@ -13,10 +13,7 @@
   display: flex;
   align-items: center;
 }
-.time{
-  font-size: 24rpx;
-  color: #5b5b5b;
-}
+
 .navTop {
   float: left;
   font-weight: 600;

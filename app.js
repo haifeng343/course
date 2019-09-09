@@ -47,7 +47,6 @@ App({
         }
       },
     })
-
     that.getKeyWord();
   },
   onLoad() {

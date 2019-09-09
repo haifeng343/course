@@ -1,6 +1,6 @@
 <view class='logTop between'>
   <view class='start'>
-    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange">
+    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange" bindtap='initPicker'>
       <view class="picker">
         {{date?date:now}}
       </view>

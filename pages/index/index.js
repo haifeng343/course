@@ -29,7 +29,8 @@ Page({
     locationAgain: true,
     winWidth: '',
     isLoaded: false,
-    typeList:[],//分类列表
+    typeList: [], //分类列表
+    popList: [], //弹窗列表
   },
   onLoad: function(options) {
     var that = this;
@@ -51,36 +52,79 @@ Page({
 
     that.banner();
     that.init();
+    that._popList();
     that.hasTypeList();
     that.data.isLoaded = true;
   },
-  hasTypeList:function() {
+  //弹窗列表
+  _popList: function() {
     let that = this;
-    var url = 'sheet/itemtype/list';
+    var url = 'user/pop/list';
     var params = {
-      PageCount:7,
-      PageIndex: 1,
+      GroupToken: 'index',
     }
-    netUtil.postRequest(url, params, function (res) { 
-      let arr = res.Data;
-      arr.push({ Id: 0, ImgUrlShow:'../../images/all.png',Name:'全部'});
-      that.setData({
-        typeList: arr,
-      })
-    },
+    netUtil.postRequest(url, params, function(res) {
+        let temp = res.Data;
+        temp.forEach((item, index) => {
+          if (index == 0) {
+            item.pop = true;
+          } else {
+            item.pop = false
+          }
+        })
+        that.setData({
+          popList: temp,
+        })
+      },
       null,
       false,
       false,
       false)
   },
-  navtoCategory:function(e){
+  //关闭弹窗按钮
+  shutDown: function(e) {
+    console.log(e)
+    let index = e.currentTarget.dataset.index;
+    let temp = this.data.popList;
+    temp[index].pop = false;
+    if (temp.length > index+1) {
+      temp[index + 1].pop = true
+    }
+    this.setData({
+      popList: temp
+    })
+  },
+  hasTypeList: function() {
+    let that = this;
+    var url = 'sheet/itemtype/list';
+    var params = {
+      PageCount: 7,
+      PageIndex: 1,
+    }
+    netUtil.postRequest(url, params, function(res) {
+        let arr = res.Data;
+        arr.push({
+          Id: 0,
+          ImgUrlShow: '../../images/all.png',
+          Name: '全部'
+        });
+        that.setData({
+          typeList: arr,
+        })
+      },
+      null,
+      false,
+      false,
+      false)
+  },
+  navtoCategory: function(e) {
     wx.navigateTo({
       url: '/pages/category/category?Id=' + e.currentTarget.dataset.id + '&name=' + e.currentTarget.dataset.name + '&Longitude=' + this.data.longitude + '&Latitude=' + this.data.latitude,
     })
   },
   //坐标转换
-  reverseLocation: function (latitude, longitude, locationType, onsuccess, onfail, oncomplete) {
-    if (locationType == 0){
+  reverseLocation: function(latitude, longitude, locationType, onsuccess, onfail, oncomplete) {
+    if (locationType == 0) {
       onsuccess({
         lat: latitude,
         lng: longitude
@@ -103,7 +147,7 @@ Page({
         longitude: longitude
       },
       coord_type: 3, //baidu经纬度
-      success: function (res) {
+      success: function(res) {
         onsuccess(res.result.ad_info.location);
       },
       fail: function() {
@@ -119,7 +163,7 @@ Page({
     const that = this;
     that.Id = parseInt(e.currentTarget.dataset.id)
     wx.navigateTo({
-      url: '/pages/chooseClass/chooseClass?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude + '&Id=' + that.Id+'&name='+e.currentTarget.dataset.name+'&type='+e.currentTarget.dataset.type,
+      url: '/pages/chooseClass/chooseClass?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude + '&Id=' + that.Id + '&name=' + e.currentTarget.dataset.name + '&type=' + e.currentTarget.dataset.type,
     })
   },
   address: function() {
@@ -185,7 +229,7 @@ Page({
       PageIndex: that.data.page,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      let tempRes=res;
+      let tempRes = res;
       that.reverseLocation(res.Data.Latitude, res.Data.Longitude, res.Data.LocationType, function(res) {
           wx.setStorageSync('loc', {
             lat: res.lat,
@@ -193,18 +237,18 @@ Page({
             title: tempRes.Data.LocationName
           });
         },
-        function () {
+        function() {
           wx.setStorageSync('loc', {
             lat: tempRes.Data.Latitude,
             lng: tempRes.Data.Longitude,
             title: tempRes.Data.LocationName
           });
         },
-        function () {
+        function() {
           let arr = tempRes.Data.List;
           if (arr.length > 0) {
             arr.forEach(item => {
-              item.TradingAreaDistance = (parseInt(item.TradingAreaDistance) / 1000).toFixed(1); 
+              item.TradingAreaDistance = (parseInt(item.TradingAreaDistance) / 1000).toFixed(1);
               item.SheetMinPrice = Number(item.SheetMinPrice / 100).toFixed(2);
             })
             var temp = [];
@@ -243,19 +287,18 @@ Page({
             longitude: res.data.lng,
             latitude: res.data.lat
           });
-          that.data.page=1;
+          that.data.page = 1;
           that.refreshList();
         }
       },
     });
   },
-  
+
   init: function() {
     let that = this;
     wx.getStorage({
       key: 'loc',
       success: function(res) {
-        console.log(res)
         that.setData({
           locationName: res.data.title,
           longitude: res.data.lng,
@@ -286,7 +329,6 @@ Page({
             longitude: res.longitude
           },
           success: function(res) {
-            console.log(res)
             that.setData({
               locationName: res.result.formatted_addresses.recommend
             })
@@ -328,7 +370,7 @@ Page({
               })
             }
           },
-          fail: function (res) {
+          fail: function(res) {
             wx.showToast({
               title: '调用授权窗口失败',
               icon: 'success',

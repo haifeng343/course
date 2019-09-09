@@ -1,0 +1,117 @@
+<view wx:if="{{usertoken}}">
+  <view wx:if="{{List.length>0}}">
+    <scroll-view scroll-y="true">
+      <view class='bg'>
+        <checkbox-group bindchange='checkedTap'>
+          <view class='keep keep1' wx:for="{{List}}" wx:key>
+            <view class='keep pd0'>
+              <view class='between marginBootom'>
+                <view class='startd che1'>
+                  <checkbox class='gou' value='{{item.CartId}}' checked='{{item.checked}}'></checkbox>
+                  <view class='groupName' data-Id="{{item.SheetId}}" data-type="{{item.SheetModel}}" bindtap='navSheet'>{{item.SheetModel==1?item.SheetName:item.TradingareaName}}</view>
+                  <view class='centers'>
+                    <image src='../../images/go.png' class='go' mode='aspectFill'></image>
+                  </view>
+                </view>
+                <view class='centers del'>
+                  <image src='../../images/delete1.png' data-index="{{index}}" data-Id="{{item.CartId}}" bindtap='deleteCard' class='delete' mode='aspectFill'></image>
+                </view>
+              </view>
+
+              <view>
+                <view class='Item' wx:for="{{item.ItemList}}" wx:key wx:for-item="item1">
+
+                  <image src='{{item1.ItemCoverImg}}' mode='aspectFill' class='topImg'></image>
+
+                  <view class='rights'>
+                    <view class='course'>{{item1.ItemName}}</view>
+                    <view class='detail start well'>
+                      <view class='startd'>
+                        <view class='centerd'>
+                          <image src='../../images/house.png' class='detailImg' mode='aspectFill'></image>
+                        </view>
+                        <view class='name'>{{item1.SellerName}}</view>
+                      </view>
+                    </view>
+                    <view class='detail start well'>
+                      <view class='startd'>
+                        <view class='centerd'>
+                          <image src='../../images/ad1.png' class='detailImg' mode='aspectFill'></image>
+                        </view>
+                        <view class='name'>{{item1.StoreAddress}}</view>
+                      </view>
+                    </view>
+                    <view class='detail start well'>
+                      <view class='startds'>
+                        <view class='centerd'>
+                          <image src='../../images/couse.png' class='detailImg' mode='aspectFill'></image>
+                        </view>
+                        <view class='name'>课程数量 {{item1.CoursesNumber}} 节</view>
+                      </view>
+                      <view class='startds ml40'>
+                        <view class='centerd'>
+                          <image src='../../images/time.png' class='detailImg' mode='aspectFill'></image>
+                        </view>
+                        <view class='name'>单节课时 {{item1.SingleTime}} min</view>
+                      </view>
+                    </view>
+                    <view class='detail start well'>
+                      <view class='startd'>
+                        <view class='name'>{{item1.SoldCount}} 人已参与，剩余名额 {{item1.RemainCount}} 个</view>
+                      </view>
+                    </view>
+                    <!-- <view>课程数量 {{item1.CoursesNumber}} 节，单节课时 {{item1.SingleTime}} min</view>
+                  <view>{{item1.SoldCount}} 人已参与 | 剩余名额 {{item1.RemainCount}} 个</view> -->
+                  </view>
+                </view>
+              </view>
+
+            </view>
+            <view class='flex-end count'>
+              <view>共{{item.ItemList.length}}门课程</view>
+              <view class='money'>小计:</view>
+              <view class='numberD'>￥{{item.Price}}</view>
+            </view>
+          </view>
+        </checkbox-group>
+      </view>
+    </scroll-view>
+  </view>
+  <view class='nohasLog' wx:else>
+    <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+    <view>您的购物车空空如也~</view>
+    <view class='btnd' bindtap='goHome'>去逛逛</view>
+  </view>
+
+  <!-- <view class='keep low between mt0' bindtap='swich' style='overflow-x:hidden'>
+  <view class='column'>
+    <view>使用积分</view>
+    <view class='start txt'>{{UseScore}}100积分抵1{{UseScoreAmount}}元
+      <view class='txt1'>现有积分{{TotalScore}}1000</view>
+    </view>
+  </view>
+  <checkbox class='' checked='{{checked}}'></checkbox>
+</view> -->
+
+  <view class='pay' wx:if="{{List.length>0}}">
+    <view class='between'>
+      <checkbox class='allcheck' bindtap='allChecked' checked='{{totalChecked}}'>全选</checkbox>
+      <view class='right'>
+        <view class='all'>合计:
+          <text class='payMoney'>￥{{money==0?0:money}}</text>
+        </view>
+        <view class='center'>
+          <view class='settlment' bindtap='settlement' data-item="{{checkItem}}" wx:if="{{money>0}}">结算
+            <text>({{totalCount}})</text>
+          </view>
+          <view class='settlment settlmentd' wx:else>结算</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
+<view class='nohasLog' wx:else bindtap='bindLogin' catchtouchmove='true'>
+  <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+  <view class='langqi'>点击登录后，查看购物车</view>
+</view>

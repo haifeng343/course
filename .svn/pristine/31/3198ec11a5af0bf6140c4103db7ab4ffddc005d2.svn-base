@@ -1,6 +1,6 @@
 <view class='logTop between'>
   <view class='start'>
-    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange" bindtap='initPicker'>
+    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange">
       <view class="picker">
         {{date?date:now}}
       </view>
@@ -15,23 +15,15 @@
   <view class='log'>
     <view class='nohasLog' wx:if="{{List.length<=0}}">
       <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
-      <view>暂无提现记录</view>
+      <view>暂无现金奖励记录</view>
     </view>
     <view class='logList' wx:else>
-      <view class='logItem column' wx:for="{{List}}" wx:key>
-        <view class='between'>
-          <view class='share'>{{item.Description}}</view>
-          <view class='fraction'>+ ￥{{item.Amount}}</view>
+      <view class='logItem between' wx:for="{{List}}" wx:key>
+        <view class='column'>
+          <view class='share'>{{item.ReceiveName}}</view>
+          <view class='fraction'>{{item.CreateTime}}</view>
         </view>
-        <view class='between'>
-          <view class='time'>{{item.CreateTime}}</view>
-          <view class='status' wx:if="{{item.Status==1}}">提交申请</view>
-          <view class='status' wx:if="{{item.Status==2}}">申请处理中</view>
-          <view class='status red start' wx:if="{{item.Status==3}}" data-StatusDes="{{item.StatusDes}}" bindtap='showEor'>提现失败
-            <image class='kw' src='../../images/kw.png' mode='widthFix' lazy-load='true'></image>
-          </view>
-          <view class='status' wx:if="{{item.Status==4}}">提现成功</view>
-        </view>
+        <view class='fraction monry'>+ ￥{{item.Amount}}</view>
       </view>
     </view>
   </view>

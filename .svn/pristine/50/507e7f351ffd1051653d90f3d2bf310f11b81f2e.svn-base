@@ -1,0 +1,73 @@
+<view>
+  <view class='List'>
+    <view class='Bill' bindtap='withdrawLog'>
+      <view class='start'>
+        <image class='icon1' src='../../images/m5.png' mode='widthFix' lazy-load='true'></image>
+        <view>提现记录</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class='Bill' bindtap='cashLog' wx:if="{{wihdraw}}">
+      <view class='start'>
+        <image class='icon1' src='../../images/m6.png' mode='widthFix' lazy-load='true'></image>
+        <view>现金奖励记录</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+  </view>
+  <view class='List mt20' wx:if="{{wihdraw}}">
+    <view class='item between' data-item="{{wihdraw}}" data- bindtap='changeCard'>
+      <view class='start align'>
+        <image class='bankIcon' src='{{wihdraw.BankIconUrl}}' mode='aspectFill' lazy-load='true'></image>
+        <view class='bankText'>
+          <view class='bankTitle'>{{wihdraw.BankName}}</view>
+          <view class='bankTxt'>尾号 {{CardNumber}} 的{{wihdraw.CardBreed}}</view>
+        </view>
+      </view>
+      <image class='go bankRight' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+  <text wx:if="{{!wihdraw}}" class='nohave red' bindtap='nohaveTo'>暂无银行卡，点击去添加</text>
+
+  <view class='item1 bor' wx:if="{{wihdraw}}">
+    <view class='withdrawTxt'>提现金额
+      <text class='txt'>(可用余额￥{{money}})</text>
+    </view>
+    <view class='start'>
+      <text class='mTxt'>￥</text>
+      <input class='money' type='digit' bindinput='amoutChange' value='{{amount}}'></input>
+      <image src='../../images/clear.png' class='clears' wx:if="{{amount}}" bindtap='clear' mode='widthFix'></image>
+      <text class='moneyTxt' bindtap='all' wx:if="{{money>=0}}">全部</text>
+      <text class='moneyTxt' wx:else>全部</text>
+      <button class='btnd end' bindtap='GetApply' wx:if="{{amount>0 && wihdraw}}">提现</button>
+      <button class='btnd end' disabled wx:else>提现</button>
+    </view>
+  </view>
+
+  <view class='List1 mt20' wx:for="{{taskList}}" wx:key>
+    <view class='title'>
+      <view class='startd'>
+        <view class='centers'>
+          <image src='{{item.TaskIconShow}}' class='icon2' mode='aspectFill'></image>
+        </view>
+        <view class='titleText'>{{item.TaskName}}</view>
+      </view>
+      <view class='txt1'>{{item.TaskDes}}</view>
+    </view>
+    <view class='content'>
+      <text class='text1'>马上提现({{item.PrizeAmountNow}}元)</text>
+      <button class='btnd btnd1'>{{item.ActionBtnText}}</button>
+    </view>
+  </view>
+  <!-- <view class='item2 bor'>
+    <view wx:if="{{amount>0 && feeMoney>0}}">额外扣除￥{{feeMoney}} 服务费（费率{{fee}}%）</view>
+    <view wx:else>可用余额￥{{money}}</view>
+  </view> -->
+
+  <!-- <view class='btn1' bindtap='GetApply' wx:if="{{amount>0 && wihdraw}}">提现</view>
+  <view class='btn1 g1' wx:else>提现</view> -->
+</view>

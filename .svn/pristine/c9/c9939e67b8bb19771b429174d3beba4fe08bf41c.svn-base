@@ -1,29 +1,28 @@
-
-var shareApi = require("../../utils/share.js");
 var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
 
   data: {
     date: '', //不填写默认今天日期，填写后是默认日期
+    date2: [],
     dataStart: '', //有效日期
     dataEnd: '', //
-    storeId: '', //门店Id
+    showError: false,
     pagecount: 20,
     page: 1,
-    year: '全部',
-    date2: [],
-    month: '全部',
+    year: '',
+    month: '',
     array: [],
     statusdes: '',
     List: [],
-    showEor: false,
-    status: '', //1门店 2商家
-    name: '',
   },
   initPicker: function () {
     var date = new Date();
-    let arr = [],
-      arr1 = [];
+    let arr = [], arr1 = [];
+    this.setData({
+      year: '全部',     //date.getFullYear(),
+      month: '全部'     //date.getMonth() + 1
+    })
 
     var year = date.getFullYear();
     arr.push('全部');
@@ -50,21 +49,7 @@ Page({
 
       })
     })
-    this.setData({
-      storeId: options.storeId || '',
-      status: options.status || '',
-      name: options.name || '',
-    })
-    if (this.data.status == 1) {
-      wx.setNavigationBarTitle({
-        title: '充值记录-' + this.data.name,
-      })
-    }
-    if (this.data.status == 2) {
-      wx.setNavigationBarTitle({
-        title: '充值记录-商家',
-      })
-    }
+
     this.initPicker();
     this.init();
   },
@@ -73,18 +58,18 @@ Page({
   },
   getData: function () {
     let that = this;
-    var url = 'user/bill/list';
+    var url = 'user/task/prize/list';
     var params = {
       Year: that.data.year,
       Month: that.data.month,
       PageCount: that.data.pagecount,
-      PageIndex: that.data.page,
+      PageIndex: that.data.page
     }
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       let arr = res.Data;
       var arr1 = [];
       arr.forEach(item => {
-        item.Amount = Number(item.Amount / 100).toFixed(2);
+        item.Amount = Number(item.Amount / 100).toFixed(2)
       })
       if (that.data.page == 1) {
         arr1 = arr;
@@ -95,32 +80,35 @@ Page({
       that.setData({
         List: arr1
       })
-    }); //调用get方法情就是户数
+    });
   },
   bindDateChange: function (e) {
-
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
     let index = e.detail.value;
     if (index[0] == 0 && index[1] == 0) {
       this.setData({
         date: '全部',
         year: '全部',
         month: '全部',
-        page: 1,
+        page: 1
       })
     } else {
       this.setData({
         date: this.data.array[0][index[0]] + '-' + this.data.array[1][index[1]],
         year: this.data.array[0][index[0]],
         month: this.data.array[1][index[1]],
-        page: 1,
+        page: 1
       })
     }
     this.getData();
   },
   showEor: function (e) {
-    this.setData({
-      statusdes: e.currentTarget.dataset.statusdes,
-      showError: true
+    wx.showModal({
+      title: '失败原因',
+      content: e.currentTarget.dataset.statusdes,
+      showCancel: false,
+      confirmColor: '#3DD6D1',
+      confirmText: '知道了'
     })
   },
   closed: function () {
@@ -128,12 +116,14 @@ Page({
       showError: false
     })
   },
+  withdrawDetail: function () {
+    wx.navigateTo({
+      url: '/pages/withdrawDetail/withdrawDetail',
+    })
+  },
   //上拉加载更多
   onReachBottom: function () {
     let that = this;
-    wx.showLoading({
-      title: '玩命加载中',
-    });
     var temp_page = this.data.page;
     temp_page++;
     this.setData({
@@ -144,9 +134,6 @@ Page({
   },
   //下拉刷新
   onPullDownRefresh: function () {
-    wx.showLoading({
-      title: "玩命加载中",
-    });
     this.setData({
       page: 1
     });

@@ -1,0 +1,124 @@
+<view>
+  <view class="map_container">
+    <map class="map" id="map" longitude="{{centerLocation.longitude}}" latitude="{{centerLocation.latitude}}" controls='{{controls}}' scale="14" show-location="true" markers="{{markers}}" bindmarkertap="makertap" bindregionchange="bindregionchange">
+      <cover-view class='top' wx:if="{{titleShow}}">
+        <cover-view class='cover-top'>小区:{{resultLocation_village.village_name}}</cover-view>
+        <cover-view class='cover-top'> 全部:{{resultLocation_village.totalCount}}人 男生:{{resultLocation_village.menCount}}人 女生:{{resultLocation_village.womenCount}}人</cover-view>
+      </cover-view>
+
+      <!-- 年龄范围弹窗 -->
+      <cover-view class='dialogAge' wx:if="{{seachDialog&&showAge}}">
+        <cover-view class='title ageTitle'>
+          <cover-view class='h80'>开始年龄</cover-view>
+          <cover-view class='h80'>结束年龄</cover-view>
+        </cover-view>
+        <cover-view class='footers'>
+          <cover-view class='footer-btn' bindtap='ageCancel'>取消</cover-view>
+          <cover-view class='footer-btn' bindtap='ageSure'>确定</cover-view>
+        </cover-view>
+        <cover-view class='contents'>
+          <cover-view class='left'>
+            <cover-view class='center' data-id="{{item.id}}" bindtap='changeActive' wx:for="{{arr}}" wx:key>
+              <cover-image src='../../images/gou.png' class='icon icon1' wx:if="{{showId==item.id}}"></cover-image>
+              <cover-view class="age">{{item.name}}</cover-view>
+            </cover-view>
+          </cover-view>
+          <cover-view class='rights'>
+            <cover-view class='center' data-id="{{item.id}}" bindtap='changeActive1' wx:for="{{arr}}" wx:key>
+              <cover-image src='../../images/gou.png' class='icon icon1' wx:if="{{showId1==item.id}}"></cover-image>
+              <cover-view class="age">{{item.name}}</cover-view>
+            </cover-view>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+
+
+      <!-- 半径范围弹窗 -->
+      <cover-view class='dialogAge' wx:if="{{seachDialog&&showRange}}">
+        <cover-view class='title'>选择范围</cover-view>
+        <cover-view class='content-range'>
+          <cover-view wx:for="{{array1}}" class='center' data-id="{{item}}" bindtap='changeRange' wx:key>
+            <cover-image src='../../images/gou.png' class='icon icon1' wx:if="{{showId2==item}}"></cover-image>
+            <cover-view class="age">{{item}}公里</cover-view>
+          </cover-view>
+        </cover-view>
+        <cover-view class='footers'>
+          <cover-view class='footer-btn' bindtap='rangeCancel'>取消</cover-view>
+          <cover-view class='footer-btn' bindtap='rangeSure'>确定</cover-view>
+        </cover-view>
+      </cover-view>
+
+
+      <cover-image class="location {{seachDialog?'bottom':''}}" bindtap='findLocation' src='../../images/location.png' mode='aspectFill'></cover-image>
+      <cover-image class="findMarks {{seachDialog?'findMarks_bottom':''}}" wx:if="{{!IsGoing}}" bindtap='findLastPosition' src='../../images/findMarks.png' mode='aspectFill'></cover-image>
+      <cover-image class="findMarks {{seachDialog?'findMarks_bottom':''}}" wx:else bindtap='findLastPosition' src='../../images/findMarksd.png' mode='aspectFill'></cover-image>
+      <cover-image class="searchLocation {{seachDialog?'bottom':''}}" wx:if="{{seachDialog}}" src='../../images/searchLocations.png' bindtap='searchLocation' mode='aspectFill'></cover-image>
+      <cover-image class="searchLocation {{seachDialog?'bottom':''}}" wx:else src='../../images/searchLocation.png' bindtap='showToast' mode='aspectFill'></cover-image>
+
+      <cover-view class="modale" wx:if="{{seachDialog&&(!showMol)}}">
+        <cover-view class='title'>搜索条件</cover-view>
+        <cover-view class='content'>
+          <cover-view class='start'>
+            <cover-view class='label'>当前位置:</cover-view>
+            <cover-view class='label-right bg'>{{address}}</cover-view>
+          </cover-view>
+          <cover-view class='start'>
+            <cover-view class='label'>年龄范围:</cover-view>
+            <cover-view class='label-right' bindtap='changeAge'>{{searchCondition.age1+'-'+searchCondition.age2}}</cover-view>
+          </cover-view>
+          <cover-view class='between'>
+            <cover-view class='label'>性别:</cover-view>
+            <cover-view class='radioList'>
+              <cover-view class='start' bindtap='changeSex' data-id="{{item.id}}" wx:for="{{items}}" wx:key>
+                <cover-view class='center'>
+                  <cover-image wx:if="{{item.id == searchCondition.sex}}" src="../../images/checkeds.png" mode='aspectFill' class='icon icon2'></cover-image>
+                  <cover-image wx:else src="../../images/checkbox.png" mode='aspectFill' class='icon icon2'></cover-image>
+                </cover-view>
+                <cover-view class='sexRadio'>{{item.value}}</cover-view>
+              </cover-view>
+            </cover-view>
+          </cover-view>
+          <cover-view class='start'>
+            <cover-view class='label'>半径范围:</cover-view>
+            <cover-view class='label-right' bindtap='showRange'>{{searchCondition.range}}公里</cover-view>
+          </cover-view>
+          <cover-view class='btn' wx:if="{{searchCondition.range}}" bindtap='bindSearch'>开始搜索</cover-view>
+          <cover-view class='btn grayd' wx:else>开始搜索</cover-view>
+        </cover-view>
+      </cover-view>
+
+
+      <cover-view class="modale" wx:if="{{seachDialog&&showMol}}">
+        <cover-view class='title'>搜索结果</cover-view>
+        <cover-view class='content'>
+          <cover-view class='start borb ky'>
+            <cover-view class='Icon'>
+              <cover-image class='icon' src='../../images/n1.png' mode="widthFix"></cover-image>
+            </cover-view>
+            <cover-view class='right'>{{resultLocation.address}}</cover-view>
+            <cover-view class='back' bindtap='backToLocation'>定位</cover-view>
+          </cover-view>
+          <cover-view class='start borb'>
+            <cover-view class='Icon'>
+              <cover-image class='icon' src='../../images/n2.png' mode="widthFix"></cover-image>
+            </cover-view>
+            <cover-view class='right'>搜索到{{resultLocation.range}}公里范围内，{{resultLocation.totalCount}}人</cover-view>
+          </cover-view>
+          <cover-view class='start borb'>
+            <cover-view class='Icon'>
+              <cover-image class='icon' src='../../images/n3.png' mode="widthFix"></cover-image>
+            </cover-view>
+            <cover-view class='right'>男生{{resultLocation.menCount}}人</cover-view>
+          </cover-view>
+          <cover-view class='start kl'>
+            <cover-view class='Icon'>
+              <cover-image class='icon' src='../../images/n4.png' mode="widthFix"></cover-image>
+            </cover-view>
+            <cover-view class='right'>女生{{resultLocation.womenCount}}人</cover-view>
+          </cover-view>
+          <cover-view class='btn' bindtap='returnSearch'>返回搜索</cover-view>
+        </cover-view>
+      </cover-view>
+    </map>
+  </view>
+</view>

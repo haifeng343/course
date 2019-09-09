@@ -89,12 +89,8 @@
 </view>
 
 
-<view wx:for="{{popList}}" wx:key wx:for-item="item1">
-  <view wx:if="{{item1.pop==true}}">
-    <view class='father' catchtouchmove='true'></view>
-    <view class='poFixed'>
-      <image src='{{item1.ImgUrlShow}}' style='left:-1rpx;' mode='aspectFill' class='hongbao'></image>
-      <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap='shutDown' style='top:{{item1.ClosePositionY}}px;left:{{item1.ClosePositionX}}px;width:{{item1.CloseWidth}}px;height:{{item1.CloseHeight}}px' hidden='{{!item1.ShowClose}}' mode='aspectFill' class='shut'></cover-image>
-    </view>
-  </view>
-</view>
+<!-- <view class='father' catchtouchmove='true'></view>
+<view class='poFixed'>
+  <image src='../../images/hongbao.png' style='left:-1rpx;' mode='aspectFill' class='hongbao'></image>
+  <cover-image src='../../images/shut.png' style='top:-5px;left:-3px' mode='aspectFill' class='shut'></cover-image>
+</view> -->

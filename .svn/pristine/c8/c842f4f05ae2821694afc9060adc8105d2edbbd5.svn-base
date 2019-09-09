@@ -1,0 +1,133 @@
+.keep {
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  padding: 30rpx 5%;
+  box-sizing: border-box;
+  display: flex;
+}
+.topImg {
+  width: 141rpx;
+  height: 180rpx;
+  margin-right: 20rpx;
+  border-radius: 15rpx;
+}
+
+.rowImg {
+  width: 28rpx;
+  height: 28rpx;
+  display: flex;
+  margin-right: 10rpx;
+  align-items: center;
+}
+.activity {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.centers{
+  width: 34rpx;
+  height: 36rpx;
+  display: flex;
+  align-items: center;
+}
+.h50 {
+  line-height: 45rpx;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.address {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ml40 {
+  margin-left: 40rpx;
+}
+.courseRow{
+  width: 100%;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right{
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.teacher {
+  margin-top: 20rpx;
+  background-color: #fff;
+}
+
+.teaTitle {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.grayd {
+  margin-left: 5rpx;
+}
+
+.teacherList {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.teacherItem {
+  margin-top: 30rpx;
+}
+
+.avator {
+  width: 150rpx;
+  height: 150rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+}
+
+.starts {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.teaRight {
+  width: 75%;
+  height: auto;
+  font-size: 26rpx;
+}
+
+.mylog {
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.name {
+  font-size: 28rpx;
+  color: #000;
+}
+
+.profession {
+  font-size: 24rpx;
+  color: #5b5b5b;
+  margin-left: 15rpx;
+}
+
+.mylogText {
+  color:#000;
+  font-size: 24rpx;
+}

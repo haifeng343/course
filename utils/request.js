@@ -22,7 +22,7 @@ function get(url, params, onSuccess, onFailed, isShowLoading = true, isShowError
  * @onFailed  失败回调
  */
 
- const baseUrl = "https://qxbclient.guditech.com/";
+const baseUrl = "https://qxbclient.guditech.com/";
 // const baseUrl = "https://test.guditech.com/rocketclient/";
 
 function request(url, params, method, onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin) {
@@ -35,6 +35,17 @@ function request(url, params, method, onSuccess, onFailed, isShowLoading, isShow
   let moment = {};
   var that = this;
   var usertoken = wx.getStorageSync('usertoken'); //wx.getStorageSync(key)，获取本地缓存
+  //生成机子唯一码
+  let deviceNo = wx.getStorageSync("deviceNo");
+  if (!deviceNo) {
+    //生成guid唯一码
+    let guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
+    wx.setStorageSync("deviceNo", guid);
+    deviceNo = guid;
+  }
 
   wx.request({
     url: baseUrl + url,
@@ -45,6 +56,7 @@ function request(url, params, method, onSuccess, onFailed, isShowLoading, isShow
       'channelCode': 'wechat',
       'appVersion': '1.0.1',
       'userToken': usertoken,
+      'deviceNo': deviceNo
     },
     success: function(res) {
       if (isShowLoading) {
