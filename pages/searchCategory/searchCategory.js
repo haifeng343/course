@@ -57,7 +57,7 @@ Page({
     var params = {
       SearchKey: that.data.SearchName,
       TradingareaId: 0,
-      TypeId: that.data.typeId,
+      TypeId: 0,
       Longitude: that.data.longitude,
       Latitude: that.data.latitude,
       PageCount: that.data.pageCount,

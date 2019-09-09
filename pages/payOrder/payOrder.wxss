@@ -7,14 +7,10 @@ page {
   background-color: #fff;
   width: 95%;
   height: auto;
-  margin: 20rpx auto;
+  margin: 20rpx 2.5% 0 2.5%;
   border-radius: 15rpx;
-  padding: 20rpx 0%;
   box-sizing: border-box;
   overflow: hidden;
-}
-.ItemContent{
-  padding: 0 3%;
 }
 
 .keep1 {
@@ -33,11 +29,6 @@ page {
   width: 65%;
 }
 
-.leftImg {
-  width: 19%;
-  margin-right: 15rpx;
-}
-
 .ml1 {
   height: auto;
   line-height: 25rpx;
@@ -46,21 +37,25 @@ page {
 
 .right {
   width: 80%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   overflow: hidden;
 }
 
 .activity {
   font-size: 28rpx;
-  font-weight: 600;
-  line-height: 35rpx;
-  word-break: keep-all;
+  font-weight: bold;
+  line-height: 40rpx;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .topImg {
-  width: 126rpx;
-  height: 161rpx;
+  width: 141rpx;
+  height: 180rpx;
+  margin-right: 20rpx;
   border-radius: 15rpx;
 }
 
@@ -79,13 +74,14 @@ page {
 .detail {
   width: 100%;
   line-height: 40rpx;
-  display: flex;
-  justify-content: flex-start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .centers {
   width: 34rpx;
-  height: 34rpx;
+  height: 36rpx;
   display: flex;
   align-items: center;
 }
@@ -116,19 +112,23 @@ page {
   flex-direction: row;
   width: 100%;
   height: auto;
-  padding-bottom: 20rpx;
   border-bottom: 1rpx solid #f4f4f4;
+  padding-bottom: 20rpx;
   margin-bottom: 20rpx;
 }
-.starts:last-child{
+ .starts:last-child{
   border: none;
+  margin-bottom: 0;
 }
 .name {
   width: 100%;
   height: auto;
   font-size: 24rpx;
   color: #5b5b5b;
-  line-height: 35rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 36rpx;
 }
 
 .rowImg {
@@ -176,9 +176,12 @@ page {
 
 .payTitle {
   width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   background-color: #fff;
-  font-size: 28rpx;
-  margin-bottom: 20rpx;
+  font-size: 32rpx;
+  margin-bottom: 25rpx;
   box-sizing: border-box;
 }
 
@@ -215,9 +218,8 @@ page {
 }
 
 .numberD {
-  font-size: 32rpx;
+  font-size: 24rpx;
   color: red;
-  margin-top: -4rpx;
 }
 
 .low {
@@ -237,14 +239,11 @@ page {
 
 .kl, .kld {
   font-size: 24rpx;
+  color: #5b5b5b;
 }
 
 radio {
   margin-top: 20rpx;
-}
-
-.pay {
-  font-size: 26rpx;
 }
 
 .again {
@@ -262,6 +261,7 @@ radio {
   line-height: 120rpx;
   margin-right: 30rpx;
   font-size: 24rpx;
+  color: #5b5b5b;
 }
 
 .paybtn {
@@ -275,7 +275,7 @@ radio {
   margin: auto 0;
 }
 
-.kl .total {
+.kl.total {
   margin-top: 30rpx;
 }
 
@@ -284,11 +284,7 @@ radio {
   color: #d1d1d1;
 }
 
-.payMoney {
-  font-size: 32rpx;
-  color: #e93a37;
-}
-
 .symbol {
   font-size: 32rpx;
+  color: red;
 }

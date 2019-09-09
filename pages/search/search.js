@@ -44,7 +44,8 @@ Page({
       SearchName: '',
       noShow: false,
       show: true,
-      groupList: []
+      groupList: [],
+      page:1,
     })
     this.getSearch();
   },
@@ -129,7 +130,7 @@ Page({
       if(that.data.page==1){
         arr1 = arr2
       }else{
-        arr1 = arr.concat(arr2);
+        arr1 = arr1.concat(arr2);
       }
       that.setData({
         groupList: arr1

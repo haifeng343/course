@@ -13,6 +13,7 @@ Page({
     fee:'',//服务费
     feeMoney:'',//额外扣除
     CashServiceFeeRate:'',
+    taskList:[],//任务列表
   },
   onShow: function() {
     let wallet = wx.getStorageSync('wallet');
@@ -39,6 +40,7 @@ Page({
   },
   init:function() {
     this.carList();
+    this.task();
   },
   clear:function() {
     this.setData({
@@ -61,6 +63,19 @@ Page({
   },
   submitTo: function() {
     this.getData();
+  },
+  //已领取任务列表
+  task: function () {
+    let that = this;
+    var url = 'user/task/list';
+    var params = {
+
+    }
+    netUtil.postRequest(url, params, function (res) {
+      that.setData({
+        taskList:res.Data
+      })
+    }); 
   },
   //银行卡列表
   carList: function() {
@@ -125,6 +140,11 @@ Page({
   withdrawLog: function() {
     wx.navigateTo({
       url: '/pages/withdrawLog/withdrawLog',
+    })
+  },
+  cashLog: function() {
+    wx.navigateTo({
+      url: '/pages/cashLog/cashLog',
     })
   },
   nohaveTo: function() {

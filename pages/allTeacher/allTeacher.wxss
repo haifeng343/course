@@ -5,49 +5,37 @@
   padding: 30rpx 5%;
   box-sizing: border-box;
   display: flex;
-  font-size: 24rpx;
 }
-
-.leftImg {
-  width: 23%;
-  margin-right: 15rpx;
-}
-
 .topImg {
-  width: 150rpx;
-  height: 128rpx;
-  border-radius: 10rpx;
+  width: 141rpx;
+  height: 180rpx;
+  margin-right: 20rpx;
+  border-radius: 15rpx;
 }
 
 .rowImg {
-  width: 32rpx;
-  height: 24rpx;
-  position: relative;
-  top: 5rpx;
-  right: 5rpx;
-}
-.mt1{
-  margin-top: 2rpx;
+  width: 28rpx;
+  height: 28rpx;
+  display: flex;
+  margin-right: 10rpx;
+  align-items: center;
 }
 .activity {
   font-size: 28rpx;
-  font-weight: 600;
-}
-
-.right {
-  width: 77%;
-}
-
-.h50 {
-  line-height: 45rpx;
-}
-
-.h40 {
   line-height: 40rpx;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.centers{
+  width: 34rpx;
+  height: 36rpx;
   display: flex;
   align-items: center;
-  word-break: break-all;
-  flex-wrap: wrap;
+}
+.h50 {
+  line-height: 45rpx;
 }
 
 .w100 {
@@ -56,6 +44,9 @@
 
 .address {
   width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ml40 {
@@ -64,74 +55,19 @@
 .courseRow{
   width: 100%;
   font-size: 24rpx;
-  line-height: 40rpx;
+  line-height: 36rpx;
   box-sizing: border-box;
-}
-.address1{
-  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* .keep{
-  width: 100%;
-  background-color: #fff;
-  padding: 30rpx 5%;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-}
-.well{
-  padding: 0;
-}
-.leftImg{
-  width: 23%;
-  margin-right: 15rpx;
-}
 .right{
-  right: 77%;
-  overflow: hidden;
-}
-.activity{
-  font-size: 28rpx;
-  font-weight: 600;
-  word-break: keep-all;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.topImg{
-  width: 150rpx;
-  height: 128rpx;
-  border-radius: 10rpx;
-}
-.courseRow{
-  width: 100%;
-  font-size: 24rpx;
-  height: 40rpx;
-  line-height: 40rpx;
-  box-sizing: border-box;
-}
-.courseRow:last-child{
-  border: none;
-}
-.rowImg{
-  width: 40rpx;
-  height: 34rpx;
-  margin-right: 5rpx;
-  margin-top: 0rpx;
-}
-.courseRow .start{
-  width: 60%;
-}
-.startd{
-  width: 80%;
+  width: 75%;
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
 }
-.address{
-  width: 90%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: keep-all;
-} */
 
 .teacher {
   margin-top: 20rpx;
@@ -139,8 +75,8 @@
 }
 
 .teaTitle {
-  font-size: 32rpx;
-  font-weight: 600;
+  font-size: 28rpx;
+  font-weight: bold;
 }
 
 .grayd {
@@ -154,7 +90,7 @@
 }
 
 .teacherItem {
-  margin-top: 40rpx;
+  margin-top: 30rpx;
 }
 
 .avator {
@@ -167,7 +103,6 @@
 .starts {
   display: flex;
   justify-content: flex-start;
-  flex-direction: row;
 }
 
 .teaRight {
@@ -188,11 +123,11 @@
 
 .profession {
   font-size: 24rpx;
-  color: #969696;
-  margin-left: 20rpx;
+  color: #5b5b5b;
+  margin-left: 15rpx;
 }
 
 .mylogText {
-  color: #717171;
+  color:#000;
   font-size: 24rpx;
 }

@@ -16,7 +16,7 @@
 </view>
 <view class='content'>
   <view class='title'>{{Info.StoreName}}</view>
-  <view class='contentText borb'>{{Info.StoreDes==null?'暂无机构简介':Info.StoreDes}}</view>
+  <view class='contentText'>{{Info.StoreDes==null?'暂无机构简介':Info.StoreDes}}</view>
   <view class='column'>
     <view class='startd move borb'>
       <view class='centers'>
@@ -32,17 +32,15 @@
     </view>
   </view>
 </view>
-<view class='content mt10' wx:if="{{Info.ItemCount>0}}">
-  <view class='title mb20'>课程（{{Info.ItemCount}}）</view>
+<view class='content mt20' wx:if="{{Info.ItemCount>0}}">
+  <view class='title'>课程（{{Info.ItemCount}}）</view>
   <view class='List'>
     <view class='item startd' wx:for="{{Info.ItemList}}" wx:key wx:for-item="item" data-Id="{{item.RelId}}" bindtap='courseDetail'>
-      <view class='leftImg'>
         <image class='topImg' src='{{item.ItemCoverImg}}' mode='aspectFill'></image>
-      </view>
       <view class='right'>
         <view class='course kl'>{{item.ItemName}}</view>
         <view class=' kl'>课程数量 {{item.CoursesNumber}} 节，单节课时 {{item.SingleTime}} min</view>
-        <view class='tagList'>
+        <view class='tagList' wx:if="{{item.TagList.length>0}}">
           <view class='tagItm' wx:for="{{item.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
         </view>
         <view class=' kl'>{{item.SoldCount}}人已参与 | 剩余名额 {{item.RemainCount}} 个</view>

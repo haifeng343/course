@@ -17,11 +17,14 @@ Page({
     latitude: "", //定位维度
     keyword: '', //搜索keyword
     title: '',
+    loc:{},//经纬度，title
   },
   onLoad: function(options) {
     let hasword = wx.getStorageSync('keyword');
+    let loc = wx.getStorageSync('loc');
     this.setData({
-      keyword: hasword
+      keyword: hasword,
+      loc: loc
     })
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
@@ -34,7 +37,7 @@ Page({
 
       })
     })
-    this.NijieXi(options.Longitude, options.Latitude);
+    this.NijieXi(this.data.loc.lng, this.data.loc.lat);
     this.onceAgain();
 
     this.init();
@@ -61,7 +64,6 @@ Page({
 
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      // console.log(res);
       that.setData({
         items: res.Data
       })
@@ -72,7 +74,7 @@ Page({
     false); //调用get方法情就是户数
   },
   //逆解析
-  NijieXi: function(longitude, latitude) {
+  NijieXi: function (latitude,longitude) {
     var that = this;
     var qqmapsdk = new QQMapWX({
       key: 'SLNBZ-QF5H3-WYD3P-YANNA-SOFVV-RMBUN' // 必填
@@ -88,11 +90,10 @@ Page({
         that.setData({
           ads: city
         })
-        console.log(that.data.ads)
       }
     })
   },
-  onceAgain: function() {
+  onceAgain: function () {
     var that = this
     that.setData({
       address: '定位中...',
@@ -107,7 +108,7 @@ Page({
     wx.getLocation({
       type: 'gcj02',
       altitude: true, //高精度定位
-      success: function(res) {
+      success: function (res) {
 
         that.setData({
           longitude: res.longitude,
@@ -116,18 +117,16 @@ Page({
         //2、根据坐标获取当前位置名称，显示在顶部:腾讯地图逆地址解析
         qqmapsdk.reverseGeocoder({
           location: {
-            latitude: 120.159862,
-            longitude: 30.176061
+            latitude: res.latitude,
+            longitude: res.longitude
           },
-          success: function(addressRes) {
+          success: function (addressRes) {
             var address = addressRes.result.formatted_addresses.recommend;
-            var title = addressRes.result.address;
             that.setData({
-              address: address,
-              title: title
+              address: address
             })
           },
-          fail: function() {
+          fail: function () {
             that.setData({
               address: '定位失败',
               longitude: '',
@@ -135,24 +134,23 @@ Page({
             })
           }
         })
+
       }
     });
     qqmapsdk.search({
       keyword: that.data.keyword,
-      success: function(res) {
+      success: function (res) {
         that.setData({
           nearList: res.data,
           show: true
         })
       },
-      fail: function(res) {
-        // console.log(res);
+      fail: function (res) {
         that.setData({
           show: false
         })
       }
     });
-    console.log(that.data.keyword)
   },
   //触发关键词输入提示事件
   getsuggest: function(e) {
@@ -182,7 +180,6 @@ Page({
       region: _this.data.ads, //设置城市名，限制关键词所示的地域范围，非必填参数
       page_size: 20,
       success: function(res) { //搜索成功后的回调
-        console.log(res);
         _this.setData({
           addressList: res.data
         });
@@ -203,7 +200,7 @@ Page({
         });
       },
       fail: function(error) {
-        console.error(error);
+        
       },
     });
   },

@@ -1,39 +1,49 @@
 <view class='keep'>
-  <view class='leftImg'>
-    <image class='topImg' src='{{otherList.ItemCoverImg}}' mode='widthFix' lazy-load='true'></image>
-  </view>
+    <image class='topImg' src='{{otherList.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
   <view class='right'>
     <view class='activity'>{{otherList.ItemName}}</view>
     <view class='courseRow starts'>
-      <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
-      <view class='h40 address'>{{otherList.SellerName}}</view>
+      <view class='centers'>
+        <image class='rowImg' src='../../images/house.png' mode='aspectFill' lazy-load='true'></image>
+      </view>
+      <view class=' address'>{{otherList.SellerName}}</view>
     </view>
-    <view class='courseRow starts w100'>
+    <view class='courseRow w100'>
       <view class='starts w100'>
-        <image class='rowImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
-        <view class='address h40'>{{otherList.StoreAddress}}</view>
+        <view class='centers'>
+          <image class='rowImg' src='../../images/ad1.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+        <view class='address'>{{otherList.StoreAddress}}</view>
       </view>
     </view>
-    <view class='courseRow starts w100' wx:if="{{otherList.Mobile}}">
-      <view class='starts w100'>
-        <image class='rowImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
-        <view class='address h40'>{{otherList.Mobile}}</view>
+    <view class='courseRow w100' wx:if="{{otherList.Mobile}}">
+      <view class='starts'>
+        <view class='centers'>
+          <image class='rowImg' src='../../images/call.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+        <view class='address'>{{otherList.Mobile}}</view>
       </view>
     </view>
-    <view class='courseRow starts w100' wx:else>
-      <view class='starts w100'>
-        <image class='rowImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
-        <view class='address h40'>暂无联系方式</view>
+    <view class='courseRow w100' wx:else>
+      <view class='starts'>
+        <view class='centers'>
+          <image class='rowImg' src='../../images/call.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+        <view class='address'>暂无联系方式</view>
       </view>
     </view>
     <view class='courseRow starts'>
       <view class='starts'>
-        <image class='rowImg mt1' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-        <view class='h40 address1 '>课程数量{{otherList.CoursesNumber}}节</view>
+        <view class='centers'>
+          <image class='rowImg mt1' src='../../images/couse.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+        <view class='address1 '>课程数量{{otherList.CoursesNumber}}节</view>
       </view>
       <view class='starts ml40'>
-        <image class='rowImg mt1' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
-        <view class='h40 address1 '>单节课时{{otherList.SingleTime}}min</view>
+        <view class='centers'>
+          <image class='rowImg mt1' src='../../images/time.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+        <view class=' address1 '>单节课时{{otherList.SingleTime}}min</view>
       </view>
     </view>
   </view>

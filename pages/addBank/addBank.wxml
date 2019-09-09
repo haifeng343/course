@@ -39,7 +39,7 @@
       <view class='del'>银行卡类型:</view>
       
       <view>
-      <image class='bankIcon' mode='apsectFill' src='{{BankIconUrl}}'></image>
+      <image class='bankIcon' mode='aspectFill' src='{{BankIconUrl}}'></image>
       </view>
       <input class='noned' value='{{bankName}}' disabled></input>
     </view>

@@ -4,11 +4,11 @@
 <view class='categoryTitle'>
   <view class='start w50' bindtap='allCategory'>
     <view class='txt'>{{txt}}</view>
-    <image src="{{ImgType1==true?'../../images/xia.png':'../../images/up.png'}}" mode='apsectFill' class='icon1'></image>
+    <image src="{{ImgType1==true?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='icon1'></image>
   </view>
   <view class='start w50' bindtap='allSeller'>
     <view class='txt'>{{name}}</view>
-    <image src="{{ImgType==true?'../../images/xia.png':'../../images/up.png'}}" mode='apsectFill' class='icon1'></image>
+    <image src="{{ImgType==true?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='icon1'></image>
   </view>
 </view>
 
@@ -41,48 +41,44 @@
       <view class='classTitle between'>
         <view class='titleTxt'>{{item.TradingareaName}}</view>
         <view class='distance' style='font-size:24rpx' wx:if="{{item.Distance<1}}">{{item.Distance}}m</view>
-          <view class='distance' style='font-size:24rpx' wx:else>{{item.Distance}}km</view>
+        <view class='distance' style='font-size:24rpx' wx:else>{{item.Distance}}km</view>
       </view>
-      <view class='content-box'>
-        <view class='classContent' wx:for="{{item.ItemList}}" wx:key wx:for-item="b" data-type="{{item.SheetModel}}" data-Id="{{item.SheetId}}" data-storeid="{{b.StoreId+'NUV'+b.GroupId}}" data-relId="{{b.RelId}}" bindtap='cheoose'>
-          <view class='left'>
-            <image src='{{b.ItemCoverImg}}' mode='apsectFill' class='leftImg'></image>
+      <view class='content-box' wx:for="{{item.ItemList}}" wx:key wx:for-item="b" data-type="{{item.SheetModel}}" data-Id="{{item.SheetId}}" data-storeid="{{b.StoreId+'NUV'+b.GroupId}}" data-relId="{{b.RelId}}" bindtap='cheoose'>
+        <image src='{{b.ItemCoverImg}}' mode='aspectFill' class='leftImg'></image>
+        <view class='rightContent' data-Id="{{b.RelId}}" wx:key bindtap='courseDetail'>
+          <view class='between relative'>
+            <view class='courseTitle'>{{b.ItemName}}</view>
           </view>
-          <view class='rightContent' data-Id="{{b.RelId}}" wx:key bindtap='courseDetail'>
-            <view class='between relative'>
-              <view class='courseTitle'>{{b.ItemName}}</view>
+          <view class='detail'>
+            <view class='centers'>
+              <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
             </view>
-            <view class='detail'>
-              <view class='centers'>
-                <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
-              </view>
-              <view class='name'>{{b.SellerName}}</view>
-            </view>
-            <view class='detail around'>
-              <view class='centers'>
-                <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
-              </view>
-              <view class='name address'>{{b.StoreAddress}}</view>
-            </view>
-            <view class='detail'>
-              <view class='ring'>
-                <view class='centers'>
-                  <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
-                </view>
-                <view class='name'>共有{{b.CoursesNumber}}节课</view>
-              </view>
-              <view class='ring'>
-                <view class='centers'>
-                  <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
-                </view>
-                <view class='name'>{{b.SingleTime}}min/课时</view>
-              </view>
-            </view>
-            <view class='tagList'>
-              <view class='tagItem' wx:for="{{b.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
-            </view>
-            <view class='coursePeople'>{{b.SoldCount}}人已参与 | {{b.RemainCount}}剩余名额</view>
+            <view class='name'>{{b.SellerName}}</view>
           </view>
+          <view class='detail around'>
+            <view class='centers'>
+              <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+            </view>
+            <view class='name address'>{{b.StoreAddress}}</view>
+          </view>
+          <view class='detail'>
+            <view class='ring'>
+              <view class='centers'>
+                <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+              </view>
+              <view class='name'>共有{{b.CoursesNumber}}节课</view>
+            </view>
+            <view class='ring'>
+              <view class='centers'>
+                <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+              </view>
+              <view class='name'>{{b.SingleTime}}min/课时</view>
+            </view>
+          </view>
+          <view class='tagList' wx:if="{{b.TagList.length>0}}">
+            <view class='tagItem' wx:for="{{b.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
+          </view>
+          <view class='coursePeople'>{{b.SoldCount}}人已参与 | {{b.RemainCount}}剩余名额</view>
         </view>
       </view>
     </view>

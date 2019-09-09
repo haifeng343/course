@@ -1,5 +1,5 @@
-<scroll-view scroll-y="true" scroll-into-view="NUV{{storeIdGoto}}" style='height:100%'>
-  <view class='banner'>
+<scroll-view scroll-y="true" scroll-into-view="NUV{{storeIdGoto}}" catchtouchmove='true' style='height:100%'>
+  <view class='banner' wx:if="{{imgUrls.length>0}}">
     <swiper bindanimationfinish="swiperChangeTo" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1' next-margin='35rpx' previous-margin='35rpx'>
       <block wx:for="{{imgUrls}}" wx:key wx:for-item="a">
         <swiper-item>
@@ -18,12 +18,14 @@
   <view class='content' wx:if="{{type==1}}">
     <view class='title'>{{detailCent.SheetName}}</view>
     <view class='contents'>
-      <view class='column'>
-        <view class='time'>{{name}}</view>
-        <view class='time'>截止时间：{{detailCent.EndTime}}</view>
-      </view>
-      <view class='money'>
-        <view class='number'>￥{{detailCent.SheetPrice}}</view>
+      <view class='column w100'>
+        <view class='time summary'>{{name}}</view>
+        <view class='between w100'>
+          <view class='time'>截止时间：{{detailCent.EndTime}}</view>
+          <view class='money'>
+            <view class='number'>￥{{detailCent.SheetPrice}}</view>
+          </view>
+        </view>
       </view>
     </view>
   </view>
@@ -31,7 +33,7 @@
     <view class='title'>{{detailCent.TradingAreaName}}</view>
     <view class='contents'>
       <view class='column'>
-        <view class='time'>{{detailCent.SheetDescription}}</view>
+        <view class='time summary'>{{detailCent.SheetDescription}}</view>
         <view class='time'>入驻机构{{detailCent.StoreCount}}家，共{{detailCent.TotalItemCount}}门体验课</view>
       </view>
     </view>
@@ -46,58 +48,44 @@
       </view>
       <checkbox-group bindchange='checkedTap' data-index='{{index}}'>
         <view class="courseCont courseConts {{b.RemainCount<=0?'gray':''}}" wx:for="{{item.ItemList}}" wx:key wx:for-item="b" wx:for-index='index1'>
-          <view class='leftImg' data-Id="{{b.RelId}}" wx:key bindtap='courseDetail'>
-            <image class='cover' src='{{b.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
-          </view>
-          <view>
-            <checkbox class="absolute {{b.RemainCount<=0?'none':''}}" disabled='{{b.RemainCount<=0}}' value='{{b.RelId}}' checked='{{b.checked}}'></checkbox>
-          </view>
+          <image class='cover' data-Id="{{b.RelId}}" wx:key bindtap='courseDetail' src='{{b.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
+
+          <checkbox class="absolute {{b.RemainCount<=0?'none':''}}" disabled='{{b.RemainCount<=0}}' value='{{b.RelId}}' checked='{{b.checked}}'></checkbox>
+
           <view class='rightContent' data-Id="{{b.RelId}}" wx:key bindtap='courseDetail'>
             <view class='between relative'>
               <view class='courseTitle'>{{b.ItemName}}</view>
             </view>
             <view class='detail'>
-              <view>
+              <view class='centers'>
                 <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
               </view>
               <view class='name'>{{b.SellerName}}</view>
             </view>
             <view class='detail around'>
               <view class='addrLong'>
-                <view>
+                <view class='centers'>
                   <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
                 </view>
                 <view class='name address'>{{b.StoreAddress}}</view>
               </view>
               <!-- <view class='long'>{{k.Distance}}km</view> -->
             </view>
-            <view class='detail' wx:if="{{b.Mobile}}">
-              <view>
-                <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
-              </view>
-              <view class='name'>{{b.Mobile}}</view>
-            </view>
-            <view class='detail' wx:else>
-              <view>
-                <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
-              </view>
-              <view class='name'>暂无联系方式</view>
-            </view>
             <view class='detail'>
               <view class='ring'>
-                <view>
+                <view class='centers'>
                   <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
                 </view>
                 <view class='name'>共有{{b.CoursesNumber}}节课</view>
               </view>
               <view class='ring'>
-                <view>
+                <view class='centers'>
                   <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
                 </view>
                 <view class='name'>{{b.SingleTime}}min/课时</view>
               </view>
             </view>
-            <view class='tagList'>
+            <view class='tagList' wx:if="{{b.TagList.length>0}}">
               <view class='tagItem' wx:for="{{b.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
             </view>
             <view class='coursePeople'>{{b.SoldCount}}人已参与 | {{b.RemainCount}}剩余名额</view>
@@ -115,9 +103,7 @@
       <checkbox-group bindchange='checkedTap' data-index='{{index}}'>
         <view class="courseCont-box allCont {{k.RemainCount<=0?'gray':''}}" wx:for="{{item.StoreList}}" wx:key wx:for-item="k" wx:for-index='storeIndex' id="NUV{{k.StoreId}}NUV{{item.GroupId}}">
           <view class="courseCont">
-            <view class='leftImg' style='width:21%;' data-groupId="{{item.GroupId}}" data-storeId="{{k.StoreId}}" bindtap='mechanismDetail'>
-              <image class='coverd' src='{{k.StoreCoverImg}}' mode='aspectFill' lazy-load='true'></image>
-            </view>
+            <image class='coverd' data-groupId="{{item.GroupId}}" data-storeId="{{k.StoreId}}" bindtap='mechanismDetail' src='{{k.StoreCoverImg}}' mode='aspectFill' lazy-load='true'></image>
             <view>
               <!-- <checkbox class="absolute" value='{{k.StoreId}}' bindtap='changeCheck' checked='{{k.checked}}'></checkbox> -->
               <view class="absolutes {{k.checked==true? 'active' : ''}}" bindtap='changeCheck' data-storeindex="{{storeIndex}}" data-groupindex="{{index}}" data-name="{{k.StoreName}}" data-total="{{item.TotalCount}}" data-storeId="{{k.StoreId}}" data-storelist="{{item.StoreList}}"
@@ -132,27 +118,27 @@
               </view>
               <view class='detail around'>
                 <view class='addrLong'>
-                  <view>
+                  <view class='centers'>
                     <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
                   </view>
                   <view class='name address' style='width:91%'>{{k.StoreAddress}}</view>
                 </view>
               </view>
               <view class='detail' wx:if="{{k.Mobile}}">
-                <view>
+                <view class='centers'>
                   <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
                 </view>
                 <view class='name'>{{k.Mobile}}</view>
               </view>
               <view class='detail' wx:else>
-                <view>
+                <view class='centers'>
                   <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
                 </view>
                 <view class='name'>暂无联系方式</view>
               </view>
               <view class='detail'>
                 <view class='ring'>
-                  <view>
+                  <view class='centers'>
                     <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
                   </view>
                   <view class='name'>{{k.StoreItemName}}</view>
@@ -211,12 +197,15 @@
       </checkbox-group>
     </view>
   </view>
-  <view class='exList' wx:if="{{detailCent.ExtraList.length>0}}">
-    <view class='groupDetail' wx:for="{{detailCent.ExtraList}}" wx:key wx:for-item="x">
-      <view class='groupDetail_title' wx:if="{{x.Title}}">{{x.Title}}</view>
-      <view class='groupDetail_content' wx:if="{{x.Title}}">{{x.Content}}</view>
+  <view wx:if="{{detailCent.ExtraList.length>0}}">
+    <view class='exList' wx:for="{{detailCent.ExtraList}}" wx:key wx:for-item="x">
+      <view class='groupDetail'>
+        <view class='groupDetail_title' wx:if="{{x.Title}}">{{x.Title}}</view>
+        <view class='groupDetail_content' wx:if="{{x.Title}}">{{x.Content}}</view>
+      </view>
     </view>
   </view>
+
   <!-- <view class='pay between' wx:if="{{type==1}}">
     <view class='kl'>
       <view class='total'>共{{detailCent.TotalItemCount}}门课程</view>
@@ -246,7 +235,7 @@
     </view>
     <view class='flex-end'>
       <view class='centersd'>
-        <image src='../../images/cart.png' mode='apsectFill' class='cart' bindtap='navtoCar'></image>
+        <image src='../../images/cart.png' mode='aspectFill' class='cart' bindtap='navtoCar'></image>
       </view>
       <button class='paybtn paycar paynone' wx:if='{{TotalPrice==-1 ||TotalPrice==0}}'>加入购物车</button>
       <button class='paybtn paycar' bindtap='addcar' wx:else>加入购物车</button>
@@ -270,7 +259,7 @@
           <view class='right choseItemRight'>
             <view class='course'>{{c.ItemName}}</view>
             <view>课程数量1节，单节课时10min</view>
-            <view class='tagList'>
+            <view class='tagList' wx:if="{{c.TagList.length>0}}">
               <view class='tagItem' wx:for="{{c.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
             </view>
             <view>{{c.SoldCount}}人已参与 | 剩余名额 {{c.RemainCount}}个</view>
@@ -337,7 +326,7 @@
             <view class='right choseItemRight'>
               <view class='course'>{{c.ItemName}}</view>
               <view>课程数量1节，单节课时10min</view>
-              <view class='tagList'>
+              <view class='tagList' wx:if="{{c.TagList.length>0}}">
                 <view class='tagItem' wx:for="{{c.TagList}}" wx:key wx:for-item="l" style='background:{{l.TagBgColor}};color:{{l.TagFontColor}};border:2rpx solid {{l.BorColor}}'>{{l.TagName}}</view>
               </view>
               <view>{{c.SoldCount}}人已参与 | 剩余名额 {{c.RemainCount}}个</view>

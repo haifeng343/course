@@ -75,9 +75,9 @@ scroll-view {
 .orderItem {
   width: 95%;
   height: auto;
-  margin: 20rpx 2.5% 0;
+  margin: 20rpx 2.5% 0 2.5%;
   box-sizing: border-box;
-  padding: 20rpx 5%;
+  padding: 20rpx 2.5%;
   background-color: #fff;
   border-radius: 15rpx;
   display: flex;
@@ -90,13 +90,11 @@ scroll-view {
 
 .title {
   font-size: 28rpx;
-  color: #4a4a4a;
   margin-bottom: 15rpx;
 }
 
 .happening {
   font-size: 28rpx;
-  color: #606060;
   width: 140rpx;
   text-align: right;
   word-break: keep-all;
@@ -120,9 +118,9 @@ scroll-view {
 }
 
 .orderImg {
-  width: 160rpx;
-  height: 160rpx;
-  margin-right: 20rpx;
+  width: 156rpx;
+  height: 156rpx;
+  margin-right: 15rpx;
   border-radius: 15rpx;
 }
 
@@ -132,21 +130,32 @@ scroll-view {
 }
 
 .Right {
-  width: 71%;
+  width: 73%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .name {
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 28rpx;
   font-weight: bold;
+  color: #000
 }
 
 .money {
   font-size: 28rpx;
-  color: #e03433;
+  color: red;
 }
 
 .address {
   width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   line-height: 40rpx;
   font-size: 24rpx;
   color: #5b5b5b;
@@ -170,7 +179,6 @@ scroll-view {
 
 .tag {
   font-size: 28rpx;
-  color: #5b5b5b;
 }
 
 .btn {
@@ -178,15 +186,15 @@ scroll-view {
   height: 55rpx;
   line-height: 55rpx;
   border: 1rpx solid #5b5b5b;
-  color: #5b5b5b;
   padding: 0rpx 30rpx;
   border-radius: 40rpx;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .bottom {
-  margin-top: 25rpx;
+  margin-top: 15rpx;
   display: flex;
   align-items: center;
   z-index: 1;

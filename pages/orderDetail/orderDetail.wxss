@@ -25,15 +25,12 @@ page{
 .kl{
   border-bottom: 1rpx solid #F4F4F4;
   padding-bottom: 15rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 15rpx;
 }
 .code{
   width: 30rpx;
   height: 24rpx;
   margin-top: 10rpx;
-}
-.ml10{
-  margin-left: 5rpx;
 }
 .ml{
   display: block;
@@ -51,36 +48,40 @@ page{
 }
 .well{
   padding: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height:36rpx;
 }
 .courseRow {
   width: 65%;
-}
-.leftImg{
-  width: 25%;
-  margin-right: 15rpx;
 }
 .Right{
   width: 75%;
   height: auto;
   overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 .activity{
-  width: 75%;
   font-size: 28rpx;
-  font-weight: 600;
-  word-break: keep-all;
+  font-weight: bold;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #000;
+  line-height: 40rpx;
 }
 .topImg{
-  width: 155rpx;
-  height: 198rpx;
+  width: 141rpx;
+  height: 180rpx;
+  margin-right: 20rpx;
   border-radius: 15rpx;
 }
 .courseRow{
   width: 100%;
   font-size: 24rpx;
-  line-height: 40rpx;
   box-sizing: border-box;
 }
 .mt1{
@@ -90,13 +91,11 @@ page{
   border: none;
 }
 .rowImg{
-  width: 34rpx;
-  height: 34rpx;
+  width: 28rpx;
+  height: 28rpx;
   margin-right: 5rpx;
   display: flex;
-  align-items: center;
-  line-height: 40rpx;
-  margin-top:4rpx;
+  margin-top: 4rpx;
 }
 .ml15{
   margin-left: 15rpx;
@@ -111,15 +110,15 @@ page{
 .startd{
   width: 100%;
   height: auto;
-  line-height: 40rpx;
   color: #5b5b5b;
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-start; 
 }
 .address{
-  width: 90%;
-  line-height: 40rpx;
   color: #5b5b5b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .bt1{
   font-size: 28rpx;
@@ -178,15 +177,15 @@ page{
   right: 32%;
 }
 .btnd{
-  width: 180rpx;
-  border:2rpx solid #29D9D6;
+  width: 170rpx;
+  border:1rpx solid #5b5b5b;
   box-sizing: border-box;
-  height: 60rpx;
-  line-height: 60rpx;
+  height: 55rpx;
+  line-height: 55rpx;
   background-color: transparent;
   font-size: 28rpx;
-  color: #29D9D6;
   display: flex;
+  color: #000;
   align-items: center;
   justify-content: center;
   margin-top: 0;

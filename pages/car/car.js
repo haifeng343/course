@@ -11,12 +11,18 @@ Page({
     totalChecked: false, //全选是否选中
     checkItem:[],
     load:false,
+    usertoken:'',
   },
   onShow:function(){
     let isLoad = wx.getStorageSync('load');
     if (this.data.load == true || isLoad==true) {
       this.init();
     }
+  },
+  bindLogin: function () {
+    wx.navigateTo({
+      url: '/pages/login/login',
+    })
   },
   onLoad: function(options) {
     console.log(11111)
@@ -34,7 +40,17 @@ Page({
     })
     this.init();
   },
-  init: function() {
+  init: function () {
+    let usertoken = wx.getStorageSync('usertoken');
+    console.log(usertoken)
+    this.setData({
+      usertoken: usertoken
+    });
+    if (usertoken) {
+      this.getData();
+    }
+  },
+  getData: function() {
     let that = this;
     var url = 'cart/list';
     var params = {
@@ -82,7 +98,7 @@ Page({
     let item = e.currentTarget.dataset;
     let a = that.data.List[item.index]
     wx.showModal({
-      content: '确认从购物车删除 ' + (a.SheetModel == 1 ? a.SheetName : a.TradingareaName) + ' ？',
+      content: '确定从购物车删除"' + (a.SheetModel == 1 ? a.SheetName : a.TradingareaName) + '"吗？',
       success: function(res) {
         if (res.confirm) {
           var url = 'cart/delete';

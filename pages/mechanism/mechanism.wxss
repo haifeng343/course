@@ -8,6 +8,8 @@
 
 swiper {
   height: 100%;
+  padding-top: 25rpx;
+  box-sizing: border-box;
 }
 
 swiper-item {
@@ -15,13 +17,11 @@ swiper-item {
 }
 .centers{
   display: flex;
-  height: 60rpx;
-  line-height: 60rpx;
+  height: 40rpx;
+  line-height: 40rpx;
   align-items: center;
 }
-.mb20{
-  margin-bottom: 20rpx;
-}
+
 .img1 {
   width: 96%;
   height: 100%;
@@ -51,29 +51,27 @@ swiper-item {
   background-color: #fff;
   width: 100%;
   box-sizing: border-box;
-  padding: 30rpx 5% 10rpx;
+  padding: 25rpx 5% 10rpx;
 }
-
-.contentText {
-  font-size: 28rpx;
-  color: #5b5b5b;
+.mt20{
   margin-top: 20rpx;
+}
+.contentText {
+  font-size: 24rpx;
+  color: #5b5b5b;
+  margin-top: 10rpx;
   padding-bottom: 10rpx;
 }
 
-.borb {
-  border-bottom: 1rpx solid #f4f4f4;
-}
-
 .icon {
-  width: 34rpx;
-  height: 34rpx;
-  margin-right: 15rpx;
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 10rpx;
 }
 
 .title {
-  font-size: 32rpx;
-  font-weight: 600;
+  font-size: 28rpx;
+  font-weight: bold;
 }
 
 .end {
@@ -87,8 +85,8 @@ swiper-item {
 }
 
 .move {
-  font-size: 28rpx;
-  line-height: 60rpx;
+  font-size: 24rpx;
+  line-height: 40rpx;
 }
 
 .addr {
@@ -105,16 +103,11 @@ swiper-item {
   width: 100%;
   box-sizing: border-box;
   padding-bottom: 15rpx;
-  margin-bottom: 20rpx;
+  margin-top: 20rpx;
   border-bottom: 1rpx solid #f4f4f4;
 }
 .item:last-child{
   border: none;
-}
-.leftImg{
-  width: 23%;
-  margin-right: 15rpx;
-  display: flex;
 }
 .startd{
   display: flex;
@@ -122,22 +115,28 @@ swiper-item {
 }
 .topImg {
   width:126rpx;
-height:161rpx;
-border-radius:15rpx;
-
+  height:161rpx;
+  margin-right: 20rpx;
+  border-radius:15rpx;
 }
 .right{
-  width: 86%;
+  width: 78%;
   font-size: 24rpx;
   color: #5b5b5b;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .kl{
-  line-height: 45rpx;
+  line-height: 44rpx;
 }
 .course{
   font-size: 28rpx;
   color: #000;
-  font-weight: 600;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tagList {

@@ -14,15 +14,16 @@ Page({
     score: 0,
     usertoken: "",
     buttons: {},
-    IsSalesman:'',
+    IsSalesman: '',
+    promptText: true, //是否显示提示语
   },
   //复制微信号
-  copyText: function (e) {
+  copyText: function(e) {
     wx.setClipboardData({
       data: e.currentTarget.dataset.text,
-      success: function (res) {
+      success: function(res) {
         wx.getClipboardData({
-          success: function (res) {
+          success: function(res) {
             wx.showToast({
               title: '复制成功'
             })
@@ -34,8 +35,10 @@ Page({
   onShow() {
     this.ButtonShow();
     let usertoken = wx.getStorageSync('usertoken');
+    let promptText = wx.getStorageSync('promptText');
     this.setData({
-      usertoken: usertoken
+      usertoken: usertoken,
+      promptText: promptText || ''
     });
     if (usertoken) {
       this.walletd();
@@ -52,51 +55,51 @@ Page({
     var url = 'user/page/show/my'
     var params = {}
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
-      var temp = {};
-      if (res.Data.indexOf("setup")>=0) {
-        temp.setup = true;
-      } else {
-        temp.setup = false;
-      }
-      if (res.Data.indexOf("aboutus") >= 0) {
-        temp.aboutus = true;
-      } else {
-        temp.aboutus = false;
-      }
-      if (res.Data.indexOf("callus") >= 0) {
-        temp.callus = true;
-      } else {
-        temp.callus = false;
-      }
-      if (res.Data.indexOf("share") >= 0) {
-        temp.share = true;
-      } else {
-        temp.share = false;
-      }
-      if (res.Data.indexOf("invitation") >= 0) {
-        temp.invitation = true;
-      } else {
-        temp.invitation = false;
-      }
-      if (res.Data.indexOf("address") >= 0) {
-        temp.address = true;
-      } else {
-        temp.address = false;
-      }
-      if (res.Data.indexOf("modifyphone") >= 0) {
-        temp.modifyphone = true;
-      } else {
-        temp.modifyphone = false;
-      }
-      that.setData({
-        buttons: temp
-      })
-      wx.setStorageSync('buttons', temp);
-    },
-    null,
-    false,
-    true,
-    false
+        var temp = {};
+        if (res.Data.indexOf("setup") >= 0) {
+          temp.setup = true;
+        } else {
+          temp.setup = false;
+        }
+        if (res.Data.indexOf("aboutus") >= 0) {
+          temp.aboutus = true;
+        } else {
+          temp.aboutus = false;
+        }
+        if (res.Data.indexOf("callus") >= 0) {
+          temp.callus = true;
+        } else {
+          temp.callus = false;
+        }
+        if (res.Data.indexOf("share") >= 0) {
+          temp.share = true;
+        } else {
+          temp.share = false;
+        }
+        if (res.Data.indexOf("invitation") >= 0) {
+          temp.invitation = true;
+        } else {
+          temp.invitation = false;
+        }
+        if (res.Data.indexOf("address") >= 0) {
+          temp.address = true;
+        } else {
+          temp.address = false;
+        }
+        if (res.Data.indexOf("modifyphone") >= 0) {
+          temp.modifyphone = true;
+        } else {
+          temp.modifyphone = false;
+        }
+        that.setData({
+          buttons: temp
+        })
+        wx.setStorageSync('buttons', temp);
+      },
+      null,
+      false,
+      true,
+      false
     );
   },
   bindLogin: function() {
@@ -109,49 +112,49 @@ Page({
       url: '/pages/aboutUs/aboutUs',
     })
   },
-  bindIsSalesman:function() {
+  bindIsSalesman: function() {
     wx.navigateTo({
       url: '/pages/map/map',
     })
   },
-  bindInquire:function() {
+  bindInquire: function() {
     wx.navigateTo({
-      url:'/pages/inquire/inquire'
+      url: '/pages/inquire/inquire'
     })
   },
   walletd: function() {
     let that = this;
     var url = 'user/wallet';
     var params = {}
-    netUtil.postRequest(url, params, function(res) { 
-      that.setData({
-        money: Number(res.Data.Money / 100).toFixed(2),
-        score: res.Data.Score
-      })
-      wx.setStorageSync('wallet', res.Data);
-      wx.setStorageSync('userInfo', res.Data);
-    }, 
-    null,
-    false, 
-    false, 
-    false);
+    netUtil.postRequest(url, params, function(res) {
+        that.setData({
+          money: Number(res.Data.TotalMoney / 100).toFixed(2),
+          score: res.Data.Score
+        })
+        wx.setStorageSync('wallet', res.Data);
+        wx.setStorageSync('userInfo', res.Data);
+      },
+      null,
+      false,
+      false,
+      false);
   },
   onLoad(options) {
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
+    wx.setStorageSync('promptText', this.data.promptText);
     var userInfo = wx.getStorageSync('userInfo');
     var recommand = userInfo.RecommandCode;
     shareApi.getShare().then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
         obj: res.Data,
-
       })
     })
   },
-  init: function () {
-    
+  init: function() {
+
   },
   integral: function(e) {
     if (this.data.usertoken) {
@@ -207,6 +210,7 @@ Page({
       wx.navigateTo({
         url: '/pages/wallet/wallet',
       })
+      wx.setStorageSync('promptText', false);
     } else {
       wx.navigateTo({
         url: '/pages/login/login',

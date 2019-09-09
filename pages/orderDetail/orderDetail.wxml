@@ -36,7 +36,7 @@
     <view>退款时间：<text class='ml10'>{{detail.RefundTime}}</text></view>
   </view>
   <view class='List'>
-    <view><text class='ml10'>{{detail.SheetModel==1?detail.SheetName:detail.TradingAreaName}}</text></view>
+    <view><text>{{detail.SheetModel==1?detail.SheetName:detail.TradingAreaName}}</text></view>
   </view>
   <view class='List between'>
     <view>券码：{{detail.TicketNumber}}</view>
@@ -45,9 +45,7 @@
 </view>
 <view class='Top'>
   <view class="keep startd kl" wx:for="{{ItemList}}" wx:key>
-    <view class='leftImg'>
       <image class='topImg' src='{{item.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
-    </view>
     <view class='Right'>
       <view class='activity'>{{item.ItemName}}</view>
       <image wx:if="{{item.UseStatus==2}}" class="use" src='../../images/used.png' mode='widthFix' lazy-load='true'></image>
@@ -55,7 +53,7 @@
         <view>
             <image class='rowImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
           </view>
-        <view>{{item.SellerName}}</view>
+        <view class='address'>{{item.SellerName}}</view>
       </view>
       <view class='courseRow between well'>
         <view class='startd'>

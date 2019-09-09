@@ -27,7 +27,7 @@
 
 <view class='categoryList' wx:if="{{typeList.length>1}}">
   <view class='Item' wx:for="{{typeList}}" wx:key wx:for-item="k" data-Id="{{k.Id}}" data-name="{{k.Name}}" bindtap='navtoCategory'>
-    <image src='{{k.ImgUrlShow}}' mode='apsectFill' class='categoryImg'></image>
+    <image src='{{k.ImgUrlShow}}' mode='aspectFill' class='categoryImg'></image>
     <view class='ategoryText'>{{k.Name}}</view>
   </view>
 </view>
@@ -35,53 +35,47 @@
 <view class='groupList'>
   <view wx:for="{{groupList}}" wx:for-item="item" wx:key data-id='{{item.SheetId}}' data-type="{{item.ModelType}}" data-name="{{item.TradingAreaName}}" class='groupDetail' bindtap='groupDetail'>
     <view class='groupItem' wx:if="{{item.ModelType==1}}">
-      <view class='itemImg'>
-        <image src="{{item.SheetCoverImg}}" binderror="binding" class='leftImg' mode='aspectFill' lazy-load='true'></image>
-      </view>
+      <image src="{{item.SheetCoverImg}}" binderror="binding" class='leftImg' mode='aspectFill' lazy-load='true'></image>
       <view class='itemRight'>
-        <view class='title h40'>{{item.SheetName}}</view>
-        <view class='between h40'>
-          <view class='addr h40'>
-            <view style='font-size:28rpx' class='address'>{{item.TradingAreaName}}</view>
+        <view class='title'>{{item.SheetName}}</view>
+        <view class='between'>
+          <view class='addr'>
+            <view class='address'>{{item.TradingAreaName}}</view>
           </view>
-          <view class='distance' style='font-size:24rpx' wx:if="{{item.TradingAreaDistance<1}}">{{item.TradingAreaDistance}}m</view>
-          <view class='distance' style='font-size:24rpx' wx:else>{{item.TradingAreaDistance}}km</view>
+          <view class='distance' wx:if="{{item.TradingAreaDistance<1}}">{{item.TradingAreaDistance*1000}}m</view>
+          <view class='distance' wx:else>{{item.TradingAreaDistance}}km</view>
         </view>
-        <view class='time h40'>截止时间：{{item.EndTime}}</view>
-        <view class='tagList'>
+        <view class='time'>截止时间：{{item.EndTime}}</view>
+        <view class='tagList' wx:if="{{item.TagList.length>0}}">
           <view class='tagItem' style='font-size:24rpx;margin-top:-10rpx;' wx:for='{{item.TagList}}' wx:for-item="k" wx:key style='background:{{k.TagBgColor}};color:{{k.TagFontColor}};border:2rpx solid {{k.BorColor}}'>{{k.TagName}}</view>
         </view>
-        <view class='bottom' style='margin-top:4rpx;'>
-          <view class='bottom-left'>
-            <view class='money'>￥{{item.SheetMinPrice}}</view>
-            <view class='integral' wx:if="{{item.UseScoreRate>0}}">积分抵扣{{item.UseScoreRate/100}}%</view>
-          </view>
-          <view class='bottom-right'>
-            <view class='number'>已售 {{item.SoldCount}}</view>
+        <view class='opsiBot'>
+          <view class='bottom'>
+            <view class='bottom-left'>
+              <view class='money'>￥{{item.SheetMinPrice}}</view>
+              <view class='integral' wx:if="{{item.UseScoreRate>0}}">积分抵扣{{item.UseScoreRate/100}}%</view>
+            </view>
+            <view class='bottom-right'>
+              <view class='number'>已售 {{item.SoldCount}}</view>
+            </view>
           </view>
         </view>
       </view>
     </view>
     <view class='groupItem' wx:else>
-      <view class='itemImg'>
-        <image src="{{item.SheetCoverImg}}" binderror="binding" class='leftImg' mode='aspectFill' lazy-load='true'></image>
-      </view>
+      <image src="{{item.SheetCoverImg}}" binderror="binding" class='leftImg' mode='aspectFill' lazy-load='true'></image>
       <view class='itemRight'>
         <view class='between'>
-          <view class='title h40'>{{item.TradingAreaName}}</view>
-          <view class='distance' style='font-size:24rpx' wx:if="{{item.TradingAreaDistance<1}}">{{item.TradingAreaDistance}}m</view>
-          <view class='distance h40' style='font-size:24rpx' wx:else>{{item.TradingAreaDistance}}km</view>
+          <view class='title'>{{item.TradingAreaName}}</view>
+          <view class='distance' wx:if="{{item.TradingAreaDistance<1}}">{{item.TradingAreaDistance*1000}}m</view>
+          <view class='distance' wx:else>{{item.TradingAreaDistance}}km</view>
         </view>
-        <view class='between'>
-          <view class=''>
-            <view style='font-size:28rpx' class='bb mechanism'>{{item.SheetDescription}}</view>
-          </view>
-        </view>
-        <view class='time h40'>入驻机构{{item.StoreCount}}家，共{{item.ItemCount}}门体验课</view>
-        <view class='tagList'>
+        <view class='mechanism bb'>{{item.SheetDescription}}</view>
+        <view class='mechanism bb'>入驻机构{{item.StoreCount}}家，共{{item.ItemCount}}门体验课</view>
+        <view class='tagList' wx:if="{{item.TagList.length>0}}">
           <view class='tagItem' style='font-size:24rpx;margin-top:-10rpx;' wx:for='{{item.TagList}}' wx:for-item="k" wx:key style='background:{{k.TagBgColor}};color:{{k.TagFontColor}};border:2rpx solid {{k.BorColor}}'>{{k.TagName}}</view>
         </view>
-        <view class='bottom' style='margin-top:20rpx;'>
+        <view class='bottom'>
           <view class='bottom-left'>
             <view class='number'>浏览量 {{item.Pageviews}}</view>
           </view>
@@ -93,3 +87,10 @@
     </view>
   </view>
 </view>
+
+
+<!-- <view class='father' catchtouchmove='true'></view>
+<view class='poFixed'>
+  <image src='../../images/hongbao.png' style='left:-1rpx;' mode='aspectFill' class='hongbao'></image>
+  <cover-image src='../../images/shut.png' style='top:-5px;left:-3px' mode='aspectFill' class='shut'></cover-image>
+</view> -->

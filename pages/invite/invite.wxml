@@ -2,23 +2,23 @@
 <view class='item between' wx:if="{{MyRecommandAccountId>0}}">
   <view>我的推荐人</view>
   <view class='plase start'>
-    <image class='person' src='{{MyRecommandAccountHeadImgUrl}}' mode='widthFix' lazy-load='true'></image>
+    <image class='person' src='{{MyRecommandAccountHeadImgUrl}}' mode='aspectFill' lazy-load='true'></image>
     <view class='name'>{{MyRecommandAccountName}}</view>
   </view>
 </view>
 <view class='item between' bindtap='recommendation' wx:else>
   <view>我的推荐人</view>
-  <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+  <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
 </view>
 <view class='heng'></view>
 <view class='myTitle'>我的邀请人</view>
 <view class='logList' wx:if="{{List.length>0}}">
   <view class='logItem between' wx:for="{{List}}" wx:key>
     <view class='start w100'>
-    <image class='avator' src='{{item.RecommandAccountHeadImgUrl}}' mode='widthFix' lazy-load='true'></image>
-      <view class='between w100'>
+    <image class='avator' src='{{item.RecommandAccountHeadImgUrl}}' mode='aspectFill' lazy-load='true'></image>
+      <view class='between w75'>
         <view class='itemLeft'>
-          <view>{{item.RecommandAccountName}}</view>
+          <view class='time'>{{item.RecommandAccountName}}</view>
           <view class='time'>{{item.CreateTime}}</view>
         </view>
         <view class='fraction' wx:if="{{item.Score>0 && item.Amount>0}}">

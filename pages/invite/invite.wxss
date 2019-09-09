@@ -36,10 +36,10 @@ page {
   border-radius: 50%;
   height: 80rpx;
   margin-right: 20rpx;
-  margin-top: 5rpx;
 }
 
 .itemLeft {
+  width: 100%;
   margin-top: 10rpx;
 }
 
@@ -77,10 +77,11 @@ page {
 }
 
 .logItem {
+  width: 100%;
   background-color: #fff;
   border-top: 1rpx solid #f9f9f9;
   border-bottom: 1rpx solid #f9f9f9;
-  padding: 20rpx 10%;
+  padding: 20rpx 5%;
   box-sizing: border-box;
 }
 
@@ -92,6 +93,12 @@ page {
   font-size: 24rpx;
   line-height: 35rpx;
   color: #717171;
+ white-space: nowrap;
+ overflow: hidden;
+  text-overflow: ellipsis;
+}
+.w75{
+  width: 75%;
 }
 
 .fraction {

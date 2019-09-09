@@ -71,8 +71,8 @@
             <cover-view class='radioList'>
               <cover-view class='start' bindtap='changeSex' data-id="{{item.id}}" wx:for="{{items}}" wx:key>
                 <cover-view class='center'>
-                  <cover-image wx:if="{{item.id == searchCondition.sex}}" src="../../images/checkeds.png" mode='apsectFill' class='icon icon2'></cover-image>
-                  <cover-image wx:else src="../../images/checkbox.png" mode='apsectFill' class='icon icon2'></cover-image>
+                  <cover-image wx:if="{{item.id == searchCondition.sex}}" src="../../images/checkeds.png" mode='aspectFill' class='icon icon2'></cover-image>
+                  <cover-image wx:else src="../../images/checkbox.png" mode='aspectFill' class='icon icon2'></cover-image>
                 </cover-view>
                 <cover-view class='sexRadio'>{{item.value}}</cover-view>
               </cover-view>

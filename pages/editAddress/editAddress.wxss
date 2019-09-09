@@ -20,11 +20,12 @@
   line-height: 100rpx;
   margin-left: 40rpx;
   overflow: hidden;
+  font-size: 28rpx;
 }
 
 .tagName{
-  font-size: 30rpx;
-  font-weight: 600;
+  font-size:28rpx;
+  font-weight: bold;
   position: absolute;
   left: -25%;
   top: -22rpx;
@@ -38,10 +39,8 @@
 }
 .adName{
   width: 120rpx;
-  font-weight: 600;
-}
-.go{
-  margin-top: 35rpx;
+  font-weight: bold;
+  font-size: 28rpx;
 }
 .kl{
   width: 60%;
@@ -49,13 +48,13 @@
   position: relative;
 }
 .tagHome,.tagCompany{
-  font-size: 28rpx;
+  font-size: 24rpx;
   border: 1rpx solid #E5E5E5;
   width: 120rpx;
-  height: 60rpx;
+  height: 50rpx;
   text-align: center;
-  line-height: 60rpx;
-  border-radius: 5rpx;
+  line-height: 50rpx;
+  border-radius: 10rpx;
 }
 .sure{
   width: 90%;

@@ -24,6 +24,7 @@
   color: #ccc;
 }
 .paypag{
+  position: relative;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -49,7 +50,31 @@
   font-size: 28rpx;
   color: #9A9A9A;
 }
-
+.wallet{
+  font-size: 24rpx;
+  color: #FA5254;
+  position: absolute;
+  padding: 0 20rpx;
+  height: 40rpx;
+  right: 0;
+  top: -50rpx;
+  text-align: center;
+  line-height: 40rpx;
+  background-color: #FCEDED;
+  background-size: 80rpx 20rpx;
+  border: 2rpx solid #F5E8E8;
+  border-radius: 8rpx;
+}
+.wallet::after{
+  content: "";
+  width: 0;
+  position: absolute;
+  bottom: -19rpx;
+  right: 50%;
+  height: 0;
+  border: 10rpx solid transparent;
+  border-top-color: #FCEDED;
+}
 .avator{
   width: 150rpx;
   height: 150rpx;

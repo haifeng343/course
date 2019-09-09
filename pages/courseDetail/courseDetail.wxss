@@ -8,6 +8,8 @@
 
 swiper {
   height: 100%;
+  padding-top: 25rpx;
+  box-sizing: border-box;
 }
 
 swiper-item {
@@ -43,16 +45,16 @@ swiper-item {
 .courseCont {
   background-color: #fff;
   padding-bottom: 15rpx;
-  padding-top: 40rpx;
+  padding-top: 25rpx;
 }
 
 .courseLi {
-  font-size: 32rpx;
-  line-height: 45rpx;
+  font-size: 28rpx;
+  line-height: 40rpx;
 }
 
 .name {
-  font-weight: 600;
+  font-weight: bold;
 }
 
 .howMoney {
@@ -61,17 +63,18 @@ swiper-item {
 }
 
 .somebody {
-  font-size: 28rpx;
-  color: #5b5b5b;
+  font-size: 24rpx;
+  line-height: 36rpx;
   margin: 10rpx 0;
+  color: #5b5b5b;
 }
 
 .courseRow {
   width: 100%;
-  font-size: 28rpx;
-  line-height: 60rpx;
-  border-bottom: 1rpx solid #f4f4f4;
+  font-size: 24rpx;
+  line-height: 40rpx;
   box-sizing: border-box;
+  padding-right: 5%;
 }
 
 .courseRow:last-child {
@@ -79,11 +82,9 @@ swiper-item {
 }
 
 .rowImg {
-  width: 34rpx;
-  height: 34rpx;
+  width: 28rpx;
+  height: 28rpx;
   margin-right: 10rpx;
-  display: flex;
-  align-items: center;
 }
 
 .courseRow .start {
@@ -101,9 +102,10 @@ swiper-item {
   display: flex;
   justify-content: flex-start;
 }
-.center{
-  height: 60rpx;
-  line-height: 60rpx;
+.centers{
+  width: 34rpx;
+  height: 40rpx;
+  display: flex;
   align-items: center;
 }
 button {
@@ -120,15 +122,14 @@ button {
 }
 
 .prompTitle {
-  font-size: 32rpx;
-  font-weight: 600;
+  font-size: 28rpx;
+  font-weight: bold;
 }
 
 .promptText {
-  font-size: 28rpx;
-  line-height: 35rpx;
-  letter-spacing: 2rpx;
-  margin-top: 20rpx;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  margin-top: 10rpx;
 }
 
 .teacherList {
@@ -142,13 +143,12 @@ button {
 }
 
 .teaNumber {
-  font-size: 32rpx;
-  font-weight: 600;
+  font-size: 28rpx;
+  font-weight: bold;
 }
 
 .go {
   position: relative;
-  top: 8rpx;
 }
 
 .teaList {

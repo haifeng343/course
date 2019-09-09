@@ -31,7 +31,7 @@ page {
 .topInput {
   background: #fff;
   height: 80rpx;
-  line-height: 100rpx;
+  line-height: 60rpx;
   width: 100%;
   position: fixed;
   top: 0;
@@ -74,8 +74,8 @@ page {
 }
 
 .addressListed {
+  margin: 20rpx auto;
   width: 100%;
-  margin: 0 auto;
   background-color: #fff;
   z-index: 9999;
   max-height: 90vh;
@@ -84,6 +84,7 @@ page {
 }
 
 .addItem {
+  margin-top: 10rpx;
   width: 100%;
   box-sizing: border-box;
   padding-left: 30rpx;
