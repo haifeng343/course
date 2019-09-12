@@ -122,6 +122,11 @@ Page({
       url: '/pages/inquire/inquire'
     })
   },
+  car:function() {
+    wx.navigateTo({
+      url: '/pages/car/car?type=2',
+    })
+  },
   walletd: function() {
     let that = this;
     var url = 'user/wallet';

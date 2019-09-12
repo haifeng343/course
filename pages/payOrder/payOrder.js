@@ -24,6 +24,11 @@ Page({
     Info:{},//数据详情
     useScoreAmount:0,//使用积分抵扣金额
     parmasItem:[],//请求列表参数
+    type:'',//1团单 2 商圈
+    PrizeAmount:"",//总的奖励金额
+    showKnow:false,//购买须知弹窗
+    type:'',
+    PrizeAmount:"",//现金奖励
   },
   onShow: function () {
     let that = this;
@@ -33,12 +38,37 @@ Page({
       })
     }
   },
+  closeShowKnow:function() {
+    this.setData({
+      showKnow:false
+    })
+    this.cancelPay();
+  },
+  navtoRule:function() {
+    wx.navigateTo({
+      url: '/pages/rewradRule/rewradRule?Id=' + this. data.OrderId,
+    })
+  },
+  getShow:function() {
+    this.oderPay();
+  },
   onLoad(options) {
     console.log(JSON.parse(options.checkItem))
     let that = this;
     that.setData({
-      parmasItem: JSON.parse(options.checkItem) || []
+      parmasItem: JSON.parse(options.checkItem) || [],
+      type: options.type || ''
     })
+    if(options.type==1){
+      wx.setNavigationBarTitle({
+        title: '支付订单',
+      })
+    }
+    if(options.type==2){
+      wx.setNavigationBarTitle({
+        title: '预约订单',
+      })
+    }
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
@@ -46,7 +76,8 @@ Page({
     shareApi.getShare().then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       that.setData({
-        obj: res.Data
+        obj: res.Data,
+        type: options.type || ''
       })
     })
     let arr = [];
@@ -69,14 +100,17 @@ Page({
     netUtil.postRequest(url, params, function(res) {
       res.Data.ItemList.forEach(item=>{
         item.Price = Number(item.Price/100).toFixed(2);
+        item.PrizeAmount = Number(item.PrizeAmount/100).toFixed(2);
       })
       that.setData({
         ItemList: res.Data.ItemList,
         totalAmount: Number(res.Data.TotalAmount/100).toFixed(2),
         useScoreAmount: Number(res.Data.UseScoreAmount/100).toFixed(2),
+        PrizeAmount: Number(res.Data.PrizeAmount/100).toFixed(2),
         totalCount: res.Data.ItemCount,
         Info:res.Data,
       })
+      console.log(that.data.PrizeAmount)
     });
   },
   swich: function() {
@@ -99,7 +133,8 @@ Page({
         PaySign: res.Data.PaySign,
         SignType: res.Data.SignType,
         TimeStamp: res.Data.TimeStamp,
-        paySuccess: false
+        paySuccess: false,
+        showKnow: false,
       });
       wx.requestPayment({
         timeStamp: that.data.TimeStamp,
@@ -122,10 +157,6 @@ Page({
         },
         'fail': function(res) {
           that.cancelPay();
-          wx.showToast({
-            title: '用户取消支付',
-            image: '../../images/cancel.png',
-          });
         },
       });
     }); //调用get方法情就是户数
@@ -137,7 +168,12 @@ Page({
     var params = {
       Id: that.data.OrderId,
     }
-    netUtil.postRequest(url, params, function(res){}, '',false,false,false);
+    netUtil.postRequest(url, params, function(res){
+      wx.showToast({
+        title: '用户取消支付',
+        image: '../../images/cancel.png',
+      });
+    }, '',false,false,false);
   },
   paySure: function() {
     wx.showLoading({
@@ -154,15 +190,22 @@ Page({
       let pages = getCurrentPages(); //当前页面
       let prevPage = pages[pages.length - 2]; //上一页面
       prevPage.setData({ //直接给上移页面赋值
-        load : true
+        load : true || ''
       });
       that.setData({
         OrderId: res.Data.OrderId,
         OrderSn: res.Data.OrderSn,
-        PayAmount: res.Data.PayAmount
+        PayAmount: (res.Data.PayAmount/100).toFixed(2),
       })
-      that.oderPay();
-    },'',false);
+      if(that.data.type==2){
+        that.setData({
+          showKnow:true
+        })
+      }else{
+        that.oderPay();
+      }
+      wx.hideLoading();
+    },'',false,true,true);
 
   },
   onShareAppMessage: function(res) {

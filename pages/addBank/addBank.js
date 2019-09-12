@@ -184,6 +184,7 @@ Page({
       VerifyCode: that.data.phoneCode,
       ActionCode: that.data.ActionCode
     }
+    console.log(params);
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       wx.showModal({
         title: '绑定成功',

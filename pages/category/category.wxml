@@ -40,7 +40,7 @@
     <view class='ListItem' wx:for="{{List}}" wx:key>
       <view class='classTitle between'>
         <view class='titleTxt'>{{item.TradingareaName}}</view>
-        <view class='distance' style='font-size:24rpx' wx:if="{{item.Distance<1}}">{{item.Distance}}m</view>
+        <view class='distance' style='font-size:24rpx' wx:if="{{item.Distance<1}}">{{item.Distance*1000}}m</view>
         <view class='distance' style='font-size:24rpx' wx:else>{{item.Distance}}km</view>
       </view>
       <view class='content-box' wx:for="{{item.ItemList}}" wx:key wx:for-item="b" data-type="{{item.SheetModel}}" data-Id="{{item.SheetId}}" data-storeid="{{b.StoreId+'NUV'+b.GroupId}}" data-relId="{{b.RelId}}" bindtap='cheoose'>

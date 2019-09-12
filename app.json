@@ -48,7 +48,8 @@
     "pages/car/car",
     "pages/category/category",
     "pages/searchCategory/searchCategory",
-    "pages/cashLog/cashLog"
+    "pages/cashLog/cashLog",
+    "pages/rewradRule/rewradRule"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -81,12 +82,6 @@
         "iconPath": "images/order.png",
         "pagePath": "pages/order/order",
         "text": "订单"
-      },
-      {
-        "selectedIconPath": "images/cars.png",
-        "iconPath": "images/car.png",
-        "pagePath": "pages/car/car",
-        "text": "购物车"
       },
       {
         "selectedIconPath": "images/mines.png",

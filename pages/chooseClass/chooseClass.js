@@ -37,6 +37,9 @@ Page({
     totalDialog_storeId: 0, //全部弹窗 选中门店Id
     storeIdGotoTemp: 0, //临时定位到门店Id
     storeIdGoto: 0, //定位到门店Id
+    PrizeAmount:'',//奖励金
+    count:'',//勾选课程数量
+    VoucherCount:"",
   },
   onLoad(options) {
     let that = this;
@@ -57,6 +60,16 @@ Page({
       type: options.type || '',
       storeIdGotoTemp: options.storeId||""
     })
+    if(options.type==1){
+      wx.setNavigationBarTitle({
+        title: '选择课程',
+      })
+    }
+    if(options.type==2){
+      wx.setNavigationBarTitle({
+        title: '选择体验课',
+      })
+    }
     that.init();
   },
   init: function(isHideLoding) {
@@ -118,7 +131,7 @@ Page({
       ids = ids.concat(v.checkedArr);
     }
     this.setData({
-      ids: ids
+      ids: ids,
     });
     var params = {
       SheetId: that.data.Id,
@@ -128,6 +141,9 @@ Page({
         that.setData({
           Remark: res.Data.Remark,
           TotalPrice: res.Data.TotalPrice == -1 ? -1 : res.Data.TotalPrice * 1.0 / 100,
+          PrizeAmount: (res.Data.PrizeAmount/100).toFixed(2),
+          VoucherCount: res.Data.VoucherCount,
+          count: ids.length
         })
       },
       '',
@@ -265,10 +281,12 @@ Page({
       that.init(false);
       that.setData({
         TotalPrice: -1,
+        count:0,
+        
       })
       wx.showToast({
         icon: 'none',
-        title: '已成功添加课程至购物车'
+        title: '添加已成功'
       })
     });
   },
@@ -435,7 +453,7 @@ Page({
     });
 
     wx.navigateTo({
-      url: '/pages/payOrder/payOrder?checkItem=' + JSON.stringify(checkedList),
+      url: '/pages/payOrder/payOrder?checkItem=' + JSON.stringify(checkedList)+'&type='+this.data.type,
     })
   },
   courseDetail(e) {
@@ -607,8 +625,8 @@ Page({
 
   navtoCar: function() {
     wx.setStorageSync('load', true);
-    wx.switchTab({
-      url: '/pages/car/car',
+    wx.navigateTo({
+      url: '/pages/car/car?type='+this.data.type,
     });
   },
   showDialog(e) {

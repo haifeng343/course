@@ -3,15 +3,13 @@ var shareApi = require("../../utils/share.js");
 Page({
 
   data: {
-    Id: '',
-    BaseList: [],
-    pageCount:10,
-    page:1,
+    Id:'',
+    BaseList:[],
   },
   onLoad: function (options) {
     let that = this;
     that.setData({
-      Id: options.Id || ''
+      Id:options.Id || ''
     })
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
@@ -28,43 +26,18 @@ Page({
   },
   init: function () {
     var that = this;
-    var url = 'user/task/prize/list'
+    var url = 'order/rules'
     var params = {
-      Year:0,
-      Month:0,
-      PageCount:that.data.pageCount,
-      PageIndex:that.data.page
+      Id: that.data.Id
     }
     netUtil.postRequest(url, params, function (res) {
-      res.Data.forEach(item => {
-        item.PrizeAmountNow = Number(item.PrizeAmountNow / 100).toFixed(2);
+      res.Data.forEach(item=>{
+        item.PrizeAmount = Number(item.PrizeAmount/100).toFixed(2);
       })
-      let arr = that.data.BaseList;
-      let arr1 = res.Data;
-      if(that.data.page==1){
-        arr = arr1
-      }else{
-        arr = arr.concat(arr1);
-      }
       that.setData({
-        BaseList: arr
+        BaseList:res.Data
       })
     });
-  },
-  onReachBottom:function() {
-    let temp = this.data.page;
-    temp++;
-    this.setData({
-      page:temp
-    })
-    this.init();
-  },
-  onPullDownRefresh:function() {
-    this.setData({
-      page:1
-    })
-    this.init();
-    wx.stopPullDownRefresh();
   },
   onShareAppMessage: function (res) {
     return {

@@ -10,17 +10,17 @@ Page({
     money: '', //可提现金额
     wihdraw: {},
     CardNumber: '',
-    fee:'',//服务费
-    feeMoney:'',//额外扣除
-    CashServiceFeeRate:'',
-    taskList:[],//任务列表
+    fee: '', //服务费
+    feeMoney: '', //额外扣除
+    CashServiceFeeRate: '',
+    taskList: [], //任务列表
   },
   onShow: function() {
     let wallet = wx.getStorageSync('wallet');
     let CashServiceFeeRate = wx.getStorageSync('userInfo').CashServiceFeeRate;
     this.setData({
       money: Number(wallet.Money / 100).toFixed(2),
-      fee: Number(CashServiceFeeRate/100).toFixed(2),
+      fee: Number(CashServiceFeeRate / 100).toFixed(2),
       CashServiceFeeRate: CashServiceFeeRate
     })
   },
@@ -38,18 +38,17 @@ Page({
     })
     this.init();
   },
-  init:function() {
+  init: function() {
     this.carList();
-    this.task();
   },
-  clear:function() {
+  clear: function() {
     this.setData({
-      amount:''
+      amount: ''
     })
   },
   changeCard: function(e) {
     wx.navigateTo({
-      url: '/pages/bankList/bankList?item=' + e.currentTarget.dataset.item+'&ibd=true',
+      url: '/pages/bankList/bankList?item=' + e.currentTarget.dataset.item + '&ibd=true',
     })
   },
   amoutChange: function(e) {
@@ -61,21 +60,21 @@ Page({
       feeMoney: (Number(value) * this.data.CashServiceFeeRate / 10000).toFixed(2)
     })
   },
-  submitTo: function() {
-    this.getData();
-  },
   //已领取任务列表
-  task: function () {
+  task: function() {
     let that = this;
     var url = 'user/task/list';
     var params = {
 
     }
-    netUtil.postRequest(url, params, function (res) {
-      that.setData({
-        taskList:res.Data
+    netUtil.postRequest(url, params, function(res) {
+      res.Data.forEach(item => {
+        item.PrizeAmountNow = (item.PrizeAmountNow / 100).toFixed(2);
       })
-    }); 
+      that.setData({
+        taskList: res.Data
+      })
+    });
   },
   //银行卡列表
   carList: function() {
@@ -91,11 +90,12 @@ Page({
           wihdraw: res.Data[0],
           CardNumber: wihdraw.CardNumber.substring(wihdraw.CardNumber.length - 4)
         })
-      }else{
+      } else {
         that.setData({
-          wihdraw:null
+          wihdraw: null
         })
       }
+      that.task();
     }); //调用get方法情就是户数
   },
   //点击提现
@@ -103,15 +103,94 @@ Page({
     let that = this;
     wx.showModal({
       title: '请确认提现￥' + this.data.amount,
-      success:function(res) {
-        if(res.confirm){
-          that.getData();
+      success: function(res) {
+        if (res.confirm) {
+          that.cash();
         }
       }
     })
   },
+  //任务提现
+  btnTaskCash: function(e) {
+    let that = this;
+    let taskId = e.currentTarget.dataset.id;
+    let index = e.currentTarget.dataset.index;
+    wx.showModal({
+      title: '请确认提现￥' + e.currentTarget.dataset.prizeaamountnow,
+      success: function(res) {
+        if (res.confirm) {
+          that.taskCash(taskId, index);
+        }
+      }
+    })
+  },
+  //任务提现
+  taskCash: function(taskId, index) {
+    let that = this;
+    var url = 'user/task/cash/apply';
+    var params = {
+      Id: taskId,
+      BankCardId: that.data.wihdraw.BankCardId,
+    }
+    netUtil.postRequest(url, params, function(res) {
+      wx.showModal({
+        title: '提现成功',
+        content: '提现申请成功，等待银行处理' + '\r\n' + '预计 1 个工作日内到账',
+        showCancel: false,
+        confirmColor: '#3DD6D1',
+        confirmText: '知道了',
+        success: function(res) {
+          let temp = that.data.taskList;
+          temp[index].PrizeAmountNowStatus = 2;
+          that.setData({
+            taskList: temp
+          })
+        }
+      })
+    });
+  },
+  btnScoreCash:function(e){
+    let that = this;
+    let index = e.currentTarget.dataset.index;
+    var url = 'user/task/score/pick';
+    var params = {
+      Id: e.currentTarget.dataset.id,
+    }
+    netUtil.postRequest(url, params, function (res) {
+      wx.showModal({
+        title: '提现成功',
+        content: '提现申请成功，等待银行处理' + '\r\n' + '预计 1 个工作日内到账',
+        showCancel: false,
+        confirmColor: '#3DD6D1',
+        confirmText: '知道了',
+        success: function (res) {
+          let temp = that.data.taskList;
+          temp[index].PrizeScoreNowStatus = 2;
+          that.setData({
+            taskList: temp
+          })
+        }
+      })
+    });
+  },
+  //执行任务按钮
+  taskclick:function(e) {
+    let actionparams = e.currentTarget.dataset.actionparams;
+    let actiontype = e.currentTarget.dataset.actiontype;
+    if (actiontype==1){
+      wx.navigateTo({
+        url: actionparams,
+      })
+    } else if (actiontype == 2){
+      wx.navigateTo({
+        url: '/pages/WebView/WebView?path=' + actionparams,
+      })
+    } else if (actiontype == 3) {
+
+    }
+  },
   //提现
-  getData: function() {
+  cash: function() {
     let that = this;
     var url = 'user/cash/apply';
     var params = {
@@ -121,17 +200,17 @@ Page({
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       wx.showModal({
         title: '提现成功',
-        content: '提现申请成功，等待银行处理' +'\r\n'+'预计 1 个工作日内到账',
+        content: '提现申请成功，等待银行处理' + '\r\n' + '预计 1 个工作日内到账',
         showCancel: false,
         confirmColor: '#3DD6D1',
         confirmText: '知道了',
-        success:function(res){
+        success: function(res) {
           that.setData({
-            amount:''
+            amount: ''
           })
         }
       })
-    }); 
+    });
   },
   //点击全部
   all: function() {
@@ -152,7 +231,7 @@ Page({
       url: '/pages/addBank/addBank',
     })
   },
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

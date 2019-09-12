@@ -156,7 +156,7 @@ Page({
     that.Id = parseInt(e.currentTarget.dataset.id)
     let loc = wx.getStorageSync('loc');
     wx.navigateTo({
-      url: '/pages/chooseClass/chooseClass?Longitude=' + loc.lng + '&Latitude=' + loc.lat + '&Id=' + that.Id,
+      url: '/pages/chooseClass/chooseClass?Longitude=' + loc.lng + '&Latitude=' + loc.lat + '&Id=' + that.Id+'&type='+e.currentTarget.dataset.type,
     })
   },
 

@@ -11,8 +11,8 @@ Page({
     showError: false,
     pagecount: 20,
     page: 1,
-    year: '',
-    month: '',
+    year: '全部',
+    month: '全部',
     array: [],
     statusdes: '',
     List: [],
@@ -21,10 +21,6 @@ Page({
     var date = new Date();
     let arr = [],
       arr1 = [];
-    this.setData({
-      year: '全部', //date.getFullYear(),
-      month: '全部' //date.getMonth() + 1
-    })
 
     var year = date.getFullYear();
     arr.push('全部');
@@ -74,19 +70,21 @@ Page({
     })
   },
   bindDateChange: function (e) {
-    // console.log('picker发送选择改变，携带值为', e.detail.value)
+
     let index = e.detail.value;
     if (index[0] == 0 && index[1] == 0) {
       this.setData({
         date: '全部',
         year: '全部',
-        month: '全部'
+        month: '全部',
+        page: 1,
       })
     } else {
       this.setData({
         date: this.data.array[0][index[0]] + '-' + this.data.array[1][index[1]],
         year: this.data.array[0][index[0]],
-        month: this.data.array[1][index[1]]
+        month: this.data.array[1][index[1]],
+        page: 1,
       })
     }
     this.getData();

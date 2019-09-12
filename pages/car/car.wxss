@@ -1,9 +1,11 @@
 .right {
-  width: 70%;
+  width: 80%;
   display: flex;
   justify-content: flex-end;
 }
-
+/* .settlments{
+  width: 160rpx!important;
+} */
 .rights {
   width: 75%;
   display: flex;
@@ -13,11 +15,23 @@
   color: #5b5b5b;
   line-height: 42rpx;
 }
-
+.allcenter{
+  display: flex;
+  align-items: center;
+}
 .ml40 {
   margin-left: 40rpx;
 }
-
+.alltext{
+  width: 80%;
+  font-size: 24rpx;
+  margin: auto 0;
+  margin-right: 20rpx;
+  text-align: left;
+}
+.alltexts{
+  text-align: right!important;
+}
 .startds {
   font-size: 24rpx;
   display: flex;
@@ -234,10 +248,6 @@
   color: #d7d7d7;
 }
 
-.pay {
-  line-height: 120rpx;
-}
-
 .settlment {
   font-size: 28rpx;
   color: #fff;
@@ -256,4 +266,5 @@
   line-height: 120rpx;
   box-sizing: border-box;
   font-size: 28rpx;
+  margin-right: 20rpx;
 }

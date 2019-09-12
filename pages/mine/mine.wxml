@@ -84,7 +84,7 @@
         <view class='ml2'>{{score}}</view>
       </view>
       <!-- <view class='wallet'>在这里提现</view> -->
-      <text class='wallet' wx:if="{{promptText}}">亲，提现这里进入哦~</text>
+      <view class='wallet' wx:if="{{promptText}}">提现,这里哦~</view>
       <view class='paypagItem' bindtap='wallet'>
         <view class='ml1'>钱包 (元)</view>
         <view class='ml2'>{{money}}</view>
@@ -92,6 +92,15 @@
     </view>
   </view>
   <view class='List mt20'>
+  <view class='item mt20' bindtap='car' wx:if="{{buttons.setup==true}}">
+      <view class='start'>
+        <image class='icon1' src='../../images/a0.png' mode='widthFix' lazy-load='true'></image>
+        <view>待体验课程</view>
+      </view>
+      <view class='start'>
+        <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
     <view class='item mt20' bindtap='setting' data-mobile="{{userInfo.Mobile}}" wx:if="{{buttons.setup==true}}">
       <view class='start'>
         <image class='icon1' src='../../images/setting.png' mode='widthFix' lazy-load='true'></image>

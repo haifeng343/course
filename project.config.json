@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 12,
+			"current": 52,
 			"list": [
 				{
 					"id": -1,
@@ -104,7 +104,7 @@
 					"id": 7,
 					"name": "chooseClass",
 					"pathName": "pages/chooseClass/chooseClass",
-					"query": "storeId=41NUV34&Id=14&type=2&relId=69",
+					"query": "Longitude=undefined&Latitude=undefined&Id=15&name=西湖银泰城商圈&type=2",
 					"scene": null
 				},
 				{
@@ -139,7 +139,7 @@
 					"id": 12,
 					"name": "payOrder",
 					"pathName": "pages/payOrder/payOrder",
-					"query": "checkItem=[{\"SheetId\":24,\"CartId\":26,\"RelId\":[90]},{\"SheetId\":24,\"CartId\":21,\"RelId\":[94,93]}]",
+					"query": "checkItem=[{\"SheetId\":\"14\",\"RelId\":[45,69]}]&type=2",
 					"scene": null
 				},
 				{
@@ -413,6 +413,13 @@
 					"name": "cashLog",
 					"pathName": "pages/cashLog/cashLog",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 52,
+					"name": "rewradRule",
+					"pathName": "pages/rewradRule/rewradRule",
+					"query": "Id=140",
 					"scene": null
 				}
 			]

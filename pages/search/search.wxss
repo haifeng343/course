@@ -336,6 +336,7 @@ page{
 }
 
 .title {
+  width: 80%;
   font-size: 28rpx;
   font-weight: bold;
   line-height: 40rpx;
@@ -343,7 +344,14 @@ page{
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
+.mechanism{
+  font-size: 24rpx;
+  line-height: 36rpx;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .ad1 {
   width: 35rpx;
   height: 28rpx;

@@ -111,7 +111,6 @@
   padding: 10rpx;
   border-radius: 4rpx;
   position: relative;
-  bottom: -30rpx;
 }
 
 .imgLoad {

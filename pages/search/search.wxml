@@ -23,28 +23,55 @@
   </view>
 </view> -->
 <view class='groupList'>
-  <view class='groupItem' wx:for="{{groupList}}" wx:for-item="item" wx:key data-id='{{item.SheetId}}' data-name="{{item.TradingAreaName}}" bindtap='groupDetail'>
-    <image src="{{item.SheetCoverImg}}" binderror="binding" class='leftImg' mode='aspectFill' lazy-load='true'></image>
-
-    <view class='itemRight'>
-      <view class='title'>{{item.SheetName}}</view>
-      <view class='between'>
-        <view class='addr'>{{item.TradingAreaName}}</view>
-        <view class='distance' wx:if="{{item.TradingAreaDistance<1}}">{{item.TradingAreaDistance*1000}}m</view>
-        <view class='distance' wx:else>{{item.TradingAreaDistance}}km</view>
-      </view>
-      <view class='time'>截止时间：{{item.EndTime}}</view>
-      <view class='tagList' wx:if="{{item.TagList.length>0}}">
-        <view class='tagItem' wx:for='{{item.TagList}}' wx:for-item="k" wx:key style='background:{{k.TagBgColor}};color:{{k.TagFontColor}};border:2rpx solid {{k.BorColor}}'>{{k.TagName}}</view>
-      </view>
-      <view class='bottom'>
-        <view class='bottom-left'>
-          <view class='money'>￥{{item.SheetMinPrice}}</view>
-          <view class='integral' wx:if="{{item.UseScoreRate>0}}">积分抵扣{{item.UseScoreRate/100}}%</view>
+  <view wx:for="{{groupList}}" wx:for-item="item" wx:key data-id='{{item.SheetId}}' data-type="{{item.ModelType}}" data-name="{{item.TradingAreaName}}" class='groupDetail' data-type="{{item.ModelType}}" bindtap='groupDetail'>
+    <view class='groupItem' wx:if="{{item.ModelType==1}}">
+      <image src="{{item.SheetCoverImg}}" binderror="binding" class='leftImg' mode='aspectFill' lazy-load='true'></image>
+      <view class='itemRight'>
+        <view class='title'>{{item.SheetName}}</view>
+        <view class='between'>
+          <view class='addr'>
+            <view class='address'>{{item.TradingAreaName}}</view>
+          </view>
+          <view class='distance' wx:if="{{item.TradingAreaDistance<1}}">{{item.TradingAreaDistance*1000}}m</view>
+          <view class='distance' wx:else>{{item.TradingAreaDistance}}km</view>
         </view>
-        <view class='bottom-right'>
-          <view class='number'>已售 {{item.SoldCount}}</view>
-          <!-- <image style='line-height:42rpx' src='../../images/go.png' class='go' mode='aspectFill'></image> -->
+        <view class='time'>截止时间：{{item.EndTime}}</view>
+        <view class='tagList' wx:if="{{item.TagList.length>0}}">
+          <view class='tagItem' style='font-size:24rpx;margin-top:-10rpx;' wx:for='{{item.TagList}}' wx:for-item="k" wx:key style='background:{{k.TagBgColor}};color:{{k.TagFontColor}};border:2rpx solid {{k.BorColor}}'>{{k.TagName}}</view>
+        </view>
+        <view class='opsiBot'>
+          <view class='bottom'>
+            <view class='bottom-left'>
+              <view class='money'>￥{{item.SheetMinPrice}}</view>
+              <view class='integral' wx:if="{{item.UseScoreRate>0}}">积分抵扣{{item.UseScoreRate/100}}%</view>
+            </view>
+            <view class='bottom-right'>
+              <view class='number'>已售 {{item.SoldCount}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='groupItem' wx:else>
+      <image src="{{item.SheetCoverImg}}" binderror="binding" class='leftImg' mode='aspectFill' lazy-load='true'></image>
+      <view class='itemRight'>
+        <view class='between'>
+          <view class='title'>{{item.TradingAreaName}}</view>
+          <view class='distance' wx:if="{{item.TradingAreaDistance<1}}">{{item.TradingAreaDistance*1000}}m</view>
+          <view class='distance' wx:else>{{item.TradingAreaDistance}}km</view>
+        </view>
+        <view class='mechanism bb'>{{item.SheetDescription}}</view>
+        <view class='mechanism bb'>入驻机构{{item.StoreCount}}家，共{{item.ItemCount}}门体验课</view>
+        <view class='tagList' wx:if="{{item.TagList.length>0}}">
+          <view class='tagItem' style='font-size:24rpx;margin-top:-10rpx;' wx:for='{{item.TagList}}' wx:for-item="k" wx:key style='background:{{k.TagBgColor}};color:{{k.TagFontColor}};border:2rpx solid {{k.BorColor}}'>{{k.TagName}}</view>
+        </view>
+        <view class='bottom'>
+          <view class='bottom-left'>
+            <view class='number'>浏览量 {{item.Pageviews}}</view>
+          </view>
+          <view class='bottom-right'>
+            <view class='number'>已参与 {{item.SoldCount}}</view>
+          </view>
         </view>
       </view>
     </view>

@@ -12,11 +12,22 @@ page {
   box-sizing: border-box;
   overflow: hidden;
 }
-
+.mt10{
+  margin-top: 10rpx;
+}
 .keep1 {
   padding: 0;
 }
-
+.showTxt{
+  font-size: 24rpx;
+  color: #000;
+  line-height: 40rpx;
+}
+.moneyRule{
+  font-size: 24rpx;
+  color: #29d9d6;
+  margin-top: 20rpx;
+}
 .klds {
   line-height: 120rpx;
 }
@@ -50,6 +61,61 @@ page {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.mask{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 9999;
+}
+
+.modal-content{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  /* height: 80%; */
+  background-color: #fff;
+  border-radius: 10rpx;
+}
+
+.modal-btn-wrapper{
+  display: flex;
+  flex-direction: row;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-top: 2rpx solid rgba(7,17,27,0.1);
+}
+.modal-title{
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  text-align: center;
+  width: 100%;
+}
+.cancel-btn, .confirm-btn{
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
+
+.cancel-btn{
+  border-right: 2rpx solid rgba(7,17,27,0.1);
+}
+
+.main-content{
+  flex: 1;
+  height: 100%;
+  overflow-y: hidden; 
+  box-sizing: border-box;
+  padding: 20rpx 8%;
 }
 
 .topImg {
@@ -259,7 +325,7 @@ radio {
 
 .totalNumber {
   line-height: 120rpx;
-  margin-right: 30rpx;
+  margin-right: 20rpx;
   font-size: 24rpx;
   color: #5b5b5b;
 }

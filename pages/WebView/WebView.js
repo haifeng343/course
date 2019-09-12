@@ -7,14 +7,6 @@ Page({
   data: {
     htmlSrc:'',
   },
-  bindHttp:function(){
-    wx.navigateTo({
-      url: 'https://www.baidu.com',
-    })
-    wx.setNavigationBarTitle({
-      title: '',
-    })
-  },
   init: function () {
 
   },

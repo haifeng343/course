@@ -2,7 +2,7 @@
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-
+var setTime;
 const app = getApp();
 
 Page({
@@ -31,9 +31,21 @@ Page({
     isLoaded: false,
     typeList: [], //分类列表
     popList: [], //弹窗列表
+    windowWidth: "",
+    closetime: '', //关闭按钮倒计时
   },
   onLoad: function(options) {
     var that = this;
+    wx.getSystemInfo({
+      success: function(res) {
+        let windowHeight = (res.windowHeight * (750 / res.windowWidth));
+        let windowWidth = (res.windowWidth * (750 / res.windowWidth));
+
+        that.setData({
+          windowWidth: windowWidth
+        })
+      },
+    })
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
@@ -56,6 +68,33 @@ Page({
     that.hasTypeList();
     that.data.isLoaded = true;
   },
+  //启动弹窗关闭定时器
+  closeInterval: function(closeTime, index) {
+    let that = this;
+    if (setTime != null) {
+      clearInterval(setTime);
+    }
+    if (closeTime <= 0) {
+      return;
+    }
+    setTime = setInterval(function() {
+      let temp = that.data.popList;
+      temp[index].pop = false;
+      if (temp.length > index + 1) {
+        temp[index + 1].pop = true
+        closeTime = temp[index + 1].CloseTime;
+        index = index + 1;
+      } else {
+        clearInterval(setTime);
+        closeTime = -1;
+        index = index + 1;
+      }
+      that.setData({
+        popList: temp
+      })
+      that.closeInterval(closeTime, index);
+    }, closeTime);
+  },
   //弹窗列表
   _popList: function() {
     let that = this;
@@ -74,21 +113,69 @@ Page({
         })
         that.setData({
           popList: temp,
-        })
+        });
+        if (temp.length > 0) {
+          that.closeInterval(temp[0].CloseTime, 0);
+        }
       },
       null,
       false,
       false,
       false)
   },
+  //点击弹窗图片事件
+  popclick: function(e) {
+    console.log(e);
+    let actiontype = e.currentTarget.dataset.actiontype;
+    let actionparams = e.currentTarget.dataset.actionparams;
+    let executeparams = e.currentTarget.dataset.executeparams;
+    let index = e.currentTarget.dataset.index;
+    let popId = e.currentTarget.dataset.popid;
+    if (executeparams == 'receiveTasks') {
+      this.receiveTasks(popId, function() {
+        if (actiontype == 1) {
+          wx.navigateTo({
+            url: actionparams,
+          })
+        } else if (actiontype == 2) {
+          wx.navigateTo({
+            url: '/pages/WebView/WebView?path=' + actionparams,
+          })
+        }
+      });
+    } else {
+      if (actiontype == 1) {
+        wx.navigateTo({
+          url: actionparams,
+        })
+      } else if (actiontype == 2) {
+        wx.navigateTo({
+          url: '/pages/WebView/WebView?path=' + actionparams,
+        })
+      }
+    }
+    if (actiontype == 1 || actiontype == 2) {
+      let temp = this.data.popList;
+      temp[index].pop = false;
+      if (temp.length > index + 1) {
+        temp[index + 1].pop = true
+      }
+      this.setData({
+        popList: temp
+      })
+    }
+  },
   //关闭弹窗按钮
   shutDown: function(e) {
-    console.log(e)
+    if (setTime != null) {
+      clearInterval(setTime);
+    }
     let index = e.currentTarget.dataset.index;
     let temp = this.data.popList;
     temp[index].pop = false;
-    if (temp.length > index+1) {
-      temp[index + 1].pop = true
+    if (temp.length > index + 1) {
+      temp[index + 1].pop = true;
+      this.closeInterval(temp[index + 1].CloseTime, index + 1);
     }
     this.setData({
       popList: temp
@@ -173,10 +260,19 @@ Page({
     })
   },
   bindBannerTo: function(e) {
-    if (e.currentTarget.dataset.path != '') {
-      wx.navigateTo({
-        url: '/pages/WebView/WebView?path=' + e.currentTarget.dataset.path,
-      })
+    if (e.currentTarget.dataset.actiontype == 1) {
+      if (e.currentTarget.dataset.path != '') {
+        wx.navigateTo({
+          url: '/pages/WebView/WebView?path=' + e.currentTarget.dataset.path,
+        })
+      }
+    }
+    if (e.currentTarget.dataset.actiontype == 2) {
+      if (e.currentTarget.dataset.path != '') {
+        wx.navigateTo({
+          url: e.currentTarget.dataset.path,
+        })
+      }
     }
   },
   swiperChangeTo: function(e) {
@@ -195,9 +291,10 @@ Page({
     var params = {
       BannerCode: 'IndexTop',
     }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function(res) {
+
         that.setData({
-          imgUrls: res.Data
+          imgUrls: res.Data,
         })
       },
       null,
@@ -418,5 +515,25 @@ Page({
         })
       }
     }
+  },
+  //弹窗本地支持代码
+  //1.领取任务
+  receiveTasks: function(popId, onSuccess) {
+    let that = this;
+    var url = 'user/pop/task/receive';
+    var params = {
+      PopId: popId,
+    }
+    netUtil.postRequest(url, params, function(res) {
+        wx.showToast({
+          icon: 'none',
+          title: '领取成功，请进入【钱包】提现。',
+        })
+        onSuccess();
+      },
+      null,
+      false,
+      true,
+      true)
   },
 })

@@ -1,31 +1,36 @@
-<view class='logTop between'>
-  <view class='start'>
-    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange" bindtap='initPicker'>
-      <view class="picker">
-        {{date?date:now}}
-      </view>
-    </picker>
-    <image src='../../images/select.png' class='select' mode='widthFix' lazy-load='true'></image>
-  </view>
-  <view class='math'>
-    <!-- <view> 提现￥100.00</view> -->
-  </view>
-</view>
-<view>
-  <view class='log'>
-    <view class='nohasLog' wx:if="{{List.length<=0}}">
-      <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
-      <view>暂无现金奖励记录</view>
-    </view>
-    <view class='logList' wx:else>
-      <view class='logItem between' wx:for="{{List}}" wx:key>
-        <view class='column'>
-          <view class='share'>{{item.ReceiveName}}</view>
-          <view class='fraction'>{{item.CreateTime}}</view>
+<view wx:if="{{BaseList.length>0}}">
+  <view class='ruleList' wx:for="{{BaseList}}" wx:key>
+    <view class="item {{item.IsExpire==true?'grop':''}}">
+      <view class='between'>
+        <view class='name'>
+          <image src='../../images/cash.png' mode='aspectFill' class='cash'></image>
+          <view class='title'>{{item.ReceiveName}}</view>
         </view>
-        <view class='fraction monry'>+ ￥{{item.Amount}}</view>
+        <view class='TaskFinishiStatus' wx:if="{{item.IsExpire==true}}">已过期</view>
+        <view class='TaskFinishiStatus' wx:if="{{item.IsExpire==false}}"></view>
+      </view>
+      <view class='time'>领取时间:{{item.CreateTime}}</view>
+      <view class='time'>有效日期:{{item.TaskEndTime}}</view>
+      <view class='status mt10'>
+        <view>奖励现金:
+          <span class="red">￥{{item.PrizeAmountNow}}</span>
+          (<span class wx:if="{{item.PrizeAmountNowStatus==1}}">未领取</span>
+          <span wx:if="{{item.PrizeAmountNowStatus==2}}">领取中</span>
+          <span wx:if="{{item.PrizeAmountNowStatus==3}}">已领取</span>
+          <span wx:if="{{item.PrizeAmountNowStatus==4}}">领取失败</span>)</view>
+        <view class='ml40'>奖励积分:
+          <span class="red">{{item.PrizeScoreNow}}</span>(<span wx:if="{{item.PrizeScoreNowGot==true}}">已到账</span>
+          <span wx:if="{{item.TaskFinishiStatus==false}}">未到账</span>)</ view>
+        </view>
+        <view class='status'>任务状态:
+          <text>未完成</text>
+        </view>
       </view>
     </view>
+  </view>
+  <view class='nohasLog' wx:else>
+    <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
+    <view>暂无现金券奖励记录</view>
   </view>
 
   <!--提现失败提示弹出框-->
@@ -37,4 +42,3 @@
       <view class='know' bindtap='closed'>知道了</view>
     </view>
   </view>
-</view>

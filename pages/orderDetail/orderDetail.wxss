@@ -24,13 +24,12 @@ page{
 }
 .kl{
   border-bottom: 1rpx solid #F4F4F4;
-  padding-bottom: 15rpx;
-  margin-bottom: 15rpx;
+  padding-bottom: 20rpx;
+  margin-bottom: 20rpx;
 }
 .code{
   width: 30rpx;
   height: 24rpx;
-  margin-top: 10rpx;
 }
 .ml{
   display: block;

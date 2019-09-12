@@ -273,6 +273,8 @@ swiper-item image {
 
 .address {
   width: 90%;
+  font-size: 24rpx;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }

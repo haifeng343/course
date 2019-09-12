@@ -67,7 +67,10 @@
               </view>
 
             </view>
-            <view class='flex-end count'>
+            <view class='flex-end count' wx:if="{{item.SheetModel==2}}">
+              <view>共{{item.ItemList.length}}门课程<span wx:if="{{item.PrizeAmount>0}}">，可获奖励金<span class="red">￥{{item.PrizeAmount}}</span></span><span wx:if="{{item.VoucherCount>0}}"><span><span wx:if="{{item.PrizeAmount>0}}">，</span><span wx:else>，可获</span></span>报名代金券<span class="red">{{item.VoucherCount}}</span>张</span></view>
+            </view>
+            <view class='flex-end count' wx:if="{{item.SheetModel==1}}">
               <view>共{{item.ItemList.length}}门课程</view>
               <view class='money'>小计:</view>
               <view class='numberD'>￥{{item.Price}}</view>
@@ -80,7 +83,7 @@
   <view class='nohasLog' wx:else>
     <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
     <view>您的购物车空空如也~</view>
-    <view class='btnd' bindtap='goHome'>去逛逛</view>
+    <!-- <view class='btnd' bindtap='goHome'>去逛逛</view> -->
   </view>
 
   <!-- <view class='keep low between mt0' bindtap='swich' style='overflow-x:hidden'>
@@ -93,11 +96,11 @@
   <checkbox class='' checked='{{checked}}'></checkbox>
 </view> -->
 
-  <view class='pay' wx:if="{{List.length>0}}">
+  <view class='pay' wx:if="{{List.length>0 && type==1}}">
     <view class='between'>
       <checkbox class='allcheck' bindtap='allChecked' checked='{{totalChecked}}'>全选</checkbox>
       <view class='right'>
-        <view class='all'>合计:
+        <view class='all allcenter'>合计:
           <text class='payMoney'>￥{{money==0?0:money}}</text>
         </view>
         <view class='center'>
@@ -109,7 +112,21 @@
       </view>
     </view>
   </view>
-
+  <view class='pay' wx:if="{{List.length>0 && type==2}}">
+    <view class='between'>
+      <checkbox class='allcheck' bindtap='allChecked' checked='{{totalChecked}}'>全选</checkbox>
+      <view class='right'>
+        <view class='alltext' wx:if="{{checkArr.length<=0}}">请选择要体验的课程</view>
+        <view class='alltext' wx:else>
+          <span wx:if="{{PrizeAmount>0 || VoucherCount>0}}">合计</span><span wx:if="{{PrizeAmount>0}}">可获奖励金<span class="red">￥{{PrizeAmount}}</span></span><span wx:if="{{VoucherCount>0}}"><span><span wx:if="{{PrizeAmount>0}}">，</span><span wx:else>可获</span></span>报名代金券<span class="red">{{VoucherCount}}</span>张</span></view>
+        <view class='center'>
+          <view class='settlment settlments' bindtap='settlement' data-item="{{checkItem}}" wx:if="{{money>0}}">立即预约
+          </view>
+          <view class='settlment settlments settlmentd' wx:else>立即预约</view>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>
 <view class='nohasLog' wx:else bindtap='bindLogin' catchtouchmove='true'>
   <image class='noImg' src='../../images/zanwu.png' mode='widthFix' lazy-load='true'></image>
