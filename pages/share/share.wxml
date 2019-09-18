@@ -1,4 +1,4 @@
 <view class="shareIt">
-  <image class='img' src='{{Info.ShareUrlShow}}' mode='widthFix' lazy-load='true'></image>
+  <image class='img' src='{{Info.ShareUrlShow}}' mode='aspectFill' lazy-load='true'></image>
   <button wx:if="{{Info.IsShowShareButton==true}}" class="btn" data-id="shareBtn" style='background:{{Info.ShareButtonBgColor}};color:{{Info.ShareButtonFtColor}}' open-type="share" bindtap='share'>{{Info.ShareButtonTitle}}</button>
 </view>

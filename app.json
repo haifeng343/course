@@ -2,6 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/mine/mine",
+    "pages/gobind/gobind",
     "pages/binding/binding",
     "pages/courseDetail/courseDetail",
     "pages/allTeacher/allTeacher",
@@ -49,7 +50,9 @@
     "pages/category/category",
     "pages/searchCategory/searchCategory",
     "pages/cashLog/cashLog",
-    "pages/rewradRule/rewradRule"
+    "pages/rewradRule/rewradRule",
+    "pages/publick/puclick",
+    "pages/partake/partake"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -15,6 +15,7 @@ Page({
     usertoken: "",
     buttons: {},
     IsSalesman: '',
+    Url:"",
     promptText: true, //是否显示提示语
   },
   //复制微信号
@@ -50,43 +51,47 @@ Page({
       })
     }
   },
+  init: function() {},
   ButtonShow: function() {
     var that = this;
     var url = 'user/page/show/my'
     var params = {}
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
         var temp = {};
-        if (res.Data.indexOf("setup") >= 0) {
+        that.setData({
+          Url: res.Data.url
+        })
+        if (res.Data.List.indexOf("setup") >= 0) {
           temp.setup = true;
         } else {
           temp.setup = false;
         }
-        if (res.Data.indexOf("aboutus") >= 0) {
+        if (res.Data.List.indexOf("aboutus") >= 0) {
           temp.aboutus = true;
         } else {
           temp.aboutus = false;
         }
-        if (res.Data.indexOf("callus") >= 0) {
+        if (res.Data.List.indexOf("callus") >= 0) {
           temp.callus = true;
         } else {
           temp.callus = false;
         }
-        if (res.Data.indexOf("share") >= 0) {
+        if (res.Data.List.indexOf("share") >= 0) {
           temp.share = true;
         } else {
           temp.share = false;
         }
-        if (res.Data.indexOf("invitation") >= 0) {
+        if (res.Data.List.indexOf("invitation") >= 0) {
           temp.invitation = true;
         } else {
           temp.invitation = false;
         }
-        if (res.Data.indexOf("address") >= 0) {
+        if (res.Data.List.indexOf("address") >= 0) {
           temp.address = true;
         } else {
           temp.address = false;
         }
-        if (res.Data.indexOf("modifyphone") >= 0) {
+        if (res.Data.List.indexOf("modifyphone") >= 0) {
           temp.modifyphone = true;
         } else {
           temp.modifyphone = false;
@@ -122,7 +127,7 @@ Page({
       url: '/pages/inquire/inquire'
     })
   },
-  car:function() {
+  car: function() {
     wx.navigateTo({
       url: '/pages/car/car?type=2',
     })
@@ -201,9 +206,15 @@ Page({
   },
   share: function(e) {
     if (this.data.usertoken) {
-      wx.navigateTo({
-        url: '/pages/share/share?Id=' + e.currentTarget.dataset.id,
-      })
+      if (this.data.Url) {
+        wx.navigateTo({
+          url: '/pages/WebView/WebView?path=' + this.data.Url,
+        })
+      } else {
+        wx.navigateTo({
+          url: '/pages/share/share?Id=' + e.currentTarget.dataset.id,
+        })
+      }
     } else {
       wx.navigateTo({
         url: '/pages/login/login',

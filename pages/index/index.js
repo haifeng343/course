@@ -8,6 +8,7 @@ const app = getApp();
 Page({
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
+    windowHeight:app.globalData.windowHeight,
     Acount: {},
     Id: 0,
     articles: [],
@@ -33,16 +34,19 @@ Page({
     popList: [], //弹窗列表
     windowWidth: "",
     closetime: '', //关闭按钮倒计时
+    car: false,
   },
+  
   onLoad: function(options) {
     var that = this;
     wx.getSystemInfo({
       success: function(res) {
-        let windowHeight = (res.windowHeight * (750 / res.windowWidth));
+        console.log(res)
+        let windowHeight = ((res.windowHeight) * (750 / res.windowWidth));
         let windowWidth = (res.windowWidth * (750 / res.windowWidth));
 
         that.setData({
-          windowWidth: windowWidth
+          windowWidth: windowWidth,
         })
       },
     })
@@ -50,7 +54,7 @@ Page({
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare().then(res => {
+    shareApi.getShare("/pages/index/index", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       that.setData({
         obj: res.Data,
@@ -125,6 +129,7 @@ Page({
   },
   //点击弹窗图片事件
   popclick: function(e) {
+    let that = this;
     console.log(e);
     let actiontype = e.currentTarget.dataset.actiontype;
     let actionparams = e.currentTarget.dataset.actionparams;
@@ -132,52 +137,75 @@ Page({
     let index = e.currentTarget.dataset.index;
     let popId = e.currentTarget.dataset.popid;
     if (executeparams == 'receiveTasks') {
-      this.receiveTasks(popId, function() {
+      that.receiveTasks(popId, function() {
         if (actiontype == 1) {
-          wx.navigateTo({
-            url: actionparams,
-          })
+          if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
+            wx.switchTab({
+              url: actionparams,
+            })
+          } else {
+            wx.navigateTo({
+              url: actionparams,
+            })
+          }
         } else if (actiontype == 2) {
           wx.navigateTo({
             url: '/pages/WebView/WebView?path=' + actionparams,
           })
         }
+        if (actiontype == 1 || actiontype == 2) {
+          let temp = that.data.popList;
+          temp[index].pop = false;
+          if (temp.length > index + 1) {
+            temp[index + 1].pop = true
+          }
+          that.setData({
+            popList: temp
+          })
+        }
       });
     } else {
       if (actiontype == 1) {
-        wx.navigateTo({
-          url: actionparams,
-        })
+        if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
+          wx.switchTab({
+            url: actionparams,
+          })
+        } else {
+          wx.navigateTo({
+            url: actionparams,
+          })
+        }
       } else if (actiontype == 2) {
         wx.navigateTo({
           url: '/pages/WebView/WebView?path=' + actionparams,
         })
       }
-    }
-    if (actiontype == 1 || actiontype == 2) {
-      let temp = this.data.popList;
-      temp[index].pop = false;
-      if (temp.length > index + 1) {
-        temp[index + 1].pop = true
+      if (actiontype == 1 || actiontype == 2) {
+        let temp = that.data.popList;
+        temp[index].pop = false;
+        if (temp.length > index + 1) {
+          temp[index + 1].pop = true
+        }
+        that.setData({
+          popList: temp
+        })
       }
-      this.setData({
-        popList: temp
-      })
     }
   },
   //关闭弹窗按钮
   shutDown: function(e) {
+    let that = this;
     if (setTime != null) {
       clearInterval(setTime);
     }
     let index = e.currentTarget.dataset.index;
-    let temp = this.data.popList;
+    let temp = that.data.popList;
     temp[index].pop = false;
     if (temp.length > index + 1) {
       temp[index + 1].pop = true;
-      this.closeInterval(temp[index + 1].CloseTime, index + 1);
+      that.closeInterval(temp[index + 1].CloseTime, index + 1);
     }
-    this.setData({
+    that.setData({
       popList: temp
     })
   },

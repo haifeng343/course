@@ -58,6 +58,7 @@ page {
 
 .money {
   font-size: 32rpx;
+  line-height: 45rpx;
 }
 
 .integral {

@@ -43,6 +43,7 @@
 .binding {
   width: 100%;
   height: 300rpx;
+  margin-bottom: 60rpx;
 }
 .close {
   width: 50rpx;

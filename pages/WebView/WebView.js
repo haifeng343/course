@@ -1,4 +1,5 @@
-// pages/WebView/WebView.js
+var netUtil = require("../../utils/request.js"); //require引入
+var shareApi = require("../../utils/share.js");
 Page({
 
   /**
@@ -14,9 +15,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-    this.setData({
+    var that = this;
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare("WebView",0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+    that.setData({
       htmlSrc: options.path
     })
+  },
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
   },
 })

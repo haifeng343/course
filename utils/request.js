@@ -75,7 +75,7 @@ function request(url, params, method, onSuccess, onFailed, isShowLoading, isShow
           wx.clearStorageSync('wallet');
           if (isnavigateToLogin) {
             wx.navigateTo({
-              url: '/pages/login/login',
+              url: '/pages/login/login?logintype=1',
             })
           }
         } else if (isShowError) {

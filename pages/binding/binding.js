@@ -6,6 +6,7 @@ Page({
     PicUrl: '',
     Mobile: '',
     ids: '',
+    fromtype:"",
     isShow: false,
     imgCodeShow: false,
     NumberCountDown: 0,
@@ -17,12 +18,13 @@ Page({
     notEdit: false,
     ActionCode: '', //操作码
   },
+  init: function() {},
   closeAlert: function() {
 
   },
-  clear:function() {
+  clear: function() {
     this.setData({
-      Mobile:''
+      Mobile: ''
     })
   },
   getCode: function(e) {
@@ -44,8 +46,9 @@ Page({
       })
     })
     that.setData({
-      // Mobile: options.phone,
-      ids: options.ids || ''
+      Mobile: options.phone || "",
+      ids: options.ids || '',
+      fromtype: options.fromtype || "",
     })
     if (options.ids == 1) {
       wx.setNavigationBarTitle({
@@ -57,8 +60,8 @@ Page({
       })
     }
   },
-  init: function () {
-    
+  init: function() {
+
   },
   codeyan: function() {
     let that = this;
@@ -178,13 +181,16 @@ Page({
       wx.showModal({
         title: that.data.ids == 1 ? "成功修改手机号" : "成功绑定手机号",
         content: '',
-        showCancel:false,
-        success:function(res){
+        showCancel: false,
+        success: function(res) {
           let pages = getCurrentPages(); //当前页面
           let prevPage = pages[pages.length - 2]; //上一页面
-          prevPage.setData({
-            mobile: that.data.Mobile,
-          })
+          if (that.data.fromtype == 1) {
+            prevPage.setData({
+              mobile: that.data.Mobile,
+            })
+          }
+          prevPage.init();
           let userInfo = wx.getStorageSync('userInfo');
           userInfo.Mobile = that.data.Mobile;
           wx.setStorageSync('userInfo', userInfo);
@@ -207,7 +213,7 @@ Page({
       isShow: false,
     })
   },
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

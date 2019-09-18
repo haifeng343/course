@@ -31,6 +31,7 @@
   color: #747474;
 }
 .money{
+  line-height:45rpx;
   font-size: 32rpx;
 }
 .List{

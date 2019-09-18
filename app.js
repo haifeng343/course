@@ -7,15 +7,18 @@ App({
     //自定义title设置顶部
     wx.getSystemInfo({
       success: function(res) {
+        console.log(res)
         that.globalData.platform = res.platform
         let totalTopHeight = 68
         if (res.model.indexOf('iPhone X') !== -1) {
+          console.log(11111)
           totalTopHeight = 88
         } else if (res.model.indexOf('iPhone') !== -1) {
           totalTopHeight = 64
         }
-        that.globalData.statusBarHeight = res.statusBarHeight
-        that.globalData.titleBarHeight = totalTopHeight - res.statusBarHeight
+        that.globalData.windowHeight = res.windowHeight * (750 / res.windowWidth);
+        that.globalData.statusBarHeight = res.statusBarHeight * (750 / res.windowWidth)
+        that.globalData.titleBarHeight = (totalTopHeight - res.statusBarHeight) * (750 / res.windowWidth)
       },
       failure() {
         that.globalData.statusBarHeight = 0

@@ -83,8 +83,7 @@
         <view class='ml1'>积分</view>
         <view class='ml2'>{{score}}</view>
       </view>
-      <!-- <view class='wallet'>在这里提现</view> -->
-      <view class='wallet' wx:if="{{promptText}}">提现,这里哦~</view>
+      <view class='wallet' wx:if="{{promptText}}"></view>
       <view class='paypagItem' bindtap='wallet'>
         <view class='ml1'>钱包 (元)</view>
         <view class='ml2'>{{money}}</view>

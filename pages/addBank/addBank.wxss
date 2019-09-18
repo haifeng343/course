@@ -106,11 +106,12 @@
 .imgCoded {
   color: #000;
   height: 45rpx;
-  line-height: 20rpx;
   font-size: 24rpx;
   padding: 10rpx;
   border-radius: 4rpx;
-  position: relative;
+  display:flex;
+  align-items:center;
+
 }
 
 .imgLoad {

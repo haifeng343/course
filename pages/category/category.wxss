@@ -266,19 +266,23 @@
 .name,.coursePeople {
   font-size: 24rpx;
   color: #5b5b5b;
-  /* line-height: 36rpx; */
+  line-height: 36rpx;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .centers{
   height: 36rpx;
+  width: 36rpx;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .detail {
   line-height: 36rpx;
   display: flex;
+  align-items: center;
+  margin: auto 0;
   justify-content: flex-start;
   white-space: nowrap;
   overflow: hidden;
@@ -287,8 +291,7 @@
 .detailImg {
   width: 28rpx;
   height: 28rpx;
-  position: relative;
   display: flex;
-  right: 5rpx;
+  margin-right: 5rpx;
   justify-content: flex-start;
 }

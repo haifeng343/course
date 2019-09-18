@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 52,
+			"current": 48,
 			"list": [
 				{
 					"id": -1,
@@ -69,13 +69,6 @@
 					"id": -1,
 					"name": "binding",
 					"pathName": "pages/binding/binding",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "index",
-					"pathName": "pages/index/index",
 					"query": "",
 					"scene": null
 				},
@@ -395,10 +388,10 @@
 					"scene": null
 				},
 				{
-					"id": 49,
+					"id": 48,
 					"name": "category",
 					"pathName": "pages/category/category",
-					"query": "Id=0&name=全部&Longitude=120.13026&Latitude=30.25961",
+					"query": "",
 					"scene": null
 				},
 				{
@@ -420,6 +413,20 @@
 					"name": "rewradRule",
 					"pathName": "pages/rewradRule/rewradRule",
 					"query": "Id=140",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "publick",
+					"pathName": "pages/publick/puclick",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "partake",
+					"pathName": "pages/partake/partake",
+					"query": "",
 					"scene": null
 				}
 			]

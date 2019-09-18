@@ -1,12 +1,14 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    Info: {}
+    Info: {},
+    
   },
   onShow: function() {
     this.getData();
@@ -30,23 +32,34 @@ Page({
     }); //调用get方法情就是户数
   },
   onLoad(options) {
+    let that = this;
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;//我的分享码
     shareApi.getShare().then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      this.setData({
+      that.setData({
         obj1: res.Data,
 
       })
     });
     shareApi.getShare("myPage").then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      this.setData({
+      that.setData({
         obj2: res.Data,
 
       })
+    })
+    wx.getSystemInfo({
+      success: function(res) {
+        console.log(res)
+        if (res.model == "iPhone X"){
+          that.setData({
+            totalTopHeight:68
+          })
+        }
+      },
     })
   },
   onShareAppMessage: function(res) {

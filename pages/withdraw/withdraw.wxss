@@ -10,16 +10,20 @@
   background-color: #fff;
   border-bottom: 1rpx solid #f9f9f9;
 }
-.Bill:last-child{
+
+.Bill:last-child {
   border: none;
 }
+
 .List {
   width: 100%;
   height: auto;
 }
+
 .btnd {
   height: 60rpx;
 }
+
 .item {
   width: 100%;
   box-sizing: border-box;
@@ -94,7 +98,7 @@
 .moneyTxt {
   font-size: 28rpx;
   color: #3dd6d1;
- margin-right: 20rpx;
+  margin-right: 20rpx;
   display: flex;
   align-items: center;
 }
@@ -121,25 +125,30 @@
   justify-content: space-between;
   align-items: center;
 }
-.start_left{
+
+.start_left {
   width: 60%;
   display: flex;
   justify-content: flex-start;
 }
-.betweens{
+
+.betweens {
   display: flex;
   justify-content: space-between;
 }
-.start-middle{
+
+.start-middle {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.start-right{
+
+.start-right {
   display: flex;
   justify-content: flex-end;
   flex-direction: row;
 }
+
 .clears {
   width: 28rpx;
   height: 28rpx;
@@ -166,14 +175,13 @@
   margin-bottom: 60rpx;
 }
 
-.startd {
+.name {
+  font-size: 28rpx;
+  font-weight: bold;
+  width: 75%;
   display: flex;
+  line-height: 40rpx;
   justify-content: flex-start;
-}
-
-.centers {
-  height: 34rpx;
-  display: flex;
   align-items: center;
 }
 
@@ -216,16 +224,19 @@
   height: auto;
   background-color: #fff;
 }
-.btndNo{
-  background-color: #F6F6F6!important;
-  color: #ccc!important;
-  background-image: none!important;
+
+.btndNo {
+  background-color: #f6f6f6 !important;
+  color: #ccc !important;
+  background-image: none !important;
   border-radius: 40rpx;
   font-size: 28rpx;
 }
-.List1:last-child{
+
+.List1:last-child {
   margin-bottom: 20rpx;
 }
+
 .title {
   width: 90%;
   box-sizing: border-box;
@@ -257,31 +268,39 @@
 .titleText {
   font-size: 28rpx;
   font-weight: bold;
-  width: 50%;
+  width: 75%;
+  line-height: 50rpx;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .between {
   width: 100%;
 }
-.bb{
+
+.bb {
   font-size: 24rpx;
 }
+
+.mr20 {
+  margin-right: 20rpx;
+}
+
 .text1 {
-  border: 2rpx solid #fe9b84;
+  border: 2rpx solid #f93736;
   box-sizing: border-box;
-  width: 30%;
+  width: 100%;
   height: 60rpx;
+  padding: 0 20rpx;
   line-height: 60rpx;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-right: 20rpx;
   font-size: 28rpx;
   text-align: center;
   border-radius: 40rpx;
-  color: #fe9b84;
+  color: #f93736;
 }
 
 .btnd1 {
@@ -292,7 +311,6 @@
   text-align: center;
   border: none;
   color: #fff;
-
   background-image: linear-gradient(180deg, #ff393a, #ff5e38);
 }
 
@@ -306,7 +324,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   width: 450rpx;
   display: flex;
   justify-content: center;

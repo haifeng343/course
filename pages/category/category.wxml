@@ -90,3 +90,31 @@
     <view>暂无查询结果</view>
   </view>
 </view>
+
+
+<view wx:for="{{popList}}" wx:key wx:for-item="item1">
+  <view wx:if="{{item1.pop==true}}">
+    <view class='fatherPop' catchtouchmove='true'></view>
+    <view class='poFixed'>
+      <cover-view class='flex-center'>
+        <cover-view class='flexBetween' wx:if="{{item1.ShowClose}}">
+          <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10000?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10000?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
+          <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10001?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10001?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
+          <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10002?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10002?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
+        </cover-view>
+        <cover-view class='flexBetween centered'>
+          <cover-image wx:if="{{item1.ShowClose}}" src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10003?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10003?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
+          <cover-image src='{{item1.ImgUrlShow}}' style="width:{{windowWidth*item1.ShowImgWidth*1.0/100}}rpx;" data-actiontype="{{item1.ActionType}}" data-actionparams="{{item1.ActionParams}}" mode='aspectFill' data-executeparams="{{item1.ExecuteParams}}" data-popId="{{item1.Id}}"
+            bindtap='popclick' data-index="{{index}}" class='hongbao'></cover-image>
+          <cover-image wx:if="{{item1.ClosePositionX}}<10000 && item1.ShowClose" src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX<10000?'shutDown':''}}" mode='aspectFill' class='shut' style='top:{{item1.ClosePositionY}}rpx;left:{{item1.ClosePositionX}}rpx;width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
+          <cover-image wx:if="{{item1.ShowClose}}" src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10004?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10004?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
+        </cover-view>
+        <cover-view class='flexBetween' wx:if="{{item1.ShowClose}}">
+          <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10005?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10005?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
+          <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10006?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10006?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
+          <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10007?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10007?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
+        </cover-view>
+      </cover-view>
+    </view>
+  </view>
+</view>
