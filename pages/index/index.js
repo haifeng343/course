@@ -2,7 +2,7 @@
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-var setTime;
+
 const app = getApp();
 
 Page({
@@ -68,36 +68,10 @@ Page({
 
     that.banner();
     that.init();
-    that._popList();
+    // that._popList();
     that.hasTypeList();
     that.data.isLoaded = true;
-  },
-  //启动弹窗关闭定时器
-  closeInterval: function(closeTime, index) {
-    let that = this;
-    if (setTime != null) {
-      clearInterval(setTime);
-    }
-    if (closeTime <= 0) {
-      return;
-    }
-    setTime = setInterval(function() {
-      let temp = that.data.popList;
-      temp[index].pop = false;
-      if (temp.length > index + 1) {
-        temp[index + 1].pop = true
-        closeTime = temp[index + 1].CloseTime;
-        index = index + 1;
-      } else {
-        clearInterval(setTime);
-        closeTime = -1;
-        index = index + 1;
-      }
-      that.setData({
-        popList: temp
-      })
-      that.closeInterval(closeTime, index);
-    }, closeTime);
+    this.selectComponent('#pop').getData('index');
   },
   //弹窗列表
   _popList: function() {
@@ -128,14 +102,14 @@ Page({
       false)
   },
   //点击弹窗图片事件
-  popclick: function(e) {
+  popclickFn: function(e) {
     let that = this;
     console.log(e);
-    let actiontype = e.currentTarget.dataset.actiontype;
-    let actionparams = e.currentTarget.dataset.actionparams;
-    let executeparams = e.currentTarget.dataset.executeparams;
-    let index = e.currentTarget.dataset.index;
-    let popId = e.currentTarget.dataset.popid;
+    let actiontype = e.detail.actiontype;
+    let actionparams = e.detail.actionparams;
+    let executeparams = e.detail.executeparams;
+    let index = e.detail.index;
+    let popId = e.detail.popid;
     if (executeparams == 'receiveTasks') {
       that.receiveTasks(popId, function() {
         if (actiontype == 1) {
@@ -191,23 +165,6 @@ Page({
         })
       }
     }
-  },
-  //关闭弹窗按钮
-  shutDown: function(e) {
-    let that = this;
-    if (setTime != null) {
-      clearInterval(setTime);
-    }
-    let index = e.currentTarget.dataset.index;
-    let temp = that.data.popList;
-    temp[index].pop = false;
-    if (temp.length > index + 1) {
-      temp[index + 1].pop = true;
-      that.closeInterval(temp[index + 1].CloseTime, index + 1);
-    }
-    that.setData({
-      popList: temp
-    })
   },
   hasTypeList: function() {
     let that = this;
