@@ -34,9 +34,9 @@ Page({
     let logintype = options.logintype;
     if (logintype == 1) {
       //被动登录
-      that._popList("login_bd");
+      this._popList("login_bd");
     }else{
-      that._popList("login_zd");
+      this._popList("login_zd");
     }
   },
   //启动弹窗关闭定时器

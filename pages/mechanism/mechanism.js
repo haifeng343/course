@@ -1,9 +1,12 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 var setTime;
+const app = getApp();
 Page({
-
   data: {
+    statusBarHeight: app.globalData.statusBarHeight,
+    windowHeight: app.globalData.windowHeight,
+    windowWidth: app.globalData.windowWidth,
     imgUrls: [],
     autoplay: true, //是否自动播放
     indicatorDots: false, //指示点
@@ -14,13 +17,15 @@ Page({
     storeId: '', //门店ID
     groupId: '', //分组Id
     Info: {},
+    type: "",//团单模式
+    sheetId:"",//团单Id
   },
   onLoad: function(options) {
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare().then(res => {
+    shareApi.getShare("/pages/mechanism/mechanism", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
         obj: res.Data,
@@ -30,12 +35,14 @@ Page({
     this.setData({
       storeId: options.storeId || '',
       groupId: options.groupId || '',
+      type: options.type || "",
+      sheetId:options.sheetId||""
     })
     this.init();
     this._popList();
   },
   //启动弹窗关闭定时器
-  closeInterval: function (closeTime, index) {
+  closeInterval: function(closeTime, index) {
     let that = this;
     if (setTime != null) {
       clearInterval(setTime);
@@ -43,7 +50,7 @@ Page({
     if (closeTime <= 0) {
       return;
     }
-    setTime = setInterval(function () {
+    setTime = setInterval(function() {
       let temp = that.data.popList;
       temp[index].pop = false;
       if (temp.length > index + 1) {
@@ -62,35 +69,35 @@ Page({
     }, closeTime);
   },
   //弹窗列表
-  _popList: function () {
+  _popList: function() {
     let that = this;
     var url = 'user/pop/list';
     var params = {
       GroupToken: 'mechanism',
     }
-    netUtil.postRequest(url, params, function (res) {
-      let temp = res.Data;
-      temp.forEach((item, index) => {
-        if (index == 0) {
-          item.pop = true;
-        } else {
-          item.pop = false
+    netUtil.postRequest(url, params, function(res) {
+        let temp = res.Data;
+        temp.forEach((item, index) => {
+          if (index == 0) {
+            item.pop = true;
+          } else {
+            item.pop = false
+          }
+        })
+        that.setData({
+          popList: temp,
+        });
+        if (temp.length > 0) {
+          that.closeInterval(temp[0].CloseTime, 0);
         }
-      })
-      that.setData({
-        popList: temp,
-      });
-      if (temp.length > 0) {
-        that.closeInterval(temp[0].CloseTime, 0);
-      }
-    },
+      },
       null,
       false,
       false,
       false)
   },
   //点击弹窗图片事件
-  popclick: function (e) {
+  popclick: function(e) {
     let that = this;
     console.log(e);
     let actiontype = e.currentTarget.dataset.actiontype;
@@ -99,7 +106,7 @@ Page({
     let index = e.currentTarget.dataset.index;
     let popId = e.currentTarget.dataset.popid;
     if (executeparams == 'receiveTasks') {
-      that.receiveTasks(popId, function () {
+      that.receiveTasks(popId, function() {
         if (actiontype == 1) {
           if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
             wx.switchTab({
@@ -155,7 +162,7 @@ Page({
     }
   },
   //关闭弹窗按钮
-  shutDown: function (e) {
+  shutDown: function(e) {
     let that = this;
     if (setTime != null) {
       clearInterval(setTime);
@@ -171,7 +178,7 @@ Page({
       popList: temp
     })
   },
-  call:function(e) {
+  call: function(e) {
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.mobile,
     })
@@ -187,17 +194,18 @@ Page({
       that.setData({
         Info: res.Data
       })
-    },null,false,false,false);
+    }, null, false, false, false);
   },
-  longtap:function() {
+  longtap: function() {
     console.log(564164168541)
   },
-  courseDetail:function(e) {
+  courseDetail: function(e) {
+    let storeid = this.data.storeId + 'NUV' + this.data.groupId
     wx.navigateTo({
-      url: '/pages/courseDetail/courseDetail?Id='+e.currentTarget.dataset.id,
+      url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id + '&type=' + this.data.type + '&sheetId=' + this.data.sheetId + '&storeId=' + storeid,
     })
   },
-  onPullDownRefresh:function() {
+  onPullDownRefresh: function() {
     this.init();
     wx.stopPullDownRefresh();
   },

@@ -1,9 +1,12 @@
 
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
+const app = getApp();
 Page({
 
   data: {
+    statusBarHeight: app.globalData.statusBarHeight,
+    windowHeight: app.globalData.windowHeight,
     date: '', //不填写默认今天日期，填写后是默认日期
     date2:[],
     dataStart: '', //有效日期
@@ -130,7 +133,7 @@ Page({
     }
     
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare().then(res => {
+    shareApi.getShare("/pages/cashBack/cashBack",0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
         obj: res.Data,

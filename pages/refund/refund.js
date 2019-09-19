@@ -1,8 +1,12 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 let baseUrl = "https://qxbclient.guditech.com/";
+const app = getApp();
+
 Page({
   data: {
+    statusBarHeight: app.globalData.statusBarHeight,
+    windowHeight: app.globalData.windowHeight,
     array: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
     index: 0,
     objectArray: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
@@ -26,7 +30,7 @@ Page({
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare().then(res => {
+    shareApi.getShare("/pages/refund/refund",0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
         obj: res.Data,

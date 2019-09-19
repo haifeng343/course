@@ -6,6 +6,8 @@ var shareApi = require("../../utils/share.js");
 
 Page({
   data: {
+    statusBarHeight: app.globalData.statusBarHeight,
+    windowHeight: app.globalData.windowHeight,
     nearList: [],
     addressList: [],
     ads: "",
@@ -27,7 +29,7 @@ Page({
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare().then(res => {
+    shareApi.getShare("/pages/selectAddress/selectAddress",0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
         obj: res.Data,

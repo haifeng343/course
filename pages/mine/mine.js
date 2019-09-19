@@ -1,12 +1,12 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
+var setTime;
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
+    statusBarHeight: app.globalData.statusBarHeight,
+    windowHeight: app.globalData.windowHeight,
+    windowWidth: app.globalData.windowWidth,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: {},
     recommandCode: '',
@@ -156,15 +156,153 @@ Page({
     wx.setStorageSync('promptText', this.data.promptText);
     var userInfo = wx.getStorageSync('userInfo');
     var recommand = userInfo.RecommandCode;
-    shareApi.getShare().then(res => {
+    shareApi.getShare("/pages/mine/mine",0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
         obj: res.Data,
       })
     })
+    this._popList();
   },
   init: function() {
 
+  },
+  //启动弹窗关闭定时器
+  closeInterval: function (closeTime, index) {
+    let that = this;
+    if (setTime != null) {
+      clearInterval(setTime);
+    }
+    if (closeTime <= 0) {
+      return;
+    }
+    setTime = setInterval(function () {
+      let temp = that.data.popList;
+      temp[index].pop = false;
+      if (temp.length > index + 1) {
+        temp[index + 1].pop = true
+        closeTime = temp[index + 1].CloseTime;
+        index = index + 1;
+      } else {
+        clearInterval(setTime);
+        closeTime = -1;
+        index = index + 1;
+      }
+      that.setData({
+        popList: temp
+      })
+      that.closeInterval(closeTime, index);
+    }, closeTime);
+  },
+  //弹窗列表
+  _popList: function () {
+    let that = this;
+    var url = 'user/pop/list';
+    var params = {
+      GroupToken: 'mine',
+    }
+    netUtil.postRequest(url, params, function (res) {
+      let temp = res.Data;
+      temp.forEach((item, index) => {
+        if (index == 0) {
+          item.pop = true;
+        } else {
+          item.pop = false
+        }
+      })
+      that.setData({
+        popList: temp,
+      });
+      if (temp.length > 0) {
+        that.closeInterval(temp[0].CloseTime, 0);
+      }
+    },
+      null,
+      false,
+      false,
+      false)
+  },
+  //点击弹窗图片事件
+  popclick: function (e) {
+    let that = this;
+    console.log(e);
+    let actiontype = e.currentTarget.dataset.actiontype;
+    let actionparams = e.currentTarget.dataset.actionparams;
+    let executeparams = e.currentTarget.dataset.executeparams;
+    let index = e.currentTarget.dataset.index;
+    let popId = e.currentTarget.dataset.popid;
+    if (executeparams == 'receiveTasks') {
+      that.receiveTasks(popId, function () {
+        if (actiontype == 1) {
+          if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
+            wx.switchTab({
+              url: actionparams,
+            })
+          } else {
+            wx.navigateTo({
+              url: actionparams,
+            })
+          }
+        } else if (actiontype == 2) {
+          wx.navigateTo({
+            url: '/pages/WebView/WebView?path=' + actionparams,
+          })
+        }
+        if (actiontype == 1 || actiontype == 2) {
+          let temp = that.data.popList;
+          temp[index].pop = false;
+          if (temp.length > index + 1) {
+            temp[index + 1].pop = true
+          }
+          that.setData({
+            popList: temp
+          })
+        }
+      });
+    } else {
+      if (actiontype == 1) {
+        if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
+          wx.switchTab({
+            url: actionparams,
+          })
+        } else {
+          wx.navigateTo({
+            url: actionparams,
+          })
+        }
+      } else if (actiontype == 2) {
+        wx.navigateTo({
+          url: '/pages/WebView/WebView?path=' + actionparams,
+        })
+      }
+      if (actiontype == 1 || actiontype == 2) {
+        let temp = that.data.popList;
+        temp[index].pop = false;
+        if (temp.length > index + 1) {
+          temp[index + 1].pop = true
+        }
+        that.setData({
+          popList: temp
+        })
+      }
+    }
+  },
+  //关闭弹窗按钮
+  shutDown: function (e) {
+    let that = this;
+    if (setTime != null) {
+      clearInterval(setTime);
+    }
+    let index = e.currentTarget.dataset.index;
+    let temp = that.data.popList;
+    temp[index].pop = false;
+    if (temp.length > index + 1) {
+      temp[index + 1].pop = true;
+      that.closeInterval(temp[index + 1].CloseTime, index + 1);
+    }
+    that.setData({
+      popList: temp
+    })
   },
   integral: function(e) {
     if (this.data.usertoken) {

@@ -1,8 +1,11 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
+const app = getApp();
 Page({
 
   data: {
+    statusBarHeight: app.globalData.statusBarHeight,
+    windowHeight: app.globalData.windowHeight,
     hasAddress: true,
     items: [],
     pl: '',
@@ -40,8 +43,20 @@ Page({
       url: '/pages/editAddress/editAddress?ids=' + 1,
     })
   },
-  onLoad() {
-    this.init();
+  onLoad: function (options) {
+    let that = this;
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+    shareApi.getShare("/pages/address/address", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      that.setData({
+        obj: res.Data,
+
+      })
+    })
+    that.init();
   },
   init: function() {
     let usertoken = wx.getStorageSync('usertoken');

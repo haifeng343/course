@@ -1,3 +1,10 @@
+<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
 <view class='logTop between'>
   <view class='start'>
     <picker mode="multiSelector" value="{{date2}}"  range='{{array}}' fields="month" bindchange="bindDateChange">
@@ -30,3 +37,4 @@
     </view>
   </view>
 </view>
+</movable-area>

@@ -1,3 +1,10 @@
+<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
 <view class='searchTop'>
   <view class='topInput'>
     <input type='search' placeholder-class='search-placeholder' bindinput='setSearchName' class='search' value='{{SearchName}}' placeholder='机构名称/课程'></input>
@@ -62,3 +69,4 @@
     <view>暂无查询结果</view>
   </view>
 </view>
+</movable-area>

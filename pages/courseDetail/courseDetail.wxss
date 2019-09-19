@@ -5,7 +5,6 @@
   z-index: 0;
   background-color: #fff;
 }
-
 swiper {
   height: 100%;
   padding-top: 25rpx;
@@ -15,7 +14,25 @@ swiper {
 swiper-item {
   text-align: center;
 }
-
+.typeFooter{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  line-height: 100rpx;
+  background-color: #29D9D6;
+  color: #fff;
+  position: fixed;
+  justify-content: space-between;
+  bottom: 0;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  padding: 0 5%;
+}
+.joinDetail{
+  width: 34rpx;
+  height: 34rpx;
+}
 .img1 {
   width: 96%;
   height: 100%;
@@ -116,11 +133,14 @@ button {
   display: flex;
   justify-content: flex-end;
 }
-
+.propList{
+  width: 100%;
+  height: auto;
+  margin-bottom: 100rpx;
+}
 .prompt {
   margin-top: 20rpx;
 }
-
 .prompTitle {
   font-size: 28rpx;
   font-weight: bold;

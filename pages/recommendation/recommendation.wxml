@@ -1,3 +1,10 @@
+<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
 <view class='recommendation'>
   <input class='Input' type='text' bindinput='setCode' value='{{code}}' placeholder='请输入推荐人的分享码'></input>
   <text class='prompt'>温馨提示： 推荐人只允许设置一次，成功后不可修改</text>
@@ -11,3 +18,4 @@
   </view>
   <text class='t1'>温馨提示：推荐人只允许设置一次，设置成功后不可修改</text>
 </modal>
+</movable-area>

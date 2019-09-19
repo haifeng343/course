@@ -1,17 +1,17 @@
 const app = getApp()
 var shareApi = require("../../utils/request.js");
 var shareApi = require("../../utils/share.js");
-
 Page({
-  /**
-   * 生命周期函数--监听页面加载
-   */
+ data:{
+   statusBarHeight: app.globalData.statusBarHeight,
+   windowHeight: app.globalData.windowHeight,
+ },
   onLoad: function (options) {
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare().then(res => {
+    shareApi.getShare("/pages/city/city",0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       this.setData({
         obj: res.Data,

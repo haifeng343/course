@@ -1,3 +1,10 @@
+<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
 <view class='Top'>
   <view class='List between'>
     <view class="start" style='width:100%'>订单编号：<text class='ml ml10'>{{detail.OrderSn}}</text></view>
@@ -135,3 +142,4 @@
 <view class='pay' wx:if="{{detail.UseStatus==5}}">
   <button class='btnd end' bindtap='cancelOrder' data-Id="{{Id}}">取消退款</button>
 </view>
+</movable-area>

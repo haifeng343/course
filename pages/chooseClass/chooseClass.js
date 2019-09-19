@@ -1,10 +1,13 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 var setTime;
+const app = getApp();
 Page({
 
-
   data: {
+    statusBarHeight: app.globalData.statusBarHeight,
+    windowHeight: app.globalData.windowHeight,
+    windowWidth: app.globalData.windowWidth,
     Longitude: "",
     Latitude: "",
     GroupList: [],
@@ -40,6 +43,7 @@ Page({
     PrizeAmount:'',//奖励金
     count:'',//勾选课程数量
     VoucherCount:"",
+    isLoad:false,//是否需要加载
   },
   onLoad(options) {
     let that = this;
@@ -47,7 +51,7 @@ Page({
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/choose/choose",0).then(res => {
+    shareApi.getShare("/pages/chooseClass/chooseClass",0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       that.setData({
         obj: res.Data,
@@ -72,6 +76,15 @@ Page({
     }
     that.init();
     that._popList();
+  },
+  onShow(){
+    if (this.data.isLoad==true) {
+      console.log(this.data.storeIdGotoTemp)
+      this.setData({
+        isLoad:false
+      });
+      this.init();
+    }
   },
   //启动弹窗关闭定时器
   closeInterval: function (closeTime, index) {
@@ -218,7 +231,6 @@ Page({
     if (isHideLoding == false) {
       hideLoding = false;
     }
-    console.log(hideLoding)
     var that = this;
     var url = 'sheet/details';
     var params = {
@@ -596,7 +608,7 @@ Page({
   },
   courseDetail(e) {
     wx.navigateTo({
-      url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id,
+      url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id+'&type='+this.data.type+'&sheetId='+this.data.Id,
     })
   },
   onPullDownRefresh: function() {
@@ -806,9 +818,8 @@ Page({
     })
   },
   mechanismDetail: function(e) {
-    console.log(e)
     wx.navigateTo({
-      url: '/pages/mechanism/mechanism?groupId=' + e.currentTarget.dataset.groupid + '&storeId=' + e.currentTarget.dataset.storeid,
+      url: '/pages/mechanism/mechanism?groupId=' + e.currentTarget.dataset.groupid + '&storeId=' + e.currentTarget.dataset.storeid + '&type=' + this.data.type + '&sheetId=' + this.data.Id
     })
   },
   onShareAppMessage: function(res) {

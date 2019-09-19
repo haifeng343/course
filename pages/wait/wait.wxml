@@ -1,14 +1,24 @@
-<view>
-  <image class='wait' src='../../images/wait.png'></image>
-  <view class='text'>等待完成支付</view>
-</view>
-<view class='heng'></view>
- <view class='title'>
-  <view>订单号: {{ordersn}}</view>
-  <view>支付金额: <text class='red'>￥{{payamount}}</text></view>
-</view>
+<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
+  <view>
+    <image class='wait' src='../../images/wait.png'></image>
+    <view class='text'>等待完成支付</view>
+  </view>
+  <view class='heng'></view>
+  <view class='title'>
+    <view>订单号: {{ordersn}}</view>
+    <view>支付金额:
+      <text class='red'>￥{{payamount}}</text>
+    </view>
+  </view>
 
-<view class='around'>
-  <button class='btnd btnd1' bindtap='groupTo'>返回首页</button>
-  <button class='btnd' bindtap='bindPayok'>已完成支付</button>
-</view>
+  <view class='around'>
+    <button class='btnd btnd1' bindtap='groupTo'>返回首页</button>
+    <button class='btnd' bindtap='bindPayok'>已完成支付</button>
+  </view>
+</movable-area>

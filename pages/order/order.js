@@ -2,14 +2,13 @@ var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 var setTime;
 const app = getApp();
-Page({
 
-  /**
-   * 页面的初始数据
-   */
+Page({
   data: {
     statusBarHeight: app.globalData.statusBarHeight,
     windowHeight: app.globalData.windowHeight,
+    statusBarHeight: app.globalData.statusBarHeight,
+    windowWidth: app.globalData.windowWidth,
     navbarActiveIndex: 0,
     navbarTitle: [
       "全部订单",
