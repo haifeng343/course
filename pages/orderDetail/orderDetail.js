@@ -4,8 +4,8 @@ const app = getApp();
 
 Page({
   data: {
-    statusBarHeight: app.globalData.statusBarHeight,
-    windowHeight: app.globalData.windowHeight,
+    windowHeight: '',
+    windowWidth: '',
     showCode: true, //条形码弹窗
     showDialog: true, //退款失败 查看原因弹窗
     showSuccess: false, //退款详情 成功弹窗
@@ -14,29 +14,35 @@ Page({
     kd: '',
     ItemList: [],
     detail: {},
-    PayAmount:'',
-    RefundFailReason:'',
+    PayAmount: '',
+    RefundFailReason: '',
+    formId: "",
   },
   onLoad(options) {
+    let that = this;
+    that.setData({
+      windowHeight: app.getGreen(0).windowHeight,
+      windowWidth: app.getGreen(0).windowWidth,
+    });
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/orderDetail/orderDetail",0).then(res => {
+    shareApi.getShare("/pages/orderDetail/orderDetail", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      this.setData({
+      that.setData({
         obj: res.Data,
-
       })
     })
-    this.setData({
-      Id: options.Id,
-      Status: options.status,
-      kd: options.kd
+    that.setData({
+      Id: options.Id || "",
+      Status: options.status || "",
+      kd: options.kd || "",
+      formId: options.formId || "",
     })
-    this.init();
+    that.init();
   },
-  init: function () {
+  init: function() {
     this.getData();
   },
   getData: function() {
@@ -46,25 +52,22 @@ Page({
       Id: that.data.Id,
       Status: that.data.Status,
     }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
-
+    netUtil.postRequest(url, params, function(res) {
       that.setData({
         detail: res.Data,
         ItemList: res.Data.ItemList,
-        PayAmount: Number(res.Data.PayAmount/100).toFixed(2),
+        PayAmount: Number(res.Data.PayAmount / 100).toFixed(2),
         RefundFailReason: res.Data.RefundFailReason
       })
-    }); //调用get方法情就是户数
+    }, null, false, false, false, that.data.formId);
   },
   //条形码弹窗
   codeShow: function() {
-    let that = this;
     this.setData({
       showCode: false
     })
   },
   dialogShow: function() {
-    let that = this;
     this.setData({
       showCode: true
     })
@@ -75,7 +78,7 @@ Page({
     wx.showModal({
       title: '退款失败详情',
       content: that.data.RefundFailReason,
-      showCancel:false,
+      showCancel: false,
     })
   },
   //取消退款
@@ -129,7 +132,7 @@ Page({
       showSuccess: true
     })
   },
-  onPullDownRefresh:function() {
+  onPullDownRefresh: function() {
     this.getData();
     wx.stopPullDownRefresh();
   },
@@ -138,7 +141,7 @@ Page({
       showSuccess: !this.data.showSuccess
     });
   },
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

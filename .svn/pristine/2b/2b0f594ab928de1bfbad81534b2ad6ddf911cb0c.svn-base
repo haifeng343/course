@@ -1,0 +1,56 @@
+.absolute {
+  width: 100%;
+  overflow: hidden;
+  height: 100vh !important;
+  transition: width 2s;
+  -moz-transition: width 2s;
+  -webkit-transition: width 2s;
+  -o-transition: width 2s;
+  position: absolute;
+  background: #fff;
+  z-index: 1;
+}
+.dialog {
+  position: absolute;
+  width: 500rpx;
+  height: 500rpx;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border-radius: 15rpx;
+  background-color: #fff;
+  z-index: 9;
+}
+.dialog p {
+  font-size: 30rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: -10rpx;
+}
+.dialog button {
+  background-color: #cc3b40;
+  color: #fff;
+  font-size: 28rpx;
+  width: 80%;
+  margin-left: 10%;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-top: 25rpx;
+  z-index: 99;
+}
+.binding {
+  width: 100%;
+  height: 300rpx;
+  margin-bottom: 60rpx;
+}
+.close {
+  width: 50rpx;
+  height: 50rpx;
+  z-index: 99;
+  float: right;
+  position: relative;
+  right: -60rpx;
+  bottom: 45rpx;
+}

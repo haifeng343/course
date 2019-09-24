@@ -1,15 +1,15 @@
 /**
  * 供外部post请求调用
  */
-function post(url, params, onSuccess, onFailed, isShowLoading = true, isShowError = true, isnavigateToLogin = true) {
-  request(url, params, "POST", onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin);
+function post(url, params, onSuccess, onFailed, isShowLoading = true, isShowError = true, isnavigateToLogin = true, formId = "") {
+  request(url, params, "POST", onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin, formId);
 }
 
 /**
  * 供外部get请求调用
  */
-function get(url, params, onSuccess, onFailed, isShowLoading = true, isShowError = true, isnavigateToLogin = true) {
-  request(url, params, "GET", onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin);
+function get(url, params, onSuccess, onFailed, isShowLoading = true, isShowError = true, isnavigateToLogin = true, formId = "") {
+  request(url, params, "GET", onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin, formId);
 }
 
 /**
@@ -25,7 +25,7 @@ function get(url, params, onSuccess, onFailed, isShowLoading = true, isShowError
 // const baseUrl = "https://qxbclient.guditech.com/";
 const baseUrl = "https://test.guditech.com/rocketclient/";
 
-function request(url, params, method, onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin) {
+function request(url, params, method, onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin, formId) {
   if (isShowLoading) {
     wx.showLoading({
       title: '玩命加载中...',
@@ -39,8 +39,9 @@ function request(url, params, method, onSuccess, onFailed, isShowLoading, isShow
   let deviceNo = wx.getStorageSync("deviceNo");
   if (!deviceNo) {
     //生成guid唯一码
-    let guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    let guid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0,
+        v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
     wx.setStorageSync("deviceNo", guid);
@@ -56,7 +57,8 @@ function request(url, params, method, onSuccess, onFailed, isShowLoading, isShow
       'channelCode': 'wechat',
       'appVersion': '1.0.1',
       'userToken': usertoken,
-      'deviceNo': deviceNo
+      'deviceNo': deviceNo,
+      "formId": formId
     },
     success: function(res) {
       if (isShowLoading) {
@@ -70,6 +72,9 @@ function request(url, params, method, onSuccess, onFailed, isShowLoading, isShow
             onSuccess(res.data); //request success
           }
         } else if (res.data.ErrorCode == 301) {
+          if (onFailed) {
+            onFailed();
+          }
           wx.clearStorageSync('userInfo');
           wx.clearStorageSync('usertoken');
           wx.clearStorageSync('wallet');

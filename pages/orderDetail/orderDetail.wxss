@@ -1,6 +1,4 @@
-page{
-  padding-bottom: 140rpx;
-}
+
 .status{
   font-size: 28rpx;
   color: #000;
@@ -28,8 +26,8 @@ page{
   margin-bottom: 20rpx;
 }
 .code{
-  width: 30rpx;
-  height: 24rpx;
+  width: 34rpx;
+  height: 34rpx;
 }
 .ml{
   display: block;
@@ -45,15 +43,10 @@ page{
   overflow: hidden;
   position: relative;
 }
-.well{
-  padding: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height:36rpx;
-}
+
 .courseRow {
-  width: 65%;
+  display: flex;
+  justify-content: flex-start;
 }
 .Right{
   width: 75%;
@@ -78,11 +71,7 @@ page{
   margin-right: 20rpx;
   border-radius: 15rpx;
 }
-.courseRow{
-  width: 100%;
-  font-size: 24rpx;
-  box-sizing: border-box;
-}
+
 .mt1{
   margin-top: 5rpx;
 }
@@ -92,33 +81,28 @@ page{
 .rowImg{
   width: 28rpx;
   height: 28rpx;
-  margin-right: 5rpx;
-  display: flex;
-  margin-top: 4rpx;
+  margin-right: 6rpx;
 }
 .ml15{
   margin-left: 15rpx;
 }
-.starts{
+
+.css_img_frame {
   display: flex;
+  height: 36rpx;
   justify-content: flex-start;
+  align-items: center;
 }
-.courseRow .start{
-  width: 60%;
-}
-.startd{
-  width: 100%;
-  height: auto;
-  color: #5b5b5b;
-  display: flex;
-  justify-content: flex-start; 
-}
-.address{
+
+.css_project_text {
   color: #5b5b5b;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 24rpx; 
+  line-height: 36rpx;
 }
+
 .bt1{
   font-size: 28rpx;
   height: 60rpx;
@@ -152,13 +136,13 @@ page{
 }
 .dialog-title{
   font-size: 32rpx;
-  margin-bottom: 25rpx;
+  margin-bottom: 20rpx;
   text-align: center;
 }
 .dialog-code{
   font-size: 28rpx;
   text-align: center;
-  margin-bottom: 20rpx;
+  margin-bottom: 25rpx;
 }
 .pay{
   display: flex;
@@ -190,7 +174,8 @@ page{
   margin-top: 0;
 }
 .codeImg{
-  width: 50%;
+  width: 350rpx;
+  height: 350rpx;
   display: flex;
   align-items: center;
   margin: 0 auto;

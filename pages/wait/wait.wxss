@@ -32,6 +32,8 @@ page{
 }
 .around{
   margin-top: 30rpx;
+  display: flex;
+  justify-content: space-around;
 }
 
 

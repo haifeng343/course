@@ -69,9 +69,7 @@ page {
   background-color: #fff;
   margin-top: 20rpx;
 }
-.exList:last-child{
-  padding-bottom: 140rpx;
-}
+
 .groupDetail_content {
   font-size: 24rpx;
   line-height: 36rpx;
@@ -81,7 +79,7 @@ page {
   background-color: #fff;
   width: 100%;
   height: auto;
-  padding: 20rpx 5% 0;
+  padding: 20rpx 5%;
   box-sizing: border-box;
 }
 
@@ -297,7 +295,8 @@ swiper-item {
 }
 
 .courseTitle {
-  width: 85%;
+  width: 93%;
+  line-height: 40rpx;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -331,11 +330,6 @@ swiper-item {
   width: 0;
   height: 0;
   color: transparent;
-}
-
-.relative {
-  position: relative;
-  line-height: 40rpx;
 }
 
 .absolute {
@@ -394,12 +388,12 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 .detail {
   display: flex;
   justify-content: flex-start;
-  line-height: 36rpx;
 }
 
 .detailImg {
   width: 28rpx;
   height: 28rpx;
+  margin-right: 6rpx;
 }
 
 .name {
@@ -411,43 +405,17 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   line-height: 36rpx;
 }
 
-.addrLong {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-}
-
 .long {
   width: 20%;
   text-align: right;
   color: #8d8d8d;
 }
 
-.around {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  font-size: 24rpx;
-}
-
 .address {
-  width: 90%;
   word-break: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: #5b5b5b;
-}
-
-.ring {
-  word-break: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.ring:first-child {
-  margin-right: 36rpx;
 }
 
 .disclaimerList {
@@ -516,8 +484,6 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 }
 
 .centers {
-  height: 36rpx;
-  width: 34rpx;
   display: flex;
   align-items: center;
 }

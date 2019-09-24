@@ -1,8 +1,8 @@
-<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
-  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+<movable-area style="height:{{windowHeight-statusBarHeight-90}}rpx;width:100%;">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx" style='top:{{statusBarHeight+90}}rpx;'>
     <button open-type='contact' class='contact contact_left'>客服</button>
   </movable-view>
-  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2' y="{{statusBarHeight+obj.CustomerServiceInfo.PositionHight}}">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2' y="{{obj.CustomerServiceInfo.PositionHight}}" style='top:{{statusBarHeight+90}}rpx;'>
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
   <view>
@@ -21,7 +21,7 @@
         <block>
           <swiper-item wx:for="{{imgUrls}}" data-ActionType="{{item.ActionType}}" wx:key data-path="{{item.ImgPath}}" bindtap="bindBannerTo">
             <view class='box'>
-              <image src='{{item.ImgUrl}}' mode="scaleToFill" lazy-load="true"></image>
+              <image src='{{item.ImgUrl}}' mode="aspectFill" lazy-load="true"></image>
             </view>
           </swiper-item>
         </block>
@@ -33,9 +33,13 @@
       </view>
     </view>
     <view class='categoryList' wx:if="{{typeList.length>1}}">
-      <view class='Item' wx:for="{{typeList}}" wx:key wx:for-item="k" data-Id="{{k.Id}}" data-name="{{k.Name}}" bindtap='navtoCategory'>
-        <image src='{{k.ImgUrlShow}}' mode='aspectFill' class='categoryImg'></image>
-        <view class='ategoryText'>{{k.Name}}</view>
+      <view class='Item' wx:for="{{typeList}}" wx:key wx:for-item="k">
+        <form bindsubmit="navtoCategory" report-submit="true" data-Id="{{k.Id}}" data-name="{{k.Name}}">
+          <button formType="submit">
+            <image src='{{k.ImgUrlShow}}' mode='aspectFill' class='categoryImg'></image>
+            <view class='ategoryText'>{{k.Name}}</view>
+          </button>
+        </form>
       </view>
     </view>
     <view class='groupList'>
@@ -112,6 +116,10 @@
     </view>
   </view>
 </view> -->
+<<<<<<< HEAD
     <pop id='pop' bind:popclick="popclickFn"></pop>
+=======
+    <pop id='pop'></pop>
+>>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
   </view>
 </movable-area>

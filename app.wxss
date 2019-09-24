@@ -25,16 +25,19 @@ picker {
   position: fixed;
   width: 100rpx;
   height: 100rpx;
-  z-index: 99999;
+  z-index: 999;
   left: 0,
 }
 .moveView2{
   position: fixed;
   width: 100rpx;
   height: 100rpx;
-  z-index: 99999;
+  z-index: 999;
   right: 0;
   left: 87%;
+}
+.ml40{
+  margin-left: 40rpx;
 }
 .contact{
   width: 100%;
@@ -144,21 +147,22 @@ picker {
   justify-content: center;
   flex-direction: column;
   color: #6c6c6c;
-  text-align: center;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  margin: auto;
+}
+
+.no_record_frame {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
 }
 
 .noImg {
   width: 400rpx;
   height: 400rpx;
-  display: flex;
-  justify-content: center;
-  margin: -100rpx auto 0;
 }
 
 .loginBtnd {
@@ -174,7 +178,7 @@ picker {
   line-height: 100rpx;
   text-align: center;
   color: #42dfde;
-  font-size: 32rpx;
+  font-size: 28rpx;
   position: fixed;
   background-color: #fff;
   bottom: 0;
@@ -295,16 +299,13 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   height: 30rpx;
   line-height: 30rpx;
   font-size: 24rpx;
+  text-align: center;
+  border-radius:5rpx;
 }
 
 .company {
   color: #80a5dc;
   background-color: #e6f9fe;
-}
-
-.around {
-  display: flex;
-  justify-content: space-around;
 }
 
 .button-hover {
@@ -345,22 +346,17 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   align-items: center;
 }
 
-.well {
-  background-color: #fff;
-  height: auto;
-  padding: 0 5%;
-}
-
 .boxd {
   width: 100%;
   padding: 20rpx 5%;
   box-sizing: border-box;
   background-color: #fff;
+  margin-top: 20rpx;
 }
 
 .go {
-  width: 30rpx;
-  height: 28rpx;
+  width: 32rpx;
+  height: 32rpx;
 }
 
 .pay {

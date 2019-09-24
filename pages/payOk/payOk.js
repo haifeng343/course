@@ -4,38 +4,53 @@ const app = getApp();
 
 Page({
   data: {
-    statusBarHeight: app.globalData.statusBarHeight,
-    windowHeight: app.globalData.windowHeight,
-    orderId:'',
-    detail:{},
+    windowHeight: '',
+    windowWidth: '',
+    orderId: '',
+    detail: {},
+    type: "",
   },
-  onLoad(options){
+  onLoad(options) {
+    let that = this;
+    that.setData({
+      windowHeight: app.getGreen(0).windowHeight,
+      windowWidth: app.getGreen(0).windowWidth,
+    });
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/payOk/payOk",0).then(res => {
+    shareApi.getShare("/pages/payOk/payOk", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      this.setData({
+      that.setData({
         obj: res.Data,
 
       })
     })
-    this.setData({
-      orderId: options.OrderId
+    that.setData({
+      orderId: options.OrderId || "",
+      type: options.type || "",
     })
-    this.init();
+    if (that.selectComponent("#pop")) {
+      if (that.data.type == 1) {
+        that.selectComponent("#pop").getData("payOk_tuandan");
+      }
+      if (that.data.type == 2) {
+        that.selectComponent("#pop").getData("payOk_tiyanke");
+      }
+    }
+    that.init();
   },
-  init: function () {
+  init: function() {
     this.getData();
   },
-  getData: function () {
+  getData: function() {
     var that = this;
     var url = 'order/pay/issuccess'
     var params = {
       OrderId: that.data.orderId,
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调、
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
       that.setData({
         detail: res.Data,
       })
@@ -43,7 +58,7 @@ Page({
   },
   navto: function(e) {
     wx.navigateTo({
-      url: '/pages/orderDetail/orderDetail?Id=' + e.currentTarget.dataset.id +'&Status='+1,
+      url: '/pages/orderDetail/orderDetail?Id=' + e.currentTarget.dataset.id + '&Status=' + 1,
     })
   },
   groupTo: function() {
@@ -51,7 +66,7 @@ Page({
       url: '/pages/index/index?',
     })
   },
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

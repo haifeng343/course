@@ -1,0 +1,96 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/gobind/gobind",
+    "pages/binding/binding",
+    "pages/courseDetail/courseDetail",
+    "pages/allTeacher/allTeacher",
+    "pages/selectAddress/selectAddress",
+    "pages/order/order",
+    "pages/orderDetail/orderDetail",
+    "pages/chooseClass/chooseClass",
+    "pages/payOk/payOk",
+    "pages/payOrder/payOrder",
+    "pages/refund/refund",
+    "pages/integralLog/integralLog",
+    "pages/callUs/callUs",
+    "pages/setting/setting",
+    "pages/modifyPhone/modifyPhone",
+    "pages/invite/invite",
+    "pages/recommendation/recommendation",
+    "pages/address/address",
+    "pages/editAddress/editAddress",
+    "pages/city/city",
+    "pages/wallet/wallet",
+    "pages/bill/bill",
+    "pages/withdraw/withdraw",
+    "pages/withdrawLog/withdrawLog",
+    "pages/cashBack/cashBack",
+    "pages/cashBackDetail/cashBackDetail",
+    "pages/withdrawDetail/withdrawDetail",
+    "pages/ballanceLog/balanceLog",
+    "pages/bankList/bankList",
+    "pages/addBank/addBank",
+    "pages/searchAddress/searchAddress",
+    "pages/search/search",
+    "pages/keepCarList/keepCarList",
+    "pages/login/login",
+    "pages/share/share",
+    "pages/WebView/WebView",
+    "pages/aboutUs/aboutUs",
+    "pages/wait/wait",
+    "pages/jifen/jifen",
+    "pages/integralList/integralList",
+    "pages/map/map",
+    "pages/inquire/inquire",
+    "pages/mechanism/mechanism",
+    "pages/demo/demo",
+    "pages/car/car",
+    "pages/category/category",
+    "pages/searchCategory/searchCategory",
+    "pages/cashLog/cashLog",
+    "pages/rewradRule/rewradRule",
+    "pages/publick/puclick"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "networkTimeout": {
+    "request": 10000
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#DBDBDB",
+    "selectedColor": "#29D9D5",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "images/indexs.png",
+        "iconPath": "images/index.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "images/orders.png",
+        "iconPath": "images/order.png",
+        "pagePath": "pages/order/order",
+        "text": "订单"
+      },
+      {
+        "selectedIconPath": "images/mines.png",
+        "iconPath": "images/mine.png",
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  }
+}

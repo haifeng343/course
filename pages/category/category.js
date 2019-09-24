@@ -1,13 +1,13 @@
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-var setTime;
+
 const app = getApp();
 Page({
 
   data: {
-    statusBarHeight: app.globalData.statusBarHeight,
-    windowHeight: app.globalData.windowHeight,
+    windowHeight: '',
+    windowWidth: '',
     Id: '', //分类id
     name: '', //课程类型
     ImgType: true, //点击全部商圈设置type值
@@ -27,174 +27,50 @@ Page({
     page: 1, //页码数
     List: [], //数据列表
     districtname: '附近', //城市名称
+    formId: "",
   },
   onLoad: function(options) {
+    let that = this;
+    that.setData({
+      windowHeight: app.getGreen(0).windowHeight,
+      windowWidth: app.getGreen(0).windowWidth,
+    });
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
     shareApi.getShare().then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      this.setData({
+      that.setData({
         obj: res.Data,
       })
     })
-    this.setData({
+    let loc = wx.getStorageSync("loc");
+    that.setData({
       showId: options.Id || 0,
       typeId: options.Id || 0,
       name: options.name || '全部',
-      longitude: options.Longitude || '',
-      latitude: options.Latitude || '',
+      longitude: options.Longitude || loc.lng,
+      latitude: options.Latitude || loc.lat,
       page: 1,
+      formId: options.formId || "",
     })
-    this.NijieXi(options.Longitude, options.Latitude);
-    this.hasTypeList();
-    this.hasList();
-    this._popList();
+    that.NijieXi(that.data.longitude, that.data.latitude);
+    that.hasTypeList();
+    that.hasList();
+    that.selectComponent("#pop").getData("category");
   },
   init: function() {},
   cheoose: function(e) {
     console.log(e)
     wx.navigateTo({
       // url: '/pages/chooseClass/chooseClass?storeId=' + e.currentTarget.dataset.storeid + '&Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&relId=' + e.currentTarget.dataset.relid,
-      url: '/pages/courseDetail/courseDetail?storeId=' + e.currentTarget.dataset.storeid + '&sheetId=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&Id=' + e.currentTarget.dataset.relid +'&sourceFrom=1',
+      url: '/pages/courseDetail/courseDetail?storeId=' + e.currentTarget.dataset.storeid + '&sheetId=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&Id=' + e.currentTarget.dataset.relid + '&sourceFrom=1',
     })
   },
-  //启动弹窗关闭定时器
-  closeInterval: function(closeTime, index) {
-    let that = this;
-    if (setTime != null) {
-      clearInterval(setTime);
-    }
-    if (closeTime <= 0) {
-      return;
-    }
-    setTime = setInterval(function() {
-      let temp = that.data.popList;
-      temp[index].pop = false;
-      if (temp.length > index + 1) {
-        temp[index + 1].pop = true
-        closeTime = temp[index + 1].CloseTime;
-        index = index + 1;
-      } else {
-        clearInterval(setTime);
-        closeTime = -1;
-        index = index + 1;
-      }
-      that.setData({
-        popList: temp
-      })
-      that.closeInterval(closeTime, index);
-    }, closeTime);
-  },
-  //弹窗列表
-  _popList: function() {
-    let that = this;
-    var url = 'user/pop/list';
-    var params = {
-      GroupToken: 'category',
-    }
-    netUtil.postRequest(url, params, function(res) {
-        let temp = res.Data;
-        temp.forEach((item, index) => {
-          if (index == 0) {
-            item.pop = true;
-          } else {
-            item.pop = false
-          }
-        })
-        that.setData({
-          popList: temp,
-        });
-        if (temp.length > 0) {
-          that.closeInterval(temp[0].CloseTime, 0);
-        }
-      },
-      null,
-      false,
-      false,
-      false)
-  },
-  //点击弹窗图片事件
-  popclick: function(e) {
-    let that = this;
-    console.log(e);
-    let actiontype = e.currentTarget.dataset.actiontype;
-    let actionparams = e.currentTarget.dataset.actionparams;
-    let executeparams = e.currentTarget.dataset.executeparams;
-    let index = e.currentTarget.dataset.index;
-    let popId = e.currentTarget.dataset.popid;
-    if (executeparams == 'receiveTasks') {
-      that.receiveTasks(popId, function() {
-        if (actiontype == 1) {
-          if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
-            wx.switchTab({
-              url: actionparams,
-            })
-          } else {
-            wx.navigateTo({
-              url: actionparams,
-            })
-          }
-        } else if (actiontype == 2) {
-          wx.navigateTo({
-            url: '/pages/WebView/WebView?path=' + actionparams,
-          })
-        }
-        if (actiontype == 1 || actiontype == 2) {
-          let temp = that.data.popList;
-          temp[index].pop = false;
-          if (temp.length > index + 1) {
-            temp[index + 1].pop = true
-          }
-          that.setData({
-            popList: temp
-          })
-        }
-      });
-    } else {
-      if (actiontype == 1) {
-        if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
-          wx.switchTab({
-            url: actionparams,
-          })
-        } else {
-          wx.navigateTo({
-            url: actionparams,
-          })
-        }
-      } else if (actiontype == 2) {
-        wx.navigateTo({
-          url: '/pages/WebView/WebView?path=' + actionparams,
-        })
-      }
-      if (actiontype == 1 || actiontype == 2) {
-        let temp = that.data.popList;
-        temp[index].pop = false;
-        if (temp.length > index + 1) {
-          temp[index + 1].pop = true
-        }
-        that.setData({
-          popList: temp
-        })
-      }
-    }
-  },
-  //关闭弹窗按钮
-  shutDown: function(e) {
-    let that = this;
-    if (setTime != null) {
-      clearInterval(setTime);
-    }
-    let index = e.currentTarget.dataset.index;
-    let temp = that.data.popList;
-    temp[index].pop = false;
-    if (temp.length > index + 1) {
-      temp[index + 1].pop = true;
-      that.closeInterval(temp[index + 1].CloseTime, index + 1);
-    }
-    that.setData({
-      popList: temp
+  navSheet: function(e) {
+    wx.navigateTo({
+      url: '/pages/chooseClass/chooseClass?Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type,
     })
   },
   //获取分类列表
@@ -242,7 +118,7 @@ Page({
         that.hasCityList();
       },
       fail: function(e) {
-
+        that.hasCityList();
       }
     })
   },
@@ -303,7 +179,7 @@ Page({
       })
     } else {
       this.setData({
-        txt: e.currentTarget.dataset.name,
+        txt: e.currentTarget.dataset.name || "附近",
       })
     }
     this.hasList();
@@ -336,7 +212,7 @@ Page({
       that.setData({
         List: arr,
       })
-    })
+    }, null, true, true, true, that.data.formId)
   },
   //商圈切换
   changeType1: function(e) {

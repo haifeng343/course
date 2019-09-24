@@ -1,30 +1,36 @@
-<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
+<movable-area style="height:{{windowHeight}}rpx;width:100%">
   <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
     <button open-type='contact' class='contact contact_left'>客服</button>
   </movable-view>
   <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
-<view class='payTop'>
-  <view class='center'>
-    <image class='payok' src='../../images/payok.png' mode='widthFix' lazy-load='true'></image>
-    <view class='payText'>购买成功</view>
-  </view>
-</view>
-<view class='orderList'>
-  <view class='detail' wx:for="{{detail.List}}" wx:key>
-    <view class='title'>{{item.SheetName}}</view>
-    <view class='between'>
-      <view class='codeNumber'>券码:{{item.TicketNumber}}</view>
-      <view><text class='theme' data-Id="{{item.OrderId}}" bindtap='navto'> 订单详情 </text></view>
+  <scroll-view scroll-y="true">
+    <view class='payTop'>
+      <view class='center'>
+        <image class='payok' src='../../images/payok.png' mode='widthFix' lazy-load='true'></image>
+        <view class='payText'>购买成功</view>
+      </view>
     </view>
-    <view class='code'>
-      <image class='codeImg' src='{{item.QRCodeAccessUrl}}' mode='widthFix' lazy-load='true'></image>
+    <view class='orderList'>
+      <view class='detail' wx:for="{{detail.List}}" wx:key>
+        <view class='title'>{{item.SheetName}}</view>
+        <view class='between'>
+          <view class='codeNumber'>券码:{{item.TicketNumber}}</view>
+          <view>
+            <text class='theme' data-Id="{{item.OrderId}}" bindtap='navto'> 订单详情 </text>
+          </view>
+        </view>
+        <view class='code'>
+          <image class='codeImg' src='{{item.QRCodeAccessUrl}}' mode='widthFix' lazy-load='true'></image>
+        </view>
+      </view>
     </view>
-  </view>
-</view>
+    <view style='width:100%;height:140rpx;background-color:transparent'></view>
+    <view class='pay'>
+      <button class='btnd' bindtap='groupTo'>返回首页</button>
+    </view>
 
-<view class='pay'>
-  <button class='btnd' bindtap='groupTo'>返回首页</button>
-</view>
+  </scroll-view>
+  <pop id="pop"></pop>
 </movable-area>

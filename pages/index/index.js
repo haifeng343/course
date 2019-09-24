@@ -2,13 +2,18 @@
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
 const app = getApp();
 
 Page({
   data: {
-    statusBarHeight: app.globalData.statusBarHeight,
-    windowHeight:app.globalData.windowHeight,
+    windowHeight: '',
+    windowWidth: "",
+    statusBarHeight: '',
+
     Acount: {},
     Id: 0,
     articles: [],
@@ -28,28 +33,20 @@ Page({
     page: 1,
     pageCount: 20,
     locationAgain: true,
-    winWidth: '',
     isLoaded: false,
     typeList: [], //分类列表
     popList: [], //弹窗列表
-    windowWidth: "",
     closetime: '', //关闭按钮倒计时
     car: false,
   },
-  
+
   onLoad: function(options) {
     var that = this;
-    wx.getSystemInfo({
-      success: function(res) {
-        console.log(res)
-        let windowHeight = ((res.windowHeight) * (750 / res.windowWidth));
-        let windowWidth = (res.windowWidth * (750 / res.windowWidth));
-
-        that.setData({
-          windowWidth: windowWidth,
-        })
-      },
-    })
+    that.setData({
+      windowHeight: app.getGreen(0).windowHeight,
+      windowWidth: app.getGreen(0).windowWidth,
+      statusBarHeight: app.getGreen(0).statusBarHeight,
+    });
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
@@ -61,13 +58,9 @@ Page({
       })
     })
 
-    var res = wx.getSystemInfoSync();
-    that.setData({
-      winWidth: res.windowWidth
-    })
-
     that.banner();
     that.init();
+<<<<<<< HEAD
     // that._popList();
     that.hasTypeList();
     that.data.isLoaded = true;
@@ -164,6 +157,12 @@ Page({
           popList: temp
         })
       }
+=======
+    that.hasTypeList();
+    that.data.isLoaded = true;
+    if (this.selectComponent('#pop')) {
+      this.selectComponent('#pop').getData('index');
+>>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
     }
   },
   hasTypeList: function() {
@@ -190,8 +189,12 @@ Page({
       false)
   },
   navtoCategory: function(e) {
+    let formId = "";
+    if (e.detail.formId != "the formId is a mock one") {
+      formId = e.detail.formId;
+    }
     wx.navigateTo({
-      url: '/pages/category/category?Id=' + e.currentTarget.dataset.id + '&name=' + e.currentTarget.dataset.name + '&Longitude=' + this.data.longitude + '&Latitude=' + this.data.latitude,
+      url: '/pages/category/category?Id=' + e.currentTarget.dataset.id + '&name=' + e.currentTarget.dataset.name + '&Longitude=' + this.data.longitude + '&Latitude=' + this.data.latitude + '&formId=' + formId,
     })
   },
   //坐标转换
@@ -500,25 +503,5 @@ Page({
         })
       }
     }
-  },
-  //弹窗本地支持代码
-  //1.领取任务
-  receiveTasks: function(popId, onSuccess) {
-    let that = this;
-    var url = 'user/pop/task/receive';
-    var params = {
-      PopId: popId,
-    }
-    netUtil.postRequest(url, params, function(res) {
-        wx.showToast({
-          icon: 'none',
-          title: '领取成功，请进入【钱包】提现。',
-        })
-        onSuccess();
-      },
-      null,
-      false,
-      true,
-      true)
   },
 })

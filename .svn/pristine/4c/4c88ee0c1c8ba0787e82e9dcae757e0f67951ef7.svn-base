@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "购买成功",
+  "components":{
+    "using":"../../components/pop/pop"
+  }
+}

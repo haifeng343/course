@@ -5,8 +5,8 @@ const app = getApp();
 
 Page({
   data: {
-    statusBarHeight: app.globalData.statusBarHeight,
-    windowHeight: app.globalData.windowHeight,
+    windowHeight: '',
+    windowWidth: '',
     array: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
     index: 0,
     objectArray: ['拍错/不想拍', '不喜欢', '与实物不符合', '重新再拍'],
@@ -26,28 +26,33 @@ Page({
     PayAmount:'',
   },
   onLoad: function(options) {
+    let that = this;
+    that.setData({
+      windowHeight: app.getGreen(0).windowHeight,
+      windowWidth: app.getGreen(0).windowWidth,
+    });
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
     shareApi.getShare("/pages/refund/refund",0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      this.setData({
+      that.setData({
         obj: res.Data,
 
       })
     })
-    this.setData({
+    that.setData({
       orderId: options.OrderId,
       kmd: options.kmd || '',
       kd: options.kd || '',
     });
-    this.init();
+    that.init();
   },
   init: function () {
     this.has();
   },
-  getData: function() {
+  getData: function (formId) {
     let that = this;
     var url = 'order/refund/apply';
     var params = {
@@ -55,7 +60,7 @@ Page({
       Reason: that.data.Reason,
       ImgList: that.data.urlImgs,
     }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function(res) { 
       console.log(res.Data.RefundStatus)
       var refundStatus = res.Data.RefundStatus;
       var refundTime = res.Data.RefundTime;
@@ -113,7 +118,7 @@ Page({
           });
         }
       })
-    }); //调用get方法情就是户数
+    }, null, true, true, true, formId); 
   },
   chooseImg: function(e) {
     var that = this;
@@ -196,8 +201,12 @@ Page({
     });
   },
   /*提交*/
-  submit: function() {
-    this.getData();
+  submitBtn: function(e) {
+    let formId = "";
+    if (e.detail.formId != "the formId is a mock one") {
+      formId = e.detail.formId;
+    }
+    this.getData(formId);
   },
   //上传图片
   upLoadImg: function(data) {
