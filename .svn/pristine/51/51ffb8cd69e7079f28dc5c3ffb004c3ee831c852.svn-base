@@ -1,0 +1,54 @@
+<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
+<view class='Top'>
+  <view class='List'>
+    <view>订单编号: {{lpm.OrderSn}}</view>
+  </view>
+  <view class='List'>
+    <view>团单名称: {{lpm.SheetName}}</view>
+  </view>
+  <view class='List start'>
+    <view>退回金额:</view>
+    <view class='red'> ￥{{PayAmount}}</view>
+  </view>
+  <view class='List start'>
+    <view>退回积分: </view>
+    <view class='red'> {{lpm.UseScore}}</view>
+  </view>
+  <view class='List between'>
+    <view>退回原因</view>
+    <view class='flex-end'>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+        <view class="picker">
+          {{array[index]}}
+        </view>
+      </picker>
+      <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+</view>
+<view class='Top'>
+  <view class='certificate'>上传凭证</view>
+  <view style='background-color:#fff;height:400rpx;'>
+    <view class="image" wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
+      <!-- 图片预览 -->
+      <image src="{{item}}" class='onload' data-index="{{index}}" bindtap="previewImg" mode='scaleToFill' lazy-load='true'></image>
+      <view class="deleteImage" data-index="{{index}}" catchtap="deleteImg">
+        <!-- 图片删除 -->
+        <image src='../../images/cha.png' class='cha' mode='widthFix' lazy-load='true'></image>
+      </view>
+    </view>
+    <view class='jiatupian' bindtap="chooseImg" wx:if="{{plusShow}}">
+      <image class='camero' src='../../images/certificate.png' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+</view>
+<view class='pay'>
+  <button class='btnd md' data-status="{{status}}" bindtap='submit'>提交</button>
+</view>
+</movable-area>

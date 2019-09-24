@@ -1,0 +1,140 @@
+<movable-area style="height:{{windowHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
+    <view class='keep column pd0' wx:for="{{ItemList}}" wx:key>
+      <view class='keep'>
+        <view class='payTitle'>{{item.SheetModel==1?item.SheetName:item.TradingareaName}}</view>
+        <view class='starts' wx:for="{{item.ItemList}}" wx:key wx:for-item="k">
+
+          <image class='topImg' src='{{k.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
+
+          <view class='right'>
+            <view class='activity'>{{k.ItemName}}</view>
+            <view class='detail well'>
+              <view class='startd'>
+                <view class='centers'>
+                  <image src='../../images/house.png' class='detailImg' mode='aspectFill'></image>
+                </view>
+                <view class='name'>{{k.SellerName}}</view>
+              </view>
+            </view>
+            <view class='detail start well'>
+              <view class='startd'>
+                <view class='centers'>
+                  <image src='../../images/ad1.png' class='detailImg' mode='aspectFill'></image>
+                </view>
+                <view class='name'>{{k.StoreAddress}}</view>
+              </view>
+            </view>
+            <view class='detail start well'>
+              <view class='startds'>
+                <view class='centers'>
+                  <image src='../../images/couse.png' class='detailImg' mode='aspectFill'></image>
+                </view>
+                <view class='name'>课程数量 {{k.CoursesNumber}} 节</view>
+              </view>
+              <view class='startds ml40'>
+                <view class='centers'>
+                  <image src='../../images/time.png' class='detailImg' mode='aspectFill'></image>
+                </view>
+                <view class='name'>单节课时 {{k.SingleTime}} min</view>
+              </view>
+            </view>
+            <view class='detail start well'>
+              <view class='startd'>
+                <view class='name'>{{k.SoldCount}} 人已参与 | 剩余名额 {{k.RemainCount}} 个</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class='flex-end count mb0' wx:if="{{type==1}}">
+        <view>共选择{{item.ItemCount}}门课程</view>
+        <view class='money'>合计:</view>
+        <view class='numberD'>￥{{item.Price}}</view>
+      </view>
+      <view class='flex-end count mb0' wx:if="{{type==2}}">
+        <view>小计{{item.ItemCount}}门课程<span wx:if="{{item.PrizeAmount>0}}">，可获奖金<span class="red">￥{{item.PrizeAmount}}</span></span><span wx:if="{{item.VoucherCount>0}}"><span><span wx:if="{{item.PrizeAmount>0}}">，</span><span wx:else>，可获</span></span>报名代金券<span class="red">{{item.VoucherCount}}</span>张</span>
+        </view>
+      </view>
+    </view>
+
+  <view style='width:100%;height:140rpx;background-color:transparent'></view>
+
+  <view class='keep low between' wx:if="{{Info.UseScore>0}}" bindtap='swich' style='overflow-x:hidden'>
+    <view class='column'>
+      <view>使用积分</view>
+      <view class='start txt'>{{Info.UseScore}}积分抵{{Info.UseScoreAmount}}元
+        <view class='txt1'>现有积分{{Info.TotalScore}}</view>
+      </view>
+    </view>
+    <checkbox class='mt20' checked='{{checked}}'></checkbox>
+  </view>
+  <view class='pay between' style='overflow-x:hidden' wx:if="{{type==1}}">
+    <view class='kl klds'>
+      <view class=''>共{{Info.ItemCount}}门课程</view>
+    </view>
+    <view class='kld'></view>
+    <view class='flex-end'>
+      <view class='totalNumber start'>合计:
+        <view class='payMoney start'>
+          <view class='symbol'>￥{{totalAmount}}</view>
+        </view>
+      </view>
+      <button class='paybtn' data-orderId="{{OrderId}}" data-ordersn="{{OrderSn}}" data-payamount="{{PayAmount}}" bindtap='paySure' disabled='{{!((checked==true&&(Info.TotalAmount-Info.UseScoreAmount)>0) || (checked==false&&Info.TotalAmount>0))}}'>确认购买</button>
+    </view>
+  </view>
+  <view class='pay between' style='overflow-x:hidden' wx:if="{{type==2}}">
+    <view class='kl'>
+      <view class=''>合计{{Info.ItemCount}}门课程<span wx:if="{{Info.PrizeAmount>0}}">，可获奖金<span class="red">￥{{PrizeAmount}}</span></span><span wx:if="{{Info.VoucherCount>0}}"><span><span wx:if="{{Info.PrizeAmount>0}}">，</span><span wx:else>，可获</span></span>报名代金券<span class="red">{{Info.VoucherCount}}</span>张</span>
+      </view>
+    </view>
+    <view class='flex-end'>
+      <button class='paybtn' data-orderId="{{OrderId}}" data-ordersn="{{OrderSn}}" data-payamount="{{PayAmount}}" bindtap='paySure' disabled='{{!((checked==true&&(Info.TotalAmount-Info.UseScoreAmount)>0) || (checked==false&&Info.TotalAmount>0))}}'>确认预约</button>
+    </view>
+  </view>
+
+  <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
+    <view class="zan-dialog__mask" bindtap="toggleDialog" />
+    <view class="zan-dialog__container">
+      <view class='zan-title'>失败原因</view>
+      <view class='zan-content'>失败原因：{{RefundFailReason}}</view>
+      <view class='know' bindtap='closeds'>知道了</view>
+    </view>
+  </view>
+
+  <!-- <view class='father' hidden="{{!showKnow}}"></view>
+<modal hidden="{{!showKnow}}" title="预约须知" confirm-text="确认" cancel-text="取消" bindcancel="closeShowKnow" bindconfirm="getShow" catchtouchmove="true" >
+  <scroll-view scroll-y="true">
+    <view class='showTxt mt20'>
+      <span>亲，本次预约须支付押金{{PayAmount}}元，体验后实时全额退回</span>
+      <span wx-if="{{PrizeAmount>0 || Info.VoucherCount>0}}">，还可获<span wx:if="{{PrizeAmount>0}}">奖金<span class="red">{{PrizeAmount}}</span>元(提现无门槛)</span>
+        <span wx-if="{{PrizeAmount>0 && Info.VoucherCount>0}}">，</span>
+        <span wx:if="{{Info.VoucherCount>0}}">报名代金券<span class="red">{{Info.VoucherCount}}</span>张</span>
+      </span>
+      <span>。</span>
+    </view>
+    <view class='moneyRule' bindtap='navtoRule'>《押金退还及奖励规则》</view>
+  </scroll-view>
+</modal> -->
+
+  <view class='mask' wx:if='{{showKnow}}' catchtouchmove='true' bindtap='clickMask'>
+    <view class='modal-content'>
+      <view class='modal-title'>预约须知</view>
+      <scroll-view scroll-y="true" catchtouchmove='true' class='main-content'>
+        <view class='showTxt'>
+          <span>亲，本次预约须支付押金{{PayAmount}}元，体验后实时全额退回</span><span wx-if="{{PrizeAmount>0 || Info.VoucherCount>0}}">，还可获<span wx:if="{{PrizeAmount>0}}">奖金<span class="red">{{PrizeAmount}}</span>元(提现无门槛)</span><span wx-if="{{PrizeAmount>0 && Info.VoucherCount>0}}">，</span><span wx:if="{{Info.VoucherCount>0}}">报名代金券<span class="red">{{Info.VoucherCount}}</span>张</span></span><span>。</span>
+        </view>
+        <view class='moneyRule' bindtap='navtoRule'>《押金退还及奖励规则》</view>
+      </scroll-view>
+      <view class='modal-btn-wrapper'>
+        <view class='cancel-btn' bindtap='closeShowKnow'>取消</view>
+        <view class='confirm-btn' bindtap='getShow'>确定</view>
+      </view>
+    </view>
+  </view>
+</movable-area>

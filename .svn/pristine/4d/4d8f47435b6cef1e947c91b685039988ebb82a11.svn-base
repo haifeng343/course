@@ -1,0 +1,14 @@
+.contnet{
+  width: 100%;
+  padding: 0 5%;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  color: #000;
+  margin-top: 10rpx;
+}
+page{
+  background-color: #fff;
+}
+.mt20{
+  margin-top: 20rpx!important;
+}

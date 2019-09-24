@@ -4,15 +4,15 @@ const app = getApp();
 
 Page({
   data: {
-    statusBarHeight: app.globalData.statusBarHeight,
-    windowHeight: app.globalData.windowHeight,
+    windowHeight: '',
+    windowWidth: '',
     checked: false,
     Id: "",
     relId: [],
-    ItemList: [],//订单列表
-    totalAmount: "",//总金额
+    ItemList: [], //订单列表
+    totalAmount: "", //总金额
     UseScore: "",
-    totalCount: "",//总门数
+    totalCount: "", //总门数
     OrderId: '',
     AppId: '',
     NonceStr: '',
@@ -24,50 +24,60 @@ Page({
     OrderSn: '', //订单编号
     PayAmount: '', //支付金额
     paySuccess: false,
-    Info:{},//数据详情
-    useScoreAmount:0,//使用积分抵扣金额
-    parmasItem:[],//请求列表参数
-    type:'',//1团单 2 商圈
-    PrizeAmount:"",//总的奖励金额
-    showKnow:false,//购买须知弹窗
-    type:'',
-    PrizeAmount:"",//现金奖励
+    Info: {}, //数据详情
+    useScoreAmount: 0, //使用积分抵扣金额
+    parmasItem: [], //请求列表参数
+    type: '', //1团单 2 商圈
+    PrizeAmount: "", //总的奖励金额
+    showKnow: false, //购买须知弹窗
+    type: '',
+    PrizeAmount: "", //现金奖励
+    isShowPayWnd:false,
   },
-  onShow: function () {
+  onShow: function() {
     let that = this;
+    that.setData({isShowPayWnd:true});
+
     if (that.data.paySuccess == true) {
       wx.reLaunch({
-        url: '/pages/wait/wait?OrderId=' + that.data.OrderId + '&ordersn=' + that.data.OrderSn + '&money=' + that.data.totalAmount,
+        url: '/pages/wait/wait?OrderId=' + that.data.OrderId + '&ordersn=' + that.data.OrderSn + '&money=' + that.data.totalAmount + '&type=' + that.data.type,
       })
     }
   },
-  closeShowKnow:function() {
+  closeShowKnow: function() {
     this.setData({
-      showKnow:false
+      showKnow: false
     })
     this.cancelPay();
   },
-  navtoRule:function() {
+  navtoRule: function() {
     wx.navigateTo({
-      url: '/pages/rewradRule/rewradRule?Id=' + this. data.OrderId,
+      url: '/pages/rewradRule/rewradRule?Id=' + this.data.OrderId,
     })
   },
-  getShow:function() {
-    this.oderPay();
+  getShow: function(e) {
+    let formId = "";
+    if (e.detail.formId != "the formId is a mock one") {
+      formId = e.detail.formId;
+    }
+    this.oderPay(formId);
   },
   onLoad(options) {
-    console.log(JSON.parse(options.checkItem))
     let that = this;
+    that.setData({
+      windowHeight: app.getGreen(0).windowHeight,
+      windowWidth: app.getGreen(0).windowWidth,
+    });
     that.setData({
       parmasItem: JSON.parse(options.checkItem) || [],
       type: options.type || ''
     })
-    if(options.type==1){
+    if (options.type == 1) {
       wx.setNavigationBarTitle({
         title: '支付订单',
       })
     }
-    if(options.type==2){
+    if (options.type == 2) {
       wx.setNavigationBarTitle({
         title: '预约订单',
       })
@@ -76,7 +86,7 @@ Page({
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/payOrder/payOrder",0).then(res => {
+    shareApi.getShare("/pages/payOrder/payOrder", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       that.setData({
         obj: res.Data,
@@ -95,23 +105,24 @@ Page({
     this.getData();
   },
   getData: function() {
+    console.log(11111)
     var that = this;
     var url = 'sheet/buy/details'
     var params = {
       List: that.data.parmasItem
     }
     netUtil.postRequest(url, params, function(res) {
-      res.Data.ItemList.forEach(item=>{
-        item.Price = Number(item.Price/100).toFixed(2);
-        item.PrizeAmount = Number(item.PrizeAmount/100).toFixed(2);
+      res.Data.ItemList.forEach(item => {
+        item.Price = Number(item.Price / 100).toFixed(2);
+        item.PrizeAmount = Number(item.PrizeAmount / 100).toFixed(2);
       })
       that.setData({
         ItemList: res.Data.ItemList,
-        totalAmount: Number(res.Data.TotalAmount/100).toFixed(2),
-        useScoreAmount: Number(res.Data.UseScoreAmount/100).toFixed(2),
-        PrizeAmount: Number(res.Data.PrizeAmount/100).toFixed(2),
+        totalAmount: Number(res.Data.TotalAmount / 100).toFixed(2),
+        useScoreAmount: Number(res.Data.UseScoreAmount / 100).toFixed(2),
+        PrizeAmount: Number(res.Data.PrizeAmount / 100).toFixed(2),
         totalCount: res.Data.ItemCount,
-        Info:res.Data,
+        Info: res.Data,
       })
       console.log(that.data.PrizeAmount)
     });
@@ -120,10 +131,10 @@ Page({
     var checked = this.data.checked;
     this.setData({
       checked: !checked,
-      totalAmount: checked ? this.data.totalAmount:(this.data.totalAmount - this.data.useScoreAmount).toFixed(2)
+      totalAmount: checked ? this.data.totalAmount : (this.data.totalAmount - this.data.useScoreAmount).toFixed(2)
     })
   },
-  oderPay: function() {
+  oderPay: function (formId) {
     var that = this;
     var url = 'order/pay'
     var params = {
@@ -138,6 +149,7 @@ Page({
         TimeStamp: res.Data.TimeStamp,
         paySuccess: false,
         showKnow: false,
+        isShowPayWnd:false
       });
       wx.requestPayment({
         timeStamp: that.data.TimeStamp,
@@ -149,9 +161,12 @@ Page({
           that.setData({
             paySuccess: true
           });
-          wx.reLaunch({
-            url: '/pages/wait/wait?OrderId=' + that.data.OrderId + '&ordersn=' + that.data.OrderSn + '&money=' + that.data.totalAmount,
-          })
+
+          if (that.data.isShowPayWnd) {
+            wx.reLaunch({
+              url: '/pages/wait/wait?OrderId=' + that.data.OrderId + '&ordersn=' + that.data.OrderSn + '&money=' + that.data.totalAmount + '&type=' + that.data.type,
+            })
+          }
           // var setTime = setTimeout(function() {
           //   wx.reLaunch({
           //     url: '/pages/wait/wait?OrderId=' + that.data.OrderId + '&ordersn=' + that.data.OrderSn + '&money=' + that.data.TotalAmount,
@@ -162,7 +177,7 @@ Page({
           that.cancelPay();
         },
       });
-    }); //调用get方法情就是户数
+    }, null, true, true, true, formId); //调用get方法情就是户数
   },
   //用户取消支付
   cancelPay: function() {
@@ -171,14 +186,19 @@ Page({
     var params = {
       Id: that.data.OrderId,
     }
-    netUtil.postRequest(url, params, function(res){
+    netUtil.postRequest(url, params, function(res) {
       wx.showToast({
         title: '用户取消支付',
         image: '../../images/cancel.png',
       });
-    }, '',false,false,false);
+    }, '', false, false, false);
   },
-  paySure: function() {
+
+  paySure: function (e) {
+    let formId = "";
+    if (e.detail.formId != "the formId is a mock one") {
+      formId = e.detail.formId;
+    }
     wx.showLoading({
       icon: 'none',
       title: '正在创建订单...',
@@ -193,22 +213,22 @@ Page({
       let pages = getCurrentPages(); //当前页面
       let prevPage = pages[pages.length - 2]; //上一页面
       prevPage.setData({ //直接给上移页面赋值
-        load : true || ''
+        load: true || ''
       });
       that.setData({
         OrderId: res.Data.OrderId,
         OrderSn: res.Data.OrderSn,
-        PayAmount: (res.Data.PayAmount/100).toFixed(2),
+        PayAmount: (res.Data.PayAmount / 100).toFixed(2),
       })
-      if(that.data.type==2){
+      if (that.data.type == 2) {
         that.setData({
-          showKnow:true
+          showKnow: true
         })
-      }else{
+      } else {
         that.oderPay();
       }
       wx.hideLoading();
-    },'',false,true,true);
+    }, '', true, true, true, formId);
 
   },
   onShareAppMessage: function(res) {

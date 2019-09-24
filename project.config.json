@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 48,
+			"current": 56,
 			"list": [
 				{
 					"id": -1,
@@ -426,6 +426,27 @@
 					"id": -1,
 					"name": "partake",
 					"pathName": "pages/partake/partake",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "fuliCenter",
+					"pathName": "pages/fuliCenter/fuliCenter",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "snatch",
+					"pathName": "pages/snatch/snatch",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "kaquan",
+					"pathName": "pages/kaquan/kaquan",
 					"query": "",
 					"scene": null
 				}

@@ -1,0 +1,34 @@
+<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
+<view>
+  <view class='horizontal between mt20' data-ids="{{ids}}" bindtap='modify' wx:if="{{mobile}}">
+    <view class='name'>修改手机号</view>
+    <view class='content start'>
+      <view class='phone'>{{mobile}}</view>
+      <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+  <view class='horizontal between mt20' data-ids="{{ids}}" bindtap='binding' wx:else>
+    <view class='name'>绑定手机号</view>
+    <view class='content start'>
+      <view class='phone'></view>
+      <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
+    </view>
+  </view>
+</view>
+<view class='horizontal between mt20' bindtap='address' wx:if="{{buttons.address == true}}">
+  <view class='name'>地址管理</view>
+  <view class='content start'>
+  <view class='phone'></view>
+    <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
+  </view>
+</view>
+<!-- <view class='horizontal center mt20'>
+  <view class='exit' bindtap='exitOut'>退出登录</view>
+</view> -->
+</movable-area>

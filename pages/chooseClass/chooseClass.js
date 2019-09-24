@@ -1,13 +1,12 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-var setTime;
+
 const app = getApp();
 Page({
 
   data: {
-    statusBarHeight: app.globalData.statusBarHeight,
-    windowHeight: app.globalData.windowHeight,
-    windowWidth: app.globalData.windowWidth,
+    windowHeight: '',
+    windowWidth: '',
     Longitude: "",
     Latitude: "",
     GroupList: [],
@@ -40,18 +39,25 @@ Page({
     totalDialog_storeId: 0, //全部弹窗 选中门店Id
     storeIdGotoTemp: 0, //临时定位到门店Id
     storeIdGoto: 0, //定位到门店Id
-    PrizeAmount:'',//奖励金
-    count:'',//勾选课程数量
-    VoucherCount:"",
-    isLoad:false,//是否需要加载
+    PrizeAmount: '', //奖励金
+    count: 0, //勾选课程数量
+    VoucherCount: "",
+    initGroupId: "", //初始化分组Id
+    initStoreId: "", //初始化门店Id
+    initRelId: "", //初始化课程关系id,
+    sourceFrom: "" //跳转来源1.选课链条 2.分类
   },
   onLoad(options) {
     let that = this;
+    that.setData({
+      windowHeight: app.getGreen(0).windowHeight,
+      windowWidth: app.getGreen(0).windowWidth,
+    });
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/chooseClass/chooseClass",0).then(res => {
+    shareApi.getShare("/pages/chooseClass/chooseClass", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       that.setData({
         obj: res.Data,
@@ -62,166 +68,24 @@ Page({
       Id: options.Id || '',
       name: options.name || '',
       type: options.type || '',
-      storeIdGotoTemp: options.storeId||""
+      storeIdGotoTemp: options.storeId || "",
+      initGroupId: options.initGroupId || "",
+      initStoreId: options.initStoreId || "",
+      initRelId: options.initRelId || "",
+      sourceFrom: options.sourceFrom || "",
     })
-    if(options.type==1){
+    if (options.type == 1) {
       wx.setNavigationBarTitle({
         title: '选择课程',
       })
     }
-    if(options.type==2){
+    if (options.type == 2) {
       wx.setNavigationBarTitle({
         title: '选择体验课',
       })
     }
     that.init();
-    that._popList();
-  },
-  onShow(){
-    if (this.data.isLoad==true) {
-      console.log(this.data.storeIdGotoTemp)
-      this.setData({
-        isLoad:false
-      });
-      this.init();
-    }
-  },
-  //启动弹窗关闭定时器
-  closeInterval: function (closeTime, index) {
-    let that = this;
-    if (setTime != null) {
-      clearInterval(setTime);
-    }
-    if (closeTime <= 0) {
-      return;
-    }
-    setTime = setInterval(function () {
-      let temp = that.data.popList;
-      temp[index].pop = false;
-      if (temp.length > index + 1) {
-        temp[index + 1].pop = true
-        closeTime = temp[index + 1].CloseTime;
-        index = index + 1;
-      } else {
-        clearInterval(setTime);
-        closeTime = -1;
-        index = index + 1;
-      }
-      that.setData({
-        popList: temp
-      })
-      that.closeInterval(closeTime, index);
-    }, closeTime);
-  },
-  //弹窗列表
-  _popList: function () {
-    let that = this;
-    var url = 'user/pop/list';
-    var params = {
-      GroupToken: 'choose',
-    }
-    netUtil.postRequest(url, params, function (res) {
-      let temp = res.Data;
-      temp.forEach((item, index) => {
-        if (index == 0) {
-          item.pop = true;
-        } else {
-          item.pop = false
-        }
-      })
-      that.setData({
-        popList: temp,
-      });
-      if (temp.length > 0) {
-        that.closeInterval(temp[0].CloseTime, 0);
-      }
-    },
-      null,
-      false,
-      false,
-      false)
-  },
-  //点击弹窗图片事件
-  popclick: function (e) {
-    let that = this;
-    console.log(e);
-    let actiontype = e.currentTarget.dataset.actiontype;
-    let actionparams = e.currentTarget.dataset.actionparams;
-    let executeparams = e.currentTarget.dataset.executeparams;
-    let index = e.currentTarget.dataset.index;
-    let popId = e.currentTarget.dataset.popid;
-    if (executeparams == 'receiveTasks') {
-      that.receiveTasks(popId, function () {
-        if (actiontype == 1) {
-          if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
-            wx.switchTab({
-              url: actionparams,
-            })
-          } else {
-            wx.navigateTo({
-              url: actionparams,
-            })
-          }
-        } else if (actiontype == 2) {
-          wx.navigateTo({
-            url: '/pages/WebView/WebView?path=' + actionparams,
-          })
-        }
-        if (actiontype == 1 || actiontype == 2) {
-          let temp = that.data.popList;
-          temp[index].pop = false;
-          if (temp.length > index + 1) {
-            temp[index + 1].pop = true
-          }
-          that.setData({
-            popList: temp
-          })
-        }
-      });
-    } else {
-      if (actiontype == 1) {
-        if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
-          wx.switchTab({
-            url: actionparams,
-          })
-        } else {
-          wx.navigateTo({
-            url: actionparams,
-          })
-        }
-      } else if (actiontype == 2) {
-        wx.navigateTo({
-          url: '/pages/WebView/WebView?path=' + actionparams,
-        })
-      }
-      if (actiontype == 1 || actiontype == 2) {
-        let temp = that.data.popList;
-        temp[index].pop = false;
-        if (temp.length > index + 1) {
-          temp[index + 1].pop = true
-        }
-        that.setData({
-          popList: temp
-        })
-      }
-    }
-  },
-  //关闭弹窗按钮
-  shutDown: function (e) {
-    let that = this;
-    if (setTime != null) {
-      clearInterval(setTime);
-    }
-    let index = e.currentTarget.dataset.index;
-    let temp = that.data.popList;
-    temp[index].pop = false;
-    if (temp.length > index + 1) {
-      temp[index + 1].pop = true;
-      that.closeInterval(temp[index + 1].CloseTime, index + 1);
-    }
-    that.setData({
-      popList: temp
-    })
+    that.selectComponent("#pop").getData("choose");
   },
   init: function(isHideLoding) {
     this.getData(isHideLoding);
@@ -248,28 +112,92 @@ Page({
           }
         }
       }
-
-      that.setData({
-        detailCent: res.Data,
-        imgUrls: res.Data.SheetImgList,
-      })
-      for (let a of r) {
-        if (a.MinCount != 0) {
-          if (a.MaxCount >= a.TotalCount && a.MinCount == 1) {
-            a.text = "任选"
+      if (that.data.sourceFrom != 1) { //课程详情跳过来的不更新基础数据
+        that.setData({
+          detailCent: res.Data,
+          imgUrls: res.Data.SheetImgList,
+        })
+        for (let a of r) {
+          if (a.MinCount != 0) {
+            if (a.MaxCount >= a.TotalCount && a.MinCount == 1) {
+              a.text = "任选"
+            } else {
+              a.text = "最少选" + a.MinCount + '门，最多选' + a.MaxCount + '门'
+            }
+          } else if (a.MaxCount == a.TotalCount) {
+            a.text = "全选"
           } else {
-            a.text = "最少选" + a.MinCount + '门，最多选' + a.MaxCount + '门'
+            a.text = "必选" + a.MaxCount + '门，不可多选'
           }
-        } else if (a.MaxCount == a.TotalCount) {
-          a.text = "全选"
-        } else {
-          a.text = "必选" + a.MaxCount + '门，不可多选'
         }
+        that.setData({
+          GroupList: r
+        })
       }
       that.setData({
-        GroupList: r,
         storeIdGoto: that.data.storeIdGotoTemp
-      })
+      });
+      if (that.data.initRelId) { //初始化存在课程Id，需要直接选中
+        if (that.data.type == 2) { //商圈模式
+          let groupListTemp = that.data.GroupList;
+          groupListTemp.forEach((e, index) => { //匹配上分组
+            if (e.GroupId == that.data.initGroupId) {
+              let dialogGroupIndex = index; //点击的分组下标
+              let storeList = e.StoreList; //点击的分组内门店列表
+              let totalDialog_totalItem = e.TotalCount; //点击的分组内课程总数量
+              storeList.forEach((x, xIndex) => {
+                if (x.StoreId == that.data.initStoreId) { //匹配上门店
+                  let storeName = x.StoreName; //点击的门店名称
+                  let dialogStoreIndex = xIndex; //点击的门店下标
+                  let totalDialog_storeId = x.StoreId; //点击的门店id
+                  let storeItem = x.ItemList; //点击的门店下课程列表
+                  that.changeCheck({ //模拟点击机构
+                    type: 1,
+                    currentTarget: {
+                      dataset: {
+                        storelist: storeList,
+                        item: storeItem,
+                        total: totalDialog_totalItem,
+                        groupindex: dialogGroupIndex,
+                        storeindex: dialogStoreIndex,
+                        storeid: totalDialog_storeId,
+                        name: storeName
+                      }
+                    }
+                  });
+                  if (that.data.hideBaitiaos == false) { //全部弹窗弹出
+                    x.ItemList.forEach((y, yIndex) => {
+                      if (y.RelId == that.data.initRelId) {
+                        that.checkItem_total({
+                          currentTarget: {
+                            dataset: {
+                              storeindex: dialogStoreIndex,
+                              itemindex: yIndex
+                            }
+                          }
+                        });
+                      }
+                    });
+                  } else if (that.data.hideBaitiao == false) { //选择弹窗弹出
+                    x.ItemList.forEach((y, yIndex) => {
+                      if (y.RelId == that.data.initRelId) {
+                        that.checkItem({
+                          currentTarget: {
+                            dataset: {
+                              remaincount: y.RemainCount,
+                              itemindex: yIndex
+                            }
+                          }
+                        });
+                      }
+                    });
+                  }
+                }
+              });
+            }
+          });
+        }
+      }
     }, null, hideLoding, true, true); //调用get方法情就是户数
   },
   //计算团单项目选择购买价格
@@ -291,7 +219,7 @@ Page({
         that.setData({
           Remark: res.Data.Remark,
           TotalPrice: res.Data.TotalPrice == -1 ? -1 : res.Data.TotalPrice * 1.0 / 100,
-          PrizeAmount: (res.Data.PrizeAmount/100).toFixed(2),
+          PrizeAmount: (res.Data.PrizeAmount / 100).toFixed(2),
           VoucherCount: res.Data.VoucherCount,
           count: ids.length
         })
@@ -317,7 +245,7 @@ Page({
     let f = 'GroupList[' + index + '].StoreList';
 
     let arr3 = [];
-    if (s.MaxCount >= s.TotalCount && s.MinCount == 0) {
+    if (s.MaxCount >= s.TotalCount && s.MinCount == 0) { //全选
       let addCount = 0;
       if (s.checkedArr.length == 0) {
         if (this.data.type == 2) {
@@ -350,9 +278,9 @@ Page({
         [f]: s.StoreList || '',
       });
     } else {
-      if (s.MaxCount == 1 && arr.length > 0) {
-        arr = [arr[arr.length - 1]]
-      } else if (s.MaxCount > 1) {
+      if (s.MaxCount == 1 && arr.length > 0) { //单选
+        arr = [arr[arr.length - 1]];
+      } else if (s.MaxCount > 1) { //任选
         if (arr.length > s.MaxCount) {
           success = false;
           wx.showToast({
@@ -431,8 +359,8 @@ Page({
       that.init(false);
       that.setData({
         TotalPrice: -1,
-        count:0,
-        
+        count: 0,
+
       })
       wx.showToast({
         icon: 'none',
@@ -441,7 +369,6 @@ Page({
     });
   },
   checkItem: function(e) {
-    console.log(e)
     let remaincount = e.currentTarget.dataset.remaincount; //剩余购买数量
     if (remaincount <= 0) {
       wx.showToast({
@@ -603,12 +530,12 @@ Page({
     });
 
     wx.navigateTo({
-      url: '/pages/payOrder/payOrder?checkItem=' + JSON.stringify(checkedList)+'&type='+this.data.type,
+      url: '/pages/payOrder/payOrder?checkItem=' + JSON.stringify(checkedList) + '&type=' + this.data.type,
     })
   },
   courseDetail(e) {
     wx.navigateTo({
-      url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id+'&type='+this.data.type+'&sheetId='+this.data.Id,
+      url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id + '&type=' + this.data.type + '&sheetId=' + this.data.Id,
     })
   },
   onPullDownRefresh: function() {
@@ -621,17 +548,24 @@ Page({
   //取消/选中
   changeCheck: function(e) {
     let that = this;
-    let storeList = e.currentTarget.dataset.storelist;
-    let storeItem = e.currentTarget.dataset.item;
-    let dialogGroupIndex = e.currentTarget.dataset.groupindex;
-    let dialogStoreIndex = e.currentTarget.dataset.storeindex;
+    let storeList = e.currentTarget.dataset.storelist; //点击的分组内门店列表
+    let storeItem = e.currentTarget.dataset.item; //点击的门店下课程列表
+    let totalDialog_totalItem = e.currentTarget.dataset.total; //点击的分组内课程总数量
+    let dialogGroupIndex = e.currentTarget.dataset.groupindex; //点击的分组下标
+    let dialogStoreIndex = e.currentTarget.dataset.storeindex; //点击的门店下标
+    let totalDialog_storeId = e.currentTarget.dataset.storeid; //点击的门店id
+    let storeName = e.currentTarget.dataset.name; //点击的门店名称
+
     that.setData({
       dialogStoreIndex: dialogStoreIndex,
       dialogGroupIndex: dialogGroupIndex,
-      totalDialog_totalItem: e.currentTarget.dataset.total
+      totalDialog_totalItem: totalDialog_totalItem
     })
     if (that.data.GroupList[dialogGroupIndex].MaxCount == that.data.GroupList[dialogGroupIndex].TotalCount && that.data.GroupList[dialogGroupIndex].MinCount == 0) {
       if (that.data.GroupList[dialogGroupIndex].StoreList[dialogStoreIndex].checked == true) { //取消选中
+        if (e.type == 1) {
+          return;
+        }
         let storeCheckedSet = 'GroupList[' + dialogGroupIndex + '].StoreList'
         let storeListChecked = that.data.GroupList[dialogGroupIndex].StoreList;
         storeListChecked.forEach(x => {
@@ -693,7 +627,7 @@ Page({
         } else {
           that.setData({
             hideBaitiaos: false,
-            totalDialog_storeId: e.currentTarget.dataset.storeid,
+            totalDialog_storeId: totalDialog_storeId,
             totalDialog_storeList: storeList
           })
         }
@@ -701,7 +635,10 @@ Page({
     } else {
       let storeCheckedSet = 'GroupList[' + dialogGroupIndex + '].StoreList[' + dialogStoreIndex + '].checked';
       let storeCheckedNameSet = 'GroupList[' + dialogGroupIndex + '].StoreList[' + dialogStoreIndex + '].checkedName';
-      if (that.data.GroupList[dialogGroupIndex].StoreList[dialogStoreIndex].checked == true) {
+      if (that.data.GroupList[dialogGroupIndex].StoreList[dialogStoreIndex].checked == true) { //取消选中
+        if (e.type == 1) {
+          return;
+        }
         let storeItemListSet = 'GroupList[' + dialogGroupIndex + '].StoreList[' + dialogStoreIndex + '].ItemList';
         let tempArr = that.data.GroupList[dialogGroupIndex].StoreList[dialogStoreIndex].ItemList;
         tempArr.forEach(x => {
@@ -763,8 +700,8 @@ Page({
         } else {
           that.setData({
             hideBaitiao: false,
-            dialogRadio: e.currentTarget.dataset.item,
-            dialogStoreName: e.currentTarget.dataset.name,
+            dialogRadio: storeItem,
+            dialogStoreName: storeName,
             dialogStoreIndex: dialogStoreIndex,
             dialogGroupIndex: dialogGroupIndex,
           })
@@ -776,7 +713,7 @@ Page({
   navtoCar: function() {
     wx.setStorageSync('load', true);
     wx.navigateTo({
-      url: '/pages/car/car?type='+this.data.type,
+      url: '/pages/car/car?type=' + this.data.type,
     });
   },
   showDialog(e) {

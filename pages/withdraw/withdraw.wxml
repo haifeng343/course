@@ -1,4 +1,4 @@
-<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
+<movable-area style="height:{{windowHeight}}rpx;width:100%">
   <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
     <button open-type='contact' class='contact contact_left'>客服</button>
   </movable-view>
@@ -57,7 +57,10 @@
         <view class='start-right'>
           <view class='moneyTxt' bindtap='all' wx:if="{{money>=0}}">全部</view>
           <view class='moneyTxt' wx:else>全部</view>
-          <button class='btnd end' bindtap='GetApply' wx:if="{{amount>0 && wihdraw}}">提现</button>
+          <form report-submit="true" bindsubmit='GetApply' wx:if="{{amount>0 && wihdraw}}">
+            <button class='btnd end' formType="submit">提现</button>
+          </form>
+          <!-- <button class='btnd end' bindtap='GetApply' wx:if="{{amount>0 && wihdraw}}">提现</button> -->
           <button class='btnd end' disabled wx:else>提现</button>
         </view>
       </view>
@@ -82,12 +85,18 @@
           </view>
 
           <view class="{{item.ActionType!=0?'mr20':''}}" wx:if="{{item.PrizeAmountNow>0}}">
-            <view class='text1' data-Id="{{item.Id}}" wx:if="{{item.PrizeAmountNowStatus==1 || item.PrizeAmountNowStatus==4}}" data-prizeaamountnow="{{item.PrizeAmountNow}}" data-index="{{index}}" bindtap='btnTaskCash'>提现({{item.PrizeAmountNow}}元)</view>
+            <form report-submit="true" data-Id="{{item.Id}}" wx:if="{{item.PrizeAmountNowStatus==1 || item.PrizeAmountNowStatus==4}}" data-prizeaamountnow="{{item.PrizeAmountNow}}" data-index="{{index}}" bindsubmit='btnTaskCash'>
+              <button class='text1' formType="submit">提现({{item.PrizeAmountNow}}元)</button>
+            </form>
+            <!-- <view class='text1' data-Id="{{item.Id}}" wx:if="{{item.PrizeAmountNowStatus==1 || item.PrizeAmountNowStatus==4}}" data-prizeaamountnow="{{item.PrizeAmountNow}}" data-index="{{index}}" bindtap='btnTaskCash'>提现({{item.PrizeAmountNow}}元)</view> -->
             <view class='text1 gray' wx:if="{{item.PrizeAmountNowStatus==2}}">提现申请中</view>
             <view class='text1 gray' wx:if="{{item.PrizeAmountNowStatus==3}}">提现成功</view>
           </view>
           <view wx:if="{{item.ActionType!=0}}">
-            <view class='btnd btnd1' data-actionparams="{{item.ActionParams}}" data-actiontype="{{item.ActionType}}" bindtap='taskclick' wx:if="{{item.TaskFinishStatus==0}}">{{item.ActionBtnText}}</view>
+            <form report-submit="true" data-actionparams="{{item.ActionParams}}" data-actiontype="{{item.ActionType}}" bindsubmit='taskclick' wx:if="{{item.TaskFinishStatus==0}}">
+              <button formType="submit" class='btnd btnd1'>{{item.ActionBtnText}}</button>
+            </form>
+            <!-- <view class='btnd btnd1' data-actionparams="{{item.ActionParams}}" data-actiontype="{{item.ActionType}}" bindtap='taskclick' wx:if="{{item.TaskFinishStatus==0}}">{{item.ActionBtnText}}</view> -->
             <view class='btnd1 btndNo' wx:if="{{item.TaskFinishStatus==1}}">已完成</view>
           </view>
         </view>
@@ -102,31 +111,6 @@
   <view class='btn1 g1' wx:else>提现</view> -->
   </view>
 
+  <pop id="pop"></pop>
 
-  <view wx:for="{{popList}}" wx:key wx:for-item="item1">
-    <view wx:if="{{item1.pop==true}}">
-      <view class='fatherPop' catchtouchmove='true'></view>
-      <view class='poFixed'>
-        <cover-view class='flex-center'>
-          <cover-view class='flexBetween' wx:if="{{item1.ShowClose}}">
-            <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10000?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10000?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
-            <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10001?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10001?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
-            <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10002?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10002?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
-          </cover-view>
-          <cover-view class='flexBetween centered'>
-            <cover-image wx:if="{{item1.ShowClose}}" src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10003?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10003?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
-            <cover-image src='{{item1.ImgUrlShow}}' style="width:{{windowWidth*item1.ShowImgWidth*1.0/100}}rpx;" data-actiontype="{{item1.ActionType}}" data-actionparams="{{item1.ActionParams}}" mode='aspectFill' data-executeparams="{{item1.ExecuteParams}}" data-popId="{{item1.Id}}"
-              bindtap='popclick' data-index="{{index}}" class='hongbao'></cover-image>
-            <cover-image wx:if="{{item1.ClosePositionX}}<10000 && item1.ShowClose" src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX<10000?'shutDown':''}}" mode='aspectFill' class='shut' style='top:{{item1.ClosePositionY}}rpx;left:{{item1.ClosePositionX}}rpx;width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
-            <cover-image wx:if="{{item1.ShowClose}}" src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10004?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10004?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
-          </cover-view>
-          <cover-view class='flexBetween' wx:if="{{item1.ShowClose}}">
-            <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10005?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10005?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
-            <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10006?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10006?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
-            <cover-image src='{{item1.CloseImgUrlShow}}' data-index="{{index}}" bindtap="{{item1.ClosePositionX==10007?'shutDown':''}}" mode='aspectFill' class="shuts {{item1.ClosePositionX!=10007?'IsHide':''}}" style='width:{{item1.CloseWidth}}rpx;height:{{item1.CloseHeight}}rpx'></cover-image>
-          </cover-view>
-        </cover-view>
-      </view>
-    </view>
-  </view>
 </movable-area>

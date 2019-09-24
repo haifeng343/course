@@ -1,0 +1,12 @@
+<movable-area style="height:{{windowHeight-statusBarHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
+  <view class="shareIt">
+    <image class='img' src='{{Info.ShareUrlShow}}' mode='aspectFill' lazy-load='true'></image>
+    <button wx:if="{{Info.IsShowShareButton==true}}" class="btn" data-id="shareBtn" style='background:{{Info.ShareButtonBgColor}};color:{{Info.ShareButtonFtColor}}' open-type="share" bindtap='share'>{{Info.ShareButtonTitle}}</button>
+  </view>
+</movable-area>

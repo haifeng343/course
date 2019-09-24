@@ -1,14 +1,10 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-var setTime;
 const app = getApp();
-
 Page({
   data: {
-    statusBarHeight: app.globalData.statusBarHeight,
-    windowHeight: app.globalData.windowHeight,
-    statusBarHeight: app.globalData.statusBarHeight,
-    windowWidth: app.globalData.windowWidth,
+    windowHeight: '',
+    windowWidth: '',
     navbarActiveIndex: 0,
     navbarTitle: [
       "全部订单",
@@ -51,163 +47,32 @@ Page({
     if (this.data.modelList[this.data.navbarActiveIndex].status == 0) {
       this.init();
     }
-    
+
   },
   onLoad(options) {
+    let that = this;
+    that.setData({
+      windowHeight: app.getGreen(0).windowHeight,
+      windowWidth: app.getGreen(0).windowWidth,
+    });
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/order/order",0).then(res => {
+    shareApi.getShare("/pages/order/order", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      this.setData({
+      that.setData({
         obj: res.Data,
 
       })
     });
-    this.init();
-    this._popList();
-  },
-  //启动弹窗关闭定时器
-  closeInterval: function (closeTime, index) {
-    let that = this;
-    if (setTime != null) {
-      clearInterval(setTime);
+    that.init();
+    if (that.selectComponent('#pop')) {
+      that.selectComponent('#pop').getData('order');
     }
-    if (closeTime <= 0) {
-      return;
-    }
-    setTime = setInterval(function () {
-      let temp = that.data.popList;
-      temp[index].pop = false;
-      if (temp.length > index + 1) {
-        temp[index + 1].pop = true
-        closeTime = temp[index + 1].CloseTime;
-        index = index + 1;
-      } else {
-        clearInterval(setTime);
-        closeTime = -1;
-        index = index + 1;
-      }
-      that.setData({
-        popList: temp
-      })
-      that.closeInterval(closeTime, index);
-    }, closeTime);
-  },
-  //弹窗列表
-  _popList: function () {
-    let that = this;
-    var url = 'user/pop/list';
-    var params = {
-      GroupToken: 'order',
-    }
-    netUtil.postRequest(url, params, function (res) {
-      let temp = res.Data;
-      temp.forEach((item, index) => {
-        if (index == 0) {
-          item.pop = true;
-        } else {
-          item.pop = false
-        }
-      })
-      that.setData({
-        popList: temp,
-      });
-      if (temp.length > 0) {
-        that.closeInterval(temp[0].CloseTime, 0);
-      }
-    },
-      null,
-      false,
-      false,
-      false)
-  },
-  //点击弹窗图片事件
-  popclick: function (e) {
-    let that = this;
-    console.log(e);
-    let actiontype = e.currentTarget.dataset.actiontype;
-    let actionparams = e.currentTarget.dataset.actionparams;
-    let executeparams = e.currentTarget.dataset.executeparams;
-    let index = e.currentTarget.dataset.index;
-    let popId = e.currentTarget.dataset.popid;
-    if (executeparams == 'receiveTasks') {
-      that.receiveTasks(popId, function () {
-        if (actiontype == 1) {
-          if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
-            wx.switchTab({
-              url: actionparams,
-            })
-          } else {
-            wx.navigateTo({
-              url: actionparams,
-            })
-          }
-        } else if (actiontype == 2) {
-          wx.navigateTo({
-            url: '/pages/WebView/WebView?path=' + actionparams,
-          })
-        }
-        if (actiontype == 1 || actiontype == 2) {
-          let temp = that.data.popList;
-          temp[index].pop = false;
-          if (temp.length > index + 1) {
-            temp[index + 1].pop = true
-          }
-          that.setData({
-            popList: temp
-          })
-        }
-      });
-    } else {
-      if (actiontype == 1) {
-        if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
-          wx.switchTab({
-            url: actionparams,
-          })
-        } else {
-          wx.navigateTo({
-            url: actionparams,
-          })
-        }
-      } else if (actiontype == 2) {
-        wx.navigateTo({
-          url: '/pages/WebView/WebView?path=' + actionparams,
-        })
-      }
-      if (actiontype == 1 || actiontype == 2) {
-        let temp = that.data.popList;
-        temp[index].pop = false;
-        if (temp.length > index + 1) {
-          temp[index + 1].pop = true
-        }
-        that.setData({
-          popList: temp
-        })
-      }
-    }
-  },
-  //关闭弹窗按钮
-  shutDown: function (e) {
-    let that = this;
-    if (setTime != null) {
-      clearInterval(setTime);
-    }
-    let index = e.currentTarget.dataset.index;
-    let temp = that.data.popList;
-    temp[index].pop = false;
-    if (temp.length > index + 1) {
-      temp[index + 1].pop = true;
-      that.closeInterval(temp[index + 1].CloseTime, index + 1);
-    }
-    that.setData({
-      popList: temp
-    })
   },
   init: function() {
     let usertoken = wx.getStorageSync('usertoken');
-    console.log(usertoken)
     this.setData({
       usertoken: usertoken
     });
@@ -236,7 +101,7 @@ Page({
   lookDetails: function(e) {
     this.setData({
       showSuccess: true,
-      PayAmount: Number(e.currentTarget.dataset.item.PayAmount/100).toFixed(2),
+      PayAmount: Number(e.currentTarget.dataset.item.PayAmount / 100).toFixed(2),
       OrderSn: e.currentTarget.dataset.item.OrderSn,
       RefundTime: e.currentTarget.dataset.item.RefundTime,
       RefundArrivalTime: e.currentTarget.dataset.item.RefundArrivalTime,
@@ -349,8 +214,12 @@ Page({
     that.init();
   },
   orderDetail: function(e) {
+    let formId = "";
+    if (e.detail.formId != "the formId is a mock one") {
+      formId = e.detail.formId;
+    }
     wx.navigateTo({
-      url: '/pages/orderDetail/orderDetail?Id=' + e.currentTarget.dataset.id + '&status=' + (this.data.navbarActiveIndex + 1) + '&kd=3',
+      url: '/pages/orderDetail/orderDetail?Id=' + e.currentTarget.dataset.id + '&status=' + (this.data.navbarActiveIndex + 1) + '&kd=3' + '&formId=' + formId,
     })
   },
   Refund: function(e) {

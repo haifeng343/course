@@ -52,7 +52,9 @@
     "pages/cashLog/cashLog",
     "pages/rewradRule/rewradRule",
     "pages/publick/puclick",
-    "pages/partake/partake"
+    "pages/fuliCenter/fuliCenter",
+    "pages/snatch/snatch",
+    "pages/kaquan/kaquan"
   ],
   "window": {
     "backgroundTextStyle": "dark",
