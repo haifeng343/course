@@ -1,11 +1,7 @@
 <!--components/pop.wxml-->
 <view wx:for="{{popList}}" wx:key wx:for-item="item1">
   <view wx:if="{{item1.pop==true}}">
-<<<<<<< HEAD
-    <view class='fatherPop' catchtouchmove='true'></view>
-=======
     <view class='fatherPop' style="top:{{token=='index'?statusBarHeight:0}}px" catchtouchmove='true'></view>
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
     <view class='poFixed'>
       <cover-view class='flex-center'>
         <cover-view class='flexBetween' wx:if="{{item1.ShowClose}}">

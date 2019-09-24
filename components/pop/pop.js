@@ -6,11 +6,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
   },
 
   /**
@@ -18,44 +14,19 @@ Component({
    */
   data: {
     popList: [],
-<<<<<<< HEAD
-=======
     token:"",
     statusBarHeight:"",
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
   },
   /**
    * 组件的方法列表
    */
   methods: {
-<<<<<<< HEAD
-    getData: function (token) {
-=======
     getData: function(token) {
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
       let that = this;
       var url = 'user/pop/list';
       var params = {
         GroupToken: token,
       }
-<<<<<<< HEAD
-      netUtil.postRequest(url, params, function (res) {
-        let temp = res.Data;
-        temp.forEach((item, index) => {
-          if (index == 0) {
-            item.pop = true;
-          } else {
-            item.pop = false
-          }
-        })
-        that.setData({
-          popList: temp,
-        });
-        if (temp.length > 0) {
-          that.closeInterval(temp[0].CloseTime, 0);
-        }
-      },
-=======
       netUtil.postRequest(url, params, function(res) {
           let temp = res.Data;
           let xpl = wx.getSystemInfoSync();
@@ -79,18 +50,13 @@ Component({
             that.closeInterval(temp[0].CloseTime, 0);
           }
         },
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
         null,
         false,
         false,
         false)
     },
     //启动弹窗关闭定时器
-<<<<<<< HEAD
-    closeInterval: function (closeTime, index) {
-=======
     closeInterval: function(closeTime, index) {
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
       let that = this;
       if (setTime != null) {
         clearTimeout(setTime);
@@ -98,11 +64,7 @@ Component({
       if (closeTime <= 0) {
         return;
       }
-<<<<<<< HEAD
-      setTime = setTimeout(function () {
-=======
       setTime = setTimeout(function() {
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
         let temp = that.data.popList;
         temp[index]['pop'] = false;
         if (temp.length > index + 1) {
@@ -121,9 +83,6 @@ Component({
       }, closeTime);
     },
     popclick: function(e) {
-<<<<<<< HEAD
-      this.triggerEvent('popclick', e.currentTarget.dataset);
-=======
       // this.triggerEvent('popclick', e.currentTarget.dataset);
       let that = this;
       console.log(e);
@@ -194,7 +153,6 @@ Component({
           })
         }
       }
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
     },
     shutDown: function(e) {
       let that = this;
@@ -212,10 +170,6 @@ Component({
         popList: temp
       })
     },
-<<<<<<< HEAD
-  }
-})
-=======
     //弹窗本地支持代码
     //1.领取任务
     receiveTasks: function(popId, onSuccess) {
@@ -238,4 +192,3 @@ Component({
     },
   }
 })
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e

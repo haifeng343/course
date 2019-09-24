@@ -116,10 +116,6 @@
     </view>
   </view>
 </view> -->
-<<<<<<< HEAD
-    <pop id='pop' bind:popclick="popclickFn"></pop>
-=======
     <pop id='pop'></pop>
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
   </view>
 </movable-area>

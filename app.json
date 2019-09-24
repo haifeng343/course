@@ -51,14 +51,10 @@
     "pages/searchCategory/searchCategory",
     "pages/cashLog/cashLog",
     "pages/rewradRule/rewradRule",
-<<<<<<< HEAD
-    "pages/publick/puclick"
-=======
     "pages/publick/puclick",
     "pages/fuliCenter/fuliCenter",
     "pages/snatch/snatch",
     "pages/kaquan/kaquan"
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
   ],
   "window": {
     "backgroundTextStyle": "dark",

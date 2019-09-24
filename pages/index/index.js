@@ -2,10 +2,6 @@
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-<<<<<<< HEAD
-
-=======
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
 const app = getApp();
 
 Page({
@@ -60,109 +56,10 @@ Page({
 
     that.banner();
     that.init();
-<<<<<<< HEAD
-    // that._popList();
-    that.hasTypeList();
-    that.data.isLoaded = true;
-    this.selectComponent('#pop').getData('index');
-  },
-  //弹窗列表
-  _popList: function() {
-    let that = this;
-    var url = 'user/pop/list';
-    var params = {
-      GroupToken: 'index',
-    }
-    netUtil.postRequest(url, params, function(res) {
-        let temp = res.Data;
-        temp.forEach((item, index) => {
-          if (index == 0) {
-            item.pop = true;
-          } else {
-            item.pop = false
-          }
-        })
-        that.setData({
-          popList: temp,
-        });
-        if (temp.length > 0) {
-          that.closeInterval(temp[0].CloseTime, 0);
-        }
-      },
-      null,
-      false,
-      false,
-      false)
-  },
-  //点击弹窗图片事件
-  popclickFn: function(e) {
-    let that = this;
-    console.log(e);
-    let actiontype = e.detail.actiontype;
-    let actionparams = e.detail.actionparams;
-    let executeparams = e.detail.executeparams;
-    let index = e.detail.index;
-    let popId = e.detail.popid;
-    if (executeparams == 'receiveTasks') {
-      that.receiveTasks(popId, function() {
-        if (actiontype == 1) {
-          if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
-            wx.switchTab({
-              url: actionparams,
-            })
-          } else {
-            wx.navigateTo({
-              url: actionparams,
-            })
-          }
-        } else if (actiontype == 2) {
-          wx.navigateTo({
-            url: '/pages/WebView/WebView?path=' + actionparams,
-          })
-        }
-        if (actiontype == 1 || actiontype == 2) {
-          let temp = that.data.popList;
-          temp[index].pop = false;
-          if (temp.length > index + 1) {
-            temp[index + 1].pop = true
-          }
-          that.setData({
-            popList: temp
-          })
-        }
-      });
-    } else {
-      if (actiontype == 1) {
-        if (actionparams == "/pages/index/index" || actionparams == "/pages/order/order" || actionparams == "/pages/mine/mine") {
-          wx.switchTab({
-            url: actionparams,
-          })
-        } else {
-          wx.navigateTo({
-            url: actionparams,
-          })
-        }
-      } else if (actiontype == 2) {
-        wx.navigateTo({
-          url: '/pages/WebView/WebView?path=' + actionparams,
-        })
-      }
-      if (actiontype == 1 || actiontype == 2) {
-        let temp = that.data.popList;
-        temp[index].pop = false;
-        if (temp.length > index + 1) {
-          temp[index + 1].pop = true
-        }
-        that.setData({
-          popList: temp
-        })
-      }
-=======
     that.hasTypeList();
     that.data.isLoaded = true;
     if (this.selectComponent('#pop')) {
       this.selectComponent('#pop').getData('index');
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
     }
   },
   hasTypeList: function() {

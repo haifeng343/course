@@ -12,13 +12,9 @@
   justify-content: center;
   align-items: center;
 }
-<<<<<<< HEAD
-
-=======
 ..button-hover{
   background-color: transparent!important;
 }
->>>>>>> 10f808d9ad7d86660d74777d9e00986ad1a92f2e
 .shut {
   position: absolute;
   top: 0;
