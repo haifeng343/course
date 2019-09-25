@@ -280,6 +280,20 @@ Page({
     } else {
       if (s.MaxCount == 1 && arr.length > 0) { //单选
         arr = [arr[arr.length - 1]];
+        for (let v of s.ItemList) {
+          if (arr.indexOf(v.RelId.toString()) != -1) {
+            v.checked = v.RelId;
+            s.checkedArr = [v.RelId];
+          } else {
+            v.checked = false;
+          }
+        }
+      } else if (s.MaxCount == 1 && arr.length == 0) {
+        for (let v of s.ItemList) {
+          if (v.checked) {
+            arr = [v.checked];
+          }
+        }
       } else if (s.MaxCount > 1) { //任选
         if (arr.length > s.MaxCount) {
           success = false;
@@ -312,15 +326,16 @@ Page({
           } else {
             for (let v of s.ItemList) {
               if (arr.indexOf(v.RelId.toString()) != -1) {
-                v.checked = true;
-              } else {
                 v.checked = false;
+              } else {
+                v.checked = v.RelId;
               }
             }
           }
         }
       }
       this.setData({
+        [a]: arr,
         [c]: arr,
         [d]: s.ItemList,
         [f]: s.StoreList || '',
