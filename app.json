@@ -54,7 +54,8 @@
     "pages/publick/puclick",
     "pages/fuliCenter/fuliCenter",
     "pages/snatch/snatch",
-    "pages/kaquan/kaquan"
+    "pages/kaquan/kaquan",
+    "pages/fulishe/fulishe"
   ],
   "window": {
     "backgroundTextStyle": "dark",
