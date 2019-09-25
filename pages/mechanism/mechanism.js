@@ -16,8 +16,12 @@ Page({
     storeId: '', //门店ID
     groupId: '', //分组Id
     Info: {},
-    type: "",//团单模式
-    sheetId:"",//团单Id
+    type: "", //团单模式
+    sheetId: "", //团单Id
+    count: 0, //购买数量
+    TotalPrice: -1, //总价
+    PrizeAmount: 0, //奖励金
+    checkedArr: [], //勾选的数组
   },
   onLoad: function(options) {
     let that = this;
@@ -40,16 +44,18 @@ Page({
       storeId: options.storeId || '',
       groupId: options.groupId || '',
       type: options.type || "",
-      sheetId:options.sheetId||""
+      sheetId: options.sheetId || ""
     })
     that.init();
     that.selectComponent("#pop").getData("mechanism");
   },
+  //拨打电话
   call: function(e) {
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.mobile,
     })
   },
+  //初始化机构信息
   init: function() {
     let that = this;
     var url = 'sheet/store/details';
@@ -63,15 +69,84 @@ Page({
       })
     }, null, false, false, false);
   },
-  longtap: function() {
-    console.log(564164168541)
+  //跳转购物车
+  navtoCar: function() {
+    wx.setStorageSync('load', true);
+    wx.navigateTo({
+      url: '/pages/car/car?type=' + this.data.type,
+    });
   },
+  //勾选
+  checkChange: function(e) {
+    var arr = [];
+    e.detail.value.forEach(item => {
+      arr = arr.concat(item);
+    })
+    this.setData({
+      checkedArr: arr
+    });
+    this.hasMoney();
+  },
+  //加入购物车
+  addcar: function() {
+    var that = this;
+    var url = 'cart/add';
+    var params = {
+      SheetId: that.data.sheetId,
+      RelId: that.data.checkedArr,
+    }
+    netUtil.postRequest(url, params, function(res) {
+      that.init(false);
+      that.setData({
+        TotalPrice: -1,
+        count: 0,
+      })
+      wx.showToast({
+        icon: 'none',
+        title: '添加已成功'
+      })
+    });
+  },
+  //确认预约
+  paybtn: function() {
+    let checkedList = [];
+    checkedList.push({
+      SheetId: this.data.sheetId,
+      RelId: this.data.checkedArr
+    });
+
+    wx.navigateTo({
+      url: '/pages/payOrder/payOrder?checkItem=' + JSON.stringify(checkedList) + '&type=' + this.data.type,
+    })
+  },
+  //计算购买价格
+  hasMoney: function() {
+    var that = this;
+    var url = 'sheet/buy/price';
+    var params = {
+      SheetId: that.data.sheetId,
+      RelId: that.data.checkedArr
+    }
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
+        that.setData({
+          Remark: res.Data.Remark,
+          TotalPrice: res.Data.TotalPrice == -1 ? -1 : res.Data.TotalPrice * 1.0 / 100,
+          PrizeAmount: (res.Data.PrizeAmount / 100).toFixed(2),
+          VoucherCount: res.Data.VoucherCount,
+          count: that.data.checkedArr.length
+        })
+      },
+      '',
+      false);
+  },
+  //跳转课程详情
   courseDetail: function(e) {
     let storeid = this.data.storeId + 'NUV' + this.data.groupId
     wx.navigateTo({
       url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id + '&type=' + this.data.type + '&sheetId=' + this.data.sheetId + '&storeId=' + storeid,
     })
   },
+  //下拉刷新
   onPullDownRefresh: function() {
     this.init();
     wx.stopPullDownRefresh();

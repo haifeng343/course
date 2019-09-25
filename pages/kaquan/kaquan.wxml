@@ -1,3 +1,22 @@
+<view class='nav'>
+  <view class='navLeft'>
+    <span class='navLi active'>全部(14)</span>
+    <span class='navLi'>全部(14)</span>
+    <span class='navLi'>全部(14)</span>
+    <span class='navLi'>全部(14)</span>
+    <span class='navLi'>全部(14)</span>
+  </view>
+  <view class='topImg'>
+    <image src='../../images/xia.png' mode='aspectFill'></image>
+  </view>
+</view>
+<view class="allList">
+  <view class="allItem on">全部(14)</view>
+  <view class="allItem">全部(14)</view>
+  <view class="allItem">全部(14)</view>
+  <view class="allItem">全部(14)</view>
+  <view class="allItem">全部(14)</view>
+</view>
 <scroll-view scroll-y="true" class="List">
   <view class='item'>
     <view class='title start'>
@@ -6,8 +25,132 @@
     </view>
     <view class='content'>
       <view class='quan'>
-      
+        <view class='guoqi'>即将过期</view>
+        <view class='startd'>
+          <image src='../../images/logo.png' mode='aspectFill' class='quanImg'></image>
+          <view class='quanContent'>
+            <view class='quanTitle noWrap'>抽京券*1</view>
+            <view class='ft28 bb noWrap'>全场通用</view>
+            <view class='ft28 bb'>有效期至2019-10-12</view>
+          </view>
+        </view>
+        <view class='foot'>
+          <view class='start bb mt25' bindtap='showDes'>
+            <view class='ft28'>使用规则</view>
+            <image src="{{des==1?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='up'></image>
+          </view>
+          <button class='btnd'>立即使用</button>
+        </view>
       </view>
+      <view class="dec {{des==2?'':'none'}}">仅供活动钱够</view>
+    </view>
+  </view>
+  <view class='item'>
+    <view class='title start'>
+      <image src='../../images/logo.png' mode='aspectFill' class='logo'></image>
+      <view class='storeName'>亲学宝</view>
+    </view>
+    <view class='content'>
+      <view class='quan'>
+        <view class='guoqi'>即将过期</view>
+        <view class='startd'>
+          <image src='../../images/logo.png' mode='aspectFill' class='quanImg'></image>
+          <view class='quanContent'>
+            <view class='quanTitle noWrap'>抽京券*1</view>
+            <view class='ft28 bb noWrap'>全场通用</view>
+            <view class='ft28 bb'>有效期至2019-10-12</view>
+          </view>
+        </view>
+        <view class='foot'>
+          <view class='start bb mt25' bindtap='showDes'>
+            <view class='ft28'>使用规则</view>
+            <image src="{{des==1?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='up'></image>
+          </view>
+          <button class='btnd'>立即使用</button>
+        </view>
+      </view>
+      <view class="dec {{des==2?'':'none'}}">仅供活动钱够</view>
+    </view>
+  </view>
+  <view class='item'>
+    <view class='title start'>
+      <image src='../../images/logo.png' mode='aspectFill' class='logo'></image>
+      <view class='storeName'>亲学宝</view>
+    </view>
+    <view class='content'>
+      <view class='quan'>
+        <view class='guoqi'>即将过期</view>
+        <view class='startd'>
+          <image src='../../images/logo.png' mode='aspectFill' class='quanImg'></image>
+          <view class='quanContent'>
+            <view class='quanTitle noWrap'>抽京券*1</view>
+            <view class='ft28 bb noWrap'>全场通用</view>
+            <view class='ft28 bb'>有效期至2019-10-12</view>
+          </view>
+        </view>
+        <view class='foot'>
+          <view class='start bb mt25' bindtap='showDes'>
+            <view class='ft28'>使用规则</view>
+            <image src="{{des==1?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='up'></image>
+          </view>
+          <button class='btnd'>立即使用</button>
+        </view>
+      </view>
+      <view class="dec {{des==2?'':'none'}}">仅供活动钱够</view>
+    </view>
+  </view>
+  <view class='item'>
+    <view class='title start'>
+      <image src='../../images/logo.png' mode='aspectFill' class='logo'></image>
+      <view class='storeName'>亲学宝</view>
+    </view>
+    <view class='content'>
+      <view class='quan'>
+        <view class='guoqi'>即将过期</view>
+        <view class='startd'>
+          <image src='../../images/logo.png' mode='aspectFill' class='quanImg'></image>
+          <view class='quanContent'>
+            <view class='quanTitle noWrap'>抽京券*1</view>
+            <view class='ft28 bb noWrap'>全场通用</view>
+            <view class='ft28 bb'>有效期至2019-10-12</view>
+          </view>
+        </view>
+        <view class='foot'>
+          <view class='start bb mt25' bindtap='showDes'>
+            <view class='ft28'>使用规则</view>
+            <image src="{{des==1?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='up'></image>
+          </view>
+          <button class='btnd'>立即使用</button>
+        </view>
+      </view>
+      <view class="dec {{des==2?'':'none'}}">仅供活动钱够</view>
+    </view>
+  </view>
+  <view class='item'>
+    <view class='title start'>
+      <image src='../../images/logo.png' mode='aspectFill' class='logo'></image>
+      <view class='storeName'>亲学宝</view>
+    </view>
+    <view class='content'>
+      <view class='quan'>
+        <view class='guoqi'>即将过期</view>
+        <view class='startd'>
+          <image src='../../images/logo.png' mode='aspectFill' class='quanImg'></image>
+          <view class='quanContent'>
+            <view class='quanTitle noWrap'>抽京券*1</view>
+            <view class='ft28 bb noWrap'>全场通用</view>
+            <view class='ft28 bb'>有效期至2019-10-12</view>
+          </view>
+        </view>
+        <view class='foot'>
+          <view class='start bb mt25' bindtap='showDes'>
+            <view class='ft28'>使用规则</view>
+            <image src="{{des==1?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='up'></image>
+          </view>
+          <button class='btnd'>立即使用</button>
+        </view>
+      </view>
+      <view class="dec {{des==2?'':'none'}}">仅供活动钱够</view>
     </view>
   </view>
 </scroll-view>

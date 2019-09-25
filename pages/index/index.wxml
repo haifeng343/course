@@ -6,6 +6,7 @@
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
   <view>
+
     <!-- 自定义的导航栏 -->
     <view class="custom flex_center" style="padding-top:{{statusBarHeight}}rpx">
       <view class='navTop' bindtap='address'>
@@ -32,6 +33,7 @@
         </block>
       </view>
     </view>
+    <!-- 分类列表 -->
     <view class='categoryList' wx:if="{{typeList.length>1}}">
       <view class='Item' wx:for="{{typeList}}" wx:key wx:for-item="k">
         <form bindsubmit="navtoCategory" report-submit="true" data-Id="{{k.Id}}" data-name="{{k.Name}}">
@@ -42,6 +44,7 @@
         </form>
       </view>
     </view>
+    <!--列表  -->
     <view class='groupList'>
       <view wx:for="{{groupList}}" wx:for-item="item" wx:key data-id='{{item.SheetId}}' data-type="{{item.ModelType}}" data-name="{{item.TradingAreaName}}" class='groupDetail' bindtap='groupDetail'>
         <view class='groupItem' wx:if="{{item.ModelType==1}}">

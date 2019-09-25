@@ -100,10 +100,19 @@
       </view>
     </view>
     <view class='List mt20'>
-      <view class='item mt20' bindtap='fuli' wx:if="{{buttons.setup==true}}">
+      <!-- <view class='item mt20' bindtap='fuli' wx:if="{{buttons.setup==true}}">
         <view class='start'>
           <image class='icon1' src='../../images/f1.png' mode='aspectFill' lazy-load='true'></image>
           <view>福利中心</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view> -->
+      <view class='item mt20' bindtap='quan' wx:if="{{buttons.setup==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/fuliquan.png' mode='aspectFill' lazy-load='true'></image>
+          <view>我的卡券</view>
         </view>
         <view class='start'>
           <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>

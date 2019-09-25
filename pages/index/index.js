@@ -133,10 +133,17 @@ Page({
   },
   groupDetail: function(e) {
     const that = this;
-    that.Id = parseInt(e.currentTarget.dataset.id)
-    wx.navigateTo({
-      url: '/pages/chooseClass/chooseClass?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude + '&Id=' + that.Id + '&name=' + e.currentTarget.dataset.name + '&type=' + e.currentTarget.dataset.type,
-    })
+    that.Id = parseInt(e.currentTarget.dataset.id);
+    let type = e.currentTarget.dataset.type;
+    if (type == 1) {
+      wx.navigateTo({
+        url: '/pages/chooseClass/chooseClass?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude + '&Id=' + that.Id + '&name=' + e.currentTarget.dataset.name + '&type=' + e.currentTarget.dataset.type,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/shangquan/shangquan?Longitude=' + that.Longitude + '&Latitude=' + that.Latitude + '&Id=' + that.Id + '&name=' + e.currentTarget.dataset.name + '&type=' + e.currentTarget.dataset.type,
+      })
+    }
   },
   address: function() {
     const that = this;

@@ -30,12 +30,10 @@ Component({
       netUtil.postRequest(url, params, function(res) {
           let temp = res.Data;
           let xpl = wx.getSystemInfoSync();
-          console.log(xpl)
           that.setData({
             token: token,
             statusBarHeight: xpl.statusBarHeight
           })
-          console.log(that.data.token)
           temp.forEach((item, index) => {
             if (index == 0) {
               item.pop = true;
@@ -85,14 +83,12 @@ Component({
     popclick: function(e) {
       // this.triggerEvent('popclick', e.currentTarget.dataset);
       let that = this;
-      console.log(e);
       let actiontype = e.currentTarget.dataset.actiontype;
       let actionparams = e.currentTarget.dataset.actionparams;
       let executeparams = e.currentTarget.dataset.executeparams;
       let index = e.currentTarget.dataset.index;
       let popId = e.currentTarget.dataset.popid;
       if (executeparams == 'receiveTasks') {
-        console.log(11111)
         that.receiveTasks(popId, function() {
           if (actiontype == 0) {
             return;

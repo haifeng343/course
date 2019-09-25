@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 56,
+			"current": 45,
 			"list": [
 				{
 					"id": -1,
@@ -94,10 +94,10 @@
 					"scene": null
 				},
 				{
-					"id": 7,
+					"id": 6,
 					"name": "chooseClass",
 					"pathName": "pages/chooseClass/chooseClass",
-					"query": "Longitude=undefined&Latitude=undefined&Id=15&name=西湖银泰城商圈&type=2",
+					"query": "Longitude=undefined&Latitude=undefined&Id=24&name=西湖区·黄龙万科中心&type=2",
 					"scene": null
 				},
 				{
@@ -367,10 +367,10 @@
 					"scene": null
 				},
 				{
-					"id": 46,
+					"id": 45,
 					"name": "mechanism",
 					"pathName": "pages/mechanism/mechanism",
-					"query": "groupId=17&storeId=6",
+					"query": "groupId=16&storeId=4&type=2&sheetId=14",
 					"scene": null
 				},
 				{

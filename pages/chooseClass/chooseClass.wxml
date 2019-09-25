@@ -190,19 +190,7 @@
       </view>
       <view wx:else>
         <!-- <view> 已选课程:{{count}}门</view> -->
-        <span wx:if="{{PrizeAmount>0}}">
-          <view>可获奖金:
-            <span class="red">￥{{PrizeAmount}}</span>
-          </view>
-        </span>
-        <span wx:if="{{VoucherCount>0}}">
-          <span>
-            <span wx:if="{{PrizeAmount>0}}">，</span>
-            <span wx:else>，可获</span>
-          </span>
-          <view>报名代金券:
-            <span class="red">{{VoucherCount}}</span>张</view>
-        </span>
+        <span wx:if="{{PrizeAmount>0}}"><span>可获奖金:<span class="red">￥{{PrizeAmount}}</span></span></span><span wx:if="{{VoucherCount>0}}"><span><span wx:if="{{PrizeAmount>0}}">，</span><span wx:else>，可获</span></span><span>报名代金券:<span class="red">{{VoucherCount}}</span>张</span></span>
       </view>
     </view>
   </view>

@@ -44,6 +44,7 @@ Page({
   clear: function() {
     this.setData({
       SearchName: '',
+      List:[],
     })
   },
   //搜索的名称
@@ -51,6 +52,12 @@ Page({
     this.setData({
       SearchName: e.detail.value
     })
+    if (!e.detail.value){
+      this.setData({
+        SearchName: '',
+        List: [],
+      })
+    }
   },
   init: function () { },
   //点击搜索
@@ -91,6 +98,9 @@ Page({
         wx.showToast({
           icon:'none',
           title: '暂无查询结果',
+        })
+        that.setData({
+          List:[]
         })
       }
     })

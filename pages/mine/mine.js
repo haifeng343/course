@@ -195,6 +195,17 @@ Page({
       })
     }
   },
+  quan: function(e) {
+    if (this.data.usertoken) {
+      wx.navigateTo({
+        url: '/pages/kaquan/kaquan',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    }
+  },
   callUs: function() {
     wx.navigateTo({
       url: '/pages/callUs/callUs',

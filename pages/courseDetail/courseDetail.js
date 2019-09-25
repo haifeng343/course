@@ -66,7 +66,8 @@ Page({
       if (that.data.type == 2) { //商圈模式
         //返回到前两页
         let pages = getCurrentPages();
-        let pagesPre2 = pages[pages.length - 3];
+        // let pagesPre2 = pages[pages.length - 3];
+        let pagesPre2 = pages[pages.length - 2];
 
         pagesPre2.setData({
           // storeIdGotoTemp: that.data.storeId,
@@ -76,9 +77,11 @@ Page({
           initRelId: relId,
           sourceFrom:1
         });
-        pagesPre2.getData(false);
+        // pagesPre2.getData(false);
+        pagesPre2.init(false);
         wx.navigateBack({
-          delta: 2
+          // delta: 2,
+          delta: 1,
         });
       }
     }
