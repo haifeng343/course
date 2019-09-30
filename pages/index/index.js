@@ -174,7 +174,7 @@ Page({
   },
   searchTo: function() {
     wx.navigateTo({
-      url: '/pages/search/search',
+      url: '/pages/searchCategory/searchCategory?latitude=' + this.data.latitude + '&longitude=' + this.data.longitude + '&typeId=0',
     })
   },
   banner: function() {

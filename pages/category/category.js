@@ -64,8 +64,7 @@ Page({
   cheoose: function(e) {
     console.log(e)
     wx.navigateTo({
-      // url: '/pages/chooseClass/chooseClass?storeId=' + e.currentTarget.dataset.storeid + '&Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&relId=' + e.currentTarget.dataset.relid,
-      url: '/pages/courseDetail/courseDetail?storeId=' + e.currentTarget.dataset.storeid + '&sheetId=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&Id=' + e.currentTarget.dataset.relid + '&sourceFrom=1',
+      url: '/pages/courseDetail/courseDetail?storeId=' + e.currentTarget.dataset.storeid + '&sheetId=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&Id=' + e.currentTarget.dataset.relid + '&sourceFrom=1' + '&groupId=' + e.currentTarget.dataset.groupid,
     })
   },
   navSheet: function(e) {
@@ -221,7 +220,6 @@ Page({
       showId1: e.currentTarget.dataset.index,
       districtname: e.currentTarget.dataset.districtname,
     })
-    console.log(this.data.districtname)
   },
   //点击全部商圈
   allSeller: function() {

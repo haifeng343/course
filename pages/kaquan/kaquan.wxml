@@ -1,156 +1,79 @@
-<view class='nav'>
+<view class="navbar">
   <view class='navLeft'>
-    <span class='navLi active'>全部(14)</span>
-    <span class='navLi'>全部(14)</span>
-    <span class='navLi'>全部(14)</span>
-    <span class='navLi'>全部(14)</span>
-    <span class='navLi'>全部(14)</span>
+    <block wx:for="{{typeList}}" wx:for-item="item1" wx:key="index">
+      <view class="navbar-item {{showId === item1.TypeId?'active':''}}" data-name="{{item1.TypeName}}" data-id="{{item1.TypeId}}" bindtap="navClick">
+        <text>{{item1.TypeName}}</text>
+      </view>
+    </block>
   </view>
   <view class='topImg'>
-    <image src='../../images/xia.png' mode='aspectFill'></image>
+    <image bindtap='showTopPop' src='{{ImgShow}}' mode='aspectFill'></image>
   </view>
 </view>
-<view class="allList">
-  <view class="allItem on">全部(14)</view>
-  <view class="allItem">全部(14)</view>
-  <view class="allItem">全部(14)</view>
-  <view class="allItem">全部(14)</view>
-  <view class="allItem">全部(14)</view>
+<!-- <view class='nav'>
+  <view class='navLeft'>
+    <view wx:for="{{typeList}}" wx:key wx:for-item="item1" class="navLi {{showId ==item1.TypeId?'active':''}}" data-name="{{item1.TypeName}}" data-id="{{item1.TypeId}}" bindtap="navClick">
+      <text>{{item1.TypeName}}</text>
+    </view>
+  </view>
+  <view class='topImg'>
+    <image bindtap='showTopPop' src='{{ImgShow}}' mode='aspectFill'></image>
+  </view>
+</view> -->
+<view class="allList" wx:if="{{showTop}}">
+  <view wx:for="{{typeList}}" wx:key wx:for-item="k" class="allItem {{showId ==k.TypeId?'on':''}}" data-name="{{k.TypeName}}" data-id="{{k.TypeId}}" bindtap="navClick">{{k.TypeName}}</view>
 </view>
-<scroll-view scroll-y="true" class="List">
-  <view class='item'>
-    <view class='title start'>
+<scroll-view scroll-y="true" class="List" wx:if="{{List.length>0}}">
+  <view class='item' wx:for="{{List}}" wx:key>
+    <!-- <view class='title start'>
       <image src='../../images/logo.png' mode='aspectFill' class='logo'></image>
       <view class='storeName'>亲学宝</view>
-    </view>
+    </view> -->
     <view class='content'>
       <view class='quan'>
-        <view class='guoqi'>即将过期</view>
+        <view class='guoqi' wx:if="{{item.IsExpireSoon==true}}">即将过期</view>
         <view class='startd'>
-          <image src='../../images/logo.png' mode='aspectFill' class='quanImg'></image>
+          <image src='{{item.CardIconUrl}}' mode='aspectFill' class='quanImg'></image>
           <view class='quanContent'>
-            <view class='quanTitle noWrap'>抽京券*1</view>
-            <view class='ft28 bb noWrap'>全场通用</view>
-            <view class='ft28 bb'>有效期至2019-10-12</view>
+            <view class='quanTitle noWrap'>{{item.CardName}}</view>
+            <view class='ft28 bb noWrap'>{{item.UseContext}}</view>
+            <view class='ft28 bb'>有效期至{{item.EndTime}}</view>
           </view>
         </view>
         <view class='foot'>
-          <view class='start bb mt25' bindtap='showDes'>
+          <view class='start bb' data-index="{{index}}" bindtap='showDesClick'>
             <view class='ft28'>使用规则</view>
-            <image src="{{des==1?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='up'></image>
+            <image src="{{item.check==true?'../../images/up.png':'../../images/xia.png'}}" mode='aspectFill' class='up'></image>
           </view>
-          <button class='btnd'>立即使用</button>
+          <view class='erFather' wx:if="{{item.ShowType==1}}" data-code="{{item.CardQrCode}}" data-codeimg="{{item.CardQrCodeUrlShow}}" bindtap='codeClick'>
+            <image src='../../images/code.png' class='erweiImg'></image>
+          </view>
+          <button class='btnd' wx:if="{{item.ShowType==2}}">立即使用</button>
         </view>
       </view>
-      <view class="dec {{des==2?'':'none'}}">仅供活动钱够</view>
+      <view class="dec {{item.check==true?'':'none'}}" wx:if="{{item.UseDescription}}">{{item.UseDescription}}</view>
+      <view class="dec" wx:else>暂无规则</view>
     </view>
   </view>
-  <view class='item'>
-    <view class='title start'>
-      <image src='../../images/logo.png' mode='aspectFill' class='logo'></image>
-      <view class='storeName'>亲学宝</view>
-    </view>
-    <view class='content'>
-      <view class='quan'>
-        <view class='guoqi'>即将过期</view>
-        <view class='startd'>
-          <image src='../../images/logo.png' mode='aspectFill' class='quanImg'></image>
-          <view class='quanContent'>
-            <view class='quanTitle noWrap'>抽京券*1</view>
-            <view class='ft28 bb noWrap'>全场通用</view>
-            <view class='ft28 bb'>有效期至2019-10-12</view>
-          </view>
-        </view>
-        <view class='foot'>
-          <view class='start bb mt25' bindtap='showDes'>
-            <view class='ft28'>使用规则</view>
-            <image src="{{des==1?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='up'></image>
-          </view>
-          <button class='btnd'>立即使用</button>
-        </view>
-      </view>
-      <view class="dec {{des==2?'':'none'}}">仅供活动钱够</view>
-    </view>
-  </view>
-  <view class='item'>
-    <view class='title start'>
-      <image src='../../images/logo.png' mode='aspectFill' class='logo'></image>
-      <view class='storeName'>亲学宝</view>
-    </view>
-    <view class='content'>
-      <view class='quan'>
-        <view class='guoqi'>即将过期</view>
-        <view class='startd'>
-          <image src='../../images/logo.png' mode='aspectFill' class='quanImg'></image>
-          <view class='quanContent'>
-            <view class='quanTitle noWrap'>抽京券*1</view>
-            <view class='ft28 bb noWrap'>全场通用</view>
-            <view class='ft28 bb'>有效期至2019-10-12</view>
-          </view>
-        </view>
-        <view class='foot'>
-          <view class='start bb mt25' bindtap='showDes'>
-            <view class='ft28'>使用规则</view>
-            <image src="{{des==1?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='up'></image>
-          </view>
-          <button class='btnd'>立即使用</button>
-        </view>
-      </view>
-      <view class="dec {{des==2?'':'none'}}">仅供活动钱够</view>
-    </view>
-  </view>
-  <view class='item'>
-    <view class='title start'>
-      <image src='../../images/logo.png' mode='aspectFill' class='logo'></image>
-      <view class='storeName'>亲学宝</view>
-    </view>
-    <view class='content'>
-      <view class='quan'>
-        <view class='guoqi'>即将过期</view>
-        <view class='startd'>
-          <image src='../../images/logo.png' mode='aspectFill' class='quanImg'></image>
-          <view class='quanContent'>
-            <view class='quanTitle noWrap'>抽京券*1</view>
-            <view class='ft28 bb noWrap'>全场通用</view>
-            <view class='ft28 bb'>有效期至2019-10-12</view>
-          </view>
-        </view>
-        <view class='foot'>
-          <view class='start bb mt25' bindtap='showDes'>
-            <view class='ft28'>使用规则</view>
-            <image src="{{des==1?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='up'></image>
-          </view>
-          <button class='btnd'>立即使用</button>
-        </view>
-      </view>
-      <view class="dec {{des==2?'':'none'}}">仅供活动钱够</view>
-    </view>
-  </view>
-  <view class='item'>
-    <view class='title start'>
-      <image src='../../images/logo.png' mode='aspectFill' class='logo'></image>
-      <view class='storeName'>亲学宝</view>
-    </view>
-    <view class='content'>
-      <view class='quan'>
-        <view class='guoqi'>即将过期</view>
-        <view class='startd'>
-          <image src='../../images/logo.png' mode='aspectFill' class='quanImg'></image>
-          <view class='quanContent'>
-            <view class='quanTitle noWrap'>抽京券*1</view>
-            <view class='ft28 bb noWrap'>全场通用</view>
-            <view class='ft28 bb'>有效期至2019-10-12</view>
-          </view>
-        </view>
-        <view class='foot'>
-          <view class='start bb mt25' bindtap='showDes'>
-            <view class='ft28'>使用规则</view>
-            <image src="{{des==1?'../../images/xia.png':'../../images/up.png'}}" mode='aspectFill' class='up'></image>
-          </view>
-          <button class='btnd'>立即使用</button>
-        </view>
-      </view>
-      <view class="dec {{des==2?'':'none'}}">仅供活动钱够</view>
-    </view>
-  </view>
+  <view style='width:100%;height:100rpx;background-color:transparent'></view>
 </scroll-view>
+
+<view class='nohasLog' wx:else>
+  <view class='no_record_frame'>
+    <image class='noImg' src='../../images/zanwu.png' mode='aspectFill' lazy-load='true'></image>
+    <view>暂无卡券</view>
+  </view>
+</view>
+<view class='footerBtn' bindtap='InvalidClick'>
+  查看失效的卡券
+  <!-- <image src='../../images/go.png' class='go' mode='aspectFill'></image> -->
+</view>
+
+<!--券码弹出框-->
+<view class='dialog' hidden='{{!showCode}}' bindtap='dialogHide' catchtouchmove="ture">
+  <view class='dialog-contatner' style='height:580rpx'>
+    <view class='dialog-title'>请扫描以下券码验券</view>
+    <view class='dialog-code'>券码: {{code}}</view>
+    <image class='codeImg' src='{{codeImg}}' mode='aspectFill' lazy-load='true'></image>
+  </view>
+</view>

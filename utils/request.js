@@ -22,8 +22,8 @@ function get(url, params, onSuccess, onFailed, isShowLoading = true, isShowError
  * @onFailed  失败回调
  */
 
-const baseUrl = "https://qxbclient.guditech.com/";
-// const baseUrl = "https://test.guditech.com/rocketclient/";
+// const baseUrl = "https://qxbclient.guditech.com/";
+const baseUrl = "https://test.guditech.com/rocketclient/";
 
 function request(url, params, method, onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin, formId) {
   if (isShowLoading) {

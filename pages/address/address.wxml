@@ -1,4 +1,3 @@
-
 <movable-area style="height:{{windowHeight}}rpx;width:100%">
   <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
     <button open-type='contact' class='contact contact_left'>客服</button>
@@ -6,39 +5,17 @@
   <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
-<!-- <view class='address' wx:if="{{items.length<=0}}">
-  <image class='noads' src='../../images/noads.png' mode='widthFix' lazy-load='true'></image>
-  <view class='nohave'>暂无收货地址</view>
-  <view class='haveto'>点击下方按钮进行添加</view>
-  <view class='add'>+新增地址</view>
-</view> -->
-<view class='address'>
-  <view class='nohasLog' wx:if="{{items.length<=0}}">
-    <image class='noImg' src='../../images/noads.png' mode='widthFix' lazy-load='true'></image>
-    <view>暂无地址，点击下方按钮去添加</view>
-  </view>
-  <view wx:else>
-    <view class="container">
-      <view class='item' wx:for="{{items}}" wx:key>
-        <view class='column'>
-          <view class='starts'>
-            <view class='name'>{{item.AddressName}}</view>
-            <view class='home' wx:if="{{item.Tag=='家'}}">家</view>
-            <view class='company' wx:if="{{item.Tag=='公司'}}">公司</view>
-            <view class='home' wx:if="{{item.Tag=='学校'}}">学校</view>
-          </view>
-          <view class='addressDetail' wx:if="{{item.DoorNumber=='' || item.DoorNumber==null}}">{{item.AddressDetails}}</view>
-          <view class='addressDetail' wx:else>{{item.DoorNumber}}</view>
-        </view>
-        <view class='center'>
-          <image class='edit' bindtap='edit' data-title='{{item.AddressName}}' data-lat="{{item.Latitude}}" data-lng="{{item.Longitude}}" data-address="{{item.AddressDetails}}" data-DoorNumber="{{item.DoorNumber}}" data-tag="{{item.Tag}}" data-addressId="{{item.AddressId}}"
-            data-Id="{{item.AddressId}}" src='../../images/more.png' mode='widthFix' lazy-load='true'></image>
-        </view>
+
+  <view class='address'>
+    <view class='nohasLog' wx:if="{{items.length<=0}}">
+      <view class='no_record_frame'>
+        <image class='noImg' src='../../images/noads.png' mode='widthFix' lazy-load='true'></image>
+        <view>暂无地址，点击下方按钮去添加</view>
       </view>
     </view>
-    <!-- <view class="container">
-      <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" wx:for="{{items}}" wx:key="">
-        <view class="content between">
+    <view wx:else>
+      <view class="container">
+        <view class='item' wx:for="{{items}}" wx:key>
           <view class='column'>
             <view class='starts'>
               <view class='name'>{{item.AddressName}}</view>
@@ -50,13 +27,12 @@
             <view class='addressDetail' wx:else>{{item.DoorNumber}}</view>
           </view>
           <view class='center'>
-          <image class='edit' bindtap='edit' data-title='{{item.AddressName}}' data-lat="{{item.Latitude}}" data-lng="{{item.Longitude}}" data-address="{{item.AddressDetails}}" data-DoorNumber="{{item.DoorNumber}}" data-tag="{{item.Tag}}" data-addressId="{{item.AddressId}}" data-Id="{{item.AddressId}}" src='../../images/more.png' mode='widthFix' lazy-load='true'></image>
+            <image class='edit' bindtap='edit' data-title='{{item.AddressName}}' data-lat="{{item.Latitude}}" data-lng="{{item.Longitude}}" data-address="{{item.AddressDetails}}" data-DoorNumber="{{item.DoorNumber}}" data-tag="{{item.Tag}}" data-addressId="{{item.AddressId}}"
+              data-Id="{{item.AddressId}}" src='../../images/more.png' mode='widthFix' lazy-load='true'></image>
           </view>
         </view>
-        <view class="del" bindtap="del" data-Id="{{item.AddressId}}">删除</view>
       </view>
-    </view> -->
+    </view>
+    <view class='add' data-ids="{{ids}}" bindtap='addAddress'>+新增地址</view>
   </view>
-  <view class='add' data-ids="{{ids}}" bindtap='addAddress'>+新增地址</view>
-</view>
 </movable-area>

@@ -22,8 +22,10 @@ Page({
     sheetId: "", //团单Id
     sourceFrom: "", //来源1分类页
     storeId: "", //门店Id
+    groupId: "", //
   },
   onLoad: function(options) {
+    console.log(options)
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
@@ -45,7 +47,8 @@ Page({
       type: options.type || "",
       sheetId: options.sheetId || "",
       sourceFrom: options.sourceFrom || "",
-      storeId: options.storeId || ""
+      storeId: options.storeId || "",
+      groupId: options.groupId || ""
     })
     that.init();
     this.selectComponent("#pop").getData('courseDetail');
@@ -54,33 +57,21 @@ Page({
   goToBuy: function() {
     let that = this;
     let relId = that.data.Id;
-    let temp = that.data.storeId.split('NUV');
-    if (temp.length != 2) {
-      return;
-    }
     if (that.data.sourceFrom == 1) {
+      let relIdGoto = 'NUV' + relId;
       wx.redirectTo({
-        url: '/pages/chooseClass/chooseClass?Id=' + that.data.sheetId + '&type=' + that.data.type + "&storeId=" + that.data.storeId + '&initGroupId=' + temp[1] + '&initStoreId=' + temp[0] + '&initRelId=' + relId +'&sourceFrom=2'
+        url: '/pages/mechanism/mechanism?groupId=' + that.data.groupId + '&storeId=' + that.data.storeId + '&type=' + that.data.type + '&relIdGoto=' + relIdGoto + '&sheetId=' + that.data.sheetId + '&relId=' + relId +'&isJump=true'
       })
     } else {
       if (that.data.type == 2) { //商圈模式
         //返回到前两页
         let pages = getCurrentPages();
-        // let pagesPre2 = pages[pages.length - 3];
         let pagesPre2 = pages[pages.length - 2];
-
         pagesPre2.setData({
-          // storeIdGotoTemp: that.data.storeId,
-          storeIdGotoTemp: "",
-          initGroupId: temp[1],
-          initStoreId: temp[0],
-          initRelId: relId,
-          sourceFrom:1
+          isJump: true
         });
-        // pagesPre2.getData(false);
-        pagesPre2.init(false);
+        pagesPre2.checkChange({RelId:that.data.Id});
         wx.navigateBack({
-          // delta: 2,
           delta: 1,
         });
       }

@@ -9,17 +9,15 @@ Page({
     pagecount: 100,
     page: 1,
     List: [],
-    money: 0, //总价
-    totalCount: 0, //总数量
     totalChecked: false, //全选是否选中
-    checkItem: [],
     load: true,
-    thisPageRefresh:true,
+    thisPageRefresh: true,
     usertoken: '',
-    type:"",//1团单 2 商圈
-    PrizeAmount:"",//总奖励金
-    VoucherCount:"",//总代金券
-    checkArr:[],
+    type: "", //1团单 2 商圈
+    totalCheckedLength: 0, //总选择数量
+    totalPrizeAmount: 0, //总奖励金额
+    totalVoucherCount: 0, //总奖励卡券数量
+    totalPayPrice: 0, //总价格
   },
   onShow: function() {
     this.init();
@@ -39,7 +37,7 @@ Page({
       load: options.refresh || '',
       type: options.type || '',
     })
-    if(options.type==1){
+    if (options.type == 1) {
       wx.setNavigationBarTitle({
         title: '购物车',
       })
@@ -48,7 +46,7 @@ Page({
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/car/car",0).then(res => {
+    shareApi.getShare("/pages/car/car", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       that.setData({
         obj: res.Data,
@@ -56,7 +54,7 @@ Page({
     })
     this.selectComponent("#pop").getData("car");
   },
-  
+  //初始化
   init: function() {
     let usertoken = wx.getStorageSync('usertoken');
     this.setData({
@@ -69,139 +67,245 @@ Page({
       }
     }
   },
+  //获取列表
   getData: function() {
     let that = this;
     var url = 'cart/list';
     var params = {
       PageCount: that.data.pagecount,
       PageIndex: that.data.page,
-      SheetModel : that.data.type
+      SheetModel: that.data.type
     }
     console.log(params)
     netUtil.postRequest(url, params, function(res) {
-      res.Data.forEach(item => {
-        item.Price = Number(item.Price / 100).toFixed(2);
-        item.PrizeAmount = Number(item.PrizeAmount / 100).toFixed(2);
-      })
-      let arr = that.data.List;
-      let arr1 = res.Data;
-      if (that.data.page == 1) {
-        arr = arr1
-      } else {
-        arr = arr.concat(arr1)
-      }
-      that.setData({
-        List: arr
-      })
-      if (that.data.page == 1) {
-        that.setData({
-          totalChecked: false,
-          money: 0
-        })
-      } else {
-        if (that.data.totalChecked == true) {
-          that.allCheckedHandler();
-        }
-      }
-      that.setData({
-        load: false,
-        thisPageRefresh:false
+      let tempArr = res.Data;
+      tempArr.forEach(item => {
+        item.checkArr = [];
+        item.CheckLength = 0;
+        item.TotalPrice = 0;
       });
+      that.setData({
+        List: tempArr,
+        load: false,
+        thisPageRefresh: false
+      })
       wx.setStorageSync('load', false);
     }, null, true, false, false)
   },
+  //点击商圈/团单跳转
   navSheet: function(e) {
-    wx.navigateTo({
-      url: '/pages/chooseClass/chooseClass?Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type,
-    })
+    if (e.currentTarget.dataset.type == 1) {
+      wx.navigateTo({
+        url: '/pages/chooseClass/chooseClass?Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type,
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/shangquan/shangquan?Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type,
+      })
+    }
   },
-  //删除购物车
-  deleteCard: function(e) {
+  //删除购物车(课程)
+  deleteCard_item: function(item) {
     let that = this;
-    let item = e.currentTarget.dataset;
-    let a = that.data.List[item.index]
+    that._delete(item.id, 2, function() {
+      wx.showToast({
+        icon: 'none',
+        title: '成功删除',
+      })
+      let sheetId = item.sheetid;
+      let sheetIndex = item.sheetindex;
+      let itemIndex = item.itemindex;
+
+      let thisList = that.data.List;
+      thisList[sheetIndex].ItemList.splice(itemIndex, 1);
+      that.setData({
+        List: thisList
+      });
+
+      let tempArr = [];
+      tempArr = thisList[sheetIndex].ItemList.filter(x => {
+        return x.checked == true;
+      }).map(x => {
+        return x.Id + '';
+      });
+      that.ItemChange({
+        currentTarget: {
+          dataset: {
+            sheetid: sheetId,
+            sheetindex: sheetIndex
+          }
+        },
+        detail: {
+          value: tempArr
+        }
+      }, function() {
+        if (thisList[sheetIndex].ItemList.length <= 0) {
+          thisList.splice(sheetIndex, 1);
+        }
+        that.setData({
+          List: thisList
+        });
+      });
+    });
+  },
+  //删除购物车(团单)
+  deleteCard_sheet: function(e) {
+    let sheetIndex = e.currentTarget.dataset.sheetindex;
+    let sheetItem = e.currentTarget.dataset.sheetitem;
+    let that = this;
     wx.showModal({
-      content: '确定从购物车删除"' + (a.SheetModel == 1 ? a.SheetName : a.TradingareaName) + '"吗？',
+      content: '确定删除"' + (sheetItem.SheetModel == 1 ? sheetItem.SheetName : sheetItem.TradingareaName) + '"吗？',
       success: function(res) {
         if (res.confirm) {
-          var url = 'cart/delete';
-          var params = {
-            Id: item.id,
-          }
-          netUtil.postRequest(url, params, function(res) {
+          that._delete(sheetItem.CartId, 1, function() {
             wx.showToast({
               icon: 'none',
               title: '成功删除',
             })
             let thisList = that.data.List;
-            console.log(thisList)
-            let money = 0;
-            let totalCount = 0;
-            let deleteIndex = 0; //刪除數據下表
-            thisList.forEach((f, index) => {
-              if (f.CartId == item.id) {
-                deleteIndex = index;
-              } else {
-                if (f.checked == true) {
-                  money = money + Number(f.Price);
-                  totalCount = totalCount + 1;
-                }
-              }
-            });
-            thisList.splice(deleteIndex, 1);
 
+            thisList.splice(sheetIndex, 1);
             that.setData({
-              List: thisList,
-              money: money.toFixed(2),
-              totalCount: totalCount
+              List: thisList
             });
-            if (thisList.length <= 0) {
-              that.setData({
-                totalChecked: false,
-              });
-            }
-          })
+            //判断是否全选
+            let allCheckedList = thisList.filter(item => {
+              return item.checked != true;
+            });
+            let totalCheckedLength = 0;
+            let totalPrizeAmount = 0;
+            let totalVoucherCount = 0;
+            let totalPayPrice = 0;
+            thisList.forEach(item => {
+              totalCheckedLength += item.checkArr.length;
+              totalPrizeAmount += item.PrizeAmount;
+              totalVoucherCount += item.VoucherCount;
+              totalPayPrice += (item.TotalPrice <= 0 ? 0 : item.TotalPrice);
+            });
+            that.setData({
+              totalChecked: allCheckedList.length > 0 ? false : true,
+              totalCheckedLength: totalCheckedLength,
+              totalPrizeAmount: (totalPrizeAmount * 1.0 / 100).toFixed(2),
+              totalVoucherCount: totalVoucherCount,
+              totalPayPrice: (totalPayPrice * 1.0 / 100).toFixed(2)
+            });
+          });
         }
       }
     })
   },
-  goHome: function() {
-    wx.switchTab({
-      url: '/pages/index/index',
+  //删除
+  _delete: function(id, type, onsuccess) {
+    var url = 'cart/delete';
+    var params = {
+      Id: id,
+      Type: type,
+    }
+    netUtil.postRequest(url, params, function(res) {
+      if (onsuccess) {
+        onsuccess();
+      }
     })
   },
-  //勾选
+  //团单勾选（只做课程全选逻辑）
   checkedTap: function(e) {
-    console.log(e)
+    let sheetid = e.currentTarget.dataset.sheetid; //点击的团单id
+    let sheetindex = e.currentTarget.dataset.sheetindex; //点击的团单下标
+    let totalChecked = e.totalChecked; //是否全选（1全选 2全不选 3不改变）
     let that = this;
-    let checkCartId = e.detail.value;
-    that.setData({
-      totalChecked: checkCartId.length >= that.data.List.length,
-      checkArr: checkCartId
-    })
-    //查找选中数据
-    let money = 0;
-    let PrizeAmount = 0;
-    let totalCount = 0;
-    let VoucherCount = 0;
     let tempList = that.data.List;
-    tempList.forEach(item => {
-      if (checkCartId.indexOf(item.CartId + '') != -1) {
+
+    //勾选/未勾选
+    if (totalChecked) {
+      tempList[sheetindex].checked = totalChecked == 1 ? true : totalChecked == 2 ? false : tempList[sheetindex].checked;
+    } else {
+      tempList[sheetindex].checked = !tempList[sheetindex].checked;
+    }
+    let checked = tempList[sheetindex].checked;
+
+    let tempArr = [];
+    if (checked == true) {
+      tempArr = tempList[sheetindex].ItemList.map(x => {
+        return x.Id + '';
+      });
+    }
+
+    this.ItemChange({
+      currentTarget: {
+        dataset: {
+          sheetid: sheetid,
+          sheetindex: sheetindex
+        }
+      },
+      detail: {
+        value: tempArr
+      }
+    });
+  },
+  //课程勾选
+  ItemChange(e, onSuccess) {
+    let sheetId = e.currentTarget.dataset.sheetid; //点击的团单Id
+    let sheetIndex = e.currentTarget.dataset.sheetindex; //点击的团单下标
+    let itemCheckedList = e.detail.value; //团单下勾选的课程
+    let that = this;
+
+    let tempList = that.data.List;
+    console.log(tempList)
+    tempList[sheetIndex].checkArr = [];
+    let i = 0;
+    tempList[sheetIndex].ItemList.forEach(item => {
+      //如果勾选包含Id，加入勾选
+      if (itemCheckedList.indexOf(item.Id + '') != -1) {
+        tempList[sheetIndex].checkArr.push({
+          Id: item.Id,
+          RelId: item.RelId
+        });
         item.checked = true;
-        money = money + Number(item.Price);
-        PrizeAmount = PrizeAmount + Number(item.PrizeAmount);
-        VoucherCount = VoucherCount + Number(item.VoucherCount)
-        totalCount = totalCount + 1;
       } else {
+        i++;
         item.checked = false;
       }
     });
-    that.setData({
-      List: tempList,
-      money: money.toFixed(2),
-      totalCount: totalCount,
-      VoucherCount: VoucherCount,
-      PrizeAmount: PrizeAmount.toFixed(2),
+    if (i == 0) {
+      tempList[sheetIndex].checked = true;
+    } else {
+      tempList[sheetIndex].checked = false;
+    }
+    //判断是否全选
+    let allCheckedList = tempList.filter(item => {
+      return item.checked != true;
+    });
+    tempList[sheetIndex].CheckLength = tempList[sheetIndex].checkArr.length;
+    that._sheetPrice(sheetId, tempList[sheetIndex].checkArr.map(x => {
+      return x.RelId;
+    }), function(res) {
+      tempList[sheetIndex].PrizeAmount = res.Data.PrizeAmount;
+      tempList[sheetIndex].VoucherCount = res.Data.VoucherCount;
+      tempList[sheetIndex].TotalPrice = res.Data.TotalPrice;
+      let totalCheckedLength = 0;
+      let totalPrizeAmount = 0;
+      let totalVoucherCount = 0;
+      let totalPayPrice = 0;
+      tempList.forEach(item => {
+        totalCheckedLength += item.checkArr.length;
+        totalPrizeAmount += item.PrizeAmount;
+        totalVoucherCount += item.VoucherCount;
+        totalPayPrice += (item.TotalPrice <= 0 ? 0 : item.TotalPrice);
+      });
+
+      console.log(totalPayPrice)
+      that.setData({
+        List: tempList,
+        totalChecked: allCheckedList.length > 0 ? false : true,
+        totalCheckedLength: totalCheckedLength,
+        totalPrizeAmount: (totalPrizeAmount * 1.0 / 100).toFixed(2),
+        totalVoucherCount: totalVoucherCount,
+        totalPayPrice: (totalPayPrice * 1.0 / 100).toFixed(2)
+      });
+      console.log(that.data.totalPayPrice)
+      if (onSuccess) {
+        onSuccess();
+      }
     });
   },
   //全选
@@ -210,54 +314,52 @@ Page({
     that.setData({
       totalChecked: !that.data.totalChecked
     })
-    that.allCheckedHandler();
-  },
-  //全选处理方法
-  allCheckedHandler() {
-    let that = this;
-    let tempArr = that.data.List;
-    let price = 0;
-    let totalCount = 0;
-    let VoucherCount = 0;
-    let PrizeAmount = 0;
-    tempArr.forEach(e => {
-      e.checked = that.data.totalChecked
-      if (that.data.totalChecked == true) {
-        price = price + Number(e.Price);
-        totalCount = totalCount + 1;
-        PrizeAmount = PrizeAmount + Number(e.PrizeAmount);
-        VoucherCount = VoucherCount + Number(e.VoucherCount);
-      }
-    })
-    
-    that.setData({
-      List: tempArr,
-      money: price.toFixed(2),
-      totalCount: totalCount,
-      PrizeAmount: PrizeAmount.toFixed(2),
-      VoucherCount: VoucherCount,
-      checkArr: (that.data.totalChecked == true ? tempArr : []),
-    })
+    let tempList = that.data.List;
+    tempList.forEach((item, index) => {
+      that.checkedTap({
+        currentTarget: {
+          dataset: {
+            sheetid: item.SheetId,
+            sheetindex: index
+          }
+        },
+        totalChecked: that.data.totalChecked
+      });
+    });
   },
   //结算购物车
   settlement: function() {
     let tempArr = this.data.List.filter(e => {
-      return e.checked == true
+      return (e.checkArr != null && e.checkArr.length > 0);
     })
     let checkedList = [];
     tempArr.forEach(item => {
       checkedList.push({
         SheetId: item.SheetId,
         CartId: item.CartId == null ? 0 : item.CartId,
-        RelId: item.ItemList.map(e => {
+        RelId: item.checkArr.map(e => {
           return e.RelId;
         })
       });
     });
     wx.navigateTo({
-      url: '/pages/payOrder/payOrder?checkItem=' + JSON.stringify(checkedList)+'&type='+this.data.type,
+      url: '/pages/payOrder/payOrder?checkItem=' + JSON.stringify(checkedList) + '&type=' + this.data.type,
     })
   },
+  //长按出现操作栏(删除购物车【课程】)
+  longTap: function(e) {
+    let that = this;
+    let item = e.currentTarget.dataset;
+    wx.showActionSheet({
+      itemList: ['删除'],
+      success: function(e) {
+        if (e.tapIndex == 0) {
+          that.deleteCard_item(item);
+        }
+      }
+    })
+  },
+
   onPullDownRefresh: function() {
     this.setData({
       page: 1
@@ -265,14 +367,18 @@ Page({
     this.init();
     wx.stopPullDownRefresh();
   },
-  // onReachBottom: function() {
-  //   let temp = this.data.page;
-  //   temp++;
-  //   this.setData({
-  //     page: temp
-  //   })
-  //   this.init();
-  // },
+  _sheetPrice: function(sheet, relId, onSuccess) {
+    let that = this;
+    var url = 'sheet/buy/price';
+    var params = {
+      SheetId: sheet,
+      RelId: relId,
+    }
+    netUtil.postRequest(url, params, function(res) {
+      onSuccess(res);
+    }, null, false, true, true, 0)
+  },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

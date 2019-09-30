@@ -22,6 +22,24 @@ Page({
     TotalPrice: -1, //总价
     PrizeAmount: 0, //奖励金
     checkedArr: [], //勾选的数组
+    relIdGoto: "", //定位relId
+    relId: "", //课程关系Id
+    isJump: false, //是否详情页跳转过来
+    over:false,
+    showTearcher:false,//教师弹窗
+    teacherInfo:{},//老师详情
+    top:0,
+  },
+  onShow: function() {
+    if (this.data.over == true) {
+      wx.showToast({
+        icon: "none",
+        title: '剩余名额不足'
+      })
+      this.setData({
+        over:false
+      });
+    }
   },
   onLoad: function(options) {
     let that = this;
@@ -44,10 +62,30 @@ Page({
       storeId: options.storeId || '',
       groupId: options.groupId || '',
       type: options.type || "",
-      sheetId: options.sheetId || ""
+      sheetId: options.sheetId || "",
+      relIdGoto: options.relIdGoto || "",
+      relId: options.relId || "",
+      isJump: options.isJump || false
     })
+
     that.init();
     that.selectComponent("#pop").getData("mechanism");
+  },
+  swiperChangeTo: function(e) {
+    this.setData({
+      current: e.detail.current
+    })
+  },
+  //点击老师获取详情
+  tearcherClick:function(e){
+    wx.navigateTo({
+      url: '/pages/teacherDetail/teacherDetail?id='+e.currentTarget.dataset.id,
+    })
+  },
+  hideTeacher:function(){
+    this.setData({
+      showTearcher: false,
+    })
   },
   //拨打电话
   call: function(e) {
@@ -65,8 +103,19 @@ Page({
     }
     netUtil.postRequest(url, params, function(res) {
       that.setData({
-        Info: res.Data
+        Info: res.Data,
+        checkedArr: [],
+        TotalPrice: -1,
+        count: 0
       })
+      if (that.data.relId) {
+        that.checkChange({
+          RelId: that.data.relId
+        });
+        that.setData({
+          relId: null
+        });
+      }
     }, null, false, false, false);
   },
   //跳转购物车
@@ -78,14 +127,54 @@ Page({
   },
   //勾选
   checkChange: function(e) {
-    var arr = [];
-    e.detail.value.forEach(item => {
-      arr = arr.concat(item);
-    })
-    this.setData({
-      checkedArr: arr
-    });
-    this.hasMoney();
+    let that = this;
+    let tempInfo = this.data.Info;
+    if (that.data.isJump == false) { //本页面点击勾选
+      that.setData({
+        checkedArr: e.detail.value,
+      });
+      tempInfo.ItemList.forEach(item => {
+        if (e.detail.value.indexOf(item.RelId + '') != -1) {
+          item.checked = true;
+        } else {
+          item.checked = false;
+        }
+      });
+      that.setData({
+        Info: tempInfo
+      });
+    } else { //其他页面跳转勾选
+      that.setData({
+        isJump: false
+      });
+      let tempArr = that.data.checkedArr;
+      if (tempArr.indexOf(e.RelId) != -1) {
+        return;
+      }
+      let tempInfo = that.data.Info;
+      let over = 0;
+      tempInfo.ItemList.forEach(item => {
+        if (item.RelId == e.RelId) {
+          if (item.RemainCount <= 0) {
+            over = 1;
+          } else {
+            item.checked = true;
+          }
+        }
+      });
+      if (over == 1) {
+        that.setData({
+          over:true
+        });
+        return;
+      }
+      tempArr.push(e.RelId);
+      that.setData({
+        checkedArr: tempArr,
+        Info: tempInfo
+      });
+    }
+    that.hasMoney();
   },
   //加入购物车
   addcar: function() {
@@ -97,10 +186,6 @@ Page({
     }
     netUtil.postRequest(url, params, function(res) {
       that.init(false);
-      that.setData({
-        TotalPrice: -1,
-        count: 0,
-      })
       wx.showToast({
         icon: 'none',
         title: '添加已成功'
@@ -141,9 +226,8 @@ Page({
   },
   //跳转课程详情
   courseDetail: function(e) {
-    let storeid = this.data.storeId + 'NUV' + this.data.groupId
     wx.navigateTo({
-      url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id + '&type=' + this.data.type + '&sheetId=' + this.data.sheetId + '&storeId=' + storeid,
+      url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id + '&type=' + this.data.type + '&sheetId=' + this.data.sheetId + '&storeId=' + this.data.storeId + '&groupId=' + this.data.groupId + '&sourceFrom=2'
     })
   },
   //下拉刷新

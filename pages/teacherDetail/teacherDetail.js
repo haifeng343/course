@@ -1,12 +1,13 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
-
 Page({
+
   data: {
     windowHeight: '',
     windowWidth: '',
-
+    Id: '', //教师Id
+    Info:{},//详情
   },
   onLoad(options) {
     let that = this;
@@ -18,22 +19,31 @@ Page({
       wx.setStorageSync("recommand", options.recommand)
     }
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/pubick/publick",0).then(res => {
+    shareApi.getShare("/pages/chooseClass/chooseClass", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       that.setData({
         obj: res.Data,
 
       })
     })
-    that.init();
+    that.setData({
+      Id: options.id || '',
+    })
+    that.getData();
   },
-  onUnload:function() {
+  getData: function () {
     var that = this;
-    var url = 'wechat/publicnumber/follow/get'
-    var params = {}
-    netUtil.postRequest(url, params, function (res) { 
-
-    }); 
+    var url = 'sheet/teacher/details';
+    var params = {
+      Id: that.data.Id
+    }
+    netUtil.postRequest(url, params, function (res) {
+      that.setData({
+        Info:res.Data
+      })
+    },null,false,true,true);
   },
-  init: function () { },
+  onShareAppMessage: function () {
+
+  }
 })

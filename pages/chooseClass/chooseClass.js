@@ -131,7 +131,9 @@ Page({
           }
         }
         that.setData({
-          GroupList: r
+          GroupList: r,
+          count:0,
+          TotalPrice:-1,
         })
       }
       that.setData({

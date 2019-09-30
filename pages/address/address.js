@@ -80,22 +80,6 @@ Page({
       })
     });
   },
-  onLoad: function(e) {
-    if (e.recommand) {
-      wx.setStorageSync("recommand", e.recommand)
-    }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare().then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      this.setData({
-        obj: res.Data,
-
-      })
-    })
-    var that = this;
-    that.init();
-  },
-
   onPullDownRefresh: function() {
     this.getData();
     wx.stopPullDownRefresh();

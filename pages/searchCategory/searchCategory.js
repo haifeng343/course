@@ -56,22 +56,18 @@ Page({
       this.setData({
         SearchName: '',
         List: [],
+
       })
     }
   },
-  init: function () { },
-  //点击搜索
-  search: function() {
+  init: function () {
+    
+  },
+  getData:function() {
     let that = this;
-    if(!that.data.SearchName){
-      wx.showToast({
-        icon:'none',
-        title: '请输入查询课程名称',
-      })
-      return false;
-    }
     var url = 'sheet/search/list';
     var params = {
+      DistrictName: "附近",
       SearchKey: that.data.SearchName,
       TradingareaId: 0,
       TypeId: 0,
@@ -80,7 +76,7 @@ Page({
       PageCount: that.data.pageCount,
       PageIndex: that.data.page,
     }
-    netUtil.postRequest(url, params, function(res) {
+    netUtil.postRequest(url, params, function (res) {
       res.Data.forEach(item => {
         item.Distance = (parseInt(item.Distance) / 1000).toFixed(1);
       })
@@ -94,16 +90,31 @@ Page({
       that.setData({
         List: arr,
       })
-      if(arr.length<=0){
+      if (arr.length <= 0) {
         wx.showToast({
-          icon:'none',
+          icon: 'none',
           title: '暂无查询结果',
         })
         that.setData({
-          List:[]
+          List: []
         })
       }
     })
+  },
+  //点击搜索
+  search: function() {
+    let that = this;
+    if (!that.data.SearchName) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入查询课程名称',
+      })
+      return false;
+    }
+    that.setData({
+      page:1
+    });
+    that.getData();
   },
   onReachBottom: function() {
     let temp = this.data.page;
@@ -111,7 +122,7 @@ Page({
     this.setData({
       page: temp
     })
-    this.search();
+    this.getData();
   },
   onShareAppMessage: function(res) {
     return {

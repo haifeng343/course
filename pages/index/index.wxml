@@ -15,7 +15,7 @@
       </view>
     </view>
     <view style="padding-top:{{statusBarHeight+90}}rpx" class='topInput'>
-      <input class='SearchInput' bindtap='searchTo' disabled placeholder='商圈名称/团单'></input>
+      <input class='SearchInput' bindtap='searchTo' disabled placeholder='商圈/机构/课程'></input>
     </view>
     <view class='banner' wx:if="{{imgUrls.length>0}}">
       <swiper bindanimationfinish="swiperChangeTo" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1'>

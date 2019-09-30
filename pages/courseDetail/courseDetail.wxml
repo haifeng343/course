@@ -53,7 +53,7 @@
         <view> {{List.SingleTime}} min/课时</view>
     </view>
   </view>
-  <view class='teacherList boxd' wx:if="{{!List.TeacherCount==0}}" bindtap='allTeacher' data-Id="{{List.RelId}}">
+  <view class='teacherList boxd' wx:if="{{List.TeacherCount>0}}" bindtap='allTeacher' data-Id="{{List.RelId}}">
     <view class='tearcherTitle between'>
       <view class='teaNumber'>师资力量 ({{List.TeacherCount}})</view>
       <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image>
@@ -67,7 +67,7 @@
       </view>
     </view>
   </view>
-  <view class='propList'>
+  <view class='propList' wx:if="{{List.OtherList.length>0}}">
     <view class='prompt boxd' wx:for="{{List.OtherList}}" wx:key>
       <view class='prompTitle'>{{item.Title}}</view>
       <view class='promptText'>
@@ -81,13 +81,8 @@
   <pop id="pop"></pop>
 </movable-area>
 <view bindtap="goToBuy" wx:if="{{type==2}}">
-  <view class='typeFooter' wx:if="{{type==1}}">
-    <view>进入团单购买，享更多优惠</view>
-    <image src='../../images/joinDetail.png' class='joinDetail'></image>
-  </view>
-
-  <view class='typeFooter' wx:if="{{type==2}}">
-    <view>去门店所在商圈预约此课程，享更多奖励</view>
+  <view class='typeFooter'>
+    <view>去门店预约此课程，享更多奖励</view>
     <image src='../../images/joinDetail.png' class='joinDetail'></image>
   </view>
 </view>

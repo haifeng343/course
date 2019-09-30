@@ -36,18 +36,18 @@
                 <view class='centers'>
                   <image src='../../images/couse.png' class='detailImg' mode='aspectFill'></image>
                 </view>
-                <view class='name'>课程数量 {{k.CoursesNumber}} 节</view>
+                <view class='name'>课程数量{{k.CoursesNumber}}节</view>
               </view>
               <view class='startds ml40'>
                 <view class='centers'>
                   <image src='../../images/time.png' class='detailImg' mode='aspectFill'></image>
                 </view>
-                <view class='name'>单节课时 {{k.SingleTime}} min</view>
+                <view class='name'>单节课时{{k.SingleTime}}min</view>
               </view>
             </view>
             <view class='detail start well'>
               <view class='startd'>
-                <view class='name'>{{k.SoldCount}} 人已参与 | 剩余名额 {{k.RemainCount}} 个</view>
+                <view class='name'>{{k.SoldCount}}人已参与 | 剩余名额{{k.RemainCount}}个</view>
               </view>
             </view>
           </view>
@@ -59,16 +59,8 @@
         <view class='numberD'>￥{{item.Price}}</view>
       </view>
       <view class='flex-end count mb0' wx:if="{{type==2}}">
-        <view>小计{{item.ItemCount}}门课程
-          <span wx:if="{{item.PrizeAmount>0}}">，可获奖金
-            <span class="red">￥{{item.PrizeAmount}}</span>
-          </span>
-          <span wx:if="{{item.VoucherCount>0}}">
-            <span>
-              <span wx:if="{{item.PrizeAmount>0}}">，</span>
-              <span wx:else>，可获</span>
-            </span>报名代金券
-            <span class="red">{{item.VoucherCount}}</span>张</span>
+        <view>已选{{item.ItemCount}}门课程<span wx:if="{{item.PrizeAmount>0}}">，可获奖金<span class="red">￥{{item.PrizeAmount}}</span>
+          </span><span wx:if="{{item.VoucherCount>0}}"><span><span wx:if="{{item.PrizeAmount>0}}">，</span><span wx:else>，可获</span></span>报名代金券<span class="red">{{item.VoucherCount}}</span>张</span>
         </view>
       </view>
     </scroll-view>

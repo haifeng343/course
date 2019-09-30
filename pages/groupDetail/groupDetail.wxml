@@ -62,7 +62,7 @@
           </view>
           <view class='ring'>
             <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
-            <view class='name'>单节课时 {{item.time}} min</view>
+            <view class='name'>单节课时{{item.time}}min</view>
           </view>
         </view>
       </view>

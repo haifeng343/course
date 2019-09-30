@@ -10,11 +10,7 @@
       <view class='welcome'>Welcome!</view>
 
       <image src="../../images/login_img.png" class="login_img" mode='widthFix' lazy-load='true' alt=""></image>
-      <form bindsubmit="getUserInfo" report-submit="true">
-        <button formType="submit">
-          <button class="loginBtn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">登录</button>
-        </button>
-      </form>
+      <button class="loginBtn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">登录</button>
     </view>
   </view>
   <pop id="pop"></pop>

@@ -7,7 +7,7 @@
   width: 160rpx!important;
 } */
 .rights {
-  width: 75%;
+  width: 65%;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -20,7 +20,7 @@
   align-items: center;
 }
 .ml40 {
-  margin-left: 40rpx;
+  margin-left: 30rpx;
 }
 .alltext{
   width: 80%;
@@ -28,6 +28,7 @@
   margin: auto 0;
   margin-right: 20rpx;
   text-align: left;
+  line-height: 36rpx;
 }
 .alltexts{
   text-align: right!important;
@@ -176,6 +177,7 @@
   height: 180rpx;
   margin-right: 20rpx;
   border-radius: 15rpx;
+  margin-left: 0.5%;
 }
 
 .Item {

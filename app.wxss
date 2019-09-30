@@ -379,7 +379,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.4);
-  z-index: 99;
+  z-index: 9999;
 }
 
 .dialog-contatner {

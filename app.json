@@ -56,7 +56,9 @@
     "pages/snatch/snatch",
     "pages/kaquan/kaquan",
     "pages/fulishe/fulishe",
-    "pages/shangquan/shangquan"
+    "pages/shangquan/shangquan",
+    "pages/invalid/invalid",
+    "pages/teacherDetail/teacherDetail"
   ],
   "window": {
     "backgroundTextStyle": "dark",

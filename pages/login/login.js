@@ -12,7 +12,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     Info: {},
     recommandCode: '',
-    userInfo: {},
   },
   onLoad: function(options) {
 
@@ -81,8 +80,7 @@ Page({
   },
   onSuccess: function(res) { //onSuccess成功回调
     let that = this;
-    that.userInfo = res.Data;
-    wx.setStorageSync('userInfo', that.userInfo);
+    wx.setStorageSync('userInfo', res.userInfo);
     wx.setStorageSync('usertoken', res.Data.UserToken);
 
     that.walletd();

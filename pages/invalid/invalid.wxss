@@ -61,8 +61,8 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  margin-top: 60rpx;
   margin-bottom: 20rpx;
+  opacity: 0.6;
 }
 
 .item {
@@ -288,9 +288,8 @@
   line-height: 80rpx;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   position: relative;
-  top: 15rpx;
+  top: 17rpx;
 }
 
 .mt25 {
@@ -298,12 +297,11 @@
 }
 
 .btnd {
-  width: 180rpx;
-  height: 55rpx;
-  line-height: 55rpx;
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
   border-radius: 45rpx;
   margin-right: 0;
-  margin-top: 0;
 }
 
 .dec {

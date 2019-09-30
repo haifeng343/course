@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 45,
+			"current": 58,
 			"list": [
 				{
 					"id": -1,
@@ -370,7 +370,7 @@
 					"id": 45,
 					"name": "mechanism",
 					"pathName": "pages/mechanism/mechanism",
-					"query": "groupId=16&storeId=4&type=2&sheetId=14",
+					"query": "groupId=23&storeId=11&type=2&sheetId=14",
 					"scene": null
 				},
 				{
@@ -381,10 +381,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 47,
 					"name": "car",
 					"pathName": "pages/car/car",
-					"query": "groupId=17&storeId=6",
+					"query": "type=2",
 					"scene": null
 				},
 				{
@@ -448,6 +448,20 @@
 					"name": "kaquan",
 					"pathName": "pages/kaquan/kaquan",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "invalid",
+					"pathName": "pages/invalid/invalid",
+					"query": "groupId=23&storeId=11&type=2&sheetId=14",
+					"scene": null
+				},
+				{
+					"id": 58,
+					"name": "teacherDetail",
+					"pathName": "pages/teacherDetail/teacherDetail",
+					"query": "id=22",
 					"scene": null
 				}
 			]

@@ -6,7 +6,7 @@
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
   <view class='topInput'>
-    <input class='SearchInput' bindtap='searchTo' disabled placeholder='机构名称/课程'></input>
+    <input class='SearchInput' bindtap='searchTo' disabled placeholder='商圈/机构/课程'></input>
   </view>
   <view class='categoryTitle'>
     <view class='start w50' bindtap='allCategory'>
@@ -50,7 +50,7 @@
           <view class='distance' style='font-size:24rpx' wx:if="{{item.Distance<1}}">{{item.Distance*1000}}m</view>
           <view class='distance' style='font-size:24rpx' wx:else>{{item.Distance}}km</view>
         </view>
-        <view class='content-box' wx:for="{{item.ItemList}}" wx:key wx:for-item="b" data-type="{{item.SheetModel}}" data-Id="{{item.SheetId}}" data-storeid="{{b.StoreId+'NUV'+b.GroupId}}" data-relId="{{b.RelId}}" bindtap='cheoose'>
+        <view class='content-box' wx:for="{{item.ItemList}}" wx:key wx:for-item="b" data-type="{{item.SheetModel}}" data-Id="{{item.SheetId}}" data-storeid="{{b.StoreId}}" data-groupid="{{b.GroupId}}" data-relId="{{b.RelId}}" bindtap='cheoose'>
           <image src='{{b.ItemCoverImg}}' mode='aspectFill' class='leftImg'></image>
           <view class='rightContent' data-Id="{{b.RelId}}" wx:key bindtap='courseDetail'>
             <view class='courseTitle'>{{b.ItemName}}</view>
