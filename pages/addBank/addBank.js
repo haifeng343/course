@@ -26,21 +26,25 @@ Page({
     carShowSuccess:false,//绑定成功
     codePhone:'',//验证码发送的手机号
   },
+  
   navtoCard: function() {
     wx.navigateTo({
       url: '/pages/keepCarList/keepCarList',
     })
   },
+
   clear:function() {
     this.setData({
       CardNumber:'',
     })
   },
+
   cleard:function() {
     this.setData({
       phoneNumber:''
     })
   },
+
   //设置name
   setName: function(e) {
     let that = this;
@@ -48,6 +52,7 @@ Page({
       Name: e.detail.value
     })
   },
+
   //设置carnumber值
   carNumberChange: function(e) {
     let that = this;
@@ -55,6 +60,7 @@ Page({
       CardNumber: e.detail.value
     })
   },
+
   //检验银行卡是否有效
   getCarCheck: function() {
     let that = this;
@@ -71,6 +77,7 @@ Page({
       })
     }); //调用get方法情就是户数
   },
+
   //获取图片验证码
   codeyan: function() {
     let that = this;
@@ -87,6 +94,7 @@ Page({
       })
     }); //调用get方法情就是户数
   },
+
   //发送验证码
   sendCode() {
     let that = this;
@@ -106,8 +114,8 @@ Page({
       })
     }); //调用get方法情就是户数
   },
-  codetime() { // 点击获取验证码
 
+  codetime() { // 点击获取验证码
     var _this = this
     var coden = 60
     var codeV = setInterval(function() {
@@ -131,6 +139,7 @@ Page({
       }
     }, 1000) //  1000是1秒
   },
+
   getSMSCode: function() {
     //检查图片验证码是否正确
     let that = this;
@@ -157,6 +166,7 @@ Page({
       }
     }); 
   },
+
   //下一步
   next: function() {
     let that = this;
@@ -176,6 +186,7 @@ Page({
       that.getCarCheck();
     }
   },
+
   //邦定手机号
   binding:function(){
     let that = this;
@@ -205,24 +216,28 @@ Page({
       })
     }); 
   },
+
   //设置手机号
   getPhoneNumber: function(e) {
     this.setData({
       phoneNumber: e.detail.value
     })
   },
+
   //设置手机号验证码
   getPhoneCode: function(e) {
     this.setData({
       phoneCode: e.detail.value
     })
   },
+
   //设置图片验证码
   codeText:function(e){
     this.setData({
       PicVerifycode: e.detail.value
     })
   },
+
   Description: function() {
     wx.showModal({
       title: '持卡人说明',
@@ -232,6 +247,7 @@ Page({
       confirmText: '知道了',
     })
   },
+
   //关闭图片验证码弹窗
   closeAlert: function() {
     this.setData({
@@ -239,26 +255,31 @@ Page({
       PicVerifycode:false,
     })
   },
+
   onLoad(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/addBack/addBack",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+
+    that.init();
+  },
+
+  init: function () {
+    let that = this;
+    shareApi.getShare("/pages/addBack/addBack", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
       that.setData({
         obj: res.Data,
       })
     })
   },
-  init: function () {
 
-  },
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

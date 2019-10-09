@@ -8,31 +8,36 @@ Page({
     windowWidth: '',
     Id:'',
     BaseList:[],
+    type:'',
   },
+
   onLoad: function (options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
+      Id: options.Id || '',
+      type: options.type,
     });
-    that.setData({
-      Id:options.Id || ''
-    })
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/rewradRule/rewradRule",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-        type: options.type || ''
-      })
-    })
+
     that.init();
   },
+
   init: function () {
-    var that = this;
+    let that = this;
+    let type = that.data.type;
+    shareApi.getShare("/pages/rewradRule/rewradRule", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+        type: type,
+      })
+    })
+
     var url = 'order/rules'
     var params = {
       Id: that.data.Id
@@ -46,6 +51,7 @@ Page({
       })
     });
   },
+  
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

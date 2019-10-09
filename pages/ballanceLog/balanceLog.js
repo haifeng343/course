@@ -2,7 +2,6 @@ var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
 Page({
-
   data: {
     windowHeight: '',
     windowWidth: '',
@@ -19,6 +18,7 @@ Page({
     statusdes: '',
     List: [],
   },
+
   initPicker: function() {
     var date = new Date();
     let arr = [],
@@ -41,29 +41,34 @@ Page({
       date2: [arr.indexOf(this.data.year), arr1.indexOf(this.data.month + '')],
     })
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+  
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/balaceLog/balaceLog",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-
-      })
-    })
+  
     that.initPicker();
     that.init();
   },
+
   init: function() {
-    this.getData();
+    let that = this;
+    shareApi.getShare("/pages/balaceLog/balaceLog", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.getData();
   },
+
   getData: function() {
     let that = this;
     var url = 'user/wallet/change/list';
@@ -74,6 +79,7 @@ Page({
       PageIndex: that.data.page,
       Type: 2
     }
+
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       let arr = res.Data;
       var arr1 = [];
@@ -94,6 +100,7 @@ Page({
       })
     }); //调用get方法情就是户数
   },
+
   bindDateChange: function(e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
     let index = e.detail.value;
@@ -114,17 +121,20 @@ Page({
     }
     this.getData();
   },
+
   showEor: function(e) {
     this.setData({
       statusdes: e.currentTarget.dataset.statusdes,
       showError: true
     })
   },
+
   closed: function() {
     this.setData({
       showError: false
     })
   },
+
   //上拉加载更多
   onReachBottom: function() {
     let that = this;
@@ -133,9 +143,10 @@ Page({
     this.setData({
       page: temp_page
     });
-    that.getData();
 
+    that.getData();
   },
+
   //下拉刷新
   onPullDownRefresh: function() {
     this.setData({
@@ -145,6 +156,7 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

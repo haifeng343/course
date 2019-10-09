@@ -21,22 +21,24 @@ Page({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
-    if (options.recommand) {
-      wx.setStorageSync("recommand", options.recommand)
-    }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/kaquan/kaquan", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand);
+    }
+
     that.init();
   },
+
   //获取我的卡券列表
   init: function() {
     let that = this;
+    shareApi.getShare("/pages/kaquan/kaquan", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    }); 
+
     var url = 'ticket/list';
     var params = {
       TypeId: 0,
@@ -44,6 +46,7 @@ Page({
       PageCount: that.data.pagecount,
       PageIndex: that.data.page,
     }
+
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       let arr = res.Data;
       var arr1 = that.data.List;
@@ -52,11 +55,13 @@ Page({
       } else {
         arr1 = arr1.concat(res.Data);
       }
+      
       that.setData({
         List: arr1
       })
     });
   },
+
   //点击额外信息
   showDesClick: function (e) {
     let index = e.currentTarget.dataset.index;

@@ -6,31 +6,37 @@ Page({
     statusBarHeight: app.getGreen().statusBarHeight,
     windowHeight: app.getGreen().windowHeight,
   },
+
   onLoad: function (options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/city/city",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-      })
-    })
+
     if (that.data.cityResults == null) {
       that.setData({
         cityResults: that.data.citys
       })
     }
+
+    that.init();
   },
+
   init: function () {
-    
+    let that = this;
+    shareApi.getShare("/pages/city/city", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    }) 
   },
+
   bindAZ: function (e) {
     var currentCityName = e.currentTarget.dataset.id;
     var that = this;

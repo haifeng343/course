@@ -17,7 +17,7 @@
     <view class="movie-content-wrapper">
       <view wx:if="{{usertoken}}">
         <view>
-          <view class='nohasLog' wx:if="{{modelList[navbarActiveIndex].list.length==0}}">
+          <view class='nohasLog' wx:if="{{modelList[navbarActiveIndex].list.length<=0}}">
             <view class='no_record_frame'>
               <image class='noImg' src='../../images/zanwu.png' mode='aspectFill' lazy-load='true'></image>
               <view>暂无订单</view>
@@ -43,7 +43,7 @@
                   <view class='Right'>
                     <form bindsubmit="orderDetail" data-Id="{{item.OrderId}}" data-kd="3" data-status="{{item.UseStatus}}" report-submit="true">
                       <button formType="submit" style='text-align:left'>
-                        <view class='between'>
+                        <view class='between nameTitle'>
                           <view class='name'>{{item.SheetModel==1?item.SheetName:item.TradingAreaName}}</view>
                           <view class='money'>￥{{item.PayAmount*1.0/100}}</view>
                         </view>
@@ -64,7 +64,7 @@
                   <view class='tag'>{{item.BuyType==null?'':item.BuyType}}</view>
                   <view>
                     <button class='btn' bindtap='Refund' data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==1}}">申请退款</button>
-                    <button class='btn' bindtap='delete' data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==3 || item.UseStatus==4}}">删除订单</button>
+                    <button class='btn' bindtap='delete' data-orderindex="{{index}}" data-ordersn="{{item.OrderSn}}" data-orderid="{{item.OrderId}}" wx:if="{{item.UseStatus==3 || item.UseStatus==4}}">删除订单</button>
                     <view class='kld'>
                       <button class='btn' bindtap='lookEor' data-item="{{item}}" wx:if="{{item.RefundFailReason==''}}" data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==7}}">查看原因</button>
                       <button class='btn' style='margin-left:15rpx' bindtap='Refund' data-Id="{{item.OrderId}}" wx:if="{{item.UseStatus==7}}">重新退款</button>

@@ -14,7 +14,7 @@
 </view>
 <view>
   <view class='List' wx:if="{{List.TotalCount>0}}">
-    <view class='title' wx:if="{{List.TotalCount>0}}">已为您找到 {{List.TotalCount}} 条相关结果</view>
+    <view class='title' wx:if="{{List.TotalCount>0}}">已为您找到 {{List.TotalCount}} 条相关数据</view>
     <view class='item' wx:for="{{List.List}}" wx:key>
       <view class='column'>
         <view>

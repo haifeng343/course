@@ -37,31 +37,68 @@ Page({
   },
 
   onLoad: function(options) {
-    var that = this;
+    let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
       statusBarHeight: app.getGreen(0).statusBarHeight,
     });
+    
     if (options.recommand) {
-      wx.setStorageSync("recommand", options.recommand)
+      wx.setStorageSync("recommand", options.recommand);
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/index/index", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-      })
-    })
 
     that.banner();
     that.init();
     that.hasTypeList();
     that.data.isLoaded = true;
-    if (this.selectComponent('#pop')) {
-      this.selectComponent('#pop').getData('index');
+    if (that.selectComponent('#pop')) {
+      that.selectComponent('#pop').getData('index');
     }
   },
+
+  init: function () {
+    let that = this;
+    let locInfo = wx.getStorageSync('loc');
+    that.setData({
+        locationName: locInfo.title,
+        longitude: locInfo.lng,
+        latitude: locInfo.lat
+    });
+   
+    shareApi.getShare("/pages/index/index", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.getLocation();
+  },
+
+  onShow: function() {
+    let that = this;
+    if (!that.data.isLoaded) {
+      return;
+    }
+
+    wx.getStorage({
+      key: 'loc',
+      success: function (res) {
+        if (that.data.locationName != res.data.title) {
+          that.setData({
+            locationName: res.data.title,
+            longitude: res.data.lng,
+            latitude: res.data.lat
+          });
+          
+          that.data.page = 1;
+          that.refreshList();
+        }
+      },
+    });
+  },
+
   hasTypeList: function() {
     let that = this;
     var url = 'sheet/itemtype/list';
@@ -76,15 +113,13 @@ Page({
           ImgUrlShow: '../../images/all.png',
           Name: '全部'
         });
+
         that.setData({
           typeList: arr,
         })
-      },
-      null,
-      false,
-      false,
-      false)
+      }, null, false, false, false)
   },
+
   navtoCategory: function(e) {
     let formId = "";
     if (e.detail.formId != "the formId is a mock one") {
@@ -94,6 +129,7 @@ Page({
       url: '/pages/category/category?Id=' + e.currentTarget.dataset.id + '&name=' + e.currentTarget.dataset.name + '&Longitude=' + this.data.longitude + '&Latitude=' + this.data.latitude + '&formId=' + formId,
     })
   },
+
   //坐标转换
   reverseLocation: function(latitude, longitude, locationType, onsuccess, onfail, oncomplete) {
     if (locationType == 0) {
@@ -129,10 +165,10 @@ Page({
         oncomplete();
       }
     });
-
   },
+
   groupDetail: function(e) {
-    const that = this;
+    let that = this;
     that.Id = parseInt(e.currentTarget.dataset.id);
     let type = e.currentTarget.dataset.type;
     if (type == 1) {
@@ -145,12 +181,14 @@ Page({
       })
     }
   },
+
   address: function() {
     const that = this;
     wx.navigateTo({
       url: '/pages/selectAddress/selectAddress?Longitude=' + that.data.longitude + '&Latitude=' + that.data.latitude
     })
   },
+
   bindBannerTo: function(e) {
     if (e.currentTarget.dataset.actiontype == 1) {
       if (e.currentTarget.dataset.path != '') {
@@ -159,6 +197,7 @@ Page({
         })
       }
     }
+
     if (e.currentTarget.dataset.actiontype == 2) {
       if (e.currentTarget.dataset.path != '') {
         wx.navigateTo({
@@ -167,32 +206,31 @@ Page({
       }
     }
   },
+
   swiperChangeTo: function(e) {
     this.setData({
       current: e.detail.current
     })
   },
+
   searchTo: function() {
     wx.navigateTo({
       url: '/pages/searchCategory/searchCategory?latitude=' + this.data.latitude + '&longitude=' + this.data.longitude + '&typeId=0',
     })
   },
+
   banner: function() {
     let that = this;
     var url = 'banner/list';
     var params = {
       BannerCode: 'IndexTop',
     }
-    netUtil.postRequest(url, params, function(res) {
 
+    netUtil.postRequest(url, params, function(res) {
         that.setData({
           imgUrls: res.Data,
         })
-      },
-      null,
-      false,
-      false,
-      false)
+      }, null, false, false, false)
   },
 
   refreshList: function() {
@@ -261,49 +299,13 @@ Page({
     }); //调用get方法情就是户数
   },
 
-  onShow: function() {
-    if (!this.data.isLoaded) {
-      return;
-    }
-
-    let that = this;
-    wx.getStorage({
-      key: 'loc',
-      success: function(res) {
-        if (that.data.locationName != res.data.title) {
-          that.setData({
-            locationName: res.data.title,
-            longitude: res.data.lng,
-            latitude: res.data.lat
-          });
-          that.data.page = 1;
-          that.refreshList();
-        }
-      },
-    });
-  },
-
-  init: function() {
-    let that = this;
-    wx.getStorage({
-      key: 'loc',
-      success: function(res) {
-        that.setData({
-          locationName: res.data.title,
-          longitude: res.data.lng,
-          latitude: res.data.lat
-        });
-      }
-    });
-    that.getLocation();
-  },
-
   getLocation() {
     var that = this;
     // 实例化腾讯地图API核心类
     var qqmapsdk = new QQMapWX({
       key: 'SLNBZ-QF5H3-WYD3P-YANNA-SOFVV-RMBUN' // 必填
     });
+
     wx.getLocation({
       type: 'gcj02',
       altitude: true, //高精度定位
@@ -384,6 +386,7 @@ Page({
 
     that.refreshList();
   },
+
   //下拉刷新
   onPullDownRefresh: function() {
     this.setData({
@@ -394,6 +397,7 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

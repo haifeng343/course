@@ -1,41 +1,45 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
+
 Page({
   data: {
     windowHeight: '',
     windowWidth: '',
     List:[],
   },
+
   onLoad(options){
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/keepCarList/keepCarList",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.init();
   },
+
   init: function () {
-    this.getData();
+    let that = this;
+    shareApi.getShare("/pages/keepCarList/keepCarList", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    });
+
+    that.getData();
   },
+
   //点击搜索
   getData: function () {
     let that = this;
     var url = 'user/bank/support/list';
-    var params = {
-      
-    }
+    var params = {};
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       that.setData({
         List : res.Data
@@ -56,6 +60,7 @@ Page({
   onReachBottom: function () {
 
   },
+
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

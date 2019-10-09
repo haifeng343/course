@@ -20,6 +20,7 @@ Page({
     statusdes: '',
     List: [],
   },
+  
   initPicker: function () {
     var date = new Date();
     let arr = [],
@@ -38,9 +39,34 @@ Page({
       date2: [arr.indexOf(this.data.year), arr1.indexOf(this.data.month + '')],
     })
   },
-  init: function () {
-    this.getData();
+
+  onLoad(options) {
+    let that = this;
+    that.setData({
+      windowHeight: app.getGreen(0).windowHeight,
+      windowWidth: app.getGreen(0).windowWidth,
+    });
+
+    if (options.recommand) {
+      wx.setStorageSync("recommand", options.recommand)
+    }
+
+    that.initPicker();
+    that.init();
   },
+
+  init: function () {
+    let that = this;
+    shareApi.getShare("/pages/cashBack/cashBack", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.getData();
+  },
+
   getData: function () {
     let that = this;
     var url = 'user/cashback/record/list';
@@ -67,11 +93,13 @@ Page({
       })
     }); //调用get方法情就是户数
   },
+
   cashbackDetail: function () {
     wx.navigateTo({
       url: '/pages/cashBackDetail/cashBackDetail',
     })
   },
+
   bindDateChange: function (e) {
 
     let index = e.detail.value;
@@ -92,22 +120,26 @@ Page({
     }
     this.getData();
   },
+
   showEor: function (e) {
     this.setData({
       statusdes: e.currentTarget.dataset.statusdes,
       showError: true
     })
   },
+
   closed: function () {
     this.setData({
       showError: false
     })
   },
+
   withdrawDetail: function () {
     wx.navigateTo({
       url: '/pages/withdrawDetail/withdrawDetail',
     })
   },
+
   //上拉加载更多
   onReachBottom: function () {
     var temp_page = this.data.page;
@@ -118,6 +150,7 @@ Page({
 
     this.getData();
   },
+
   //下拉刷新
   onPullDownRefresh: function () {
     this.setData({
@@ -127,27 +160,7 @@ Page({
     // 停止下拉动作
     wx.stopPullDownRefresh();
   },
-  onLoad(options) {
-    let that = this;
-    that.setData({
-      windowHeight: app.getGreen(0).windowHeight,
-      windowWidth: app.getGreen(0).windowWidth,
-    });
-    if (options.recommand) {
-      wx.setStorageSync("recommand", options.recommand)
-    }
-    
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/cashBack/cashBack",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-      })
-    })
 
-    that.initPicker();
-    that.init();
-  },
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

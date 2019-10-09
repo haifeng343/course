@@ -11,58 +11,69 @@ Page({
     windowWidth: "",
     closetime: '', //关闭按钮倒计时
   },
+
   onLoad:function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/wallet/wallet",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+
+    that.init();
+    that.selectComponent("#pop").getData("wallet");
+  },
+
+  init:function() {
+    let that = this;
+    shareApi.getShare("/pages/wallet/wallet", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
       that.setData({
         obj: res.Data,
       })
-    })
-    that.selectComponent("#pop").getData("wallet");
+    });
   },
-  init:function() {
 
-  },
-  onShow(){
-    let wallet = wx.getStorageSync('wallet');
+  onShow: function(){
+    let userInfo = wx.getStorageSync('userInfo');
     this.setData({
-      money: wallet? Number(wallet.TotalMoney/100).toFixed(2):0
+      money: (userInfo ? Number(userInfo.TotalMoney/100).toFixed(2) : 0)
     })
   },
+
   Bill:function(){
     wx.navigateTo({
       url: '/pages/bill/bill',
     })
   },
+
   withdraw:function() {
     wx.navigateTo({
       url: '/pages/withdraw/withdraw',
     })
   },
+
   cashBack: function () {
     wx.navigateTo({
       url: '/pages/cashBack/cashBack',
     })
   },
+
   balanceLog:function(){
     wx.navigateTo({
       url: '/pages/ballanceLog/balanceLog',
     })
   },
+
   bankList:function(){
     wx.navigateTo({
       url: '/pages/bankList/bankList',
     })
   },
+
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

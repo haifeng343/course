@@ -2,8 +2,6 @@ var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
 Page({
-
-
   data: {
     windowHeight: '',
     windowWidth: '',
@@ -14,31 +12,37 @@ Page({
     teacherList:[],
     TeacherCount:'',
   },
+
   onLoad: function (options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/allTeacher/allTeacher",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.setData({
       Id: options.Id
     })
-    this.init();
+    
+    that.init();
   },
+
   init:function() {
-    this.getData();
+    let that = this;
+    shareApi.getShare("/pages/allTeacher/allTeacher", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.getData();
   },
+
   getData: function () {
     var that = this;
     //获取项目全部师资信息
@@ -58,6 +62,7 @@ Page({
       })
     }); //调用get方法情就是户数
   },
+
   //上拉刷新
   onReachBottom: function () {
     let that = this;

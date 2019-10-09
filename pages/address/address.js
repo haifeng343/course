@@ -2,7 +2,6 @@ var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
 Page({
-
   data: {
     windowHeight: '',
     windowWidth: '',
@@ -10,6 +9,7 @@ Page({
     items: [],
     pl: '',
   },
+  
   edit: function(e) {
     let that = this;
     let item = e.currentTarget.dataset;
@@ -43,31 +43,35 @@ Page({
       url: '/pages/editAddress/editAddress?ids=' + 1,
     })
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/address/address", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.init();
   },
+
   init: function() {
-    let usertoken = wx.getStorageSync('usertoken');
-    if (usertoken) {
-      this.getData();
+    let that = this;
+    shareApi.getShare("/pages/address/address", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    if (wx.getStorageSync('usertoken')) {
+      that.getData();
     }
   },
+
   getData: function() {
     let that = this;
     var url = 'user/address/list';
@@ -80,6 +84,7 @@ Page({
       })
     });
   },
+
   onPullDownRefresh: function() {
     this.getData();
     wx.stopPullDownRefresh();

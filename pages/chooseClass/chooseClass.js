@@ -47,23 +47,18 @@ Page({
     initRelId: "", //初始化课程关系id,
     sourceFrom: "" //跳转来源1.选课链条 2.分类
   },
+
   onLoad(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/chooseClass/chooseClass", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.setData({
       Id: options.Id || '',
       name: options.name || '',
@@ -74,27 +69,34 @@ Page({
       initRelId: options.initRelId || "",
       sourceFrom: options.sourceFrom || "",
     })
+
     if (options.type == 1) {
       wx.setNavigationBarTitle({
         title: '选择课程',
       })
-    }
-    if (options.type == 2) {
+    } else if (options.type == 2) {
       wx.setNavigationBarTitle({
         title: '选择体验课',
       })
     }
+
     that.init();
     that.selectComponent("#pop").getData("choose");
   },
-  init: function(isHideLoding) {
-    this.getData(isHideLoding);
+
+  init: function() {
+    let that = this;
+    shareApi.getShare("/pages/chooseClass/chooseClass", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.getData(true);
   },
-  getData: function(isHideLoding) {
-    let hideLoding = true;
-    if (isHideLoding == false) {
-      hideLoding = false;
-    }
+
+  getData: function(isHideLoading) {
     var that = this;
     var url = 'sheet/details';
     var params = {
@@ -102,6 +104,7 @@ Page({
       Latitude: that.data.Latitude,
       Id: that.data.Id
     }
+    
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
       let r = res.Data.GroupList;
       for (let v of r) {
@@ -112,11 +115,13 @@ Page({
           }
         }
       }
+
       if (that.data.sourceFrom != 1) { //课程详情跳过来的不更新基础数据
         that.setData({
           detailCent: res.Data,
           imgUrls: res.Data.SheetImgList,
         })
+
         for (let a of r) {
           if (a.MinCount != 0) {
             if (a.MaxCount >= a.TotalCount && a.MinCount == 1) {
@@ -130,15 +135,18 @@ Page({
             a.text = "必选" + a.MaxCount + '门，不可多选'
           }
         }
+
         that.setData({
           GroupList: r,
           count:0,
           TotalPrice:-1,
         })
       }
+
       that.setData({
         storeIdGoto: that.data.storeIdGotoTemp
       });
+
       if (that.data.initRelId) { //初始化存在课程Id，需要直接选中
         if (that.data.type == 2) { //商圈模式
           let groupListTemp = that.data.GroupList;
@@ -167,6 +175,7 @@ Page({
                       }
                     }
                   });
+
                   if (that.data.hideBaitiaos == false) { //全部弹窗弹出
                     x.ItemList.forEach((y, yIndex) => {
                       if (y.RelId == that.data.initRelId) {
@@ -200,8 +209,9 @@ Page({
           });
         }
       }
-    }, null, hideLoding, true, true); //调用get方法情就是户数
+    }, null, isHideLoading, true, true); //调用get方法情就是户数
   },
+
   //计算团单项目选择购买价格
   hasMoney: function() {
     var that = this;
@@ -350,6 +360,7 @@ Page({
       this.hasMoney();
     }
   },
+
   //团单加入购物车
   addcar: function() {
     var that = this;
@@ -365,26 +376,29 @@ Page({
         return;
       }
     }
+
     that.setData({
       ids: ids
     });
+
     var params = {
       SheetId: that.data.Id,
       RelId: ids
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
-      that.init(false);
+      that.getData(false);
       that.setData({
         TotalPrice: -1,
         count: 0,
-
       })
+
       wx.showToast({
         icon: 'none',
         title: '添加已成功'
       })
     });
   },
+
   checkItem: function(e) {
     let remaincount = e.currentTarget.dataset.remaincount; //剩余购买数量
     if (remaincount <= 0) {
@@ -550,18 +564,22 @@ Page({
       url: '/pages/payOrder/payOrder?checkItem=' + JSON.stringify(checkedList) + '&type=' + this.data.type,
     })
   },
+
   courseDetail(e) {
     wx.navigateTo({
       url: '/pages/courseDetail/courseDetail?Id=' + e.currentTarget.dataset.id + '&type=' + this.data.type + '&sheetId=' + this.data.Id,
     })
   },
+
   onPullDownRefresh: function() {
-    this.getData();
+    this.getData(true);
     this.setData({
       TotalPrice: -1
     })
+    
     wx.stopPullDownRefresh()
   },
+
   //取消/选中
   changeCheck: function(e) {
     let that = this;

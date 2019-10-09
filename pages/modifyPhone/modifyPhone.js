@@ -18,6 +18,7 @@ Page({
     getText2: '获取验证码',
     showDialog:false,
   },
+
   onLoad: function (options) {
     let that = this;
     that.setData({
@@ -25,20 +26,24 @@ Page({
       windowWidth: app.getGreen(0).windowWidth,
       statusBarHeight: app.getGreen(0).statusBarHeight,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/modifyPhone/modifyPhone",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.init();
   },
-  init:function() {},
+
+  init:function() {
+    let that = this;
+    shareApi.getShare("/pages/modifyPhone/modifyPhone", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    });
+  },
+
   // 手机验证
   lovePhone: function(e) {
     let phone = e.detail.value;
@@ -53,19 +58,15 @@ Page({
         wx.showToast({
           title: '手机号有误',
           icon: 'none',
-          duration: 1000
         })
       }
     } else {
       this.setData({
         lovePhone: true
-
       })
     }
   },
-  init: function () {
-    
-  },
+ 
   // 验证码输入
   yanLoveInput: function(e) {
     // let that = this;
@@ -91,8 +92,8 @@ Page({
     //     })
     //   }
     // }
-
   },
+
   // 验证码按钮
   yanLoveBtn: function() {
     let loveChange = this.data.loveChange;
@@ -133,21 +134,22 @@ Page({
         // }).catch(err => {
         //   console.log(err)
         // })
-
-
       }
     }
   },
+
   closed:function() {
     this.setData({
       showDialog: !this.data.showDialog
     });
   },
+
   sure:function () {
     this.setData({
       showDialog: !this.data.showDialog
     });
   },
+
   //form表单提交
   formSubmit(e) {
     let val = e.detail.value;

@@ -9,7 +9,7 @@
   <view class="dialog">
     <image src="../../images/gobind.png" class="binding" lazy-load='true' mode='widthFix'></image>
     <p>请绑定您的手机号，完成登录</p>
-    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">去绑定</button>
+    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">知道啦~</button>
   </view>
 </view>
 </movable-area>

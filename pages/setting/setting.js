@@ -11,29 +11,24 @@ Page({
     ids: 1,
     buttons:{},
   },
+
   onShow:function() {
     this.setData({
       buttons:wx.getStorageSync('buttons')
     })
-    console.log(this.data.buttons)
   },
+
   onLoad(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/setting/setting",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     if (options.mobile) {
       that.setData({
         mobile: options.mobile,
@@ -44,20 +39,32 @@ Page({
         name: '绑定手机号'
       })
     }
-  },
-  init:function() {
 
+    that.init();
   },
+
+  init:function() {
+    let that = this;
+    shareApi.getShare("/pages/setting/setting", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+  },
+
   binding:function() {
     wx.navigateTo({
       url: '/pages/binding/binding?phone=' + this.data.mobile + '&ids=' + 2,
     })
   },
+
   modify: function() {
     wx.navigateTo({
       url: '/pages/binding/binding?phone=' + this.data.mobile + '&ids=' + this.data.ids,
     })
   },
+
   exitOut: function() {
     wx.removeStorage({
       key: 'userInfo',
@@ -65,6 +72,7 @@ Page({
         console.log(res)
       },
     })
+
     wx.removeStorage({
       key: 'usertoken',
       success: function(res) {
@@ -72,11 +80,13 @@ Page({
       },
     })
   },
+
   address: function() {
     wx.navigateTo({
       url: '/pages/address/address',
     })
   },
+
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

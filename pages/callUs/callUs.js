@@ -3,7 +3,6 @@ var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
 Page({
-
   data: {
     windowHeight: '',
     windowWidth: '',
@@ -25,28 +24,33 @@ Page({
       }
     })
   },
+
   onLoad:function(options){
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
-    if (options.recommand) {                                                                                                                               
+
+    if (options.recommand) {                                                                                                                           
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/callUs/callUs",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.init();
   },
+
   init: function () {
-    this.getData();
+    let that = this;
+    shareApi.getShare("/pages/callUs/callUs", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.getData();
   },
+
   getData: function () {
     let that = this;
     var url = 'user/customer/service';
@@ -60,6 +64,7 @@ Page({
       })
     }); //调用get方法情就是户数
   },
+
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

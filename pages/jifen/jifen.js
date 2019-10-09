@@ -17,25 +17,28 @@ Page({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/jifen/jifen",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.init();
   },
+
   init: function () {
     let that = this;
+    shareApi.getShare("/pages/jifen/jifen", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    });
+
     var url = 'banner/page/content';
     var params = {
       Code: 'ScoreRules'
     }
+
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       console.log(res)
       that.setData({
@@ -43,6 +46,7 @@ Page({
       })
     });
   },
+
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

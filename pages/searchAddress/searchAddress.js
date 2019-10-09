@@ -21,12 +21,14 @@ Page({
     title: "",
     loc:{},//经纬度，title
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     let hasword = wx.getStorageSync('keyword');
     let loc = wx.getStorageSync('loc');
     that.setData({
@@ -37,24 +39,27 @@ Page({
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/searchAddress/searchAddress",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+
+    that.NijieXi(that.data.loc.lat, that.data.loc.lng);
+    that.onceAgain();
+    that.init();
+  },
+
+  init: function() {
+    let that = this;
+    let userInfo = wx.getStorageSync('userInfo');
+    shareApi.getShare("/pages/searchAddress/searchAddress", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, userInfo.RecommandCode)
       that.setData({
         obj: res.Data,
       })
     })
-    that.NijieXi(that.data.loc.lat, that.data.loc.lng);
-    that.onceAgain();
 
-    that.init();
-  },
-  init: function() {
-    let usertoken = wx.getStorageSync('usertoken');
-    if (usertoken) {
-      this.getAddressList();
+    if (userInfo.UserToken) {
+      that.getAddressList();
     }
   },
+
   //clear
   clear: function() {
     this.setData({
@@ -62,6 +67,7 @@ Page({
       searchAdr: '',
     })
   },
+
   //我的地址
   getAddressList: function() {
     let that = this;
@@ -78,6 +84,7 @@ Page({
     false, 
     false); //调用get方法情就是户数
   },
+
   //逆解析
   NijieXi: function (latitude, longitude) {
     var that = this;
@@ -166,6 +173,7 @@ Page({
       }
     });
   },
+
   //触发关键词输入提示事件
   getsuggest: function(e) {
     var _this = this;
@@ -218,6 +226,7 @@ Page({
       },
     });
   },
+
   sendAddress: function(e) {
     let pages = getCurrentPages(); //当前页面
     let prevPage = pages[pages.length - 2]; //上一页面
@@ -231,6 +240,7 @@ Page({
       delta: 1
     });
   },
+
   //跳转编辑地址
   adsChange(e) {
     // this.setData({
@@ -248,17 +258,20 @@ Page({
       delta: 1
     });
   },
+
   //跳转城市选择
   cityChange: function() {
     wx.navigateTo({
       url: '/pages/city/city',
     })
   },
+
   prvent: function() {
     wx.navigateBack({
       changed: true
     });
   },
+  
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

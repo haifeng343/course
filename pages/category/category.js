@@ -4,7 +4,6 @@ var shareApi = require("../../utils/share.js");
 
 const app = getApp();
 Page({
-
   data: {
     windowHeight: '',
     windowWidth: '',
@@ -29,22 +28,18 @@ Page({
     districtname: '附近', //城市名称
     formId: "",
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare().then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-      })
-    })
+
     let loc = wx.getStorageSync("loc");
     that.setData({
       showId: options.Id || 0,
@@ -55,31 +50,46 @@ Page({
       page: 1,
       formId: options.formId || "",
     })
+
+    shareApi.getShare("/pages/category/category", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
     that.NijieXi(that.data.longitude, that.data.latitude);
     that.hasTypeList();
     that.hasList();
     that.selectComponent("#pop").getData("category");
   },
-  init: function() {},
+
+  init: function() {
+
+  },
+
   cheoose: function(e) {
     console.log(e)
     wx.navigateTo({
       url: '/pages/courseDetail/courseDetail?storeId=' + e.currentTarget.dataset.storeid + '&sheetId=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&Id=' + e.currentTarget.dataset.relid + '&sourceFrom=1' + '&groupId=' + e.currentTarget.dataset.groupid,
     })
   },
+
   navSheet: function(e) {
     wx.navigateTo({
-      url: '/pages/chooseClass/chooseClass?Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type,
+      url: '/pages/shangquan/shangquan?Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type,
     })
   },
+
   //获取分类列表
   hasTypeList: function() {
     let that = this;
     var url = 'sheet/itemtype/list';
     var params = {
-      PageCount: 100,
+      PageCount: 200,
       PageIndex: 1,
     }
+
     netUtil.postRequest(url, params, function(res) {
         let arr = res.Data;
         console.log(arr)
@@ -97,6 +107,7 @@ Page({
       false,
       false)
   },
+
   //逆解析
   NijieXi: function(longitude, latitude) {
     var that = this;
@@ -121,6 +132,7 @@ Page({
       }
     })
   },
+
   //获取商圈列表
   hasCityList: function() {
     let that = this;
@@ -163,6 +175,7 @@ Page({
       false,
       false)
   },
+
   //获取商圈Id
   checkTrading: function(e) {
     console.log(e)
@@ -183,6 +196,7 @@ Page({
     }
     this.hasList();
   },
+
   //获取数据列表
   hasList: function() {
     let that = this;
@@ -213,6 +227,7 @@ Page({
       })
     }, null, true, true, true, that.data.formId)
   },
+
   //商圈切换
   changeType1: function(e) {
     this.setData({
@@ -221,6 +236,7 @@ Page({
       districtname: e.currentTarget.dataset.districtname,
     })
   },
+
   //点击全部商圈
   allSeller: function() {
     this.setData({
@@ -228,18 +244,22 @@ Page({
       ImgType1: true,
     })
   },
+
   collapse: function() {
     this.setData({
       ImgType: true,
       ImgType1: true,
     })
   },
+
   navtoSeller: function(e) {
 
   },
+
   navtoClass: function(e) {
 
   },
+
   searchTo: function() {
     wx.navigateTo({
       url: '/pages/searchCategory/searchCategory?latitude=' + this.data.latitude + '&longitude=' + this.data.longitude + '&typeId=' + this.data.typeId,
@@ -249,6 +269,7 @@ Page({
       ImgType1: true,
     })
   },
+
   //点击全部商圈里的条件
   changeType: function(e) {
     this.setData({
@@ -260,27 +281,33 @@ Page({
     })
     this.hasList();
   },
+
   allCategory: function() {
     this.setData({
       ImgType1: !this.data.ImgType1,
       ImgType: true,
     })
   },
+
   onPullDownRefresh: function() {
     this.setData({
       page: 1
     })
+
     this.hasList();
     wx.stopPullDownRefresh();
   },
+
   onReachBottom: function() {
     let temp = this.data.page;
     temp++;
     this.setData({
       page: temp
     })
+    
     this.hasList();
   },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

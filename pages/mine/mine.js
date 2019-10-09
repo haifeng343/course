@@ -9,15 +9,12 @@ Page({
     windowWidth: "",
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: {},
-    recommandCode: '',
-    money: 0,
-    score: 0,
-    usertoken: "",
+    wallet_yuan:'0',
     buttons: {},
-    IsSalesman: '',
     Url: "",
     promptText: true, //是否显示提示语
   },
+
   //复制微信号
   copyText: function(e) {
     wx.setClipboardData({
@@ -33,31 +30,50 @@ Page({
       }
     })
   },
+
+  onLoad(options) {
+    let that = this;
+
+    that.setData({
+      windowHeight: app.getGreen(0).windowHeight,
+      windowWidth: app.getGreen(0).windowWidth,
+    });
+
+    that.init();
+    that.selectComponent("#pop").getData("mine");
+  },
+
   onShow() {
-    console.log(this.data.windowHeight)
-    this.ButtonShow();
-    let usertoken = wx.getStorageSync('usertoken');
+    let that = this;
     let promptText = wx.getStorageSync('promptText');
-    this.setData({
-      usertoken: usertoken,
+    that.setData({
       promptText: promptText || ''
     });
-    if (usertoken) {
-      this.walletd();
-      let userInfo = wx.getStorageSync('userInfo');
-      this.setData({
-        userInfo: userInfo,
-        IsSalesman: userInfo.IsSalesman || '',
-        recommandCode: userInfo.RecommandCode || '',
-      })
-    }
+
+    that.menuShow();
+
+    let userInfo = wx.getStorageSync('userInfo') || {};
+    that.setData({
+      userInfo: userInfo, 
+      wallet_yuan: Number(userInfo.TotalMoney / 100).toFixed(2)
+    });
   },
-  init: function() {},
-  ButtonShow: function() {
+
+  init: function() {
+    let that = this;
+    shareApi.getShare("/pages/mine/mine", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    });
+  },
+
+  menuShow: function() {
     var that = this;
-    var url = 'user/page/show/my'
-    var params = {}
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
+    var url = 'user/page/show/my';
+    var params = {};
+    netUtil.postRequest(url, params, function(res) { 
         var temp = {};
         that.setData({
           Url: res.Data.url
@@ -97,6 +113,7 @@ Page({
         } else {
           temp.modifyphone = false;
         }
+
         that.setData({
           buttons: temp
         })
@@ -108,73 +125,39 @@ Page({
       false
     );
   },
+
   bindLogin: function() {
     wx.navigateTo({
       url: '/pages/login/login',
     })
   },
+
   aboutUs: function() {
     wx.navigateTo({
       url: '/pages/aboutUs/aboutUs',
     })
   },
+
   bindIsSalesman: function() {
     wx.navigateTo({
       url: '/pages/map/map',
     })
   },
+
   bindInquire: function() {
     wx.navigateTo({
       url: '/pages/inquire/inquire'
     })
   },
+
   car: function() {
     wx.navigateTo({
       url: '/pages/car/car?type=2',
     })
   },
-  walletd: function() {
-    let that = this;
-    var url = 'user/wallet';
-    var params = {}
-    netUtil.postRequest(url, params, function(res) {
-        that.setData({
-          money: Number(res.Data.TotalMoney / 100).toFixed(2),
-          score: res.Data.Score
-        })
-        wx.setStorageSync('wallet', res.Data);
-        wx.setStorageSync('userInfo', res.Data);
-      },
-      null,
-      false,
-      false,
-      false);
-  },
-  onLoad(options) {
-    let that=this;
-    if (options.recommand) {
-      wx.setStorageSync("recommand", options.recommand)
-    }
-    wx.setStorageSync('promptText', that.data.promptText);
-    var userInfo = wx.getStorageSync('userInfo');
-    var recommand = userInfo.RecommandCode;
-    shareApi.getShare("/pages/mine/mine", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-      })
-    })
-    that.setData({
-      windowHeight: app.getGreen(0).windowHeight,
-      windowWidth: app.getGreen(0).windowWidth,
-    });
-    that.selectComponent("#pop").getData("mine");
-  },
-  init: function() {
 
-  },
   integral: function(e) {
-    if (this.data.usertoken) {
+    if (this.data.userInfo.UserToken) {
       wx.navigateTo({
         url: '/pages/integralLog/integralLog',
       })
@@ -184,8 +167,9 @@ Page({
       })
     }
   },
+
   fuli: function(e) {
-    if (this.data.usertoken) {
+    if (this.data.userInfo.UserToken) {
       wx.navigateTo({
         url: '/pages/fuliCenter/fuliCenter',
       })
@@ -195,8 +179,9 @@ Page({
       })
     }
   },
+
   quan: function(e) {
-    if (this.data.usertoken) {
+    if (this.data.userInfo.UserToken) {
       wx.navigateTo({
         url: '/pages/kaquan/kaquan',
       })
@@ -206,13 +191,15 @@ Page({
       })
     }
   },
+
   callUs: function() {
     wx.navigateTo({
       url: '/pages/callUs/callUs',
     })
   },
+
   setting: function() {
-    if (this.data.usertoken) {
+    if (this.data.userInfo.UserToken) {
       wx.navigateTo({
         url: '/pages/setting/setting?mobile=' + this.data.userInfo.Mobile + '&ids=' + 1,
       })
@@ -222,8 +209,9 @@ Page({
       })
     }
   },
+
   invite: function() {
-    if (this.data.usertoken) {
+    if (this.data.userInfo.UserToken) {
       wx.navigateTo({
         url: '/pages/invite/invite',
       })
@@ -233,8 +221,9 @@ Page({
       })
     }
   },
+
   share: function(e) {
-    if (this.data.usertoken) {
+    if (this.data.userInfo.UserToken) {
       if (this.data.Url) {
         wx.navigateTo({
           url: '/pages/WebView/WebView?path=' + this.data.Url,
@@ -250,8 +239,9 @@ Page({
       })
     }
   },
+
   wallet: function() {
-    if (this.data.usertoken) {
+    if (this.data.userInfo.UserToken) {
       wx.navigateTo({
         url: '/pages/wallet/wallet',
       })
@@ -262,54 +252,7 @@ Page({
       })
     }
   },
-  getUserInfo: function(e) {
-    var that = this;
-    // 查看是否授权
 
-    wx.getSetting({
-      success: function(res) {
-        if (res.authSetting['scope.userInfo']) {
-          wx.getUserInfo({
-            success: function(res) {
-              var Info = res;
-              wx.login({
-                success: res => {
-                  var url = 'user/login/wechat';
-                  var params = {
-                    Code: res.code,
-                    EncryptedData: Info.encryptedData,
-                    RecommandCode: that.recommandCode,
-                    Iv: Info.iv,
-                    RawData: Info.rawData,
-                    Signature: Info.signature
-                  }
-                  wx.setStorage({
-                    key: 'code',
-                    data: res.code,
-                  });
-                  netUtil.postRequest(url, params, that.onSuccess); //调用get方法情就是户数
-                }
-              });
-            }
-          });
-        } else {
-          // 用户没有授权
-          wx.redirectTo({
-            url: '/pages/authorization/authorization',
-          })
-        }
-      }
-    });
-  },
-  onSuccess: function(res) { //onSuccess成功回调
-    let that = this;
-    that.userInfo = res.Data;
-    wx.setStorageSync('userInfo', that.userInfo);
-    wx.setStorageSync('usertoken', res.Data.UserToken);
-    that.setData({
-      userInfo: res.Data
-    })
-  },
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

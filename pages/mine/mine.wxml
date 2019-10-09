@@ -5,7 +5,7 @@
   <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2' y="{{statusBarHeight+obj.CustomerServiceInfo.PositionHight}}">
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
-  <view wx:if="{{!usertoken}}">
+  <view wx:if="{{!userInfo.UserToken}}">
     <view class='myTop'>
       <image class='icon1 setImg' bindtap='setting' data-mobile="{{userInfo.Mobile}}" wx:if="{{buttons.setup==true}}" src='../../images/setting.png' mode='aspectFill' lazy-load='true'></image>
       <view class='start' bindtap='bindLogin'>
@@ -27,16 +27,7 @@
       </view>
     </view>
     <view class='List mt20'>
-      <!-- <view class='item mt20' bindtap='setting' data-mobile="{{userInfo.Mobile}}" wx:if="{{buttons.setup==true}}">
-        <view class='start'>
-          <image class='icon1' src='../../images/setting.png' mode='aspectFill' lazy-load='true'></image>
-          <view>设置</view>
-        </view>
-        <view class='start'>
-          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
-        </view>
-      </view> -->
-      <view class='item mt20 borb' bindtap='share' data-Id="{{recommandCode}}" wx:if="{{buttons.share==true}}">
+      <view class='item mt20 borb' bindtap='share' data-Id="{{userInfo.RecommandCode}}" wx:if="{{buttons.share==true}}">
         <view class='start'>
           <image class='icon1' src='../../images/a3.png' mode='aspectFill' lazy-load='true'></image>
           <view>分享给好友</view>
@@ -90,12 +81,12 @@
       <view class='paypag'>
         <view class='paypagItem' bindtap='integral'>
           <view class='ml1'>积分</view>
-          <view class='ml2'>{{score}}</view>
+          <view class='ml2'>{{userInfo.Score}}</view>
         </view>
         <view class='wallet' wx:if="{{promptText}}"></view>
         <view class='paypagItem' bindtap='wallet'>
           <view class='ml1'>钱包 (元)</view>
-          <view class='ml2'>{{money}}</view>
+          <view class='ml2'>{{wallet_yuan}}</view>
         </view>
       </view>
     </view>
@@ -127,16 +118,7 @@
           <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
         </view>
       </view>
-      <!-- <view class='item mt20' bindtap='setting' data-mobile="{{userInfo.Mobile}}" wx:if="{{buttons.setup==true}}">
-        <view class='start'>
-          <image class='icon1' src='../../images/setting.png' mode='aspectFill' lazy-load='true'></image>
-          <view>设置</view>
-        </view>
-        <view class='start'>
-          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
-        </view>
-      </view> -->
-      <view class='item mt20 borb' bindtap='share' data-Id="{{recommandCode}}" wx:if="{{buttons.share==true}}">
+      <view class='item mt20 borb' bindtap='share' data-Id="{{userInfo.RecommandCode}}" wx:if="{{buttons.share==true}}">
         <view class='start'>
           <image class='icon1' src='../../images/a3.png' mode='aspectFill' lazy-load='true'></image>
           <view>分享给好友</view>
@@ -172,7 +154,7 @@
           <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
         </view>
       </view>
-      <view class='item borb mt20' bindtap='bindIsSalesman' wx:if="{{IsSalesman==true}}">
+      <view class='item borb mt20' bindtap='bindIsSalesman' wx:if="{{userInfo.IsSalesman==true}}">
         <view class='start'>
           <image class='icon1' src='../../images/ss1.png' mode='aspectFill' lazy-load='true'></image>
           <view>数据统计</view>
@@ -181,7 +163,7 @@
           <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
         </view>
       </view>
-      <view class='item' bindtap='bindInquire' wx:if="{{IsSalesman==true}}">
+      <view class='item' bindtap='bindInquire' wx:if="{{userInfo.IsSalesman==true}}">
         <view class='start'>
           <image class='icon1' src='../../images/chaxun.png' mode='aspectFill' lazy-load='true'></image>
           <view>数据查询</view>

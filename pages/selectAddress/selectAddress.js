@@ -1,8 +1,9 @@
-let app = getApp();
+
 // 引入SDK核心类
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
+let app = getApp();
 
 Page({
   data: {
@@ -19,38 +20,43 @@ Page({
     latitude:"",//定位维度
     keyword: '',//搜索keyword
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     let hasword = wx.getStorageSync('keyword');
     that.setData({
       keyword: hasword
     })
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/selectAddress/selectAddress",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+
+    that.NijieXi(options.Longitude, options.Latitude);
+    that.onceAgain();
+    that.init();
+  },
+
+  init:function() {
+    let that = this;
+    let userInfo = wx.getStorageSync('userInfo');
+    shareApi.getShare("/pages/selectAddress/selectAddress", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, userInfo.RecommandCode)
       that.setData({
         obj: res.Data,
       })
     })
 
-    that.NijieXi(options.Longitude, options.Latitude);
-    that.onceAgain();
-    that.init();
-
-  },
-  init:function() {
-    let usertoken = wx.getStorageSync('usertoken');
-    if (usertoken) {
-      this.getAddressList();
+    if (userInfo.UserToken) {
+      that.getAddressList();
     }
   },
+
   //clear
   clear:function() {
     this.setData({
@@ -58,6 +64,7 @@ Page({
       searchAdr:'',
     })
   },
+
   //我的地址
   getAddressList: function() {
     let that = this;
@@ -215,6 +222,7 @@ Page({
       },
     });
   },
+
   setAddress:function() {
     wx.setStorageSync('loc', {
       lat:this.data.latitude,
@@ -225,6 +233,7 @@ Page({
       url: '/pages/index/index',
     })
   },
+
   //跳转首页
   adsChange(e) {
     let {
@@ -240,6 +249,7 @@ Page({
       url: '/pages/index/index',
     })
   },
+
   //跳转首页
   navToIndex(e) {
     console.log(e);
@@ -256,17 +266,20 @@ Page({
       url: '/pages/index/index',
     })
   },
+
   //跳转城市选择
   cityChange: function() {
     wx.navigateTo({
       url: '/pages/city/city',
     })
   },
+
   prvent: function() {
     wx.navigateBack({
       changed: true
     });
   },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

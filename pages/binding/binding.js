@@ -21,42 +21,40 @@ Page({
     notEdit: false,
     ActionCode: '', //操作码
   },
-  init: function() {},
+
   closeAlert: function() {
 
   },
+
   clear: function() {
     this.setData({
       Mobile: ''
     })
   },
+
   getCode: function(e) {
     this.setData({
       Mobile: e.detail.value
     })
   },
+
   onLoad(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/binding/binding",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-
-      })
-    })
+    
     that.setData({
       Mobile: options.phone || "",
       ids: options.ids || '',
       fromtype: options.fromtype || "",
     })
+
     if (options.ids == 1) {
       wx.setNavigationBarTitle({
         title: '修改手机号',
@@ -66,10 +64,20 @@ Page({
         title: '绑定手机号',
       })
     }
-  },
-  init: function() {
 
+    that.init();
   },
+
+  init: function() {
+    let that = this;
+    shareApi.getShare("/pages/binding/binding", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+  },
+  
   codeyan: function() {
     let that = this;
 
@@ -90,6 +98,7 @@ Page({
       }
     }); //调用get方法情就是户数
   },
+
   //图片验证码 
   codeText: function(e) {
     let that = this;
@@ -99,6 +108,7 @@ Page({
 
     })
   },
+
   //获取验证码
   cendCode: function(e) {
     let that = this;
@@ -109,7 +119,6 @@ Page({
   },
 
   codetime() { // 点击获取验证码
-
     var _this = this
     var coden = 60
     var codeV = setInterval(function() {
@@ -133,6 +142,7 @@ Page({
       }
     }, 1000) //  1000是1秒
   },
+
   //发送验证码
   sendCode() {
     let that = this;
@@ -148,6 +158,7 @@ Page({
       })
     }); //调用get方法情就是户数
   },
+
   getSMSCode: function() {
     //检查图片验证码是否正确
     let that = this;
@@ -175,6 +186,7 @@ Page({
     //   imgCodeShow: false,
     // })
   },
+
   //绑定
   SMSVerifyCodeLogin: function() {
     let that = this;
@@ -184,6 +196,7 @@ Page({
       VerifyCode: that.data.VerifyCode,
       ActionCode: that.data.ActionCode
     }
+    
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       wx.showModal({
         title: that.data.ids == 1 ? "成功修改手机号" : "成功绑定手机号",
@@ -208,18 +221,21 @@ Page({
       })
     }); //调用get方法情就是户数
   },
+  
   closeAlert: function() {
     let that = this;
     that.setData({
       imgCodeShow: false,
     })
   },
+
   closed: function() {
     let that = this;
     that.setData({
       isShow: false,
     })
   },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

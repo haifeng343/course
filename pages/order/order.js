@@ -18,22 +18,26 @@ Page({
     modelList: [{
       list: [],
       status: 0, //是否需要刷新0是 1否
-      pageIndex: 1,
+      pageIndex: 0,
+      wantIndex: 0,
       navbarActiveIndex: 0
     }, {
       list: [],
       status: 0,
-      pageIndex: 1,
+      pageIndex: 0,
+      wantIndex: 0,
       navbarActiveIndex: 1
     }, {
       list: [],
       status: 0,
-      pageIndex: 1,
+      pageIndex: 0,
+      wantIndex: 0,
       navbarActiveIndex: 2
     }, {
       list: [],
       status: 0,
-      pageIndex: 1,
+      pageIndex: 0,
+      wantIndex: 0,
       navbarActiveIndex: 3
     }],
     RefundFailReason: '',
@@ -43,48 +47,96 @@ Page({
     RefundArrivalTime: '',
     usertoken: ""
   },
-  onShow() {
-    if (this.data.modelList[this.data.navbarActiveIndex].status == 0) {
-      this.init();
+
+  onShow: function() {
+    this.setData({
+      usertoken: wx.getStorageSync('usertoken')
+    });
+
+    this.getData(false, false);
+  },
+
+  getData: function (isForceData, isRefreshData){
+    if ((isForceData || this.data.modelList[this.data.navbarActiveIndex].status == 0) && this.data.usertoken) {
+      this._getData(isRefreshData ? 1 : this.data.modelList[this.data.navbarActiveIndex].pageIndex + 1);
+    }
+  },
+
+  _getData: function (wantIndex) {
+    let that = this;
+    if (that.data.modelList[that.data.navbarActiveIndex].wantIndex > 0) {
+      return;
     }
 
+    let tempModelList = that.data.modelList;
+    tempModelList[that.data.navbarActiveIndex].wantIndex = wantIndex;
+    that.setData({
+      modelList: tempModelList
+    })
+
+    var url = 'order/list';
+    var params = {
+      Status: that.data.navbarActiveIndex + 1,
+      PageCount: 20,
+      PageIndex: wantIndex,
+    }
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+      let arr = [];
+      if (tempModelList[that.data.navbarActiveIndex].wantIndex == 1) {
+        arr = res.Data;
+      } else {
+        arr = tempModelList[that.data.navbarActiveIndex].list;
+        arr = arr.concat(res.Data);
+      }
+      
+      if (res.Data.length > 0) {
+        tempModelList[that.data.navbarActiveIndex].pageIndex = tempModelList[that.data.navbarActiveIndex].wantIndex;
+      }
+      tempModelList[that.data.navbarActiveIndex].status = 1; //设置状态为已刷新
+      tempModelList[that.data.navbarActiveIndex].wantIndex = 0;
+      tempModelList[that.data.navbarActiveIndex].list = arr;
+      that.setData({
+        modelList: tempModelList
+      })
+    }, function(error) {
+      tempModelList[that.data.navbarActiveIndex].wantIndex = 0;
+      that.setData({
+        modelList: tempModelList
+      })
+    });
   },
-  onLoad(options) {
+
+  onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+
+    that.init();
+    that.selectComponent('#pop').getData('order');
+  },
+
+  init: function() {
+    let that = this;
     shareApi.getShare("/pages/order/order", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
       that.setData({
         obj: res.Data,
-
       })
     });
-    that.init();
-    if (that.selectComponent('#pop')) {
-      that.selectComponent('#pop').getData('order');
-    }
   },
-  init: function() {
-    let usertoken = wx.getStorageSync('usertoken');
-    this.setData({
-      usertoken: usertoken
-    });
-    if (usertoken) {
-      this.getData();
-    }
-  },
+
   bindLogin: function() {
     wx.navigateTo({
       url: '/pages/login/login',
     })
   },
+
   lookEor: function(e) {
     let that = this;
     wx.showModal({
@@ -93,11 +145,13 @@ Page({
       showCancel: false,
     })
   },
+
   toggleDialog: function() {
     this.setData({
       showError: false
     })
   },
+
   lookDetails: function(e) {
     this.setData({
       showSuccess: true,
@@ -106,46 +160,8 @@ Page({
       RefundTime: e.currentTarget.dataset.item.RefundTime,
       RefundArrivalTime: e.currentTarget.dataset.item.RefundArrivalTime,
     })
-    // wx.showModal({
-    //   title: '退款成功',
-    //   content: '交易编号:' + e.currentTarget.dataset.item.OrderSn + '\r\n' + 
-    //   '退款金额:' + Number(e.currentTarget.dataset.item.PayAmount / 100).toFixed(2) + '\r\n' +
-    //   '交易时间:' + e.currentTarget.dataset.item.RefundTime,
-    //   showCancel:false,
-    //   confirmText:'知道了',
-    //   confirmColor:'#3CD5CF'
-    // })
   },
-  getData: function() {
-    let that = this;
-    let tempModelList = that.data.modelList;
-    tempModelList[that.data.navbarActiveIndex].status = 1; //设置状态为已刷新
-    that.setData({
-      modelList: tempModelList
-    })
-    var url = 'order/list';
-    var params = {
-      Status: that.data.navbarActiveIndex + 1,
-      PageCount: 5,
-      PageIndex: that.data.modelList[that.data.navbarActiveIndex].pageIndex,
-    }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      let arr = res.Data;
-      let arr1 = [];
-      if (tempModelList[that.data.navbarActiveIndex].pageIndex == 1) {
-        arr1 = arr;
-        tempModelList[that.data.navbarActiveIndex].pageIndex = 1; //设置为第一页
-      } else {
-        arr1 = tempModelList[that.data.navbarActiveIndex].list;
-        arr1 = arr1.concat(arr);
-        tempModelList[that.data.navbarActiveIndex].pageIndex = tempModelList[that.data.navbarActiveIndex].pageIndex + 1; //页码加1
-      }
-      tempModelList[that.data.navbarActiveIndex].list = arr1;
-      that.setData({
-        modelList: tempModelList
-      })
-    });
-  },
+
   //取消退款
   cancelOrder: function(e) {
     let that = this;
@@ -170,49 +186,36 @@ Page({
           }
         })
       })
+
       that.setData({
         modelList: tempList
       })
     }); //调用get方法情就是户数
   },
+
   /**
    * 点击导航栏
    */
   onNavBarTap: function(event) {
-    // 获取点击的navbar的index
-    let navbarTapIndex = event.currentTarget.dataset.navbarIndex
     // 设置data属性中的navbarActiveIndex为当前点击的navbar
     this.setData({
-      navbarActiveIndex: navbarTapIndex
+        navbarActiveIndex: event.currentTarget.dataset.navbarIndex
     })
 
-    if (this.data.usertoken) {
-      if (this.data.modelList[navbarTapIndex].status == 0) {
-        this.init();
-      }
-    }
+    this.getData(false, false);
   },
+
   //下拉刷新
   onPullDownRefresh: function() {
-    let that = this;
-    let temp = that.data.modelList;
-    temp[that.data.navbarActiveIndex].pageIndex = 1;
-    that.setData({
-      modelList: temp
-    })
-    that.init();
+    this.getData(true, true);
     wx.stopPullDownRefresh();
   },
+
   //上拉加载更多
   onReachBottom: function() {
-    let that = this;
-    let temp = that.data.modelList;
-    temp[that.data.navbarActiveIndex].pageIndex++;
-    that.setData({
-      modelList: temp
-    })
-    that.init();
+    this.getData(true, false);
   },
+
   orderDetail: function(e) {
     let formId = "";
     if (e.detail.formId != "the formId is a mock one") {
@@ -230,37 +233,53 @@ Page({
       url: '/pages/refund/refund?OrderId=' + e.currentTarget.dataset.id + '&kmd=1',
     })
   },
+
   //删除
   delete: function(e) {
     let that = this;
+    console.log(e)
+    let orderid = e.currentTarget.dataset.orderid;
+    let orderindex = e.currentTarget.dataset.orderindex;
     wx.showModal({
-      title: '提示',
-      content: '确定要删除吗？',
+      title: '',
+      content: '确定删除此订单吗？',
       success: function(sm) {
         if (sm.confirm) {
           var url = 'order/delete';
           var params = {
-            Id: e.currentTarget.dataset.id,
+            Id: e.currentTarget.dataset.orderid,
           }
-          netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-            that.init();
-          }); //调用get方法情就是户数
+          netUtil.postRequest(url, params, function(res) {
+            wx.showToast({
+              icon: 'none',
+              title: '成功删除',
+            })
+
+            let tempList = that.data.modelList;
+            tempList[that.data.navbarActiveIndex].list.splice(orderindex, 1);
+            that.setData({
+              modelList: tempList
+            });
+          });
         } else if (sm.cancel) {
 
         }
       }
     })
   },
+
   closeds: function() {
     this.setData({
       showError: !this.data.showError
     });
   },
+
   closeded: function() {
     this.setData({
       showSuccess: !this.data.showSuccess
     });
   },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

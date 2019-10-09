@@ -21,6 +21,7 @@ Page({
     status: '', //1门店 2商家
     name: '',
   },
+  
   initPicker: function () {
     var date = new Date();
     let arr = [],
@@ -51,14 +52,6 @@ Page({
       wx.setStorageSync("recommand", options.recommand)
     }
 
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/bill/bill").then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-      })
-    })
-
     that.setData({
       storeId: options.storeId || '',
       status: options.status || '',
@@ -82,7 +75,15 @@ Page({
   },
 
   init: function () {
-    this.getData();
+    let that = this;
+    shareApi.getShare("/pages/bill/bill").then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.getData();
   },
 
   getData: function () {
@@ -101,15 +102,17 @@ Page({
       arr.forEach(item => {
         item.Amount = Number(item.Amount / 100).toFixed(2);
       })
+      
       if (that.data.page == 1) {
         arr1 = arr;
       } else {
         arr1 = that.data.List;
         arr1 = arr1.concat(res.Data);
       }
+
       that.setData({
         List: arr1
-      })
+      });
     }); //调用get方法情就是户数
   },
 
@@ -133,25 +136,22 @@ Page({
     this.getData();
   },
 
-  showEor: function (e) {
+  showEor: function(e) {
     this.setData({
       statusdes: e.currentTarget.dataset.statusdes,
       showError: true
     })
   },
 
-  closed: function () {
+  closed: function() {
     this.setData({
       showError: false
     })
   },
 
   //上拉加载更多
-  onReachBottom: function () {
+  onReachBottom: function() {
     let that = this;
-    wx.showLoading({
-      title: '玩命加载中',
-    });
     var temp_page = this.data.page;
     temp_page++;
     this.setData({
@@ -162,19 +162,16 @@ Page({
   },
 
   //下拉刷新
-  onPullDownRefresh: function () {
-    wx.showLoading({
-      title: "玩命加载中",
-    });
+  onPullDownRefresh: function() {
     this.setData({
       page: 1
     });
+
     this.getData();
-    // 停止下拉动作
     wx.stopPullDownRefresh();
   },
 
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

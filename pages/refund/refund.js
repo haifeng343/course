@@ -25,33 +25,39 @@ Page({
     urlImgs: [],
     PayAmount:'',
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/refund/refund",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.setData({
       orderId: options.OrderId,
       kmd: options.kmd || '',
       kd: options.kd || '',
     });
+
     that.init();
   },
+
   init: function () {
-    this.has();
+    let that = this;
+    shareApi.getShare("/pages/refund/refund", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.has();
   },
+
   getData: function (formId) {
     let that = this;
     var url = 'order/refund/apply';
@@ -120,6 +126,7 @@ Page({
       })
     }, null, true, true, true, formId); 
   },
+
   chooseImg: function(e) {
     var that = this;
     var imgs = that.data.imgs; //存图片地址的变量
@@ -140,6 +147,7 @@ Page({
       }
     });
   },
+
   /*
       删除图片
   */
@@ -152,6 +160,7 @@ Page({
     });
     this.showHide();
   },
+
   /*
       预览图片
   */
@@ -167,6 +176,7 @@ Page({
       urls: imgs
     })
   },
+
   /*
       控制添加图片按钮是否显示出来
   */
@@ -185,6 +195,7 @@ Page({
       });
     }
   },
+
   has: function() {
     let that = this;
     var url = 'order/details';
@@ -193,13 +204,13 @@ Page({
       Status: 1,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      // console.log(res)
       that.setData({
         lpm: res.Data,
         PayAmount: Number(res.Data.PayAmount/100).toFixed(2)
       })
     });
   },
+
   /*提交*/
   submitBtn: function(e) {
     let formId = "";
@@ -208,6 +219,7 @@ Page({
     }
     this.getData(formId);
   },
+
   //上传图片
   upLoadImg: function(data) {
     var that = this;
@@ -238,6 +250,7 @@ Page({
       },
     });
   },
+
   bindPickerChange: function(e) {
     let index = e.detail.value;
     // console.log('picker发送选择改变，携带值为', this.data.array[index])
@@ -246,6 +259,7 @@ Page({
       Reason: this.data.array[index]
     })
   },
+  
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

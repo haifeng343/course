@@ -29,20 +29,34 @@
   line-height: 70rpx;
   border-radius: 45rpx;
 }
-.top{
-  width: 80rpx;
-  height: 80rpx;
-  margin-left: 10rpx;
-  margin-top: 10rpx;
-  border-radius: 5rpx;
+
+.nickname_frame{
+  display: flex;
+  justify-content:flex-start;
+  align-items: center;
 }
-.mg{
-  margin: 10rpx 0;
+
+.account_info_text {
+  line-height: 50rpx;
+  font-size: 28rpx;
+  color: #5b5b5b;
 }
-.mg1{
-  padding-left: 31rpx;
+
+.prefix_width {
+  text-align: right;
+  margin-right: 15rpx;
+  width: 18%;
 }
-.t1{
+
+.nickname_logo{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 20rpx;
+  margin-right: 10rpx;
+}
+
+.remark{
+  margin-top: 20rpx;
   font-size: 24rpx;
   color: #D3D3D3;
 }

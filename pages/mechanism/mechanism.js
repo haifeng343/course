@@ -30,34 +30,31 @@ Page({
     teacherInfo:{},//老师详情
     top:0,
   },
+
   onShow: function() {
     if (this.data.over == true) {
       wx.showToast({
         icon: "none",
         title: '剩余名额不足'
       })
+
       this.setData({
         over:false
       });
     }
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/mechanism/mechanism", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.setData({
       storeId: options.storeId || '',
       groupId: options.groupId || '',
@@ -71,31 +68,43 @@ Page({
     that.init();
     that.selectComponent("#pop").getData("mechanism");
   },
+
   swiperChangeTo: function(e) {
     this.setData({
       current: e.detail.current
     })
   },
+
   //点击老师获取详情
   tearcherClick:function(e){
     wx.navigateTo({
       url: '/pages/teacherDetail/teacherDetail?id='+e.currentTarget.dataset.id,
     })
   },
+
   hideTeacher:function(){
     this.setData({
       showTearcher: false,
     })
   },
+
   //拨打电话
   call: function(e) {
     wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.mobile,
     })
   },
+
   //初始化机构信息
   init: function() {
     let that = this;
+    shareApi.getShare("/pages/mechanism/mechanism", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
     var url = 'sheet/store/details';
     var params = {
       GroupId: that.data.groupId,
@@ -108,6 +117,7 @@ Page({
         TotalPrice: -1,
         count: 0
       })
+
       if (that.data.relId) {
         that.checkChange({
           RelId: that.data.relId
@@ -118,6 +128,7 @@ Page({
       }
     }, null, false, false, false);
   },
+
   //跳转购物车
   navtoCar: function() {
     wx.setStorageSync('load', true);
@@ -125,6 +136,7 @@ Page({
       url: '/pages/car/car?type=' + this.data.type,
     });
   },
+
   //勾选
   checkChange: function(e) {
     let that = this;
@@ -133,6 +145,7 @@ Page({
       that.setData({
         checkedArr: e.detail.value,
       });
+
       tempInfo.ItemList.forEach(item => {
         if (e.detail.value.indexOf(item.RelId + '') != -1) {
           item.checked = true;
@@ -140,6 +153,7 @@ Page({
           item.checked = false;
         }
       });
+      
       that.setData({
         Info: tempInfo
       });
@@ -162,12 +176,14 @@ Page({
           }
         }
       });
+
       if (over == 1) {
         that.setData({
           over:true
         });
         return;
       }
+
       tempArr.push(e.RelId);
       that.setData({
         checkedArr: tempArr,

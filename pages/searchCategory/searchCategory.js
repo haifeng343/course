@@ -15,6 +15,7 @@ Page({
     longitude:'',
     latitude:'',
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
@@ -22,12 +23,13 @@ Page({
       windowWidth: app.getGreen(0).windowWidth,
       statusBarHeight: app.getGreen(0).statusBarHeight,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+
     shareApi.getShare("/pages/searchCategory/searchCategory",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
       that.setData({
         obj: res.Data,
         typeId: options.typeId || '',
@@ -36,11 +38,13 @@ Page({
       })
     })
   },
+
   cheoose:function(e){
     wx.navigateTo({
-      url: '/pages/chooseClass/chooseClass?storeId=' + e.currentTarget.dataset.storeid + '&Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&relId=' + e.currentTarget.dataset.relid,
+      url: '/pages/shangquan/shangquan?storeId=' + e.currentTarget.dataset.storeid + '&Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&relId=' + e.currentTarget.dataset.relid,
     })
   },
+
   clear: function() {
     this.setData({
       SearchName: '',
@@ -60,9 +64,11 @@ Page({
       })
     }
   },
+
   init: function () {
     
   },
+
   getData:function() {
     let that = this;
     var url = 'sheet/search/list';
@@ -101,6 +107,7 @@ Page({
       }
     })
   },
+  
   //点击搜索
   search: function() {
     let that = this;
@@ -116,6 +123,7 @@ Page({
     });
     that.getData();
   },
+
   onReachBottom: function() {
     let temp = this.data.page;
     temp++;
@@ -124,6 +132,7 @@ Page({
     })
     this.getData();
   },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
@@ -141,7 +150,7 @@ Page({
 
   navSheet: function (e) {
     wx.navigateTo({
-      url: '/pages/chooseClass/chooseClass?Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type,
+      url: '/pages/shangquan/shangquan?Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type,
     })
   },
 })

@@ -12,29 +12,27 @@ Page({
     HeadUrl: '',
     NickName: '',
   },
+
   onLoad(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/recommendation/recommendation",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
+    that.init();
   },
+
   setCode: function(e) {
     this.setData({
       code: e.detail.value
     })
   },
+
   getData: function() {
     let that = this;
     var url = 'user/info/byrecommandcode';
@@ -50,15 +48,21 @@ Page({
       })
     });
   },
+
   init: function () {
-   
+    let that = this;
+    shareApi.getShare("/pages/recommendation/recommendation", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
   },
+
   sure: function() {
     this.getData();
-    // this.setData({
-    //   hiddenmodalput: false,
-    // })
   },
+
   cancelM: function(e) {
     this.setData({
       hiddenmodalput: true,
@@ -80,14 +84,17 @@ Page({
         MyRecommandAccountHeadImgUrl: that.data.HeadUrl,
         MyRecommandAccountName: that.data.NickName
       });
+
       that.setData({
         hiddenmodalput: true,
       })
+      
       wx.navigateBack({
         delta: 1
       })
     });
   },
+
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

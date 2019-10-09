@@ -1,9 +1,8 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-
 const app = getApp();
-Page({
 
+Page({
   data: {
     windowHeight: '',
     windowWidth: '',
@@ -18,39 +17,41 @@ Page({
     current: 0, //初始化时第一个显示的图片 下标值（从0）index
     type: '', //1团单 2商圈
   },
+  
   onLoad(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/chooseClass/chooseClass", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.setData({
       Id: options.Id || '',
       name: options.name || '',
       type: options.type || '',
     })
+
     that.init();
     that.selectComponent("#pop").getData("choose");
   },
-  init: function(isHideLoding) {
-    this.getData(isHideLoding);
+
+  init: function() {
+    let that = this;
+    shareApi.getShare("/pages/shangquan/shangquan", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.getData();
   },
-  getData: function(isHideLoding) {
-    let hideLoding = true;
-    if (isHideLoding == false) {
-      hideLoding = false;
-    }
+
+  getData: function() {
     var that = this;
     var url = 'sheet/details';
     var params = {
@@ -65,18 +66,21 @@ Page({
         GroupList: res.Data.GroupList,
         imgUrls: res.Data.SheetImgList,
       })
-    }, null, hideLoding, true, true); //调用get方法情就是户数
+    }, null, true, true, true); //调用get方法情就是户数
   },
+
   swiperChangeTo: function(e) {
     this.setData({
       current: e.detail.current
     })
   },
+
   mechanismDetail: function(e) {
     wx.navigateTo({
       url: '/pages/mechanism/mechanism?groupId=' + e.currentTarget.dataset.groupid + '&storeId=' + e.currentTarget.dataset.storeid + '&type=' + this.data.type + '&sheetId=' + this.data.Id
     })
   },
+  
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

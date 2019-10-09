@@ -1,74 +1,83 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
-Page({
 
+Page({
   data: {
     windowHeight: '',
     windowWidth: '',
-    pagecount: 100,
+    pagecount: 200,
     page: 1,
     List: [],
     totalChecked: false, //全选是否选中
-    load: true,
-    thisPageRefresh: true,
     usertoken: '',
+    isInitialized: false,
     type: "", //1团单 2 商圈
     totalCheckedLength: 0, //总选择数量
     totalPrizeAmount: 0, //总奖励金额
     totalVoucherCount: 0, //总奖励卡券数量
     totalPayPrice: 0, //总价格
   },
-  onShow: function() {
-    this.init();
-  },
+
   bindLogin: function() {
     wx.redirectTo({
       url: '/pages/login/login',
     })
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     that.setData({
-      load: options.refresh || '',
       type: options.type || '',
     })
+
     if (options.type == 1) {
       wx.setNavigationBarTitle({
         title: '购物车',
       })
     }
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+
+    that.selectComponent("#pop").getData("car");
+    that.init();
+  },
+
+  //初始化
+  init: function() {
+    let that = this;
     shareApi.getShare("/pages/car/car", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
       that.setData({
         obj: res.Data,
       })
     })
-    this.selectComponent("#pop").getData("car");
   },
-  //初始化
-  init: function() {
-    let usertoken = wx.getStorageSync('usertoken');
-    this.setData({
-      usertoken: usertoken,
+
+  onShow: function() {
+    let that = this;
+    that.setData({
+      usertoken: wx.getStorageSync('usertoken'),
     });
-    if (usertoken) {
-      let isRefreshFromPage = wx.getStorageSync('load');
-      if (this.data.thisPageRefresh || this.data.load || isRefreshFromPage == true) {
-        this.getData();
-      }
+
+    that.getData(false);
+  },
+
+  getData:function(isRefreshData) {
+    if (this.data.usertoken && (isRefreshData || !this.data.isInitialized || wx.getStorageSync('load') == true)) {
+      this._getData();
     }
   },
+
   //获取列表
-  getData: function() {
+  _getData: function() {
     let that = this;
     var url = 'cart/list';
     var params = {
@@ -76,7 +85,7 @@ Page({
       PageIndex: that.data.page,
       SheetModel: that.data.type
     }
-    console.log(params)
+
     netUtil.postRequest(url, params, function(res) {
       let tempArr = res.Data;
       tempArr.forEach(item => {
@@ -84,26 +93,16 @@ Page({
         item.CheckLength = 0;
         item.TotalPrice = 0;
       });
+
       that.setData({
+        isInitialized: true,
         List: tempArr,
-        load: false,
-        thisPageRefresh: false
       })
+
       wx.setStorageSync('load', false);
-    }, null, true, false, false)
+    }, null, true, true, true)
   },
-  //点击商圈/团单跳转
-  navSheet: function(e) {
-    if (e.currentTarget.dataset.type == 1) {
-      wx.navigateTo({
-        url: '/pages/chooseClass/chooseClass?Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type,
-      })
-    } else {
-      wx.navigateTo({
-        url: '/pages/shangquan/shangquan?Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type,
-      })
-    }
-  },
+
   //删除购物车(课程)
   deleteCard_item: function(item) {
     let that = this;
@@ -148,6 +147,7 @@ Page({
       });
     });
   },
+
   //删除购物车(团单)
   deleteCard_sheet: function(e) {
     let sheetIndex = e.currentTarget.dataset.sheetindex;
@@ -194,6 +194,7 @@ Page({
       }
     })
   },
+
   //删除
   _delete: function(id, type, onsuccess) {
     var url = 'cart/delete';
@@ -207,6 +208,7 @@ Page({
       }
     })
   },
+
   //团单勾选（只做课程全选逻辑）
   checkedTap: function(e) {
     let sheetid = e.currentTarget.dataset.sheetid; //点击的团单id
@@ -242,6 +244,7 @@ Page({
       }
     });
   },
+
   //课程勾选
   ItemChange(e, onSuccess) {
     let sheetId = e.currentTarget.dataset.sheetid; //点击的团单Id
@@ -266,6 +269,7 @@ Page({
         item.checked = false;
       }
     });
+
     if (i == 0) {
       tempList[sheetIndex].checked = true;
     } else {
@@ -275,6 +279,7 @@ Page({
     let allCheckedList = tempList.filter(item => {
       return item.checked != true;
     });
+
     tempList[sheetIndex].CheckLength = tempList[sheetIndex].checkArr.length;
     that._sheetPrice(sheetId, tempList[sheetIndex].checkArr.map(x => {
       return x.RelId;
@@ -308,6 +313,7 @@ Page({
       }
     });
   },
+
   //全选
   allChecked: function() {
     let that = this;
@@ -327,6 +333,7 @@ Page({
       });
     });
   },
+
   //结算购物车
   settlement: function() {
     let tempArr = this.data.List.filter(e => {
@@ -346,6 +353,7 @@ Page({
       url: '/pages/payOrder/payOrder?checkItem=' + JSON.stringify(checkedList) + '&type=' + this.data.type,
     })
   },
+
   //长按出现操作栏(删除购物车【课程】)
   longTap: function(e) {
     let that = this;
@@ -364,9 +372,11 @@ Page({
     this.setData({
       page: 1
     })
-    this.init();
+
+    this.getData(true);
     wx.stopPullDownRefresh();
   },
+
   _sheetPrice: function(sheet, relId, onSuccess) {
     let that = this;
     var url = 'sheet/buy/price';

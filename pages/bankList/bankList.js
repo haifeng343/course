@@ -2,7 +2,6 @@ var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
 Page({
-
   data: {
     windowHeight: '',
     windowWidth: '',
@@ -14,22 +13,26 @@ Page({
     item: {},
     ibd:'false',
   },
+
   closeded: function() {
     this.setData({
       showSuccess: false
     })
   },
+
   addBank: function() {
     wx.navigateTo({
       url: '/pages/addBank/addBank',
     })
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     that.setData({
       ibd:options.ibd || 'false',
     })
@@ -41,22 +44,25 @@ Page({
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/backList/backList",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.init();
     that.setData({
       item: options.item || {}
     })
   },
+
   init: function() {
-    this.getData();
+    let that = this;
+    shareApi.getShare("/pages/backList/backList", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.getData();
   },
+
   navtoWith: function(e) {
     if(this.data.ibd=='true'){
       let pages = getCurrentPages(); //当前页面
@@ -70,6 +76,7 @@ Page({
       });
     }
   },
+
   getData: function() {
     let that = this;
     var url = 'user/bank/card/list';
@@ -80,6 +87,7 @@ Page({
       })
     }); //调用get方法情就是户数
   },
+
   deleted: function(e) {
     let that = this;
     wx.showModal({
@@ -101,10 +109,12 @@ Page({
       },
     })
   },
+
   onPullDownRefresh: function() {
     this.getData();
     wx.stopPullDownRefresh();
   },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

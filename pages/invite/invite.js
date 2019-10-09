@@ -12,12 +12,14 @@ Page({
     MyRecommandAccountHeadImgUrl:'',
   },
 
-  onShow:function() {
-    this.init();
-  },
-
   init: function () {
-    this.getData();
+    let that = this;
+    shareApi.getShare("/pages/invite/invite", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({ obj: res.Data })
+    })
+
+    that.getData();
   },
 
   onLoad(options) {
@@ -31,11 +33,7 @@ Page({
       wx.setStorageSync("recommand", options.recommand)
     }
 
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/invite/invite",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({obj: res.Data})
-    })
+    that.init();
   },
 
   shareSth:function() {

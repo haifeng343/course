@@ -21,56 +21,62 @@ Page({
     avator: '',
     usertoken: '',
   },
+
   onShow: function() {
-    let usertoken = wx.getStorageSync('usertoken');
-    let userInfo = wx.getStorageSync('userInfo');
-    let wallet = wx.getStorageSync('wallet');
+    let userInfo = wx.getStorageSync('userInfo') || {};
     this.setData({
-      score: wallet.Score || '',
+      score: userInfo.Score || '',
       avator: userInfo.HeadUrl || '',
-      usertoken: usertoken
+      usertoken: userInfo.UserToken || ''
     })
   },
+
   jifen: function() {
     wx.navigateTo({
       url: '/pages/jifen/jifen',
     })
   },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/integralLog/integralLog",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.init();
   },
-  init() {
 
+  init: function() {
+    let that = this;
+    shareApi.getShare("/pages/integralLog/integralLog", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    });
   },
+  
   navtoIntegral: function() {
     wx.navigateTo({
       url: '/pages/integralList/integralList',
     })
   },
+
   //上拉加载更多
   onReachBottom: function() {
 
   },
+
   //下拉刷新
   onPullDownRefresh: function() {
  
   },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

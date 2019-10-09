@@ -1,6 +1,7 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
+
 Page({
   data: {
     windowHeight: '',
@@ -23,29 +24,24 @@ Page({
     }],
     ids: '',
     addressId:'',
-
   },
+
   onLoad(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/editAddress/editAddress",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     if (options.ids == 1) {
       that.setData({
         ids: options.ids
       })
+
       wx.setNavigationBarTitle({
         title: '增加地址',
       })
@@ -59,13 +55,25 @@ Page({
         addressId: options.addressId,
         address: options.address,
       })
+
       wx.setNavigationBarTitle({
         title: '编辑地址',
       })
     }
+
+    that.init();
   },
+
   init: function () {
+    let that = this;
+    shareApi.getShare("/pages/editAddress/editAddress", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    });
   },
+
   //编辑
   editSure: function () {
     let that = this;
@@ -79,6 +87,7 @@ Page({
       DoorNumber: that.data.houseNumber,
       AddressId : that.data.addressId
     }
+
     if (that.data.InputValue == "") {
       wx.showToast({
         icon: "none",
@@ -99,30 +108,36 @@ Page({
           item.Tag = that.data.tag;
         }
       });
+
       prevPage.setData({ //直接给上移页面赋值
         items: arrTemp
       });
+
       wx.navigateBack({
         dleta :1
       })
     });
   },
+
   houseName: function (e) {
     this.setData({
       houseNumber: e.detail.value
     })
   },
+
   menuClick: function (e) {
     console.log(e)
     this.setData({
       tag: e.currentTarget.dataset.name
     })
   },
+
   searchAddress: function (e) {
     wx.navigateTo({
       url: '/pages/searchAddress/searchAddress',
     })
   },
+
   //提交
   submitSure: function () {
     let that = this;
@@ -135,12 +150,14 @@ Page({
       Tag: that.data.tag,
       DoorNumber: that.data.houseNumber
     }
+
     if (that.data.InputValue == "") {
       wx.showToast({
         icon: "none",
         title: '请填写地址',
       })
     }
+
     netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       let pages = getCurrentPages(); //当前页面
       let prevPage = pages[pages.length - 2]; //上一页面
@@ -150,6 +167,7 @@ Page({
       })
     }); //调用get方法情就是户数
   },
+  
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

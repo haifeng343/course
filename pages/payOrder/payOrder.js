@@ -34,6 +34,7 @@ Page({
     PrizeAmount: "", //现金奖励
     isShowPayWnd:false,
   },
+
   onShow: function() {
     let that = this;
     that.setData({isShowPayWnd:true});
@@ -44,68 +45,78 @@ Page({
       })
     }
   },
+
   closeShowKnow: function() {
     this.setData({
       showKnow: false
-    })
+    });
+
     this.cancelPay();
   },
+
   navtoRule: function() {
     wx.navigateTo({
       url: '/pages/rewradRule/rewradRule?Id=' + this.data.OrderId,
     })
   },
+
   getShow: function(e) {
     let formId = "";
     if (e.detail.formId != "the formId is a mock one") {
       formId = e.detail.formId;
     }
+
     this.oderPay(formId);
   },
+
   onLoad(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
-    });
-    that.setData({
       parmasItem: JSON.parse(options.checkItem) || [],
       type: options.type || ''
-    })
+    });
+
     if (options.type == 1) {
       wx.setNavigationBarTitle({
         title: '支付订单',
       })
-    }
-    if (options.type == 2) {
+    } else if (options.type == 2) {
       wx.setNavigationBarTitle({
         title: '预约订单',
       })
     }
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/payOrder/payOrder", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-        type: options.type || ''
-      })
-    })
+
     let arr = [];
     // arr = options.ids.split(',');
     that.setData({
       Id: options.Id || '',
       relId: arr,
     })
-    this.init();
+
+    that.init();
   },
+
   init: function() {
-    this.getData();
+    let that = this;
+    let type = that.data.type;
+    shareApi.getShare("/pages/payOrder/payOrder", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+        type: type,
+      });
+    });
+
+    that.getData();
   },
+
   getData: function() {
-    console.log(11111)
     var that = this;
     var url = 'sheet/buy/details'
     var params = {
@@ -116,6 +127,7 @@ Page({
         item.Price = Number(item.Price / 100).toFixed(2);
         item.PrizeAmount = Number(item.PrizeAmount / 100).toFixed(2);
       })
+
       that.setData({
         ItemList: res.Data.ItemList,
         totalAmount: Number(res.Data.TotalAmount / 100).toFixed(2),
@@ -124,9 +136,9 @@ Page({
         totalCount: res.Data.ItemCount,
         Info: res.Data,
       })
-      console.log(that.data.PrizeAmount)
     });
   },
+
   swich: function() {
     var checked = this.data.checked;
     this.setData({
@@ -134,6 +146,7 @@ Page({
       totalAmount: checked ? this.data.totalAmount : (this.data.totalAmount - this.data.useScoreAmount).toFixed(2)
     })
   },
+
   oderPay: function (formId) {
     var that = this;
     var url = 'order/pay'
@@ -151,6 +164,7 @@ Page({
         showKnow: false,
         isShowPayWnd:false
       });
+
       wx.requestPayment({
         timeStamp: that.data.TimeStamp,
         nonceStr: that.data.NonceStr,
@@ -179,6 +193,7 @@ Page({
       });
     }, null, true, true, true, formId); //调用get方法情就是户数
   },
+
   //用户取消支付
   cancelPay: function() {
     var that = this;
@@ -199,10 +214,12 @@ Page({
     if (e.detail.formId != "the formId is a mock one") {
       formId = e.detail.formId;
     }
+
     wx.showLoading({
       icon: 'none',
       title: '正在创建订单...',
     })
+
     var that = this;
     var url = 'order/create'
     var params = {
@@ -215,22 +232,27 @@ Page({
       prevPage.setData({ //直接给上移页面赋值
         load: true || ''
       });
+
       that.setData({
         OrderId: res.Data.OrderId,
         OrderSn: res.Data.OrderSn,
         PayAmount: (res.Data.PayAmount / 100).toFixed(2),
-      })
+      });
+
       if (that.data.type == 2) {
         that.setData({
           showKnow: true
-        })
+        });
       } else {
         that.oderPay();
       }
-      wx.hideLoading();
-    }, '', true, true, true, formId);
 
+      wx.hideLoading();
+    }, function(error) {
+      wx.hideLoading();
+    }, false, true, true, formId);
   },
+
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

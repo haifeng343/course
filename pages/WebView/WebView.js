@@ -8,6 +8,7 @@ Page({
   data: {
     htmlSrc:'',
   },
+
   init: function () {
 
   },
@@ -17,19 +18,21 @@ Page({
   onLoad: function (options) {
     var that = this;
     if (options.recommand) {
-      wx.setStorageSync("recommand", options.recommand)
+      wx.setStorageSync("recommand", options.recommand);
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
+
     shareApi.getShare("WebView",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
       that.setData({
         obj: res.Data,
-      })
-    })
+      });
+    });
+
     that.setData({
       htmlSrc: options.path
-    })
+    });
   },
+
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

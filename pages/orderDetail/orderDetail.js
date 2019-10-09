@@ -18,33 +18,40 @@ Page({
     RefundFailReason: '',
     formId: "",
   },
+
   onLoad(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/orderDetail/orderDetail", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
-      })
-    })
+
     that.setData({
       Id: options.Id || "",
       Status: options.status || "",
       kd: options.kd || "",
       formId: options.formId || "",
     })
+
     that.init();
   },
+
   init: function() {
-    this.getData();
+    let that = this;
+    shareApi.getShare("/pages/orderDetail/orderDetail", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    }) 
+    
+    that.getData();
   },
+  
   getData: function() {
     var that = this;
     var url = 'order/details'
@@ -61,17 +68,20 @@ Page({
       })
     }, null, false, false, false, that.data.formId);
   },
+
   //条形码弹窗
   codeShow: function() {
     this.setData({
       showCode: false
     })
   },
+
   dialogShow: function() {
     this.setData({
       showCode: true
     })
   },
+
   //退款失败 查看原因弹窗
   errorShow: function() {
     let that = this;
@@ -81,6 +91,7 @@ Page({
       showCancel: false,
     })
   },
+
   //取消退款
   cancelOrder: function(e) {
     console.log(e)
@@ -115,32 +126,38 @@ Page({
       });
     }); //调用get方法情就是户数
   },
+
   //重新退款
   Refund: function(e) {
     wx.navigateTo({
       url: '/pages/refund/refund?OrderId=' + e.currentTarget.dataset.orderid + '&kmd=2' + '&kd=' + this.data.kd,
     })
   },
+
   closed: function() {
     this.setData({
       showDialog: !this.data.showDialog
     });
   },
+
   //退款详情 成功弹窗
   showSucess: function() {
     this.setData({
       showSuccess: true
     })
   },
+
   onPullDownRefresh: function() {
     this.getData();
     wx.stopPullDownRefresh();
   },
+
   closeded: function() {
     this.setData({
       showSuccess: !this.data.showSuccess
     });
   },
+  
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

@@ -14,33 +14,34 @@ Page({
     noShow: false,
     groupList: [],
   },
-  onShow: function() {
 
-  },
   onLoad: function(options) {
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/search/search",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      this.setData({
-        obj: res.Data,
 
-      })
-    })
     this.init();
   },
+
   init: function () {
-    this.getSearch();
+    let that = this;
+    shareApi.getShare("/pages/search/search", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      this.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.getSearch();
   },
+  
   //取本地缓存的搜索历史
   getSearch: function() {
     this.setData({
       searchRecord: wx.getStorageSync('searchRecord') || [], //若无缓存取空
     })
-
   },
+
   clear: function() {
     this.setData({
       SearchName: '',
@@ -49,16 +50,20 @@ Page({
       groupList: [],
       page:1,
     })
+    
     this.getSearch();
   },
+
   searchTo: function(e) {
     this.setData({
       SearchName: e.currentTarget.dataset.item.value,
       show: false,
       noShow: true
     })
+
     this.search();
   },
+
   //搜索的名称
   setSearchName: function(e) {
     this.setData({
@@ -80,6 +85,7 @@ Page({
       })
     }
   },
+
   //点击搜索
   search: function() {
     let that = this;
@@ -94,6 +100,7 @@ Page({
       PageCount: that.data.pagecount,
       PageIndex: that.data.page,
     }
+
     if (that.data.SearchName == '') {
       wx.showToast({
         icon: 'none',
@@ -111,8 +118,9 @@ Page({
     }
   
     if (searchRecord.length > 20) {
-      searchRecord.pop()
+      searchRecord.pop();
     }
+
     searchRecord.unshift({
       value: inputVal,
       id: searchRecord.length
@@ -145,6 +153,7 @@ Page({
       }
     }); //调用get方法情就是户数
   },
+
   //删除历史搜索
   deleteHistory: function() {
     wx.removeStorageSync('searchRecord');
@@ -152,13 +161,14 @@ Page({
       searchRecord: []
     })
   },
+
   //跳转详情页
   groupDetail: function(e) {
     const that = this;
     that.Id = parseInt(e.currentTarget.dataset.id)
     let loc = wx.getStorageSync('loc');
     wx.navigateTo({
-      url: '/pages/chooseClass/chooseClass?Longitude=' + loc.lng + '&Latitude=' + loc.lat + '&Id=' + that.Id+'&type='+e.currentTarget.dataset.type,
+      url: '/pages/shangquan/shangquan?Longitude=' + loc.lng + '&Latitude=' + loc.lat + '&Id=' + that.Id+'&type='+e.currentTarget.dataset.type,
     })
   },
 
@@ -168,6 +178,7 @@ Page({
     this.setData({
       page: temp
     })
+
     this.search();
   },
 

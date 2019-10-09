@@ -40,8 +40,9 @@
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
 </movable-area> -->
-
+<!-- 
 <form bindsubmit="formSubmit" report-submit="true">
   <button formType="submit" class='btnd'>
   </button>
-</form>
+</form> -->
+

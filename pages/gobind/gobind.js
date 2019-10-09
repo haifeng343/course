@@ -8,24 +8,27 @@ Page({
     code: "",
   },
 
-  init: function() {},
+  init: function() {
+    let that = this;
+    shareApi.getShare("/pages/gobind/gobind", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+  },
+
   onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+    
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/gobind/gobind",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     wx.login({
       success: res => {
         that.setData({
@@ -33,11 +36,13 @@ Page({
         })
       }
     })
+
+    that.init();
   },
+
   getPhoneNumber: function(e) {
-    console.log(e);
-    var that = this
     if (e.detail.errMsg == "getPhoneNumber:fail user deny") return;
+
     //用户授权获取手机号码
     var url = 'user/wechatdecrypt';
     var params = {
@@ -47,7 +52,6 @@ Page({
     }
 
     netUtil.postRequest(url, params, function(res) {
-      console.log(res.Data);
       wx.redirectTo({
         url: '/pages/binding/binding?phone=' + res.Data.phoneNumber+'&fromtype=1',
       })

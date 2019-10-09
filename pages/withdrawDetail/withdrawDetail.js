@@ -6,7 +6,6 @@ Page({
   data: {
     windowHeight: '',
     windowWidth: '',
-
   },
 
   /**
@@ -18,21 +17,24 @@ Page({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/withdrawDetail/withdrawDetail",0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
+
+    that.init();
+  },
+
+  init:function() {
+    let that = this;
+    shareApi.getShare("/pages/withdrawDetail/withdrawDetail", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
       that.setData({
         obj: res.Data,
-
       })
     })
   },
-  init:function() {
 
-  },
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

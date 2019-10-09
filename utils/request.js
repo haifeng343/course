@@ -22,8 +22,8 @@ function get(url, params, onSuccess, onFailed, isShowLoading = true, isShowError
  * @onFailed  失败回调
  */
 
-// const baseUrl = "https://qxbclient.guditech.com/";
-const baseUrl = "https://test.guditech.com/rocketclient/";
+const baseUrl = "https://qxbclient.guditech.com/";
+// const baseUrl = "https://test.guditech.com/rocketclient/";
 
 function request(url, params, method, onSuccess, onFailed, isShowLoading, isShowError, isnavigateToLogin, formId) {
   if (isShowLoading) {
@@ -65,31 +65,30 @@ function request(url, params, method, onSuccess, onFailed, isShowLoading, isShow
         wx.hideLoading();
       }
 
-      if (res.data) {
-        /** start 根据需求 接口的返回状态码进行处理 */
-        if (res.data.ErrorCode == 0) {
-          if (onSuccess) {
-            onSuccess(res.data); //request success
-          }
-        } else if (res.data.ErrorCode == 301) {
-          if (onFailed) {
-            onFailed();
-          }
-          wx.clearStorageSync('userInfo');
-          wx.clearStorageSync('usertoken');
-          wx.clearStorageSync('wallet');
-          if (isnavigateToLogin) {
-            wx.navigateTo({
-              url: '/pages/login/login?logintype=1',
-            })
-          }
-        } else if (isShowError) {
+      /** start 根据需求 接口的返回状态码进行处理 */
+      if (res.data.ErrorCode == 0) {
+        if (onSuccess) {
+          onSuccess(res.data); //request success
+        }
+      } else {
+        if (onFailed) {
+          onFailed();
+        }
+
+        if (isShowError) {
           wx.showToast({
             icon: 'none',
             title: res.data.ErrorMessage,
           })
         }
-        /** end 处理结束*/
+
+        if (res.data.ErrorCode == 301) {
+          wx.clearStorageSync('userInfo');
+          wx.clearStorageSync('usertoken');
+          if (isnavigateToLogin) {
+            wx.navigateTo({url: '/pages/login/login?logintype=1'});
+          }
+        }
       }
     },
 

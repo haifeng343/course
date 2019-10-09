@@ -16,57 +16,65 @@ Page({
     taskList: [], //任务列表
   },
   onShow: function() {
-    let wallet = wx.getStorageSync('wallet');
-    let CashServiceFeeRate = wx.getStorageSync('userInfo').CashServiceFeeRate;
+    let userInfo = wx.getStorageSync('userInfo');
+    let CashServiceFeeRate = userInfo.CashServiceFeeRate;
     this.setData({
-      money: Number(wallet.Money / 100).toFixed(2),
+      money: Number(userInfo.Money / 100).toFixed(2),
       fee: Number(CashServiceFeeRate / 100).toFixed(2),
       CashServiceFeeRate: CashServiceFeeRate
     })
   },
+
   onLoad(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
+
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
-    var recommand = wx.getStorageSync('userInfo').RecommandCode;
-    shareApi.getShare("/pages/withdraw/withdraw", 0).then(res => {
-      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
-      that.setData({
-        obj: res.Data,
 
-      })
-    })
     that.init();
-    console.log(that.selectComponent("#pop"))
     that.selectComponent("#pop").getData("withdraw");
   },
+
   init: function() {
-    this.carList();
+    let that = this;
+    shareApi.getShare("/pages/withdraw/withdraw", 0).then(res => {
+      res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
+      that.setData({
+        obj: res.Data,
+      })
+    })
+
+    that.carList();
   },
+
   clear: function() {
     this.setData({
       amount: ''
     })
   },
+
   changeCard: function(e) {
     wx.navigateTo({
       url: '/pages/bankList/bankList?item=' + e.currentTarget.dataset.item + '&ibd=true',
     })
   },
+
   amoutChange: function(e) {
     this.doChange(e.detail.value);
   },
+
   doChange: function(value) {
     this.setData({
       amount: value,
       feeMoney: (Number(value) * this.data.CashServiceFeeRate / 10000).toFixed(2)
     })
   },
+
   //已领取任务列表
   task: function() {
     let that = this;
@@ -83,13 +91,12 @@ Page({
       })
     });
   },
+
   //银行卡列表
   carList: function() {
     let that = this;
     var url = 'user/bank/card/list';
-    var params = {
-
-    }
+    var params = {};
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       if (res.Data.length >= 1) {
         let wihdraw = res.Data[0];
@@ -105,6 +112,7 @@ Page({
       that.task();
     }); //调用get方法情就是户数
   },
+
   //点击提现
   GetApply: function(e) {
     let that = this;
@@ -121,6 +129,7 @@ Page({
       }
     })
   },
+
   //任务提现
   btnTaskCash: function(e) {
     console.log(e)
@@ -140,6 +149,7 @@ Page({
       }
     })
   },
+
   //任务提现
   taskCash: function(taskId, index, formId) {
     console.log(formId)
@@ -166,6 +176,7 @@ Page({
       })
     }, null, false, false, formId);
   },
+
   btnScoreCash: function(e) {
     let that = this;
     let index = e.currentTarget.dataset.index;
@@ -190,6 +201,7 @@ Page({
       })
     });
   },
+
   //执行任务按钮
   taskclick: function(e) {
     let actionparams = e.currentTarget.dataset.actionparams;
@@ -212,6 +224,7 @@ Page({
 
     }
   },
+
   //提现
   cash: function(formId) {
     let that = this;
@@ -235,25 +248,30 @@ Page({
       })
     }, null, true, true, true, formId);
   },
+
   //点击全部
   all: function() {
     this.doChange(this.data.money);
   },
+
   withdrawLog: function() {
     wx.navigateTo({
       url: '/pages/withdrawLog/withdrawLog',
     })
   },
+
   cashLog: function() {
     wx.navigateTo({
       url: '/pages/cashLog/cashLog',
     })
   },
+
   nohaveTo: function() {
     wx.navigateTo({
       url: '/pages/addBank/addBank',
     })
   },
+  
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
