@@ -40,6 +40,9 @@
   box-sizing: border-box;
   border-bottom: 1rpx solid #F9F9F9;
 }
+.item:last-child{
+  border: none;
+}
 .content{
   font-size: 28rpx;
 }

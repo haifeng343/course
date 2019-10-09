@@ -23,10 +23,6 @@ Page({
     var date = new Date();
     let arr = [],
       arr1 = [];
-    this.setData({
-      year: '全部', //date.getFullYear(),
-      month: '全部' //date.getMonth() + 1
-    })
 
     var year = date.getFullYear();
     arr.push('全部');
