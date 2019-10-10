@@ -11,7 +11,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
@@ -25,7 +25,7 @@ Page({
     that.init();
   },
 
-  init: function () {
+  init: function() {
     let that = this;
     shareApi.getShare("/pages/jifen/jifen", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
@@ -39,15 +39,16 @@ Page({
       Code: 'ScoreRules'
     }
 
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
-      console.log(res)
-      that.setData({
-        html: res.Data.Content
-      })
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+      if (res.Data) {
+        that.setData({
+          html: res.Data.Content
+        })
+      }
     });
   },
 
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

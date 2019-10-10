@@ -23,7 +23,7 @@ Page({
     TotalAmountFen: '',
     OrderSn: '', //订单编号
     PayAmount: '', //支付金额
-    paySuccess: false,
+    paySuccess: false, //是否支付成功
     Info: {}, //数据详情
     useScoreAmount: 0, //使用积分抵扣金额
     parmasItem: [], //请求列表参数
@@ -32,13 +32,14 @@ Page({
     showKnow: false, //购买须知弹窗
     type: '',
     PrizeAmount: "", //现金奖励
-    isShowPayWnd:false,
+    isShowPayWnd: false,
   },
 
   onShow: function() {
     let that = this;
-    that.setData({isShowPayWnd:true});
-
+    that.setData({
+      isShowPayWnd: true
+    });
     if (that.data.paySuccess == true) {
       wx.reLaunch({
         url: '/pages/wait/wait?OrderId=' + that.data.OrderId + '&ordersn=' + that.data.OrderSn + '&money=' + that.data.totalAmount + '&type=' + that.data.type,
@@ -56,7 +57,7 @@ Page({
 
   navtoRule: function() {
     wx.navigateTo({
-      url: '/pages/rewradRule/rewradRule?Id=' + this.data.OrderId,
+      url: '/pages/rewradRule/rewradRule?Id=' + this.data.OrderId+'&type='+this.data.type,
     })
   },
 
@@ -104,12 +105,10 @@ Page({
 
   init: function() {
     let that = this;
-    let type = that.data.type;
     shareApi.getShare("/pages/payOrder/payOrder", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
       that.setData({
         obj: res.Data,
-        type: type,
       });
     });
 
@@ -147,7 +146,7 @@ Page({
     })
   },
 
-  oderPay: function (formId) {
+  oderPay: function(formId) {
     var that = this;
     var url = 'order/pay'
     var params = {
@@ -162,7 +161,7 @@ Page({
         TimeStamp: res.Data.TimeStamp,
         paySuccess: false,
         showKnow: false,
-        isShowPayWnd:false
+        isShowPayWnd: false
       });
 
       wx.requestPayment({
@@ -175,17 +174,11 @@ Page({
           that.setData({
             paySuccess: true
           });
-
           if (that.data.isShowPayWnd) {
             wx.reLaunch({
               url: '/pages/wait/wait?OrderId=' + that.data.OrderId + '&ordersn=' + that.data.OrderSn + '&money=' + that.data.totalAmount + '&type=' + that.data.type,
             })
           }
-          // var setTime = setTimeout(function() {
-          //   wx.reLaunch({
-          //     url: '/pages/wait/wait?OrderId=' + that.data.OrderId + '&ordersn=' + that.data.OrderSn + '&money=' + that.data.TotalAmount,
-          //   })
-          // }, 800);
         },
         'fail': function(res) {
           that.cancelPay();
@@ -209,7 +202,7 @@ Page({
     }, '', false, false, false);
   },
 
-  paySure: function (e) {
+  paySure: function(e) {
     let formId = "";
     if (e.detail.formId != "the formId is a mock one") {
       formId = e.detail.formId;

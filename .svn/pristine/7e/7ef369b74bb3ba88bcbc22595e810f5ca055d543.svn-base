@@ -1,0 +1,20 @@
+<view class='List mt20'>
+  <view class='item mt20' bindtap='kaquan'>
+    <view class='start'>
+      <image class='icon1' src='../../images/fuliquan.png' mode='aspectFill' lazy-load='true'></image>
+      <view>卡券</view>
+    </view>
+    <view class='start bb'>
+      3张<image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+    </view>
+  </view>
+  <view class='item mt20' bindtap='snatch'>
+    <view class='start'>
+      <image class='icon1' src='../../images/fulilog.png' mode='aspectFill' lazy-load='true'></image>
+      <view>抢购记录</view>
+    </view>
+    <view class='start bb'>
+      <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,190 @@
+
+.status{
+  font-size: 28rpx;
+  color: #000;
+  width: 140rpx;
+  text-align: right;
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ml40{
+  margin-left: 40rpx;
+}
+.zan-dialog__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: 370rpx;
+}
+.kl{
+  border-bottom: 1rpx solid #F4F4F4;
+  padding-bottom: 20rpx;
+  margin-bottom: 20rpx;
+}
+.code{
+  width: 34rpx;
+  height: 34rpx;
+}
+.ml{
+  display: block;
+  width: 70%;
+  overflow: hidden;
+  word-break: break-keep;
+  text-overflow: ellipsis;
+}
+.keep{
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+}
+
+.courseRow {
+  display: flex;
+  justify-content: flex-start;
+}
+.Right{
+  width: 75%;
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.activity{
+  font-size: 28rpx;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #000;
+  line-height: 40rpx;
+}
+.topImg{
+  width: 141rpx;
+  height: 180rpx;
+  margin-right: 20rpx;
+  border-radius: 15rpx;
+}
+
+.mt1{
+  margin-top: 5rpx;
+}
+.courseRow:last-child{
+  border: none;
+}
+.rowImg{
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 6rpx;
+}
+.ml15{
+  margin-left: 15rpx;
+}
+
+.css_img_frame {
+  display: flex;
+  height: 36rpx;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.css_project_text {
+  color: #5b5b5b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 24rpx; 
+  line-height: 36rpx;
+}
+
+.bt1{
+  font-size: 28rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.deduction{
+  color: red;
+}
+.bt2{
+  font-size: 28rpx;
+}
+.money{
+  color: red;
+  font-size: 32rpx;
+}
+.use{
+  width: 100rpx;
+  margin-bottom: -45rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.pay .btnd2{
+  background-color: #fff;
+  color: #29D9D6;
+  border: 2rpx solid #29D9D6;
+}
+.end{
+  position: absolute;
+  right: 2.5%;
+}
+.dialog-title{
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+.dialog-code{
+  font-size: 28rpx;
+  text-align: center;
+  margin-bottom: 25rpx;
+}
+.pay{
+  display: flex;
+  align-items: center;
+}
+.r1{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 5%;
+  margin: auto 0;
+}
+.r2{
+  position: absolute;
+  right: 32%;
+}
+.btnd{
+  width: 170rpx;
+  border:1rpx solid #5b5b5b;
+  box-sizing: border-box;
+  height: 55rpx;
+  line-height: 55rpx;
+  background-color: transparent;
+  font-size: 28rpx;
+  display: flex;
+  color: #000;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+}
+.codeImg{
+  width: 350rpx;
+  height: 350rpx;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+.date{
+  font-size: 26rpx;
+  color: #ccc;
+}
+
+
+
+

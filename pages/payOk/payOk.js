@@ -68,7 +68,7 @@ Page({
 
   groupTo: function() {
     wx.switchTab({
-      url: '/pages/index/index?',
+      url: '/pages/index/index',
     })
   },
 

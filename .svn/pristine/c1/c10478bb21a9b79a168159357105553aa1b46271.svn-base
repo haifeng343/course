@@ -1,0 +1,78 @@
+<view class='banner'>
+  <swiper bindchange="swiperChange" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1' next-margin='35rpx' previous-margin='35rpx'>
+    <block wx:for="{{imgUrls}}" wx:key>
+      <swiper-item>
+        <view class='box'>
+          <image src='{{item.img}}' mode="widthFix" lazy-load="true"></image>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class="dots">
+    <block wx:for="{{imgUrls}}" wx:key>
+      <view class="dot{{index == currentSwiper ? ' active' : ''}}">{{current+1}}/{{imgUrls.length}}</view>
+    </block>
+  </view>
+</view>
+<view class='content'>
+  <view class='title'>{{detailCent.SheetName}}</view>
+  <view class='contents'>
+    <view class='time'>活动截止时间：{{detailCent.EndTime}}</view>
+    <view class='money'>
+      <view class='sym'>￥</view>
+      <view class='number'>{{detailCent.SheetPrice}}</view>
+    </view>
+  </view>
+</view>
+<view class='courseList'>
+  <view class='courseItem' wx:for='{{courseList}}' wx:key>
+    <view class='title'>
+      <view class='heng'></view> {{item.title}}
+      <view class='heng'></view>
+    </view>
+    <view class='courseCont' bindtap='courseDetail'>
+      <view class='leftImg'>
+        <image class='cover' src='{{item.imgUrl}}' mode='widthFix' lazy-load='true'></image>
+      </view>
+      <view class='rightContent'>
+        <view class='courseTitle'>{{item.titleName}}</view>
+        <view class='coursePeople'>{{item.yiPeople}}人已参与 | 剩余名额 {{item.guo}} 个</view>
+        <view class='tagList'>
+          <view class='tagItm' wx:for="{{item.tagList}}" wx:key style='background:{{bgcolor}};color:{{color}}'>{{item.tag}}</view>
+        </view>
+        <view class='detail'>
+          <image class='detailImg' src='../../images/house.png' mode='widthFix' lazy-load='true'></image>
+          <view class='name'>{{item.name}}</view>
+        </view>
+        <view class='detail around'>
+          <view class='addrLong'>
+            <image class='detailImg' src='../../images/ad1.png' mode='widthFix' lazy-load='true'></image>
+            <view class='name address'>{{item.address}}</view>
+          </view>
+          <view class='long'>{{item.nearby}}km</view>
+        </view>
+        <view class='detail'>
+          <image class='detailImg' src='../../images/call.png' mode='widthFix' lazy-load='true'></image>
+          <view class='name'>{{item.phone}}</view>
+        </view>
+        <view class='detail'>
+          <view class='ring'>
+            <image class='detailImg' src='../../images/couse.png' mode='widthFix' lazy-load='true'></image>
+            <view class='name'>共有{{item.number}}节课</view>
+          </view>
+          <view class='ring'>
+            <image class='detailImg' src='../../images/time.png' mode='widthFix' lazy-load='true'></image>
+            <view class='name'>单节课时{{item.time}}min</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='disclaimerList'>
+  <view class='disTitle'>免责声明</view>
+  <view class='disContent'>免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明免责声明</view>
+</view>
+<view class='pay'>
+  <button class='payBtn' bindtap='chooseClass'>立即购买</button>
+</view>

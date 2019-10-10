@@ -12,21 +12,17 @@ Page({
     showError: false,
     pagecount: 20,
     page: 1,
-    year: '',
-    month: '',
+    year: '全部',
+    month: '全部',
     array: [],
     statusdes: '',
     List: [],
   },
 
-  initPicker: function() {
+  initPicker: function () {
     var date = new Date();
     let arr = [],
       arr1 = [];
-    this.setData({
-      year: '全部', //date.getFullYear(),
-      month: '全部' //date.getMonth() + 1
-    })
 
     var year = date.getFullYear();
     arr.push('全部');

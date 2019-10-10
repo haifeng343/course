@@ -17,7 +17,7 @@ Page({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
       Id: options.Id || '',
-      type: options.type,
+      type: options.type || '',
     });
 
     if (options.recommand) {

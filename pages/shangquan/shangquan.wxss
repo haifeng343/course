@@ -100,7 +100,6 @@ page {
 
 swiper {
   height: 100%;
-  padding-top: 25rpx;
   box-sizing: border-box;
 }
 

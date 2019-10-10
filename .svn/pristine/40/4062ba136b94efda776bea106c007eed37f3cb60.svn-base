@@ -1,0 +1,47 @@
+<!-- pages/scrollnav/scrollnav.wxml -->
+<!--导航滚动  -->
+<!-- <view>
+  <view>
+    <scroll-view class="tui-city-scroll" scroll-x="true" scroll-into-view="NAV{{status}}" scroll-with-animation="true">
+      <text bindtap="getStatus" id="NAV{{index}}" class="tui-nav-li {{index === status ? 'tui-nav-active' : ''}}" data-index="{{index}}" wx:for="{{navList}}" wx:key="">{{item}}</text>
+    </scroll-view>
+  </view>
+</view> -->
+<!--列表滚动区  -->
+<!-- <view hidden='{{!show}}'>
+  <view>
+    <view>
+      <view>
+        <view>
+          <view class="tui-fixed-y">
+
+            <view class='titles'>选择课程-全选</view>
+            <scroll-view class="tui-city-scroll-y" scroll-y="true" scroll-into-view="NAV{{status}}">
+              <checkbox-group>
+                <view>
+                  <view wx:for="{{navList}}" wx:key="">
+                    <view id="NAV{{index}}" class="tui-list-head">{{item}}</view>
+                    <view class="tui-list-li">{{item}} 列表 {{index}}</view>
+                  </view>
+                </view>
+              </checkbox-group>
+            </scroll-view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view> -->
+<!-- <movable-area style="height:1220rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2' y="{{statusBarHeight+obj.CustomerServiceInfo.PositionHight}}">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
+</movable-area> -->
+
+<form bindsubmit="formSubmit" report-submit="true">
+  <button formType="submit" class='btnd'>
+  </button>
+</form>

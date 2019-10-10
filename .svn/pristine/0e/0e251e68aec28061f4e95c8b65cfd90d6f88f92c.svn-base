@@ -1,0 +1,13 @@
+<scroll-view scroll-y="true" class="List">
+  <view class='item'>
+    <view class='title start'>
+      <image src='../../images/logo.png' mode='aspectFill' class='logo'></image>
+      <view class='storeName'>亲学宝</view>
+    </view>
+    <view class='content'>
+      <view class='quan'>
+      
+      </view>
+    </view>
+  </view>
+</scroll-view>

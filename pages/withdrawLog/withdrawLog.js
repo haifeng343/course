@@ -13,27 +13,24 @@ Page({
     showError: false,
     pagecount: 20,
     page: 1,
-    year: '',
-    month: '',
+    year: '全部',
+    month: '全部',
     array: [],
     statusdes: '',
     List: [],
   },
   
-  initPicker: function() {
+  initPicker: function () {
     var date = new Date();
-    let arr = [], arr1 = [];
-    this.setData({
-      year: '全部',     //date.getFullYear(),
-      month: '全部'     //date.getMonth() + 1
-    })
+    let arr = [],
+      arr1 = [];
 
     var year = date.getFullYear();
     arr.push('全部');
     for (var i = year; i > 1970; i--) {
       arr.push(i)
     }
-    
+
     arr1 = ['全部', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
     this.setData({
       array: [arr, arr1],
