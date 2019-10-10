@@ -1,4 +1,6 @@
 page{
+  width: 100%;
+  height: auto;
   background-color: #fff;
   box-sizing: border-box;
   padding: 0 5%;
