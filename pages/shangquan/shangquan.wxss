@@ -98,29 +98,6 @@ page {
   background-color: #fff;
 }
 
-swiper {
-  height: 100%;
-  box-sizing: border-box;
-}
-
-swiper-item {
-  text-align: center;
-}
-
-.img1 {
-  width: 96%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 15rpx;
-}
-
-.box {
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  box-sizing: border-box;
-}
-
 .dot {
   position: absolute;
   bottom: 8rpx;
@@ -202,7 +179,12 @@ swiper-item {
   flex-direction: row;
   justify-content: center;
 }
-
+.courseItem{
+  border-bottom: 1rpx solid #f4f4f4;
+}
+.courseItem:last-child{
+  border: none;
+}
 .check {
   font-size: 28rpx;
   height: 48rpx;

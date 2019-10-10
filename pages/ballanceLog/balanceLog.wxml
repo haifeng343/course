@@ -7,11 +7,7 @@
   </movable-view>
 <view class='logTop between'>
   <view class='start'>
-<<<<<<< HEAD
     <picker mode="multiSelector" value="{{date2}}" range='{{array}}' fields="month" bindchange="bindDateChange" bindtap='initPicker'>
-=======
-    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' fields="month" bindchange="bindDateChange" bindtap="initPicker">
->>>>>>> 3ef02be11e1ab15574f661a4e757be96fb1898b2
       <view class="picker">
         {{date?date:now}}
       </view>

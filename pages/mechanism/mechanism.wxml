@@ -24,7 +24,7 @@
     </view>
     <view class='content'>
       <view class='title'>{{Info.StoreName}}</view>
-      <view class='contentText'>{{Info.StoreDes==null?'暂无机构简介':Info.StoreDes}}</view>
+      <rich-text class='contentText' nodes="{{Info.StoreDes==null?'暂无机构简介':Info.StoreDes}}"></rich-text>
       <view class='startd'>
         <view class='centers'>
           <image src='../../images/ad1.png' mode='aspectFill' class='icon'></image>
@@ -80,6 +80,7 @@
         </checkbox-group>
       </view>
     </view>
+
 
     <!-- 额外信息 -->
     <view class='propList' wx:if="{{Info.OtherList.length>0}}">

@@ -6,22 +6,26 @@
   background-color: #fff;
 }
 
-swiper {
-  height: 100%;
-  padding-top: 25rpx;
-  box-sizing: border-box;
-}
-
-swiper-item {
-  text-align: center;
-}
-
 .centers {
   display: flex;
   height: 40rpx;
   align-items: center;
 }
+.propList{
+  width: 100%;
+  height: auto;
+}
 
+.prompTitle {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.promptText {
+  font-size: 24rpx;
+  line-height: 36rpx;
+  margin-top: 10rpx;
+}
 .none {
   display: none;
 }
@@ -189,21 +193,6 @@ swiper-item {
   font-size: 26rpx;
   word-break: keep-all;
 }
-
-.img1 {
-  width: 96%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 15rpx;
-}
-
-.box {
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  box-sizing: border-box;
-}
-
 .dot {
   position: absolute;
   bottom: 8rpx;

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "选择体验课",
+  "navigationBarTitleText": "机构",
   "usingComponents": {
     "pop": "../../components/pop/pop"
   }

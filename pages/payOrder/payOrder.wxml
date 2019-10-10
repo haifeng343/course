@@ -95,17 +95,7 @@
   </view>
   <view class='pay between' style='overflow-x:hidden' wx:if="{{type==2}}">
     <view class='kl'>
-      <view class=''>合计{{Info.ItemCount}}门课程
-        <span wx:if="{{Info.PrizeAmount>0}}">，可获奖金
-          <span class="red">￥{{PrizeAmount}}</span>
-        </span>
-        <span wx:if="{{Info.VoucherCount>0}}">
-          <span>
-            <span wx:if="{{Info.PrizeAmount>0}}">，</span>
-            <span wx:else>，可获</span>
-          </span>报名代金券
-          <span class="red">{{Info.VoucherCount}}</span>张</span>
-      </view>
+      <view class=''>合计{{Info.ItemCount}}门课程<span wx:if="{{Info.PrizeAmount>0}}">，可获奖金<span class="red">￥{{PrizeAmount}}</span></span><span wx:if="{{Info.VoucherCount>0}}"><span><span wx:if="{{Info.PrizeAmount>0}}">，</span><span wx:else>，可获</span></span>报名代金券<span class="red">{{Info.VoucherCount}}</span>张</span></view>
     </view>
     <view class='flex-end'>
       <form bindsubmit="paySure" report-submit="true">
@@ -143,16 +133,8 @@
     <view class='modal-content'>
       <view class='modal-title'>预约须知</view>
       <scroll-view scroll-y="true" catchtouchmove='true' class='main-content'>
-        <view class='showTxt'>
-          <span>亲，本次预约须支付押金{{PayAmount}}元，体验后实时全额退回</span>
-          <span wx-if="{{PrizeAmount>0 || Info.VoucherCount>0}}">，还可获
-            <span wx:if="{{PrizeAmount>0}}">奖金
-              <span class="red">{{PrizeAmount}}</span>元(提现无门槛)</span>
-            <span wx-if="{{PrizeAmount>0 && Info.VoucherCount>0}}">，</span>
-            <span wx:if="{{Info.VoucherCount>0}}">报名代金券
-              <span class="red">{{Info.VoucherCount}}</span>张</span>
-          </span>
-          <span>。</span>
+        <view class='showTxt'><span>亲，本次预约须支付押金{{PayAmount}}元，体验后实时全额退回</span>
+          <span wx-if="{{PrizeAmount>0 || Info.VoucherCount>0}}">，还可获<span wx:if="{{PrizeAmount>0}}">奖金<span class="red">{{PrizeAmount}}</span>元(提现无门槛)</span><span wx-if="{{PrizeAmount>0 && Info.VoucherCount>0}}">，</span><span wx:if="{{Info.VoucherCount>0}}">报名代金券<span class="red">{{Info.VoucherCount}}</span>张</span></span><span>。</span>
         </view>
         <view class='moneyRule' bindtap='navtoRule'>《押金退还及奖励规则》</view>
       </scroll-view>
