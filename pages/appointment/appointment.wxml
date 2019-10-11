@@ -5,7 +5,7 @@
   </radio-group>
 
   <view class="calendars" wx:if="{{check==2}}">
-    <calendar bindnextMonth="next" bindprevMonth="prev" binddateChange="dateChange" binddayClick="dayClick" weeks-type="cn" active-type="rounded" pitch_on="circle" days-color="{{dayStyle}}" board-style="board" atefont-style="atefont" />
+    <calendar bindnextMonth="next" startDate="2018-01" endDate="2020-12" bindprevMonth="prev" binddateChange="dateChange" binddayClick="dayClick" weeks-type="cn" active-type="rounded" pitch_on="circle" days-color="{{dayStyle}}" board-style="board" atefont-style="atefont" />
   </view>
 
   <radio-group class="appointTop bort pddingt20" bindchange="classChange" wx:if="{{check==2}}">
