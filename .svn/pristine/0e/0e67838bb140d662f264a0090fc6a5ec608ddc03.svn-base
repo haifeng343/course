@@ -1,0 +1,42 @@
+<movable-area style="height:{{windowHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
+<view class='logTop between'>
+  <view class='start'>
+    <picker mode="multiSelector" value="{{date2}}"  range='{{array}}' fields="month" bindchange="bindDateChange" bindtap='initPicker'>
+        <view class="picker">
+          {{date?date:now}}
+        </view>
+      </picker>
+    <image src='../../images/select.png' class='select' mode='aspectFill' lazy-load='true'></image>
+  </view>
+  <view class='math'>
+    <!-- <view>支出:100</view>
+    <view>收入:1200</view> -->
+  </view>
+</view>
+<view class='log'>
+  <view class='nohasLog' wx:if="{{List.length<=0}}">
+    <view class='no_record_frame'>
+      <image class='noImg' src='../../images/zanwu.png' mode='aspectFill' lazy-load='true'></image>
+      <view>暂无积分变更记录</view>
+    </view>
+  </view>
+  <view class='logList' wx:else>
+    <view class='logItem column' wx:for="{{List}}" wx:key bindtap='withdrawDetail'>
+      <view class='between'>
+        <view class='share'>{{item.Description}}</view>
+        <view class='fraction'>{{item.ChangeAmount}}</view>
+      </view>
+      <view class='between'>
+        <view class='time'>{{item.CreateTime}}</view>
+        <view class='status'>{{item.ChangeAmountBefore}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+</movable-area>

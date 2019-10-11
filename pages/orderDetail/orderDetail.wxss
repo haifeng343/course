@@ -11,6 +11,9 @@
 .ml40{
   margin-left: 40rpx;
 }
+.reservation_container{
+  height: 480rpx!important;
+}
 .zan-dialog__container {
   position: fixed;
   top: 0;
@@ -18,7 +21,24 @@
   bottom: 0;
   right: 0;
   margin: auto;
-  height: 370rpx;
+  height: 380rpx;
+}
+.center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn{
+  width: 175rpx;
+  font-size: 28rpx;
+  height: 55rpx;
+  color: #27DAD7;
+  line-height: 55rpx;
+  border: 1rpx solid #27DAD7;
+  padding: 0rpx 30rpx;
+  border-radius: 40rpx;
+  margin: 15rpx 0;
+  margin-right: 0;
 }
 .kl{
   border-bottom: 1rpx solid #F4F4F4;

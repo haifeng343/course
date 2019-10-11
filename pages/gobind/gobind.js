@@ -6,6 +6,7 @@ Page({
     windowHeight:'',
     windowWidth:'',
     code: "",
+    type:"",
   },
 
   init: function() {
@@ -23,6 +24,7 @@ Page({
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
+      type : options.type || '',
     });
     
     if (options.recommand) {

@@ -1,0 +1,26 @@
+.appointContainer {
+  width: 95%;
+  border-radius: 15rpx;
+  height: auto;
+  box-sizing: border-box;
+  padding: 20rpx 5%;
+  background-color: #fff;
+  margin: 20rpx auto;
+}
+
+.appointTop {
+  display: flex;
+  flex-direction: column;
+  line-height: 50rpx;
+  font-size: 28rpx;
+}
+
+.calendars {
+  margin: 20rpx 0;
+}
+.bort{
+  border-top: 1rpx solid #f4f4f4;
+}
+.pddingt20{
+  padding-top: 20rpx;
+}

@@ -45,10 +45,6 @@ Page({
 
   getUserInfo: function(e) {
     var that = this;
-    let formId = "";
-    if (e.detail.formId != "the formId is a mock one") {
-      formId = e.detail.formId;
-    }
 
     // 查看是否授权
     wx.login({
@@ -68,7 +64,7 @@ Page({
                     Signature: e.signature
                   }
 
-                  netUtil.postRequest(url, params, that.onSuccess, null, true, true, true, formId); //调用get方法情就是户数
+                  netUtil.postRequest(url, params, that.onSuccess, null, true, true, true, ''); //调用get方法情就是户数
                 }
               });
             }
@@ -87,7 +83,7 @@ Page({
 
     if (!res.Data.Mobile) {
       wx.redirectTo({
-        url: '/pages/gobind/gobind',
+        url: '/pages/gobind/gobind?type=1',
       })
     } else {
       wx.navigateBack({

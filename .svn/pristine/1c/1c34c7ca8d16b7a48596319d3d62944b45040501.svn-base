@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "机构",
+  "usingComponents": {
+    "pop": "../../components/pop/pop"
+  }
+}

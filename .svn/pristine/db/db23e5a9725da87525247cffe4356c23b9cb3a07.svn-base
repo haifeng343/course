@@ -5,12 +5,13 @@
   <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
-<view class="absolute">
-  <view class="dialog">
-    <image src="../../images/gobind.png" class="binding" lazy-load='true' mode='aspectFill'></image>
-    <p wx:if="{{type==1}}">请绑定您的手机号，完成登录</p>
-    <p wx:else>预约课程需绑定手机号</p>
-    <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">知道啦~</button>
+  <view class="container">
+    <view class="content">
+      <view class='welcome'>Welcome!</view>
+
+      <image src="../../images/login_img.png" class="login_img" mode='widthFix' lazy-load='true' alt=""></image>
+      <button class="loginBtn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">登录</button>
+    </view>
   </view>
-</view>
+  <pop id="pop"></pop>
 </movable-area>

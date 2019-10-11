@@ -12,30 +12,11 @@ page::-webkit-scrollbar {
 picker {
   z-index: 9999;
 }
-.ft24{
-  font-size: 24rpx;
-}
 
 .know {
   color: #3cd5cf !important;
 }
-.lastItem{
-  width: 100%;
-  height: 100rpx;
-  background-color: transparent; 
-}
-.shenqing{
-  width: 100%;
-  height: 100rpx;
-  line-height: 100rpx;
-  background-color: #29D9D6;
-  color: #fff;
-  font-size: 32rpx;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  z-index: 1;
-}
+
 .tagList {
   line-height: 40rpx !important;
 }
@@ -403,7 +384,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 
 .pay {
   position: fixed;
-  z-index: 2;
+  z-index: 100;
   bottom: 0;
   width: 100%;
   height: 120rpx;
@@ -447,7 +428,7 @@ radio .wx-radio-input.wx-radio-input-checked::before {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 3;
+  z-index: 2;
   background: rgba(0, 0, 0, 0.4);
   display: none;
 }
@@ -498,15 +479,14 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 }
 
 .zan-title {
-  height: 80rpx;
-  line-height: 80rpx;
+  line-height: 100rpx;
   font-size: 32rpx;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .zan-content {
   font-size: 28rpx;
-  line-height: 50rpx;
+  line-height: 40rpx;
 }
 
 .align-left {

@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 58,
+			"current": 60,
 			"list": [
 				{
 					"id": -1,
@@ -115,10 +115,10 @@
 					"scene": null
 				},
 				{
-					"id": 10,
+					"id": 9,
 					"name": "orderDetail",
 					"pathName": "pages/orderDetail/orderDetail",
-					"query": "Id=23&status=1&kd=3",
+					"query": "Id=596&status=1&kd=3&formId=",
 					"scene": null
 				},
 				{
@@ -462,6 +462,20 @@
 					"name": "teacherDetail",
 					"pathName": "pages/teacherDetail/teacherDetail",
 					"query": "id=22",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "reservation",
+					"pathName": "pages/reservation/reservation",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "appointment",
+					"pathName": "pages/appointment/appointment",
+					"query": "",
 					"scene": null
 				}
 			]

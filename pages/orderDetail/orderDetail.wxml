@@ -73,39 +73,49 @@
     </view>
 
     <view class='Top'>
-      <view class='kl' style='display:flex; justify-content:flex-start;' wx:for="{{ItemList}}" wx:key>
-        <image class='topImg' src='{{item.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
-        <view class='Right'>
-          <view class='activity'>{{item.ItemName}}</view>
-          <image wx:if="{{item.UseStatus==2}}" class="use" src='../../images/used.png' mode='aspectFill' lazy-load='true'></image>
-          <view class='courseRow'>
-            <view class='css_img_frame'>
-              <image class='rowImg' src='../../images/house.png' mode='aspectFill' lazy-load='true'></image>
+      <view class='kl' wx:for="{{ItemList}}" wx:key>
+        <view style='display:flex; justify-content:flex-start;'>
+          <image class='topImg' src='{{item.ItemCoverImg}}' mode='aspectFill' lazy-load='true'></image>
+          <view class='Right'>
+            <view class='activity'>{{item.ItemName}}</view>
+            <image wx:if="{{item.UseStatus==2}}" class="use" src='../../images/used.png' mode='aspectFill' lazy-load='true'></image>
+            <view class='courseRow'>
+              <view class='css_img_frame'>
+                <image class='rowImg' src='../../images/house.png' mode='aspectFill' lazy-load='true'></image>
+              </view>
+              <view class='css_project_text'>{{item.SellerName}}</view>
             </view>
-            <view class='css_project_text'>{{item.SellerName}}</view>
+            <view class='courseRow'>
+              <view class='css_img_frame'>
+                <image class='rowImg' src='../../images/ad1.png' mode='aspectFill' lazy-load='true'></image>
+              </view>
+              <view class='css_project_text'>{{item.StoreAddress}}</view>
+            </view>
+            <view class='courseRow' wx:if="{{item.Mobile}}">
+              <view class='css_img_frame'>
+                <image class='rowImg' src='../../images/call.png' mode='aspectFill' lazy-load='true'></image>
+              </view>
+              <view class='css_project_text'>{{item.Mobile}}</view>
+            </view>
+            <view class='courseRow'>
+              <view class='css_img_frame'>
+                <image class='rowImg' src='../../images/couse.png' mode='aspectFill' lazy-load='true'></image>
+              </view>
+              <view class='css_project_text' style='margin-right:40rpx'>课程数量{{item.CoursesNumber}}节</view>
+              <view class='css_img_frame'>
+                <image class='rowImg' src='../../images/time.png' mode='aspectFill' lazy-load='true'></image>
+              </view>
+              <view class='css_project_text'>单节课时{{item.SingleTime}}min</view>
+            </view>
           </view>
-          <view class='courseRow'>
-            <view class='css_img_frame'>
-              <image class='rowImg' src='../../images/ad1.png' mode='aspectFill' lazy-load='true'></image>
-            </view>
-            <view class='css_project_text'>{{item.StoreAddress}}</view>
-          </view>
-          <view class='courseRow' wx:if="{{item.Mobile}}">
-            <view class='css_img_frame'>
-              <image class='rowImg' src='../../images/call.png' mode='aspectFill' lazy-load='true'></image>
-            </view>
-            <view class='css_project_text'>{{item.Mobile}}</view>
-          </view>
-          <view class='courseRow'>
-            <view class='css_img_frame'>
-              <image class='rowImg' src='../../images/couse.png' mode='aspectFill' lazy-load='true'></image>
-            </view>
-            <view class='css_project_text' style='margin-right:40rpx'>课程数量{{item.CoursesNumber}}节</view>
-            <view class='css_img_frame'>
-              <image class='rowImg' src='../../images/time.png' mode='aspectFill' lazy-load='true'></image>
-            </view>
-            <view class='css_project_text'>单节课时{{item.SingleTime}}min</view>
-          </view>
+        </view>
+        <view class='between'>
+        <view class='ft24 bb'>已预约课程，请注意上课时间</view>
+        <!-- <view class='ft24 bb start' bindtap='reservationDetail'>预约被取消，点击查看详情<image src='../../images/go.png' class='go center' mode='aspectFill'></image></view> -->
+          <button class='btn yuyue' bindtap='navtoReser'>预约</button>
+          <!-- <button class='btn yuyue'>取消预约</button> -->
+          <!-- <button class='btn yuyue' bindtap='reservationDialog'>预约详情</button> -->
+          <!-- <button class='btn yuyue'>重新预约</button> -->
         </view>
       </view>
       <view class='between bt1' wx:if="{{detail.UseScore!=0}}">
@@ -117,9 +127,24 @@
         <view class='money'>￥{{(detail.PayAmount-detail.ScoreAmount)*1.0/100}}</view>
       </view>
     </view>
-    
+
     <view style='width:100%;height:140rpx;background-color:transparent'></view>
   </scroll-view>
+
+  <!--预约详情弹出框-->
+  <view class="zan-dialog {{ reservationShow ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
+    <view class="zan-dialog__mask" bindtap="toggleDialog" />
+    <view class="zan-dialog__container reservation_container">
+      <view class='zan-title'>预约详情</view>
+      <view class='zan-content align-left le'>课程名称: 数学课</view>
+      <view class='le zan-til'>机构名称: 教育机构</view>
+      <view class='zan-content align-left le'>机构地址: 杭州西湖</view>
+      <view class='zan-content align-left le' wx:if="{{detail.RefundArrivalTime}}">预约手机号: 155454545</view>
+      <view class='zan-content align-left le'>预约时间: 14:00数学课 (2019-10-12)</view>
+      <view class='zan-content align-left le'>孩子信息: <span>丽丽 (6岁)</span></view>
+      <view class='know' bindtap='reservationClosed'>知道了</view>
+    </view>
+  </view>
 
   <!--券码弹出框-->
   <view class='dialog' hidden='{{showCode}}' bindtap='dialogShow' catchtouchmove="ture">
@@ -134,10 +159,10 @@
     <view class="zan-dialog__mask" bindtap="toggleDialog" />
     <view class="zan-dialog__container">
       <view class='zan-title'>退款成功</view>
-      <view class='zan-content align-left le'>交易编号：{{detail.OrderSn}}</view>
-      <view class='le zan-til'>退款金额：{{PayAmount}}元</view>
-      <view class='zan-content align-left le'>退款时间：{{detail.RefundTime}}</view>
-      <view class='zan-content align-left le' wx:if="{{detail.RefundArrivalTime}}">到账时间：{{detail.RefundArrivalTime}}</view>
+      <view class='zan-content align-left le'>交易编号: {{detail.OrderSn}}</view>
+      <view class='le zan-til'>退款金额: {{PayAmount}}元</view>
+      <view class='zan-content align-left le'>退款时间: {{detail.RefundTime}}</view>
+      <view class='zan-content align-left le' wx:if="{{detail.RefundArrivalTime}}">到账时间: {{detail.RefundArrivalTime}}</view>
       <view class='know' bindtap='closeded'>知道了</view>
     </view>
   </view>

@@ -9,13 +9,14 @@ Page({
     showCode: true, //条形码弹窗
     showDialog: true, //退款失败 查看原因弹窗
     showSuccess: false, //退款详情 成功弹窗
-    Id: '',
-    Status: '',
-    kd: '',
-    ItemList: [],
-    detail: {},
-    PayAmount: '',
-    RefundFailReason: '',
+    reservationShow:false,//预约详情弹出框
+    Id: '',//订单Id
+    Status: '',//状态
+    kd: '',//页面跳转
+    ItemList: [],//项目列表
+    detail: {},//项目详情
+    PayAmount: '',//支付金额
+    RefundFailReason: '',//退款失败说明
     formId: "",
   },
 
@@ -146,7 +147,38 @@ Page({
       showSuccess: true
     })
   },
+  //预约被取消详情
+  reservationDetail:function(){
+    wx.showModal({
+      title: '预约取消详情',
+      content: '此时间无课程'+'\r\n'+'是的',
+      showCancel:false,
+      confirmText: "知道了",
+      confirmColor:"#000",
+      success:function(res) {
+        if(res.confirm){
 
+        }
+      }
+    })
+  },
+  //预约详情弹出框
+  reservationDialog:function() {
+    this.setData({
+      reservationShow:true
+    })
+  },
+  reservationClosed:function(){
+    this.setData({
+      reservationShow: false
+    })
+  },
+  //预约课程
+  navtoReser:function() {
+    wx.navigateTo({
+      url: '/pages/reservation/reservation',
+    })
+  },
   onPullDownRefresh: function() {
     this.getData();
     wx.stopPullDownRefresh();
