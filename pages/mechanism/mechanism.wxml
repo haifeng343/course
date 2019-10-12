@@ -1,4 +1,4 @@
-<scroll-view scroll-y="true" scroll-into-view="NUV{{relIdGoto}}" style='height:100%'>
+<scroll-view scroll-y="true" scroll-into-view="NUV{{relIdGoto}}" catchtouchmove='true' style='height:100%'>
   <movable-area style="height:{{windowHeight}}rpx;width:100%">
     <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
       <button open-type='contact' class='contact contact_left'>客服</button>
@@ -45,21 +45,6 @@
       </view>
     </view>
 
-    <!-- 师资力量 -->
-    <view class='teacherList' wx:if="{{Info.TeacherCount>0}}">
-      <view class='tearcherTitle between'>
-        <view class='teaNumber'>师资力量 ({{Info.TeacherCount}})</view>
-        <!-- <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image> -->
-      </view>
-      <view class='teaList' style="width: 100%">
-        <view class='teachers' wx:for="{{Info.TeacherList}}" wx:key bindtap='tearcherClick' data-id="{{item.Id}}">
-          <image class='teaImg' src='{{item.HeadUrl}}' mode='aspectFill' lazy-load='true'></image>
-          <view class='teaName ft24'>{{item.Name}}</view>
-          <!-- <view class='profession'>{{item.Honor}}</view>
-      <view class='profession'>{{item.TeachingAge}}</view> -->
-        </view>
-      </view>
-    </view>
 
     <view class='content mt20' wx:if="{{Info.ItemCount>0}}">
       <view class='title'>课程（{{Info.ItemCount}}）</view>
@@ -81,6 +66,21 @@
       </view>
     </view>
 
+    <!-- 师资力量 -->
+    <view class='teacherList' wx:if="{{Info.TeacherCount>0}}">
+      <view class='tearcherTitle between'>
+        <view class='teaNumber'>师资力量 ({{Info.TeacherCount}})</view>
+        <!-- <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image> -->
+      </view>
+      <view class='teaList' style="width: 100%">
+        <view class='teachers' wx:for="{{Info.TeacherList}}" wx:key bindtap='tearcherClick' data-id="{{item.Id}}">
+          <image class='teaImg' src='{{item.HeadUrl}}' mode='aspectFill' lazy-load='true'></image>
+          <view class='teaName ft24'>{{item.Name}}</view>
+          <!-- <view class='profession'>{{item.Honor}}</view>
+      <view class='profession'>{{item.TeachingAge}}</view> -->
+        </view>
+      </view>
+    </view>
 
     <!-- 额外信息 -->
     <view class='propList' wx:if="{{Info.OtherList.length>0}}">

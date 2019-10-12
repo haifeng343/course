@@ -171,7 +171,9 @@ swiper-item image {
 
 .ategoryText {
   font-size: 24rpx;
-  line-height: 50rpx;
+  line-height: 25rpx;
+  position: relative;
+  top: -10rpx;
 }
 
 .categoryImg {

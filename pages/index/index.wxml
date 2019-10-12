@@ -5,8 +5,6 @@
   <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2' y="{{obj.CustomerServiceInfo.PositionHight}}" style='top:{{statusBarHeight+90}}rpx;'>
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
-  <view>
-
     <!-- 自定义的导航栏 -->
     <view class="custom flex_center" style="padding-top:{{statusBarHeight}}rpx">
       <view class='navTop' bindtap='address'>
@@ -120,5 +118,4 @@
   </view>
 </view> -->
     <pop id='pop'></pop>
-  </view>
 </movable-area>

@@ -52,14 +52,4 @@
       <view>暂无现金券奖励记录</view>
     </view>
   </view>
-
-  <!--提现失败提示弹出框-->
-  <view class="zan-dialog {{ showError ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
-    <view class="zan-dialog__mask" bindtap="toggleDialog" />
-    <view class="zan-dialog__container">
-      <view class='zan-title'>失败原因</view>
-      <view class='zan-content'>{{statusdes}}</view>
-      <view class='know' bindtap='closed'>知道了</view>
-    </view>
-  </view>
 </movable-area>

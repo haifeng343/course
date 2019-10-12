@@ -1,0 +1,28 @@
+<view class='appointContainer'>
+  <radio-group class="appointTop" bindchange="checkChange">
+    <radio value='1' checked='{{check==1}}'>与老师协商确定</radio>
+    <radio value='2' checked='{{check==2}}'>选择体验时间</radio>
+  </radio-group>
+
+  <view class="calendars" wx:if="{{check==2}}">
+    <calendar bindnextMonth="next" startDate="2018-01" endDate="2020-12" bindprevMonth="prev" binddateChange="dateChange" binddayClick="dayClick" weeks-type="cn" active-type="rounded" pitch_on="circle" days-color="{{dayStyle}}" board-style="board" atefont-style="atefont" />
+  </view>
+
+  <radio-group class="appointTop bort pddingt20" bindchange="classChange" wx:if="{{check==2}}">
+    <view class='between'>
+      <radio value='1' checked='checked'>
+        <view>14:00数学课</view>
+      </radio>
+      <view class='bb'>剩余名额: 22</view>
+    </view>
+    <view class='between'>
+      <radio value='1'>
+        <view>14:00数学课</view>
+      </radio>
+      <view class='bb'>剩余名额: 22</view>
+    </view>
+  </radio-group>
+</view>
+
+<view class='lastItem' wx:if="{{check==2}}"></view>
+<view class='shenqing' bindtap='bindSure'>确定</view>
