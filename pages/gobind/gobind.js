@@ -43,6 +43,7 @@ Page({
   },
 
   getPhoneNumber: function(e) {
+    let that = this;
     if (e.detail.errMsg == "getPhoneNumber:fail user deny") return;
 
     //用户授权获取手机号码

@@ -6,6 +6,6 @@
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
   <image class='logo' src='../../images/logo.png' mode='widthFix'></image>
-  <view class='manaText'>版本号v1.9.2</view>
+  <view class='manaText'>版本号v1.9.6</view>
   <rich-text nodes="{{html}}"></rich-text>
 </movable-area>
