@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 60,
+			"current": 61,
 			"list": [
 				{
 					"id": -1,
@@ -476,6 +476,13 @@
 					"name": "appointment",
 					"pathName": "pages/appointment/appointment",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": 61,
+					"name": "maps",
+					"pathName": "pages/maps/maps",
+					"query": "Longitude=120.17199&Latitude=30.249587&name=西湖银泰城商圈",
 					"scene": null
 				}
 			]

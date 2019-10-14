@@ -60,7 +60,8 @@
     "pages/invalid/invalid",
     "pages/teacherDetail/teacherDetail",
     "pages/reservation/reservation",
-    "pages/appointment/appointment"
+    "pages/appointment/appointment",
+    "pages/maps/maps"
   ],
   "window": {
     "backgroundTextStyle": "dark",

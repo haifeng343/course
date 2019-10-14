@@ -101,7 +101,7 @@
               <view class='css_img_frame'>
                 <image class='rowImg' src='../../images/couse.png' mode='aspectFill' lazy-load='true'></image>
               </view>
-              <view class='css_project_text' style='margin-right:40rpx'>课程数量{{item.CoursesNumber}}节</view>
+              <view class='css_project_text'>课程数量{{item.CoursesNumber}}节</view>
               <view class='css_img_frame'>
                 <image class='rowImg' src='../../images/time.png' mode='aspectFill' lazy-load='true'></image>
               </view>
@@ -109,7 +109,7 @@
             </view>
           </view>
         </view>
-        <view class='between'>
+        <view class='between mt20'>
         <view class='ft24 bb'>已预约课程，请注意上课时间</view>
         <!-- <view class='ft24 bb start' bindtap='reservationDetail'>预约被取消，点击查看详情<image src='../../images/go.png' class='go center' mode='aspectFill'></image></view> -->
           <button class='btn yuyue' bindtap='navtoReser'>预约</button>

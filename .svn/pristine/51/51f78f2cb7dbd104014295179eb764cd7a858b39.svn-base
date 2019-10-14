@@ -3,10 +3,10 @@ var shareApi = require("../../utils/share.js");
 const app = getApp();
 Page({
   data: {
-    windowHeight: '',
-    windowWidth: '',
+    windowHeight:'',
+    windowWidth:'',
     code: "",
-    type: "",
+    type:"",
   },
 
   init: function() {
@@ -24,9 +24,9 @@ Page({
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
-      type: options.type || '',
+      type : options.type || '',
     });
-
+    
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
@@ -44,21 +44,20 @@ Page({
 
   getPhoneNumber: function(e) {
     let that = this;
-    if ((e.detail.errMsg).toLowerCase() == "getphonenumber:ok" && e.detail.iv != null && e.detail.iv.length > 0) {
+    if (e.detail.errMsg == "getPhoneNumber:fail user deny") return;
 
-      //用户授权获取手机号码
-      var url = 'user/wechatdecrypt';
-      var params = {
-        encryptedData: e.detail.encryptedData,
-        iv: e.detail.iv,
-        code: that.data.code
-      }
-
-      netUtil.postRequest(url, params, function(res) {
-        wx.redirectTo({
-          url: '/pages/binding/binding?phone=' + res.Data.phoneNumber + '&fromtype=1',
-        })
-      });
+    //用户授权获取手机号码
+    var url = 'user/wechatdecrypt';
+    var params = {
+      encryptedData: e.detail.encryptedData,
+      iv: e.detail.iv,
+      code: that.data.code
     }
+
+    netUtil.postRequest(url, params, function(res) {
+      wx.redirectTo({
+        url: '/pages/binding/binding?phone=' + res.Data.phoneNumber+'&fromtype=1',
+      })
+    });
   }
 })

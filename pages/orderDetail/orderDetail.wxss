@@ -115,6 +115,7 @@
 }
 
 .css_project_text {
+  width: 100%;
   color: #5b5b5b;
   white-space: nowrap;
   overflow: hidden;

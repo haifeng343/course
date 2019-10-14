@@ -1,13 +1,14 @@
 .banner {
   width: 100%;
-  height: 285rpx;
+  height: 305rpx;
   position: relative;
   z-index: 0;
+  box-sizing: border-box;
+  padding-top: 20rpx;
   background-color: #fff;
 }
 swiper {
   height: 100%;
-  padding-top: 25rpx;
   box-sizing: border-box;
 }
 

@@ -5,7 +5,7 @@
   <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
-  <scroll-view scroll-y="true" scroll-into-view="NUV{{storeIdGoto}}" catchtouchmove='true' style='height:100%'>
+  <scroll-view scroll-y="true"  scroll-into-view="NUV{{storeIdGoto}}" catchtouchmove='true' style='height:100%'>
     <view class='banner' wx:if="{{imgUrls.length>0}}">
       <swiper bindanimationfinish="swiperChangeTo" indicatorDots='{{indicatorDots}}' current='{{current}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' circular='{{circular}}' display-multiple-items='1' next-margin='35rpx' previous-margin='35rpx'>
         <block wx:for="{{imgUrls}}" wx:key wx:for-item="a">
@@ -26,7 +26,7 @@
 
     <!--显示头部信息(商圈模式)-->
     <view class='content' wx:if="{{type==2}}">
-      <view class='title'>{{detailCent.TradingAreaName}}</view>
+      <view class='title' bindtap='address'>{{detailCent.TradingAreaName}}</view>
       <view class='contents'>
         <view class='column'>
           <view class='time summary'>{{detailCent.SheetDescription}}</view>

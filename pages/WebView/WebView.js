@@ -12,9 +12,7 @@ Page({
   init: function () {
 
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
+  
   onLoad: function (options) {
     var that = this;
     if (options.recommand) {
@@ -32,7 +30,6 @@ Page({
       htmlSrc: options.path
     });
   },
-
   onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,

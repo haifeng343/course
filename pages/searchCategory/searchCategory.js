@@ -40,9 +40,13 @@ Page({
   },
 
   cheoose:function(e){
+    console.log(e)
     wx.navigateTo({
-      url: '/pages/shangquan/shangquan?storeId=' + e.currentTarget.dataset.storeid + '&Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&relId=' + e.currentTarget.dataset.relid,
+      url: '/pages/courseDetail/courseDetail?storeId=' + e.currentTarget.dataset.storeid + '&sheetId=' + e.currentTarget.dataset.sheetid + '&type=' + e.currentTarget.dataset.type + '&Id=' + e.currentTarget.dataset.relid + '&sourceFrom=1' + '&groupId=' + e.currentTarget.dataset.groupid,
     })
+    // wx.navigateTo({
+    //   url: '/pages/shangquan/shangquan?storeId=' + e.currentTarget.dataset.storeid + '&Id=' + e.currentTarget.dataset.id + '&type=' + e.currentTarget.dataset.type + '&relId=' + e.currentTarget.dataset.relid,
+    // })
   },
 
   clear: function() {
@@ -68,7 +72,6 @@ Page({
   init: function () {
     
   },
-
   getData:function() {
     let that = this;
     var url = 'sheet/search/list';

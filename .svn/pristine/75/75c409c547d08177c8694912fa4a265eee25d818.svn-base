@@ -1,0 +1,87 @@
+.ruleList{
+  width: 95%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+.ruleList:last-child{
+  margin-bottom: 20rpx;
+}
+.mt10{
+  margin-top: 10rpx;
+}
+.item{
+  width: 100%;
+  height: auto;
+  border-radius: 15rpx;
+  background-color: #fff;
+  margin-top: 20rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.name{
+  font-size: 28rpx;
+  font-weight: bold;
+  width: 75%;
+  display: flex;
+  line-height: 40rpx;
+  justify-content: flex-start;
+}
+.status{
+  font-size: 24rpx;
+  line-height: 36rpx;
+  display: flex;
+  justify-content: flex-start;
+}
+.TaskFinishiStatus{
+  font-size: 28rpx;
+}
+.title{
+  width: 100%;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ml40{
+  margin-left: 40rpx;
+}
+.time{
+  font-size: 24rpx;
+  color: #5b5b5b;
+  line-height: 36rpx;
+}
+.ItemList{
+  margin-top: 20rpx;
+  width: 100%;
+  height: auto;
+}
+.grop{
+  opacity: 0.5;
+}
+.ItemTxt{
+  line-height: 40rpx;
+  font-size: 28rpx;
+  color: #5b5b5b;
+}
+.content{
+  width: 95%;
+  height: auto;
+  padding: 0 2.5%;
+  padding-bottom: 20rpx;
+}
+.orderSn{
+  color: #5b5b5b;
+  font-size: 24rpx;
+}
+.mt20{
+  margin-top: 20rpx;
+}
+.cash{
+  width: 34rpx;
+  height: 34rpx;
+  margin-right: 15rpx;
+}
+

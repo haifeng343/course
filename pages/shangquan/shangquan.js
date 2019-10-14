@@ -9,6 +9,7 @@ Page({
     Id: '', //团单Id
     name: '',
     imgUrls: [],
+    detailCent:{},//数据
     autoplay: true, //是否自动播放
     indicatorDots: false, //指示点
     circular: true,
@@ -16,6 +17,8 @@ Page({
     duration: 500, //每个图片滑动速度,
     current: 0, //初始化时第一个显示的图片 下标值（从0）index
     type: '', //1团单 2商圈
+    longitude:'',
+    latitude:'',
   },
   
   onLoad(options) {
@@ -33,6 +36,7 @@ Page({
       Id: options.Id || '',
       name: options.name || '',
       type: options.type || '',
+
     })
 
     that.init();
@@ -50,7 +54,12 @@ Page({
 
     that.getData();
   },
-
+  address: function () {
+    const that = this;
+    wx.navigateTo({
+      url: '/pages/maps/maps?Longitude=' + that.data.detailCent.TradingAreaLongitude + '&Latitude=' + that.data.detailCent.TradingAreaLatitude + '&name=' + that.data.detailCent.TradingAreaName
+    })
+  },
   getData: function() {
     var that = this;
     var url = 'sheet/details';
