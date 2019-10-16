@@ -162,7 +162,13 @@ Page({
     let that = this;
     let index = e.currentTarget.dataset.index;
     let tempArr = that.data.modelList;
-    tempArr[index].check = !tempArr[index].check;
+    if (that.data.navbarActiveIndex == 0){
+      tempArr[0].list[index].check = !tempArr[0].list[index].check
+    }else{
+      tempArr[1].list[index].check = !tempArr[1].list[index].check
+    }
+    console.log(tempArr)
+    // tempArr[index].list.check = !tempArr[index].list.check;
     that.setData({
       modelList: tempArr
     });

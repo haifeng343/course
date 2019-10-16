@@ -26,7 +26,6 @@ Page({
       windowHeight: app.getGreen(0).windowHeight,
       windowWidth: app.getGreen(0).windowWidth,
     });
-
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
@@ -173,11 +172,18 @@ Page({
       reservationShow: false
     })
   },
-  //预约课程
-  navtoReser:function() {
-    wx.navigateTo({
-      url: '/pages/reservation/reservation',
-    })
+  //预约课程 / 重新预约
+  navtoReser:function(e) {
+    let userInfo = wx.getStorageSync('userInfo');
+    if (userInfo.Mobile) {
+      wx.navigateTo({
+        url: '/pages/reservation/reservation?id=' + e.currentTarget.dataset.id,
+      })
+    }else{
+      wx.navigateTo({
+        url: '/pages/gobind/gobind'
+      })
+    }
   },
   onPullDownRefresh: function() {
     this.getData();

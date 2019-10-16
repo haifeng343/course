@@ -26,10 +26,7 @@
 
     <!--显示头部信息(商圈模式)-->
     <view class='content' wx:if="{{type==2}}">
-      <view class='betweens center' bindtap='address'>
-      <view class='title'>{{detailCent.TradingAreaName}}</view>
-      <image src='../../images/maps1.png' mode='aspectFill' class='maps center'></image>
-      </view>
+      <view class='title' bindtap='address'>{{detailCent.TradingAreaName}}</view>
       <view class='contents'>
         <view class='column'>
           <view class='time summary'>{{detailCent.SheetDescription}}</view>

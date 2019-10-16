@@ -22,7 +22,7 @@
 }
 .reserItem label{
   font-size: 28rpx;
-  font-weight: bold;
+  color: #5b5b5b;
 }
 .reserItem .Itemtext{
   font-size: 28rpx;
@@ -71,6 +71,15 @@
 }
 .zan-dialog__container{
   padding: 40rpx 0;
+}
+.beter{
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+.rightTIme{
+  width: 34rpx;
+  height: 34rpx;
 }
 .btn{
   width: 80%;

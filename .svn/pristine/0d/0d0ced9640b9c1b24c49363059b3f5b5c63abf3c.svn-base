@@ -1,0 +1,203 @@
+.banner {
+  width: 100%;
+  height: 305rpx;
+  position: relative;
+  z-index: 0;
+  box-sizing: border-box;
+  padding-top: 20rpx;
+  background-color: #fff;
+}
+swiper {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+swiper-item {
+  text-align: center;
+}
+.typeFooter{
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  line-height: 100rpx;
+  background-color: #29D9D6;
+  color: #fff;
+  position: fixed;
+  justify-content: space-between;
+  bottom: 0;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  padding: 0 5%;
+}
+.joinDetail{
+  width: 34rpx;
+  height: 34rpx;
+}
+.img1 {
+  width: 96%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15rpx;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  font-size: 32rpx;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.dot {
+  position: absolute;
+  bottom: 8rpx;
+  right: 52rpx;
+  background: rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 40rpx;
+  padding: 3rpx 20rpx;
+}
+
+.courseCont {
+  background-color: #fff;
+  padding: 20rpx 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+}
+
+.courseLi {
+  font-size: 28rpx;
+  line-height: 40rpx;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.howMoney {
+  color: #f8000f;
+  font-size: 32rpx;
+}
+
+.somebody {
+  font-size: 24rpx;
+  line-height: 36rpx;
+  margin: 10rpx 0;
+  color: #5b5b5b;
+}
+
+.courseRow {
+  font-size: 24rpx;
+  line-height: 40rpx;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.courseRow:last-child {
+  border: none;
+}
+
+.rowImg {
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 6rpx;
+}
+
+.courseRow .start {
+  width: 100%;
+}
+
+.address {
+  width: 100%;
+}
+
+.ml40{
+  margin-left: 40rpx;
+}
+
+.centers{
+  display: flex;
+  align-items: center;
+  height: 40rpx;
+}
+
+button {
+  padding: 0;
+}
+
+.end {
+  display: flex;
+  justify-content: flex-end;
+}
+.propList{
+  width: 100%;
+  height: auto;
+}
+
+.prompTitle {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.promptText {
+  font-size: 24rpx;
+  line-height: 36rpx;
+  margin-top: 10rpx;
+}
+
+.teacherList {
+  width: 100%;
+  height: auto;
+}
+
+.tearcherTitle {
+  margin-bottom: 20rpx;
+}
+
+.teaNumber {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.go {
+  position: relative;
+}
+
+.teaList {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.teaList::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.teachers {
+  width: 200rpx;
+  margin-right: 25rpx;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.teaImg {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+}
+
+.teaName {
+  font-size: 28rpx;
+}
+
+.profession {
+  color: #656565;
+  font-size: 26rpx;
+  word-break: keep-all;
+}

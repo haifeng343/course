@@ -109,17 +109,13 @@
             </view>
           </view>
         </view>
-        <view class='between mt20' wx:if="{{(detail.UseStatus==1 || detail.UseStatus==2) && item.UseStatus == 1}}">
-          <view class="start">
-            <view class='ft24 bb' wx:if="{{item.AppointmentStatus==2}}">已预约课程，请注意上课时间</view>
-            <view class='ft24 bb start' bindtap='reservationDetail' wx:if="{{item.AppointmentStatus==1 && item.AppointmentStatusDes}}">{{item.AppointmentStatusDes}}
-              <image src='../../images/go.png' class='go center' mode='aspectFill'></image>
-            </view>
-          </view>
-          <button class='btn yuyue' wx:if="{{item.AppointmentStatus==0}}" data-Id="{{item.Id}}" bindtap='navtoReser'>预约</button>
-          <button class='btn yuyue' wx:if="{{item.AppointmentStatus==1}}">取消预约</button>
-          <button class='btn yuyue' wx:if="{{item.AppointmentStatus==2}}" bindtap='reservationDialog'>预约详情</button>
-          <button class='btn yuyue' wx:if="{{item.AppointmentStatus==3}}" data-Id="{{item.Id}}" bindtap='navtoReser'>重新预约</button>
+        <view class='between mt20'>
+        <view class='ft24 bb'>已预约课程，请注意上课时间</view>
+        <!-- <view class='ft24 bb start' bindtap='reservationDetail'>预约被取消，点击查看详情<image src='../../images/go.png' class='go center' mode='aspectFill'></image></view> -->
+          <button class='btn yuyue' bindtap='navtoReser'>预约</button>
+          <!-- <button class='btn yuyue'>取消预约</button> -->
+          <!-- <button class='btn yuyue' bindtap='reservationDialog'>预约详情</button> -->
+          <!-- <button class='btn yuyue'>重新预约</button> -->
         </view>
       </view>
       <view class='between bt1' wx:if="{{detail.UseScore!=0}}">
@@ -145,9 +141,7 @@
       <view class='zan-content align-left le'>机构地址: 杭州西湖</view>
       <view class='zan-content align-left le' wx:if="{{detail.RefundArrivalTime}}">预约手机号: 155454545</view>
       <view class='zan-content align-left le'>预约时间: 14:00数学课 (2019-10-12)</view>
-      <view class='zan-content align-left le'>孩子信息:
-        <span>丽丽 (6岁)</span>
-      </view>
+      <view class='zan-content align-left le'>孩子信息: <span>丽丽 (6岁)</span></view>
       <view class='know' bindtap='reservationClosed'>知道了</view>
     </view>
   </view>

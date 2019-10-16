@@ -86,13 +86,13 @@ Page({
       Phone: that.data.phoneNumber,
       CodeType: 2,
     }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function(res) { 
       that.setData({
         imgCodeShow: true,
         imgCodeUrl:res.Data,
         PicVerifycode:'',
       })
-    }); //调用get方法情就是户数
+    }); 
   },
 
   //发送验证码

@@ -51,15 +51,12 @@ Page({
       var params = {
         encryptedData: e.detail.encryptedData,
         iv: e.detail.iv,
-        code: that.data.code,
-        Type:2
+        code: that.data.code
       }
+
       netUtil.postRequest(url, params, function(res) {
-        let userInfo = wx.getStorageSync('userInfo');
-        userInfo.Mobile = res.Data.phoneNumber;
-        wx.setStorageSync('userInfo', userInfo);
-        wx.navigateBack({
-          delta:1
+        wx.redirectTo({
+          url: '/pages/binding/binding?phone=' + res.Data.phoneNumber + '&fromtype=1',
         })
       });
     }

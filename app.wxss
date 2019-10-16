@@ -15,7 +15,14 @@ picker {
 .ft24{
   font-size: 24rpx;
 }
-
+.maps{
+  width: 34rpx;
+  height: 34rpx;
+}
+.gray1{
+  background-color: #ccc!important;
+  color: #f4f4f4!important;
+}
 .know {
   color: #3cd5cf !important;
 }

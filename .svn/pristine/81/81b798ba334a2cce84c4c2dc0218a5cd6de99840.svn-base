@@ -45,14 +45,6 @@
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 40rpx;
 }
-.betweens{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-.detail_address{
-  width: 90%;
-}
 
 .paybtn {
   background-color: #29d9d6;

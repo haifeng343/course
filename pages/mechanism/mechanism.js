@@ -1,3 +1,4 @@
+var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 
@@ -25,10 +26,10 @@ Page({
     relIdGoto: "", //定位relId
     relId: "", //课程关系Id
     isJump: false, //是否详情页跳转过来
-    over:false,
-    showTearcher:false,//教师弹窗
-    teacherInfo:{},//老师详情
-    top:0,
+    over: false,
+    showTearcher: false, //教师弹窗
+    teacherInfo: {}, //老师详情
+    top: 0,
   },
 
   onShow: function() {
@@ -39,7 +40,7 @@ Page({
       })
 
       this.setData({
-        over:false
+        over: false
       });
     }
   },
@@ -74,15 +75,57 @@ Page({
       current: e.detail.current
     })
   },
+  address: function() {
+    const that = this;
+    that.reverseLocation(that.data.Info.StoreLatitude, that.data.Info.StoreLongitude, function(res) {
+      wx.openLocation({
+        latitude: res.result.ad_info.location.lat,
+        longitude: res.result.ad_info.location.lng,
+        scale: 12,
+        name: that.data.Info.StoreName, //打开后显示的地址名称
+        address: that.data.Info.StoreAddress
+      })
+    })
+  },
+  reverseLocation: function(latitude, longitude, onsuccess, onfail, oncomplete) {
+    var that = this;
+    // 实例化API核心类
+    var geocoder = new QQMapWX({
+      key: 'SLNBZ-QF5H3-WYD3P-YANNA-SOFVV-RMBUN' // 必填
+    });
 
+    // 调用接口
+    geocoder.reverseGeocoder({
+      location: {
+        latitude: latitude,
+        longitude: longitude
+      },
+      coord_type: 3, //baidu经纬度
+      success: function(res) {
+        if (onsuccess) {
+          onsuccess(res);
+        }
+      },
+      fail: function(e) {
+        if (onfail) {
+          onfail(e);
+        }
+      },
+      complete: function() {
+        if (oncomplete) {
+          oncomplete();
+        }
+      }
+    });
+  },
   //点击老师获取详情
-  tearcherClick:function(e){
+  tearcherClick: function(e) {
     wx.navigateTo({
-      url: '/pages/teacherDetail/teacherDetail?id='+e.currentTarget.dataset.id,
+      url: '/pages/teacherDetail/teacherDetail?id=' + e.currentTarget.dataset.id,
     })
   },
 
-  hideTeacher:function(){
+  hideTeacher: function() {
     this.setData({
       showTearcher: false,
     })
@@ -153,7 +196,7 @@ Page({
           item.checked = false;
         }
       });
-      
+
       that.setData({
         Info: tempInfo
       });
@@ -179,7 +222,7 @@ Page({
 
       if (over == 1) {
         that.setData({
-          over:true
+          over: true
         });
         return;
       }

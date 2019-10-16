@@ -1,6 +1,9 @@
+page {
+  height: 100%;
+}
 
 .title {
-  width: 90%;
+  width: 100%;
   height: auto;
   padding: 0 5%;
   box-sizing: border-box;
@@ -11,13 +14,6 @@
 .flex-end .paynone {
   color: #ccc !important;
   border-color: #f4f4f4 !important;
-}
-.betweens{
-  display: flex;
-  justify-content: space-between;
-}
-.maps{
-  margin-top: 10rpx;
 }
 .radioPise{
   height: 36rpx;

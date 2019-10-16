@@ -5,24 +5,19 @@
   </radio-group>
 
   <view class="calendars" wx:if="{{check==2}}">
-    <calendar bindnextMonth="next" startDate="2018-01" endDate="2020-12" bindprevMonth="prev" binddateChange="dateChange" binddayClick="dayClick" weeks-type="cn" active-type="rounded" pitch_on="circle" days-color="{{dayStyle}}" board-style="board" atefont-style="atefont" />
+    <calendar bindnextMonth="next" year="{{year}}" month="{{month}}" day="{{day}}" bindprevMonth="prev" binddateChange="dateChange" binddayClick="dayClick" weeks-type="cn" active-type="rounded" pitch_on="circle" days-color="{{dayStyle}}" board-style="board" atefont-style="atefont" />
   </view>
 
-  <radio-group class="appointTop bort pddingt20" bindchange="classChange" wx:if="{{check==2}}">
-    <view class='between'>
-      <radio value='1' checked='checked'>
-        <view>14:00数学课</view>
+  <radio-group class="appointTop bort pddingt20" bindchange="classChange" wx:if="{{check==2 && classList.length>0}}">
+    <view class='between' wx:for="{{classList}}" wx:key>
+      <radio value='{{item.AppointmentId}}' checked='{{item.check==true}}'>
+        <view>{{item.ScheduleName}}</view>
       </radio>
-      <view class='bb'>剩余名额: 22</view>
-    </view>
-    <view class='between'>
-      <radio value='1'>
-        <view>14:00数学课</view>
-      </radio>
-      <view class='bb'>剩余名额: 22</view>
+      <view class='bb'>剩余名额: {{item.RemainQuota}}</view>
     </view>
   </radio-group>
 </view>
 
 <view class='lastItem' wx:if="{{check==2}}"></view>
-<view class='shenqing' bindtap='bindSure'>确定</view>
+<view class='shenqing' bindtap='bindSure' wx:if="{{ check==1 || ( check==2 && appointmentId)}}">确定</view>
+<view class='shenqing gray1' wx:else>确定</view>

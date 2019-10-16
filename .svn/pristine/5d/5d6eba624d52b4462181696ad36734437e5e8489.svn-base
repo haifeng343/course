@@ -1,6 +1,5 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-var QQMapWX = require('../../utils/qqmap-wx-jssdk.js');
 const app = getApp();
 
 Page({
@@ -37,6 +36,7 @@ Page({
       Id: options.Id || '',
       name: options.name || '',
       type: options.type || '',
+
     })
 
     that.init();
@@ -56,45 +56,9 @@ Page({
   },
   address: function () {
     const that = this;
-    that.reverseLocation(that.data.detailCent.TradingAreaLatitude, that.data.detailCent.TradingAreaLongitude, function (res) {
-      wx.openLocation({
-        latitude: res.result.ad_info.location.lat,
-        longitude: res.result.ad_info.location.lng,
-        scale: 12,
-        name: that.data.detailCent.TradingAreaName, //打开后显示的地址名称
-      })
+    wx.navigateTo({
+      url: '/pages/maps/maps?Longitude=' + that.data.detailCent.TradingAreaLongitude + '&Latitude=' + that.data.detailCent.TradingAreaLatitude + '&name=' + that.data.detailCent.TradingAreaName
     })
-  },
-  reverseLocation: function (latitude, longitude, onsuccess, onfail, oncomplete) {
-    var that = this;
-    // 实例化API核心类
-    var geocoder = new QQMapWX({
-      key: 'SLNBZ-QF5H3-WYD3P-YANNA-SOFVV-RMBUN' // 必填
-    });
-
-    // 调用接口
-    geocoder.reverseGeocoder({
-      location: {
-        latitude: latitude,
-        longitude: longitude
-      },
-      coord_type: 3, //baidu经纬度
-      success: function (res) {
-        if (onsuccess) {
-          onsuccess(res);
-        }
-      },
-      fail: function (e) {
-        if (onfail) {
-          onfail(e);
-        }
-      },
-      complete: function () {
-        if (oncomplete) {
-          oncomplete();
-        }
-      }
-    });
   },
   getData: function() {
     var that = this;
