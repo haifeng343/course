@@ -117,7 +117,7 @@
             </view>
           </view>
           <button class='btn yuyue' wx:if="{{item.AppointmentStatus==0}}" data-Id="{{item.Id}}" bindtap='navtoReser'>预约</button>
-          <button class='btn yuyue' wx:if="{{item.AppointmentStatus==1}}">取消预约</button>
+          <button class='btn yuyue' wx:if="{{item.AppointmentStatus==1}}" data-Id="{{item.Id}}" bindtap="cancelReser">取消预约</button>
           <button class='btn yuyue' wx:if="{{item.AppointmentStatus==2}}" bindtap='reservationDialog'>预约详情</button>
           <button class='btn yuyue' wx:if="{{item.AppointmentStatus==3}}" data-Id="{{item.Id}}" bindtap='navtoReser'>重新预约</button>
         </view>

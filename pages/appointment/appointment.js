@@ -1,23 +1,22 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
-const todayStyle = [{
+var styleArr = [{
   month: 'current',
   day: new Date().getDate(),
   color: 'white',
   background: '#3CD5D1'
 }];
 //当前总样式
-let styleArr = [], tempStyleArr = [];
+let tempStyleArr = [];
 Page({
 
   data: {
-    year: new Date().getFullYear(),//传递的年
-    month: (new Date().getMonth() + 1),//传递的月
-    day: new Date().getDate(),//传递的日
+    year: '',//传递的年
+    month: '',//传递的月
+    day: '',//传递的日
     check: 1, //默认选中
     dayStyle: styleArr,
     Id:'',//具体Id
-    dayStyle: styleArr, //自定义日期样式
     itemId:'',//课程Id
     storeId:'',//门店Id
     currentMonth:'',//当前月份
@@ -27,14 +26,33 @@ Page({
   },
   onLoad: function(options) {
     let that = this;
+    const dd = new Date();
+    if (options.time) {
+      let arr = options.time.split('-');
+      this.setData({ year: arr[0], month: arr[1], day: arr[2] });
+    } else {
+      this.setData({ year: dd.getFullYear(), month: dd.getMonth() + 1, day: dd.getDate() });
+    }
     that.setData({
       Id:options.Id || '',
       itemId:options.itemId || '',
       storeId: options.storeId || '',
       check: options.type || '',
-      time: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate()
+      time: options.time || (that.data.year + '-' + that.data.month + '-' + that.data.day),
+      appointmentId: options.appointmentId || '',
     })
     that.init();
+    // let arr = [];
+
+    // for(let i = 0; i < 32; i++){
+    //   arr.push({
+    //     month: 'current',
+    //     day: i,
+    //     color: '#ccc',
+    //     background: '#fff'
+    //   })
+    // }
+    // this.setData({ dayStyle: this.data.dayStyle.concat(arr) });
   },
   init: function() {
     let that = this;
@@ -49,6 +67,7 @@ Page({
     }
     that.setGray();
   },
+
   setGray: function() {
     const data = [
       // { month: 10, day: 1 },
@@ -59,16 +78,25 @@ Page({
       // { month: 10, day: 6 },
       // { month: 10, day: 7 },
     ];
-      
+    const dd = new Date();
     let arr = [];
     for (let v of data) {
-      if (v.month == new Date().getMonth() + 1) {
+      if (v.month == dd.getMonth() + 1) {
         arr.push({
           month: 'current',
           day: v.day,
           color: '#ccc',
         })
       }
+    }
+    let tempArr = this.data.time.split('-');
+    if (tempArr[0] == this.data.year && tempArr[1] == this.data.month && tempArr[2] == this.data.day) {
+      arr.push({
+        month: 'current',
+        day: tempArr[2],
+        color: '#fff',
+        background: '#000'
+      })
     }
     let arr1 = this.data.dayStyle.concat(arr);
     this.setData({ dayStyle: arr1 });
@@ -92,6 +120,12 @@ Page({
       e.detail.currentYear != (dd.getFullYear()))) {
       this.setData({ dayStyle: [], currentMonth: e.detail.currentMonth});
     } else {
+      styleArr = [{
+        month: 'current',
+        day: new Date().getDate(),
+        color: 'white',
+        background: '#3CD5D1'
+      }];
       this.setData({ dayStyle: styleArr, currentMonth: e.detail.currentMonth});
     }
     this._resetday();
@@ -106,6 +140,12 @@ Page({
         e.detail.currentYear != (dd.getFullYear()))) {
       this.setData({ dayStyle: [], currentMonth: e.detail.currentMonth });
     } else {
+      styleArr = [{
+        month: 'current',
+        day: new Date().getDate(),
+        color: 'white',
+        background: '#3CD5D1'
+      }];
       this.setData({ dayStyle: styleArr, currentMonth: e.detail.currentMonth});
     }
     this._resetday();
@@ -120,6 +160,12 @@ Page({
         e.detail.currentYear != (dd.getFullYear()))) {
       this.setData({ dayStyle: [], currentMonth: e.detail.currentMonth });
     } else {
+      styleArr = [{
+        month: 'current',
+        day: new Date().getDate(),
+        color: 'white',
+        background: '#3CD5D1'
+      }];
       this.setData({ dayStyle: styleArr, currentMonth: e.detail.currentMonth });
     }
     this.setGray();
@@ -139,16 +185,29 @@ Page({
       let changeBg = `dayStyle[0].background`;
       this.setData({
         [changeDay]: clickDay,
-        [changeBg]: "#84e7d0"
+        [changeBg]: "red"
       })
     } else {
+      styleArr = [{
+        month: 'current',
+        day: new Date().getDate(),
+        color: 'white',
+        background: '#3CD5D1'
+      }];
+      styleArr.push({
+        month: 'current',
+        day: e.detail.day,
+        background: '#000',
+      })
       this.setData({ dayStyle: styleArr });
       let clickDay = e.detail.day;
       let changeDay = `dayStyle[1].day`;
+      let changeColor = `dayStyle[1].color`;
       let changeBg = `dayStyle[1].background`;
       this.setData({
         [changeDay]: clickDay,
-        [changeBg]: "#84e7d0"
+        [changeColor]: '#fff',
+        [changeBg]: "red"
       })
     }
     // const data = [
@@ -194,6 +253,13 @@ Page({
       ClassDate: that.data.time,
     }
     netUtil.postRequest(url, params, function (res) {
+      for (let v of res.Data) {
+        if (v.AppointmentId == that.data.appointmentId) {
+          v.check = true;
+          break;
+        }
+      }
+
       that.setData({
         classList:res.Data
       })

@@ -69,7 +69,7 @@ Page({
   navtoAppointTime: function() {
     let that = this;
     wx.navigateTo({
-      url: '/pages/appointment/appointment?Id=' + that.data.Id + '&storeId=' + that.data.Info.StoreId + '&itemId=' + that.data.Info.ItemId+ '&type=' + that.data.appointmentType,
+      url: '/pages/appointment/appointment?Id=' + that.data.Id + '&storeId=' + that.data.Info.StoreId + '&itemId=' + that.data.Info.ItemId + '&type=' + that.data.appointmentType + '&appointmentId=' + that.data.appointmentId+'&time='+that.data.time,
     })
   },
 

@@ -146,6 +146,20 @@ Page({
       showSuccess: true
     })
   },
+  cancelReser: function(e) {
+    let that = this;
+    var url = 'appointment/cancel';
+    var params = {
+      Id: e.currentTarget.dataset.id,
+    }
+    netUtil.postRequest(url, params, function (res) {
+      wx.showToast({
+        icon:"none",
+        title: '取消预约成功',
+      })
+      that.getData();
+    })
+  },
   //预约被取消详情
   reservationDetail:function(){
     wx.showModal({
