@@ -1,4 +1,4 @@
-<scroll-view scroll-y="true" scroll-into-view="{{relIdGoto}}" catchtouchmove='true' style='height:100%'>
+<scroll-view scroll-y="true" scroll-into-view="NUV{{relIdGoto}}" catchtouchmove='true' style='height:100%'>
   <movable-area style="height:{{windowHeight}}rpx;width:100%">
     <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
       <button open-type='contact' class='contact contact_left'>客服</button>
@@ -54,7 +54,7 @@
     <view class='content mt20' wx:if="{{Info.ItemCount>0}}">
       <view class='title'>课程（{{Info.ItemCount}}）</view>
       <view class='List'>
-        <checkbox-group bindchange="checkChange">
+        <checkbox-group bindchange="checkChange" data-index='{{index}}'>
           <view class="item startd {{item.RemainCount<=0?'gray':''}}" wx:for="{{Info.ItemList}}" wx:key wx:for-item="item" id="NUV{{item.RelId}}">
             <checkbox checked='{{item.checked==true}}' class="absolutes {{item.RemainCount<=0?'none':''}}" value='{{item.RelId}}'></checkbox>
             <image class='topImg' data-Id="{{item.RelId}}" bindtap='courseDetail' src='{{item.ItemCoverImg}}' mode='aspectFill'></image>

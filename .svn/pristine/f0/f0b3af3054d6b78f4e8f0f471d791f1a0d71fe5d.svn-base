@@ -18,7 +18,6 @@ Page({
     PayAmount: '',//支付金额
     RefundFailReason: '',//退款失败说明
     formId: "",
-    reserVationInfo:{},//预约详情
   },
 
   onLoad(options) {
@@ -149,64 +148,38 @@ Page({
   },
   cancelReser: function(e) {
     let that = this;
-    let formId = "";
-    if (e.detail.formId != "the formId is a mock one") {
-      formId = e.detail.formId;
+    var url = 'appointment/cancel';
+    var params = {
+      Id: e.currentTarget.dataset.id,
     }
+    netUtil.postRequest(url, params, function (res) {
+      wx.showToast({
+        icon:"none",
+        title: '取消预约成功',
+      })
+      that.getData();
+    })
+  },
+  //预约被取消详情
+  reservationDetail:function(){
     wx.showModal({
-      content: '确认取消 "' + e.currentTarget.dataset.name +'" 课程的预约吗？',
-      confirmText: "确认",
+      title: '预约取消详情',
+      content: '此时间无课程'+'\r\n'+'是的',
+      showCancel:false,
+      confirmText: "知道了",
       confirmColor:"#000",
       success:function(res) {
         if(res.confirm){
-          var url = 'appointment/cancel';
-          var params = {
-            Id: e.currentTarget.dataset.id,
-          }
-          netUtil.postRequest(url, params, function (res) {
-            wx.showToast({
-              icon: "none",
-              title: '取消预约成功',
-            })
-            that.getData();
-          }, null, false, false, false, formId)
+
         }
       }
     })
   },
-  //预约被取消详情
-  // reservationDetail:function(){
-  //   wx.showModal({
-  //     title: '预约取消详情',
-  //     content: '此时间无课程'+'\r\n'+'是的',
-  //     showCancel:false,
-  //     confirmText: "知道了",
-  //     confirmColor:"#000",
-  //     success:function(res) {
-  //       if(res.confirm){
-
-  //       }
-  //     }
-  //   })
-  // },
   //预约详情弹出框
-  reservationDialog:function(e) {
-    let Id = e.currentTarget.dataset.id;
-    this._getServerDetail(Id);
-  },
-  //获取预约详情
-  _getServerDetail: function (Id) {
-    let that = this;
-    var url = 'appointment/details';
-    var params = {
-      Id: Id,
-    }
-    netUtil.postRequest(url, params, function (res) {
-      that.setData({
-        reserVationInfo:res.Data,
-        reservationShow: true
-      })
-    });
+  reservationDialog:function() {
+    this.setData({
+      reservationShow:true
+    })
   },
   reservationClosed:function(){
     this.setData({
@@ -215,7 +188,6 @@ Page({
   },
   //预约课程 / 重新预约
   navtoReser:function(e) {
-    
     let userInfo = wx.getStorageSync('userInfo');
     if (userInfo.Mobile) {
       wx.navigateTo({

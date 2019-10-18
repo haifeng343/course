@@ -46,6 +46,11 @@ Page({
       that.setData({
         Info: res.Data,
       })
+      if (res.Data) {
+        wx.setNavigationBarTitle({
+          title: '预约课程-' + res.Data.StoreName,
+        })
+      }
     })
   },
   //获取孩子姓名

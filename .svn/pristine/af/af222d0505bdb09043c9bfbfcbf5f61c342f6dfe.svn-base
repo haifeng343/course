@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 60,
 			"list": [
 				{
 					"id": -1,
@@ -118,7 +118,7 @@
 					"id": 9,
 					"name": "orderDetail",
 					"pathName": "pages/orderDetail/orderDetail",
-					"query": "Id=683&status=1&kd=3&formId=",
+					"query": "Id=679&status=1&kd=3&formId=",
 					"scene": null
 				},
 				{
@@ -475,7 +475,7 @@
 					"id": 60,
 					"name": "appointment",
 					"pathName": "pages/appointment/appointment",
-					"query": "Id=1057&storeId=7&itemId=22&type=2&appointmentId=16&time=2019-10-16",
+					"query": "Id=1057&storeId=7&itemId=22&type=1",
 					"scene": null
 				}
 			]

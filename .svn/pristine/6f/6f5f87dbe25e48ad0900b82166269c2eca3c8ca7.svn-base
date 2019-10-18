@@ -111,24 +111,15 @@
         </view>
         <view class='between mt20' wx:if="{{(detail.UseStatus==1 || detail.UseStatus==2) && item.UseStatus == 1}}">
           <view class="start">
-            <view class='ft24' wx:if="{{item.AppointmentStatus==1}}">已申请预约，等待商家确认</view>
-            <view class='ft24' wx:if="{{item.AppointmentStatus==2}}">已预约课程，请注意上课时间</view>
-            <view class='ft24 start' wx:if="{{item.AppointmentStatus==3 && item.AppointmentStatusDes}}">{{item.AppointmentStatusDes}}
-              <!-- <image src='../../images/go.png' class='go center' mode='aspectFill'></image> -->
+            <view class='ft24 bb' wx:if="{{item.AppointmentStatus==2}}">已预约课程，请注意上课时间</view>
+            <view class='ft24 bb start' bindtap='reservationDetail' wx:if="{{item.AppointmentStatus==1 && item.AppointmentStatusDes}}">{{item.AppointmentStatusDes}}
+              <image src='../../images/go.png' class='go center' mode='aspectFill'></image>
             </view>
           </view>
-          <form report-submit="true" wx:if="{{item.AppointmentStatus==0}}" data-Id="{{item.Id}}" bindtap='navtoReser'>
-            <button formType="submit" class='btn yuyue'>预约</button>
-          </form>
-          <form report-submit="true" wx:if="{{item.AppointmentStatus==1}}" data-name="{{item.ItemName}}" data-Id="{{item.Id}}" bindtap="cancelReser">
-            <button formType="submit" class='btn yuyue'>取消预约</button>
-          </form>
-          <form report-submit="true" wx:if="{{item.AppointmentStatus==2}}" data-Id="{{item.Id}}" bindtap='reservationDialog'>
-            <button formType="submit" class='btn yuyue'>预约详情</button>
-          </form>
-          <form report-submit="true" wx:if="{{item.AppointmentStatus==3}}" data-Id="{{item.Id}}" bindtap='navtoReser'>
-            <button formType="submit" class='btn yuyue'>重新预约</button>
-          </form>
+          <button class='btn yuyue' wx:if="{{item.AppointmentStatus==0}}" data-Id="{{item.Id}}" bindtap='navtoReser'>预约</button>
+          <button class='btn yuyue' wx:if="{{item.AppointmentStatus==1}}">取消预约</button>
+          <button class='btn yuyue' wx:if="{{item.AppointmentStatus==2}}" bindtap='reservationDialog'>预约详情</button>
+          <button class='btn yuyue' wx:if="{{item.AppointmentStatus==3}}" data-Id="{{item.Id}}" bindtap='navtoReser'>重新预约</button>
         </view>
       </view>
       <view class='between bt1' wx:if="{{detail.UseScore!=0}}">
@@ -149,13 +140,13 @@
     <view class="zan-dialog__mask" bindtap="toggleDialog" />
     <view class="zan-dialog__container reservation_container">
       <view class='zan-title'>预约详情</view>
-      <view class='zan-content align-left le'>课程名称: {{reserVationInfo.ItemName}}</view>
-      <view class='zan-content align-left le'>机构名称: {{reserVationInfo.StoreName}}</view>
-      <view class='zan-content align-left le'>机构地址: {{reserVationInfo.StoreAddress}}</view>
-      <view class='zan-content align-left le' wx:if="{{detail.RefundArrivalTime}}">预约手机号: {{reserVationInfo.AppointmentMobile}}</view>
-      <view class='zan-content align-left le'>预约时间: {{reserVationInfo.ScheduleName}} ({{reserVationInfo.ClassDate}})</view>
+      <view class='zan-content align-left le'>课程名称: 数学课</view>
+      <view class='le zan-til'>机构名称: 教育机构</view>
+      <view class='zan-content align-left le'>机构地址: 杭州西湖</view>
+      <view class='zan-content align-left le' wx:if="{{detail.RefundArrivalTime}}">预约手机号: 155454545</view>
+      <view class='zan-content align-left le'>预约时间: 14:00数学课 (2019-10-12)</view>
       <view class='zan-content align-left le'>孩子信息:
-        <span>{{reserVationInfo.ItemName}} ({{reserVationInfo.ChildAge}}岁)</span>
+        <span>丽丽 (6岁)</span>
       </view>
       <view class='know' bindtap='reservationClosed'>知道了</view>
     </view>
@@ -175,7 +166,7 @@
     <view class="zan-dialog__container">
       <view class='zan-title'>退款成功</view>
       <view class='zan-content align-left le'>交易编号: {{detail.OrderSn}}</view>
-      <view class='zan-content align-left le'>退款金额: {{PayAmount}}元</view>
+      <view class='le zan-til'>退款金额: {{PayAmount}}元</view>
       <view class='zan-content align-left le'>退款时间: {{detail.RefundTime}}</view>
       <view class='zan-content align-left le' wx:if="{{detail.RefundArrivalTime}}">到账时间: {{detail.RefundArrivalTime}}</view>
       <view class='know' bindtap='closeded'>知道了</view>
