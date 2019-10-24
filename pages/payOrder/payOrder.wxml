@@ -86,7 +86,7 @@
           <view class='symbol'>￥{{totalAmount}}</view>
         </view>
       </view>
-      <form bindsubmit="paySure" class='center' report-submit="true" data-orderId="{{OrderId}}" data-ordersn="{{OrderSn}}" data-payamount="{{PayAmount}}" bindtap='paySure' disabled='{{!((checked==true&&(Info.TotalAmount-Info.UseScoreAmount)>0) || (checked==false&&Info.TotalAmount>0))}}'>
+      <form bindsubmit="paySure" class='center' report-submit="true" data-orderId="{{OrderId}}" data-ordersn="{{OrderSn}}" data-payamount="{{PayAmount}}" disabled='{{!((checked==true&&(Info.TotalAmount-Info.UseScoreAmount)>0) || (checked==false&&Info.TotalAmount>0))}}'>
         <button formType="submit" class='paybtn'>确认购买</button>
       </form>
     </view>

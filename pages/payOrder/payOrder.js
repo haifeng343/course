@@ -62,6 +62,8 @@ Page({
   },
 
   getShow: function(e) {
+    if (this.loading) return;
+    this.loading = true;
     let formId = "";
     if (e.detail.formId != "the formId is a mock one") {
       formId = e.detail.formId;
@@ -163,7 +165,6 @@ Page({
         showKnow: false,
         isShowPayWnd: false
       });
-
       wx.requestPayment({
         timeStamp: that.data.TimeStamp,
         nonceStr: that.data.NonceStr,
@@ -174,6 +175,7 @@ Page({
           that.setData({
             paySuccess: true
           });
+          that.loading = false;
           if (that.data.isShowPayWnd) {
             wx.reLaunch({
               url: '/pages/wait/wait?OrderId=' + that.data.OrderId + '&ordersn=' + that.data.OrderSn + '&money=' + that.data.totalAmount + '&type=' + that.data.type,
@@ -181,10 +183,13 @@ Page({
           }
         },
         'fail': function(res) {
+          that.loading = false;
           that.cancelPay();
         },
       });
-    }, null, true, true, true, formId); //调用get方法情就是户数
+    }, function(err) {
+      that.loading = false;
+    }, true, true, true, formId); //调用get方法情就是户数
   },
 
   //用户取消支付
@@ -203,6 +208,8 @@ Page({
   },
 
   paySure: function(e) {
+    if (this.loading) return;
+    this.loading = true;
     let formId = "";
     if (e.detail.formId != "the formId is a mock one") {
       formId = e.detail.formId;
@@ -220,6 +227,9 @@ Page({
       UseScore: that.data.checked,
     }
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调、
+      setTimeout(() => {
+        that.loading = false;
+      }, 200);
       let pages = getCurrentPages(); //当前页面
       let prevPage = pages[pages.length - 2]; //上一页面
       prevPage.setData({ //直接给上移页面赋值
@@ -243,6 +253,7 @@ Page({
       wx.hideLoading();
     }, function(error) {
       wx.hideLoading();
+      that.loading = false;
     }, false, true, true, formId);
   },
 
