@@ -60,7 +60,10 @@
     "pages/invalid/invalid",
     "pages/teacherDetail/teacherDetail",
     "pages/reservation/reservation",
-    "pages/appointment/appointment"
+    "pages/appointment/appointment",
+    "pages/subsidy/subsidy",
+    "pages/subsidyLog/subsidyLog",
+    "pages/exchange/exchange"
   ],
   "window": {
     "backgroundTextStyle": "dark",

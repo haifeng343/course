@@ -17,12 +17,16 @@
       </view>
       <view class='paypag'>
         <view class='paypagItem' bindtap='integral'>
-          <view class='ml1'>积分</view>
           <view class='ml2'>0</view>
+          <view class='ml1'>积分</view>
         </view>
         <view class='paypagItem' bindtap='wallet'>
-          <view class='ml1'>钱包 (元)</view>
           <view class='ml2'>0</view>
+          <view class='ml1'>钱包 (元)</view>
+        </view>
+        <view class='paypagItem' bindtap='wallet'>
+          <view class='ml2'>0</view>
+          <view class='ml1'>卡券</view>
         </view>
       </view>
     </view>
@@ -80,18 +84,22 @@
       </view>
       <view class='paypag'>
         <view class='paypagItem' bindtap='integral'>
-          <view class='ml1'>积分</view>
           <view class='ml2'>{{userInfo.Score}}</view>
+          <view class='ml1'>积分</view>
         </view>
-        <view class='wallet' wx:if="{{promptText}}"></view>
+        <!-- <view class='wallet' wx:if="{{promptText}}"></view> -->
         <view class='paypagItem' bindtap='wallet'>
-          <view class='ml1'>钱包 (元)</view>
           <view class='ml2'>{{wallet_yuan}}</view>
+          <view class='ml1'>钱包 (元)</view>
+        </view>
+        <view class='paypagItem' bindtap='quan'>
+          <view class='ml2'>{{userInfo.CardCount==null?0:userInfo.CardCount}}</view>
+          <view class='ml1'>卡券</view>
         </view>
       </view>
     </view>
     <view class='List mt20'>
-      <view class='item mt20' bindtap='fuli' wx:if="{{buttons.setup==true}}">
+      <view class='item mt20 borb' bindtap='fuli' wx:if="{{buttons.setup==true}}">
         <view class='start'>
           <image class='icon1' src='../../images/f1.png' mode='aspectFill' lazy-load='true'></image>
           <view>福利中心</view>
@@ -100,10 +108,10 @@
           <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
         </view>
       </view>
-      <view class='item mt20' bindtap='quan' wx:if="{{buttons.setup==true}}">
+      <view class='item' bindtap='subsidy'>
         <view class='start'>
-          <image class='icon1' src='../../images/fuliquan.png' mode='aspectFill' lazy-load='true'></image>
-          <view>我的卡券</view>
+          <image class='icon1' src='../../images/ab.png' mode='aspectFill' lazy-load='true'></image>
+          <view>补贴宝</view>
         </view>
         <view class='start'>
           <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>

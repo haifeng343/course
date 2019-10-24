@@ -26,20 +26,6 @@ page{
   padding: 0 5%;
   box-sizing: border-box;
 }
-.logTop{
-  position: fixed;
-  top: 0;
-  z-index: 999;
-  width: 100%;
-  box-sizing: border-box;
-  height: 60rpx;
-  line-height: 60rpx;
-  padding: 0 5%;
-  background-color: #ECECEC;
-  color:#5b5b5b;
-  font-size: 28rpx;
-  align-items: center;
-}
 .go{
   margin-top: 6rpx;
 }

@@ -9,6 +9,7 @@
 }
 .reserItem{
   display: flex;
+  align-items: center;
   width: 95%;
   box-sizing: border-box;
   padding: 20rpx 0;
@@ -16,6 +17,10 @@
   border-bottom: 1rpx solid #f4f4f4;
   flex-direction: row;
   position: relative;
+}
+.centers{
+  display: flex;
+  align-items: center;
 }
 .reserItem:last-child{
   border: none;

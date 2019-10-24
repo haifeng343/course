@@ -16,19 +16,19 @@
     <view class='rule' bindtap='balanceLog'>余额变更记录</view>
   </view>
   <view class='List mt20'>
-    <view class='item mt20' bindtap='Bill'>
+    <view class='item mt20' bindtap='withdraw'>
       <view class='start'>
-        <image class='icon1' src='../../images/m1.png' mode='widthFix' lazy-load='true'></image>
-        <view>账单</view>
+        <image class='icon1' src='../../images/m2.png' mode='widthFix' lazy-load='true'></image>
+        <view>提现</view>
       </view>
       <view class='start'>
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
-    <view class='item mt20 borb' bindtap='withdraw'>
+    <view class='item mt20 borb' bindtap='Bill'>
       <view class='start'>
-        <image class='icon1' src='../../images/m2.png' mode='widthFix' lazy-load='true'></image>
-        <view>提现</view>
+        <image class='icon1' src='../../images/m1.png' mode='widthFix' lazy-load='true'></image>
+        <view>账单</view>
       </view>
       <view class='start'>
         <image class='go' src='../../images/go.png' mode='widthFix' lazy-load='true'></image>

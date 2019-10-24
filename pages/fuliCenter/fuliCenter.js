@@ -3,20 +3,15 @@ Page({
 
 
   data: {
-
+    showSuccess:false
   },
 
   onLoad: function (options) {
 
   },
-  snatch:function() {
+  exchange:function() {
     wx.navigateTo({
-      url: '/pages/snatch/snatch',
-    })
-  },
-  kaquan:function() {
-    wx.navigateTo({
-      url: '/pages/kaquan/kaquan',
+      url: '/pages/exchange/exchange',
     })
   },
   onShareAppMessage: function () {

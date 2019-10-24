@@ -1,0 +1,36 @@
+<view class="List" wx:if="{{List.length>0}}">
+  <view class='item' wx:for="{{List}}" wx:key>
+    <view data-item="{{item}}" bindtap='bindShowCode'>
+      <view class='between'>
+        <view class='w70'>
+          <view class='leftTxt'>机构名称: {{item.StoreName}}</view>
+        </view>
+        <view wx:if="{{item.Status==1}}">等待确认</view>
+        <view wx:if="{{item.Status==2}}">信息有误</view>
+        <view wx:if="{{item.Status==3}}">等待补贴到账</view>
+        <view wx:if="{{item.Status==4}}">补贴已到账</view>
+      </view>
+      <view>课程名称: {{item.ItemName?item.ItemName:'/'}}</view>
+      <view>原价(元): {{item.Price*1.0/100?item.Price*1.0/100:'/'}}</view>
+      <view>实付(元): {{item.PayAmount*1.0/100?item.PayAmount*1.0/100:'/'}}</view>
+      <view>补贴: {{item.DealAmountRate*1.0/100?item.DealAmountRate*1.0/100:0}}%，预计补贴{{item.DealAmount*1.0/100?item.DealAmount*1.0/100:0}}元</view>
+      <view>申请时间: {{item.CreateTime?item.CreateTime:'/'}}</view>
+      <view>补贴到账时间: {{item.FinishTime?item.FinishTime:'/'}}</view>
+    </view>
+    <view class='footer'>
+      <span>
+        <view class='bb' wx:if="{{item.Status==1}}">商家端已输入课程信息</view>
+        <view class='bb' wx:if="{{item.Status==2}}">等待商家修改课程信息</view>
+      </span>
+      <view class='btn end' bindtap='bindDelete' data-storename="{{item.StoreName}}" data-itemname="{{item.ItemName}}" data-Id="{{item.RecordId}}">删除</view>
+    </view>
+  </view>
+</view>
+
+<view class='nohasLog' wx:else>
+  <view class='no_record_frame'>
+    <image class='noImg' src='../../images/zanwu.png' mode='aspectFill' lazy-load='true'></image>
+    <view>暂无补贴记录</view>
+  </view>
+</view>
+<sub id="sub"></sub>

@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 9,
+			"current": 62,
 			"list": [
 				{
 					"id": -1,
@@ -424,13 +424,6 @@
 				},
 				{
 					"id": -1,
-					"name": "partake",
-					"pathName": "pages/partake/partake",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "fuliCenter",
 					"pathName": "pages/fuliCenter/fuliCenter",
 					"query": "",
@@ -476,6 +469,27 @@
 					"name": "appointment",
 					"pathName": "pages/appointment/appointment",
 					"query": "Id=1057&storeId=7&itemId=22&type=2&appointmentId=16&time=2019-10-16",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "subsidy",
+					"pathName": "pages/subsidy/subsidy",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "subsidyLog",
+					"pathName": "pages/subsidyLog/subsidyLog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "exchange",
+					"pathName": "pages/exchange/exchange",
+					"query": "",
 					"scene": null
 				}
 			]

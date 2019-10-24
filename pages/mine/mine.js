@@ -9,7 +9,7 @@ Page({
     windowWidth: "",
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     userInfo: {},
-    wallet_yuan:'0',
+    wallet_yuan: '0',
     buttons: {},
     Url: "",
     promptText: true, //是否显示提示语
@@ -50,13 +50,8 @@ Page({
       promptText: promptText || ''
     });
 
+    that._getMyInfo();
     that.menuShow();
-
-    let userInfo = wx.getStorageSync('userInfo') || {};
-    that.setData({
-      userInfo: userInfo, 
-      wallet_yuan: Number(userInfo.TotalMoney / 100).toFixed(2)
-    });
   },
 
   init: function() {
@@ -68,12 +63,24 @@ Page({
       })
     });
   },
+  _getMyInfo:function() {
+    var that = this;
+    var url = 'user/wallet';
+    var params = {};
+    netUtil.postRequest(url, params, function (res) {
+      wx.setStorageSync('userInfo', res.Data);
 
+      that.setData({
+        userInfo: res.Data,
+        wallet_yuan: Number(res.Data.TotalMoney / 100).toFixed(2)
+      });
+    },null,false,false,false)
+  },
   menuShow: function() {
     var that = this;
     var url = 'user/page/show/my';
     var params = {};
-    netUtil.postRequest(url, params, function(res) { 
+    netUtil.postRequest(url, params, function(res) {
         var temp = {};
         that.setData({
           Url: res.Data.url
@@ -253,6 +260,11 @@ Page({
     }
   },
 
+  subsidy: function() {
+    wx.navigateTo({
+      url: '/pages/subsidy/subsidy',
+    })
+  },
   onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,

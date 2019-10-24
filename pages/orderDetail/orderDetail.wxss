@@ -23,6 +23,9 @@
   margin: auto;
   height: 380rpx;
 }
+.pay{
+  z-index: 2;
+}
 .center{
   display: flex;
   justify-content: center;

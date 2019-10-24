@@ -1,0 +1,61 @@
+<!--券码弹出框-->
+<view class='dialogMask' hidden="{{!showCode}}" catchtouchmove="true">
+  <view class='dialog-container'>
+    <view class='dialog-title'>{{codeName}}</view>
+    <!-- <view class='dialog-title' wx:else>补贴宝基础补贴{{userInfo.BaseSubsidyRate*1.0/100}}%</view> -->
+    <scroll-view scroll-y="true" class='dialog-content'>
+      <view class='mb20'>券码: {{codeNumber}}</view>
+      <image class='codeImg' src='{{codeImg}}' mode='aspectFill' lazy-load='true'></image>
+    </scroll-view>
+    <view class='dialog-footer'>
+      <view class='dialog-btn' bindtap='classEor'>取消</view>
+      <view class='dialog-btn' bindtap='classSure'>完成课程确认</view>
+    </view>
+  </view>
+</view>
+
+<!--确认补贴金额-->
+<view class='dialogMask' hidden="{{!showPaySuccess}}" catchtouchmove="true">
+  <view class='dialog-container'>
+    <view class='dialog-title'>确认补贴金额</view>
+    <scroll-view scroll-y="true" class='dialog-content'>
+      <view class='startd h40'>
+        <label>机构名: </label>
+        <view class='bb ml10'>{{cardInfo.StoreName}}</view>
+      </view>
+      <view class='startd h40'>
+        <label>课程名: </label>
+        <view class='bb ml10'>{{cardInfo.ItemName}}</view>
+      </view>
+      <view class='startd h40'>
+        <label>原价(元): </label>
+        <view class='bb ml10'>{{cardInfo.Price*1.0/100}}</view>
+      </view>
+      <view class='startd h40'>
+        <label>实付金额(元): </label>
+        <view class='bb ml10'>{{cardInfo.PayAmount*1.0/100}}</view>
+      </view>
+      <view class='startd h40'>
+        <label>您可获补贴: </label>
+        <view class='red ml10'>{{cardInfo.SubsidyRateAmount*1.0/100}}元</view>
+      </view>
+    </scroll-view>
+    <view class='dialog-footer'>
+      <view class='dialog-btn' bindtap='closePayDialog'>取消</view>
+      <view class='dialog-btn' bindtap='bindMessageEor'>信息有误</view>
+      <view class='dialog-btn' bindtap='bindSureSend'>确认</view>
+    </view>
+  </view>
+</view>
+
+<!-- 完成申请弹窗 -->
+<view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
+  <view class="zan-dialog__mask">
+    <view class="zan-dialog__container">
+      <image src='../../images/success1.png' class='success' mode='aspectFill'></image>
+      <view class='title'>恭喜您，完成申请</view>
+      <view class='zan-content le'>补贴金将于2个工作日内到账，请注意查收</view>
+      <button class='btn' bindtap='closeded'>知道了</button>
+    </view>
+  </view>
+</view>

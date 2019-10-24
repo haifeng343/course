@@ -32,24 +32,25 @@ Page({
     if (options.recommand) {
       wx.setStorageSync("recommand", options.recommand)
     }
+    
+    that.init();
+  },
+  init: function () {
+    let that = this;
+    let usertoken = wx.getStorageSync('usertoken');
     var recommand = wx.getStorageSync('userInfo').RecommandCode;
     shareApi.getShare("/pages/snatch/snatch", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, recommand)
       that.setData({
         obj: res.Data,
-
       })
     });
-    that.init();
-  },
-  init: function () {
-    let usertoken = wx.getStorageSync('usertoken');
-    console.log(usertoken)
-    this.setData({
+    
+    that.setData({
       usertoken: usertoken
     });
     if (usertoken) {
-      this.getData();
+      that.getData();
     }
   },
   getData: function () {
@@ -128,7 +129,18 @@ Page({
     })
     that.init();
   },
-  onShareAppMessage: function() {
-
-  }
+  onShareAppMessage: function (res) {
+    return {
+      title: this.data.obj.Title,
+      path: this.data.obj.SharePath,
+      desc: this.data.obj.ShareDes,
+      imageUrl: this.data.obj.ShareImgUrl,
+      success: (res) => {
+        wx.showToast({
+          icon: 'none',
+          title: '分享成功',
+        })
+      }
+    }
+  },
 })

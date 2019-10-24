@@ -215,11 +215,16 @@ Page({
   },
   //预约课程 / 重新预约
   navtoReser:function(e) {
-    
+    console.log(e)
+    let that = this;
+    let formId = "";
+    if (e.detail.formId != "the formId is a mock one") {
+      formId = e.detail.formId;
+    }
     let userInfo = wx.getStorageSync('userInfo');
     if (userInfo.Mobile) {
       wx.navigateTo({
-        url: '/pages/reservation/reservation?id=' + e.currentTarget.dataset.id,
+        url: '/pages/reservation/reservation?id=' + e.currentTarget.dataset.id + '&formId=' + that.data.formId,
       })
     }else{
       wx.navigateTo({

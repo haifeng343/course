@@ -1,5 +1,6 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
+const app = getApp().globalData;
 Page({
 
   data: {
@@ -15,11 +16,13 @@ Page({
     appointmentId: '',//预约排课表Id
     somethimg:'',//下一页面返回传递课程名称
     time: '',//下一页面返回传递时间
+    formId:'',
   },
   onLoad: function(options) {
     let that = this;
     that.setData({
       Id: options.id || '',
+      formId: options.formId || '',
     })
     that.init();
     that._getExtra();
@@ -48,6 +51,12 @@ Page({
       })
     })
   },
+  //获取手机号
+  hasMobile:function(e){
+    this.setData({
+      mobile:e.detail.value
+    })
+  },
   //获取孩子姓名
   hasChildName:function(e) {
     this.setData({
@@ -71,6 +80,13 @@ Page({
   //订单课程预约申请
   shenqing: function() {
     let that = this;
+    if (!app.mobileReg.test(that.data.mobile)) {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入正确的手机号',
+      })
+      return;
+    }
     var url = 'appointment/apply';
     var params = {
       Id: that.data.Id,
@@ -84,7 +100,7 @@ Page({
       that.setData({
         showSuccess: true
       })
-    })
+    },null, false, false, false, that.data.formId)
 
   },
 
