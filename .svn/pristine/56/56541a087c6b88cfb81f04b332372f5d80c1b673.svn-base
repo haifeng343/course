@@ -1,0 +1,187 @@
+<movable-area style="height:{{windowHeight}}rpx;width:100%">
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 1}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView1' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
+    <button open-type='contact' class='contact contact_left'>客服</button>
+  </movable-view>
+  <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2' y="{{statusBarHeight+obj.CustomerServiceInfo.PositionHight}}">
+    <button open-type='contact' class='contact contact_right'>客服</button>
+  </movable-view>
+  <view wx:if="{{!userInfo.UserToken}}">
+    <view class='myTop'>
+      <image class='icon1 setImg' bindtap='setting' data-mobile="{{userInfo.Mobile}}" wx:if="{{buttons.setup==true}}" src='../../images/setting.png' mode='aspectFill' lazy-load='true'></image>
+      <view class='start' bindtap='bindLogin'>
+        <image class='avator' src='../../images/userIcon.png' mode='aspectFill' lazy-load='true'></image>
+        <view class='align column'>
+          <text class='please'>未登录</text>
+          <view class='more'>点击登录更精彩</view>
+        </view>
+      </view>
+      <view class='paypag'>
+        <view class='paypagItem' bindtap='integral'>
+          <view class='ml2'>0</view>
+          <view class='ml1'>积分</view>
+        </view>
+        <view class='paypagItem' bindtap='wallet'>
+          <view class='ml2'>0</view>
+          <view class='ml1'>钱包 (元)</view>
+        </view>
+        <view class='paypagItem' bindtap='wallet'>
+          <view class='ml2'>0</view>
+          <view class='ml1'>卡券</view>
+        </view>
+      </view>
+    </view>
+    <view class='List mt20'>
+      <view class='item mt20 borb' bindtap='share' data-Id="{{userInfo.RecommandCode}}" wx:if="{{buttons.share==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/a3.png' mode='aspectFill' lazy-load='true'></image>
+          <view>分享给好友</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item' bindtap='invite' wx:if="{{buttons.invitation==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/a4.png' mode='aspectFill' lazy-load='true'></image>
+          <view>推荐与邀请</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item mt20 borb' bindtap='aboutUs' wx:if="{{buttons.aboutus==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/a1.png' mode='aspectFill' lazy-load='true'></image>
+          <view>关于我们</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item' bindtap='callUs' wx:if="{{buttons.callus==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/a2.png' mode='aspectFill' lazy-load='true'></image>
+          <view>联系我们</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else>
+    <view class='myTop'>
+      <image class='icon1 setImg' bindtap='setting' data-mobile="{{userInfo.Mobile}}" wx:if="{{buttons.setup==true}}" src='../../images/setting.png' mode='aspectFill' lazy-load='true'></image>
+      <view class='start'>
+        <image class='avator' src='{{userInfo.HeadUrl}}' mode='aspectFill' lazy-load='true'></image>
+        <view class='align'>
+          <view class='name'>{{userInfo.NickName}}</view>
+          <view class='share start'>分享码：
+            <view class='code' bindtap='copyText' data-text="{{userInfo.RecommandCode}}">{{userInfo.RecommandCode}}</view>
+          </view>
+        </view>
+      </view>
+      <view class='paypag'>
+        <view class='paypagItem' bindtap='integral'>
+          <view class='ml2'>{{userInfo.Score}}</view>
+          <view class='ml1'>积分</view>
+        </view>
+        <!-- <view class='wallet' wx:if="{{promptText}}"></view> -->
+        <view class='paypagItem' bindtap='wallet'>
+          <view class='ml2'>{{wallet_yuan}}</view>
+          <view class='ml1'>钱包 (元)</view>
+        </view>
+        <view class='paypagItem' bindtap='quan'>
+          <view class='ml2'>{{userInfo.CardCount==null?0:userInfo.CardCount}}</view>
+          <view class='ml1'>卡券</view>
+        </view>
+      </view>
+    </view>
+    <view class='List mt20'>
+      <view class='item mt20 borb' bindtap='fuli' wx:if="{{buttons.setup==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/f1.png' mode='aspectFill' lazy-load='true'></image>
+          <view>福利中心</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item' bindtap='subsidy'>
+        <view class='start'>
+          <image class='icon1' src='../../images/ab.png' mode='aspectFill' lazy-load='true'></image>
+          <view>补贴宝</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item mt20' bindtap='car' wx:if="{{buttons.setup==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/a0.png' mode='aspectFill' lazy-load='true'></image>
+          <view>待体验课程</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item mt20 borb' bindtap='share' data-Id="{{userInfo.RecommandCode}}" wx:if="{{buttons.share==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/a3.png' mode='aspectFill' lazy-load='true'></image>
+          <view>分享给好友</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item' bindtap='invite' wx:if="{{buttons.invitation==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/a4.png' mode='aspectFill' lazy-load='true'></image>
+          <view>推荐与邀请</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item mt20 borb' bindtap='aboutUs' wx:if="{{buttons.aboutus==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/a1.png' mode='aspectFill' lazy-load='true'></image>
+          <view>关于我们</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item' bindtap='callUs' wx:if="{{buttons.callus==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/a2.png' mode='aspectFill' lazy-load='true'></image>
+          <view>联系我们</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item borb mt20' bindtap='bindIsSalesman' wx:if="{{userInfo.IsSalesman==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/ss1.png' mode='aspectFill' lazy-load='true'></image>
+          <view>数据统计</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+      <view class='item' bindtap='bindInquire' wx:if="{{userInfo.IsSalesman==true}}">
+        <view class='start'>
+          <image class='icon1' src='../../images/chaxun.png' mode='aspectFill' lazy-load='true'></image>
+          <view>数据查询</view>
+        </view>
+        <view class='start'>
+          <image class='go' src='../../images/go.png' mode='aspectFill' lazy-load='true'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <pop id="pop"></pop>
+</movable-area>

@@ -1,0 +1,59 @@
+<view class='reserContainer'>
+  <view class='reserItem'>
+    <label>机构名称:</label>
+    <view class='Itemtext bb'>{{Info.StoreName}}</view>
+  </view>
+  <view class='reserItem'>
+    <label>课程名称:</label>
+    <view class='Itemtext bb'>{{Info.ItemName}}</view>
+  </view>
+
+  <view class='reserItem centers'>
+    <label>手机号码:</label>
+    <!-- <view class='Itemtext'>{{mobile}}</view> -->
+    <input class='Itemtext centers' type='number' value='{{mobile}}' bindinput='hasMobile'></input>
+  </view>
+  <view class='reserItem'>
+    <label>预约时间:</label>
+    <view class=' css_appointment_frame ' bindtap='navtoAppointTime'>
+      <view class='Itemtext w90'>{{appointmentType==1?'与老师协商确定':somethimg +' ('+time+')'}}</view>
+      <image src='../../images/rightTIme.png' class='rightTIme center' mode='aspectFill'></image>
+    </view>
+  </view>
+  <view class='reserItem'>
+    <label>孩子姓名:</label>
+    <view class='Itemtext'>
+      <input type='text' value='{{childName}}' bindinput='hasChildName' placeholder='请输入孩子姓名' placeholder-class='placeholder'></input>
+    </view>
+  </view>
+  <view class='reserItem'>
+    <label>孩子年龄:</label>
+    <view class='Itemtext'>
+      <input type='text' value='{{childAge}}' bindinput='hasChildAge' placeholder='请输入孩子年龄' placeholder-class='placeholder'></input>
+    </view>
+  </view>
+</view>
+
+<view wx:if="{{Info.List.length>0}}">
+  <view class='propList' wx:for="{{Info.List}}" wx:key>
+    <view class='prompTitle'>预约须知</view>
+    <view class='promptText'>
+      上课时间：每周有一次
+    </view>
+  </view>
+</view>
+
+<view class='lastItem'></view>
+<view class='shenqing' bindtap='shenqing'>申请预约</view>
+
+<!-- 预约成功弹窗 -->
+<view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
+  <view class="zan-dialog__mask">
+    <view class="zan-dialog__container">
+      <image src='../../images/success1.png' class='success' mode='aspectFill'></image>
+      <view class='title'>恭喜您，预约成功！</view>
+      <view class='zan-content le'>稍后老师将与您联系，请保持电话畅通</view>
+      <button class='btn' bindtap='closeded'>知道了</button>
+    </view>
+  </view>
+</view>

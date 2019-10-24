@@ -1,0 +1,64 @@
+.List {
+  width: 100%;
+  height: auto;
+}
+.placeholder{
+  width: 90%;
+  height: 80rpx;
+  border: 1rpx solid #EAEAEA;
+  font-size: 28rpx;
+  background-color: #fff;
+  padding-left: 15rpx;
+  margin: 0 auto;
+}
+.btnd{
+  width: 90%;
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 45rpx;
+  text-align: center;
+  margin: 30rpx auto;
+}
+.item {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 5%;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.icon1 {
+  width: 34rpx;
+  height: 34rpx;
+  margin: 0rpx 15rpx 0 0;
+}
+.go{
+  margin-left: 10rpx;
+}
+
+
+.success {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.zan-dialog__container {
+  padding: 40rpx 0;
+}
+.btn {
+  width: 80%;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #fff;
+  background-color: #29d9d5;
+  border-radius: 15rpx;
+  margin-top: 20rpx;
+}
+.theme{
+  color: #29d9d5;
+}
+

@@ -1,0 +1,44 @@
+page{
+  background-color: #fff;
+}
+.log{
+  width: 100%;
+  background-color: #fff;
+}
+.avator{
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 15rpx;
+  border-radius: 50%;
+}
+.share{
+  font-size: 28rpx;
+  color: #000;
+}
+.math{
+  font-size: 24rpx;
+  color: #2F2F2F;
+}
+.logList{
+  width: 100%;
+  height: auto;
+  font-size: 32rpx;
+  margin-top: 60rpx;
+}
+.logItem{
+  width: 100%;
+  padding: 20rpx 5%;
+  box-sizing: border-box;
+  border-bottom: 1rpx solid #F9F9F9;
+}
+.time{
+  font-size: 24rpx;
+  line-height: 40rpx;
+  color: #717171;
+}
+.fraction{
+  height: 120rpx;
+  line-height:120rpx;
+  font-size: 28rpx;
+}
+

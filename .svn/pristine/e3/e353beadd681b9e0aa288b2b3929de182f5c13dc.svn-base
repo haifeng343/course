@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "补贴宝",
+  "usingComponents": {
+    "sub": "../../components/sub/sub"
+  }
+}

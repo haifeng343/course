@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "补贴记录",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "sub": "../../components/sub/sub"
+  }
+}

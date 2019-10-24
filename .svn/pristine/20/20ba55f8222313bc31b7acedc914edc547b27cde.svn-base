@@ -1,0 +1,122 @@
+.reserContainer{
+  width: 95%;
+  height: auto;
+  margin: 20rpx auto;
+  background-color: #fff;
+  border-radius: 15rpx;
+  display: flex;
+  flex-direction: column;
+}
+.reserItem{
+  display: flex;
+  align-items: center;
+  width: 95%;
+  box-sizing: border-box;
+  padding: 20rpx 0;
+  margin-left: 5%;
+  border-bottom: 1rpx solid #f4f4f4;
+  flex-direction: row;
+  position: relative;
+}
+.centers{
+  display: flex;
+  align-items: center;
+}
+.reserItem:last-child{
+  border: none;
+}
+.reserItem label{
+  font-size: 28rpx;
+  color: #000;
+}
+.w90{
+  width: 90%!important;
+}
+.reserItem .Itemtext{
+  width: 75%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 28rpx;
+  margin-left: 15rpx;
+}
+.rightTIme{
+  width: 34rpx;
+  height: 34rpx;
+  position: absolute;
+  right: 2.5%;
+}
+.placeholder{
+  color: #D0D0D0;
+}
+.propList{
+  width: 95%;
+  box-sizing: border-box;
+  padding: 20rpx 5%;
+  height: auto;
+  background-color: #fff;
+  margin: 20rpx auto;
+  border-radius: 15rpx;
+}
+.prompt{
+  border-radius: 15rpx;
+}
+.prompTitle {
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.promptText {
+  font-size: 24rpx;
+  line-height: 36rpx;
+  margin-top: 10rpx;
+}
+
+.title{
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+}
+.success{
+  width: 100rpx;
+  height: 100rpx;
+}
+.zan-dialog__container{
+  padding: 40rpx 0;
+}
+
+.css_appointment_frame{
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn{
+  width: 80%;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #fff;
+  background-color: #29D9D5;
+  border-radius: 15rpx;
+  margin-top: 20rpx;
+}
+.zan-dialog__container{
+  position: fixed;
+  width: 650rpx;
+  height: 330rpx;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+
+
+
+
+
+
+

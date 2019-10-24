@@ -223,6 +223,7 @@ Page({
         if (item.Id == 0) {
           that.hasBasesubsidyCode(function(res) {
             if (that.selectComponent('#sub')) {
+              console.log(1111)
               that.selectComponent('#sub').qrCodePop({
                 QrCodeUrl: res.QrCodeUrl,
                 QrCode: res.QrCode,
