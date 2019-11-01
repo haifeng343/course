@@ -8,12 +8,14 @@
   border-radius: 15rpx;
   position: relative;
 }
-.setImg{
+
+.setImg {
   position: absolute;
   right: 0;
-  margin-right: 20rpx!important;
+  margin-right: 20rpx !important;
   top: 20rpx;
 }
+
 .ml2 {
   line-height: 45rpx;
   font-size: 32rpx;
@@ -51,12 +53,13 @@
   border-right: 1rpx solid #e8e8e8;
   box-sizing: border-box;
 }
-.paypagItem:last-child{
+
+.paypagItem:last-child {
   border: none;
 }
 
 .paypagItem .ml1 {
-  font-size: 28rpx;
+  font-size: 24rpx;
   color: #9a9a9a;
 }
 
@@ -115,4 +118,63 @@
   width: 34rpx;
   height: 34rpx;
   margin: 0rpx 15rpx 0 0;
+}
+
+.vipBlock {
+  width: 90%;
+  height: 120rpx;
+  background-color: #383E4C;
+  color: #F6E1C3;
+  font-size: 28rpx;
+  margin: 0 auto;
+  margin-bottom: -20rpx;
+  border-radius: 15rpx;
+  box-sizing: border-box;
+  padding: 15rpx 5%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.vipLeft {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.vipTitle {
+  font-size: 24rpx;
+  line-height: 55rpx;
+}
+
+.vipCenter {
+  width: auto;
+  height: 56rpx;
+  line-height: 56rpx;
+  background-color: #F6E1C3;
+  color: #000;
+  font-size: 28rpx;
+  padding: 0 30rpx;
+  border-radius: 35rpx;
+}
+
+.swiper_container {
+  height: 30rpx;
+  line-height: 30rpx;
+  width: 100%;
+}
+
+.swiper_item {
+  font-size: 24rpx;
+  color: #F6E1C3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  /* letter-spacing: 2px; */
+  /* padding-top: 20rpx; */
 }

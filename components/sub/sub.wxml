@@ -53,7 +53,7 @@
   <view class="zan-dialog__mask">
     <view class="zan-dialog__container">
       <image src='../../images/success1.png' class='success' mode='aspectFill'></image>
-      <view class='title'>恭喜您，完成申请</view>
+      <view class='title'>成功申请补贴</view>
       <view class='zan-content le'>补贴金将于2个工作日内到账，请注意查收</view>
       <button class='btn' bindtap='closeded'>知道了</button>
     </view>

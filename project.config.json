@@ -49,7 +49,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 62,
+			"current": 65,
 			"list": [
 				{
 					"id": -1,
@@ -354,13 +354,6 @@
 				},
 				{
 					"id": -1,
-					"name": "maps",
-					"pathName": "pages/maps/maps",
-					"query": "Id=32",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "inquire",
 					"pathName": "pages/inquire/inquire",
 					"query": "",
@@ -370,7 +363,7 @@
 					"id": 45,
 					"name": "mechanism",
 					"pathName": "pages/mechanism/mechanism",
-					"query": "groupId=23&storeId=11&type=2&sheetId=14",
+					"query": "groupId=91&storeId=792&type=2&sheetId=70",
 					"scene": null
 				},
 				{
@@ -490,6 +483,33 @@
 					"name": "exchange",
 					"pathName": "pages/exchange/exchange",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "vip",
+					"pathName": "pages/vip/vip",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "fund",
+					"pathName": "pages/fund/fund",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "rechargeLog",
+					"pathName": "pages/rechargeLog/rechargeLog",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "poster",
+					"pathName": "pages/poster/poster",
 					"scene": null
 				}
 			]

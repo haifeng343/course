@@ -1,7 +1,7 @@
 .List {
   width: 100%;
   height: auto;
-  position: absolute;
+  position: relative;
   top: 60rpx;
 }
 
@@ -18,12 +18,21 @@
   flex-direction: column;
 }
 
+.item:last-child{
+  margin-bottom: 20rpx;
+}
+
 .exchange-title {
   font-size: 24rpx;
   display: flex;
   justify-content: space-between;
   border-bottom: 1rpx solid #f4f4f4;
   padding-bottom: 15rpx;
+}
+
+.borderNone{
+  border: none!important;
+  padding-bottom: 0!important;
 }
 
 .exchange-content {
@@ -48,6 +57,10 @@
   flex-direction: column;
   justify-content: space-between;
   width: 75%;
+}
+
+.ft24{
+  font-size: 24rpx;
 }
 
 .noWrap {

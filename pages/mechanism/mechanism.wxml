@@ -77,14 +77,14 @@
         <view class='teaNumber'>师资力量 ({{Info.TeacherCount}})</view>
         <!-- <image src='../../images/go.png' class='go' mode='widthFix' lazy-load='true'></image> -->
       </view>
-      <view class='teaList' style="width: 100%">
+      <scroll-view scroll-x="true" class='teaList' style="width: 100%">
         <view class='teachers' wx:for="{{Info.TeacherList}}" wx:key bindtap='tearcherClick' data-id="{{item.Id}}">
           <image class='teaImg' src='{{item.HeadUrl}}' mode='aspectFill' lazy-load='true'></image>
           <view class='teaName ft24'>{{item.Name}}</view>
           <!-- <view class='profession'>{{item.Honor}}</view>
-      <view class='profession'>{{item.TeachingAge}}</view> -->
+          <view class='profession'>{{item.TeachingAge}}</view> -->
         </view>
-      </view>
+      </scroll-view>
     </view>
 
     <!-- 额外信息 -->

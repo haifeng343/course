@@ -1,22 +1,26 @@
 var netUtil = require("../../utils/request.js"); //require引入
 var shareApi = require("../../utils/share.js");
 const app = getApp();
-Page({
 
+Page({
   data: {
     windowHeight: '',
     windowWidth: '',
     date: '', //不填写默认今天日期，填写后是默认日期
     date2: [],
+    dataStart: '', //有效日期
+    dataEnd: '', //
+    showError: false,
     pagecount: 20,
     page: 1,
     year: '全部',
     month: '全部',
     array: [],
+    statusdes: '',
     List: [],
   },
 
-  initPicker: function() {
+  initPicker: function () {
     var date = new Date();
     let arr = [],
       arr1 = [];
@@ -34,7 +38,8 @@ Page({
       date2: [arr.indexOf(this.data.year), arr1.indexOf(this.data.month + '')],
     })
   },
-  onLoad: function(options) {
+
+  onLoad: function (options) {
     let that = this;
     that.setData({
       windowHeight: app.getGreen(0).windowHeight,
@@ -48,9 +53,10 @@ Page({
     that.initPicker();
     that.init();
   },
-  init: function() {
+
+  init: function () {
     let that = this;
-    shareApi.getShare("/pages/exchange/exchange", 0).then(res => {
+    shareApi.getShare("/pages/rechargeLog/rechargeLog", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
       that.setData({
         obj: res.Data,
@@ -60,16 +66,16 @@ Page({
     that.getData();
   },
 
-  getData: function() {
+  getData: function () {
     let that = this;
-    var url = 'user/welfare/exchange/record/list';
+    var url = 'user/cash/record/list';
     var params = {
       Year: that.data.year,
       Month: that.data.month,
       PageCount: that.data.pagecount,
       PageIndex: that.data.page
     }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
       let arr = res.Data;
       var arr1 = [];
       arr.forEach(item => {
@@ -86,7 +92,8 @@ Page({
       })
     });
   },
-  bindDateChange: function(e) {
+
+  bindDateChange: function (e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
     let index = e.detail.value;
     if (index[0] == 0 && index[1] == 0) {
@@ -107,8 +114,31 @@ Page({
 
     this.getData();
   },
+
+  showEor: function (e) {
+    wx.showModal({
+      title: '失败原因',
+      content: e.currentTarget.dataset.statusdes,
+      showCancel: false,
+      confirmColor: '#3DD6D1',
+      confirmText: '知道了'
+    })
+  },
+
+  closed: function () {
+    this.setData({
+      showError: false
+    })
+  },
+
+  withdrawDetail: function () {
+    wx.navigateTo({
+      url: '/pages/withdrawDetail/withdrawDetail',
+    })
+  },
+
   //上拉加载更多
-  onReachBottom: function() {
+  onReachBottom: function () {
     let that = this;
     var temp_page = this.data.page;
     temp_page++;
@@ -120,7 +150,7 @@ Page({
   },
 
   //下拉刷新
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     this.setData({
       page: 1
     });
@@ -129,7 +159,7 @@ Page({
     wx.stopPullDownRefresh();
   },
 
-  onShareAppMessage: function(res) {
+  onShareAppMessage: function (res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

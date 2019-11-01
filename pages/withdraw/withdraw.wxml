@@ -93,14 +93,18 @@
             <view class='text1 gray' wx:if="{{item.PrizeAmountNowStatus==3}}">提现成功</view>
           </view>
           <view wx:if="{{item.ActionType!=0}}">
-          <button open-type="contact" wx:if="{{item.ActionType==4}}" send-message-title="{{item.SendTitle}}" send-message-img="{{item.SendImgUrl}}" send-message-path="{{item.SendLinkPath}}" session-from="{{item.ReplyContent}}" bindcontact='contact' show-message-card plain class='btnd btnd1'>{{item.ActionBtnText}}</button>
+            <view wx:if="{{item.ActionType==4}}">
+              <button open-type="contact" wx:if="{{item.TaskFinishStatus==0}}" send-message-title="{{item.SendTitle}}" send-message-img="{{item.SendImgUrl}}" send-message-path="{{item.SendLinkPath}}" session-from="{{item.ReplyContent}}" bindcontact='contact' show-message-card
+                plain class='btnd btnd1'>{{item.ActionBtnText}}</button>
+              <view class='btnd1 btndNo' wx:if="{{item.TaskFinishStatus==1}}">已完成</view>
+            </view>
             <view wx:else>
-            <form report-submit="true" data-actionparams="{{item.ActionParams}}" data-actiontype="{{item.ActionType}}" bindsubmit='taskclick' wx:if="{{item.TaskFinishStatus==0}}">
-              <button formType="submit" class='btnd btnd1'>{{item.ActionBtnText}}</button>
-            </form>
+              <form report-submit="true" data-actionparams="{{item.ActionParams}}" data-actiontype="{{item.ActionType}}" bindsubmit='taskclick' wx:if="{{item.TaskFinishStatus==0}}">
+                <button formType="submit" class='btnd btnd1'>{{item.ActionBtnText}}</button>
+              </form>
+              <view class='btnd1 btndNo' wx:if="{{item.TaskFinishStatus==1}}">已完成</view>
             </view>
             <!-- <view class='btnd btnd1' data-actionparams="{{item.ActionParams}}" data-actiontype="{{item.ActionType}}" bindtap='taskclick' wx:if="{{item.TaskFinishStatus==0}}">{{item.ActionBtnText}}</view> -->
-            <view class='btnd1 btndNo' wx:if="{{item.TaskFinishStatus==1}}">已完成</view>
           </view>
         </view>
       </view>

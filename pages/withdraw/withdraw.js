@@ -194,8 +194,8 @@ Page({
     }
     netUtil.postRequest(url, params, function(res) {
       wx.showModal({
-        title: '提现成功',
-        content: '提现申请成功，等待银行处理' + '\r\n' + '预计 1 个工作日内到账',
+        title: '积分提取成功',
+        content: '请前往钱包查看',
         showCancel: false,
         confirmColor: '#3DD6D1',
         confirmText: '知道了',

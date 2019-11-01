@@ -186,8 +186,8 @@ scroll-view {
 
 .btn {
   font-size: 28rpx;
-  height: 55rpx;
-  line-height: 55rpx;
+  height: 56rpx;
+  line-height: 56rpx;
   border: 1rpx solid #5b5b5b;
   padding: 0rpx 30rpx;
   border-radius: 40rpx;

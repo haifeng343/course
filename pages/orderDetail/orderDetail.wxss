@@ -187,8 +187,8 @@
   width: 170rpx;
   border:1rpx solid #5b5b5b;
   box-sizing: border-box;
-  height: 55rpx;
-  line-height: 55rpx;
+  height: 56rpx;
+  line-height: 56rpx;
   background-color: transparent;
   font-size: 28rpx;
   display: flex;

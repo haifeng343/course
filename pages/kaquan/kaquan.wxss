@@ -146,7 +146,7 @@ scroll-view {
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  z-index: 999;
+  z-index: 9;
 }
 
 .footerBtn {

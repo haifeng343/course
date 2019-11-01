@@ -98,6 +98,23 @@
         </view>
       </view>
     </view>
+
+    <!-- vip -->
+    <view class='vipBlock'>
+      <view class='vipLeft'>
+        <!-- <view class='vipTitle'>嗨~亲学宝会员</view> -->
+        <view class='vipTitle'>成为会员，享四大权益</view>
+        <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="3000">
+          <block wx:for="{{noticeList}}" wx:key>
+            <swiper-item catchtouchmove="true">
+              <view class="swiper_item">{{item.content}}</view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <view class='vipCenter' bindtap='navtoVip'>会员中心</view>
+    </view>
+
     <view class='List mt20'>
       <view class='item mt20 borb' bindtap='fuli' wx:if="{{buttons.setup==true}}">
         <view class='start'>

@@ -5,7 +5,9 @@
   <movable-view wx:if="{{obj.CustomerServiceInfo.PositionType == 2}}" direction="{{obj.CustomerServiceInfo.IsMove==true?'vertical':'none'}}" class='moveView2 ' y="{{obj.CustomerServiceInfo.PositionHight}}rpx">
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
-  <image class='logo' src='../../images/logo.png' mode='widthFix'></image>
-  <view class='manaText'>版本号v1.9.8</view>
+  <view>
+    <image class='logo' src='../../images/logo.png' mode='widthFix'></image>
+    <view class='manaText'>版本号v1.9.8</view>
+  </view>
   <rich-text nodes="{{html}}"></rich-text>
 </movable-area>

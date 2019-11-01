@@ -8,19 +8,21 @@ Page({
     windowWidth: "",
     navbarActiveIndex: 0,
     navbarTitle: [
-      "可使用的",
-      "已失效的",
+      "可使用",
+      "已使用/已失效",
     ],
     modelList: [{
       list: [],
       status: 0, //是否需要刷新0是 1否
       pageIndex: 1,
-      navbarActiveIndex: 0
+      navbarActiveIndex: 0,
+      isFinish: true,//数据是否加载完成
     }, {
       list: [],
       status: 0,
       pageIndex: 1,
-      navbarActiveIndex: 1
+      navbarActiveIndex: 1,
+      isFinish:true,//数据是否加载完成
     }],
     usertoken:"",
     showId: 0, //默认选中
@@ -90,40 +92,55 @@ Page({
     });
 
     if (userInfo.UserToken) {
-      that.getData();
+      that.getData(1);
     }
   },
 
-  getData: function() {
+  getData: function(type) {
     let that = this;
     let tempModelList = that.data.modelList;
-    tempModelList[that.data.navbarActiveIndex].status = 1; //设置状态为已刷新
+
+    //判断上一次操作是否完成,未完成直接返回
+    if (tempModelList[that.data.navbarActiveIndex].isFinish != true) {
+      return;
+    }
+    tempModelList[that.data.navbarActiveIndex].isFinish = false;
     that.setData({
       modelList: tempModelList
-    })
+    });
     
     var url = 'ticket/list';
     var params = {
       TypeId: that.data.navbarActiveIndex == 0 ?that.data.showId:0,
       UseStatus: that.data.navbarActiveIndex==0?1:2,
       PageCount: 5,
-      PageIndex: that.data.modelList[that.data.navbarActiveIndex].pageIndex,
+      PageIndex: type == 1 ? 1 : (that.data.modelList[that.data.navbarActiveIndex].pageIndex + 1),
     }
-    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
-      let arr = res.Data;
-      let arr1 = [];
-      if (tempModelList[that.data.navbarActiveIndex].pageIndex == 1) {
-        arr1 = arr;
-        tempModelList[that.data.navbarActiveIndex].pageIndex = 1; //设置为第一页
+    netUtil.postRequest(url, params, function(res) { 
+      tempModelList = that.data.modelList;
+      tempModelList[that.data.navbarActiveIndex].status = 1; //设置状态为已刷新
+      let arr = res.Data; //返回数据
+      //1.判断是刷新还是加载更多
+      //a.如果刷新，设置页码数为1
+      //b.如果加载更多且数据列表不为空，设置页码数+1
+      if (type == 1) {
+        tempModelList[that.data.navbarActiveIndex].list = arr;
+        tempModelList[that.data.navbarActiveIndex].pageIndex = 1;
       } else {
-        arr1 = tempModelList[that.data.navbarActiveIndex].list;
-        arr1 = arr1.concat(arr);
-        tempModelList[that.data.navbarActiveIndex].pageIndex = tempModelList[that.data.navbarActiveIndex].pageIndex + 1; //页码加1
-      }
-      tempModelList[that.data.navbarActiveIndex].list = arr1;
+        if (arr.length > 0) {
+          tempModelList[that.data.navbarActiveIndex].list = tempModelList[that.data.navbarActiveIndex].list.concat(arr)
+          tempModelList[that.data.navbarActiveIndex].pageIndex++;
+        }
+      } 
+      tempModelList[that.data.navbarActiveIndex].isFinish = true;
       that.setData({
         modelList: tempModelList
       })
+    }, function () {
+      tempModelList[that.data.navbarActiveIndex].isFinish = true;
+      that.setData({
+        modelList: tempModelList
+      });
     });
   },
 
@@ -137,7 +154,7 @@ Page({
 
     if (this.data.usertoken) {
       if (this.data.modelList[navbarTapIndex].status == 0) {
-        this.init();
+        this.getData(1);
       }
     }
   },
@@ -147,7 +164,7 @@ Page({
       showId: e.currentTarget.dataset.id,
       showName: e.currentTarget.dataset.name,
     })
-    this.init();
+    this.getData(1);
   },
 
   showTopPop: function() {
@@ -198,23 +215,13 @@ Page({
   //上拉加载更多
   onReachBottom: function() {
     let that = this;
-    let temp = that.data.modelList;
-    temp[that.data.navbarActiveIndex].pageIndex++;
-    that.setData({
-      modelList: temp
-    })
-    that.init();
+    that.getData(2);
   },
 
   //下拉刷新
   onPullDownRefresh: function() {
     let that = this;
-    let temp = that.data.modelList;
-    temp[that.data.navbarActiveIndex].pageIndex = 1;
-    that.setData({
-      modelList: temp
-    })
-    that.init();
+    that.getData(1);
     wx.stopPullDownRefresh();
   },
 

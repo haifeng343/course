@@ -57,13 +57,16 @@
     "pages/kaquan/kaquan",
     "pages/fulishe/fulishe",
     "pages/shangquan/shangquan",
-    "pages/invalid/invalid",
     "pages/teacherDetail/teacherDetail",
     "pages/reservation/reservation",
     "pages/appointment/appointment",
     "pages/subsidy/subsidy",
     "pages/subsidyLog/subsidyLog",
-    "pages/exchange/exchange"
+    "pages/exchange/exchange",
+    "pages/vip/vip",
+    "pages/fund/fund",
+    "pages/rechargeLog/rechargeLog",
+    "pages/poster/poster"
   ],
   "window": {
     "backgroundTextStyle": "dark",

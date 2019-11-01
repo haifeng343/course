@@ -13,8 +13,19 @@ Page({
     buttons: {},
     Url: "",
     promptText: true, //是否显示提示语
+    noticeList: [{
+        content: "国庆假期暂停发货温馨提醒：尊敬的用户，",
+      },
+      {
+        content: "停发货，并停止客服服务，将于10月8日恢复正常",
+      },
+    ],
   },
-
+  navtoVip:function() {
+    wx.navigateTo({
+      url: '/pages/vip/vip',
+    })
+  },
   //复制微信号
   copyText: function(e) {
     wx.setClipboardData({
@@ -63,18 +74,18 @@ Page({
       })
     });
   },
-  _getMyInfo:function() {
+  _getMyInfo: function() {
     var that = this;
     var url = 'user/wallet';
     var params = {};
-    netUtil.postRequest(url, params, function (res) {
+    netUtil.postRequest(url, params, function(res) {
       wx.setStorageSync('userInfo', res.Data);
 
       that.setData({
         userInfo: res.Data,
         wallet_yuan: Number(res.Data.TotalMoney / 100).toFixed(2)
       });
-    },null,false,false,false)
+    }, null, false, false, false)
   },
   menuShow: function() {
     var that = this;
