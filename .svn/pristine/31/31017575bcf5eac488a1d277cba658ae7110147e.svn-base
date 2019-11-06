@@ -1,0 +1,113 @@
+<view class='vipTop'>
+  <view class='vipUserInfo'>
+    <image src='../../images/userIcon.png' mode='aspectFill' class='userImg'></image>
+    <view class='vipText'>
+      <view class='vipName'>账户名</view>
+      <view>成为会员享4大权益</view>
+      <!-- <view>有效期至 2019-10-23</view> -->
+    </view>
+  </view>
+  <view class='vipLog'>
+    <view class='vipLogText' bindtap='bindRecharge'>充值记录</view>
+    <image src='../../images/vipIcon.png' mode='aspectFill' class='vipIcon'></image>
+  </view>
+  <view class='vipContent'>
+    <view class='vipItem'>
+      <view class='vipNumber'>300</view>
+      <view>累计节省 (元)</view>
+    </view>
+    <view class='vipItem' bindtap='bindFund'>
+      <view class='vipNumber'>300</view>
+      <view>累计节省 (元)</view>
+    </view>
+  </view>
+</view>
+
+<view class='vipCard'>
+  <view class='vipCardItem active'>
+    <view class='vipCardName'>季卡</view>
+    <view class='vipCardMoney'>
+      <span class="fuhao">￥</span>300</view>
+    <view class='vipCardOldMoney'>￥400</view>
+  </view>
+  <view class='vipCardItem'>
+    <view class='vipCardName'>季卡</view>
+    <view class='vipCardMoney'>
+      <span class="fuhao">￥</span>300</view>
+    <view class='vipCardOldMoney'>￥400</view>
+  </view>
+  <view class='vipCardItem'>
+    <view class='vipCardName'>季卡</view>
+    <view class='vipCardMoney'>
+      <span class="fuhao">￥</span>300</view>
+    <view class='vipCardOldMoney'>￥400</view>
+  </view>
+</view>
+<view class='vipInterests'>会员权益</view>
+<view class='vipList'>
+  <view class='vipInterItem'>
+    <view class='column'>
+      <view class='between'>
+        <view class='start w75'>
+          <image src='../../images/bb1.png' mode='aspectFill' class='vipItenIcon'></image>
+          <view class='vipItemTitlte'>会员补贴金</view>
+        </view>
+        <view class='vipBtn'>立即使用</view>
+      </view>
+    </view>
+    <view class='vipItemContent'>授课计划法可视电话疯狂夺金沙发ID还是覅打开 了打卡师傅来看；恢复卡上 立刻打开我涵盖了妇女</view>
+  </view>
+  <view class='vipInterItem'>
+    <view class='column'>
+      <view class='between'>
+        <view class='start w75'>
+          <image src='../../images/bb1.png' mode='aspectFill' class='vipItenIcon'></image>
+          <view class='vipItemTitlte'>会员补贴金</view>
+        </view>
+        <view class='vipBtn'>立即使用</view>
+      </view>
+    </view>
+    <view class='vipItemContent'>授课计划法可视电话疯狂夺金沙发ID还是覅打开 了打卡师傅来看；恢复卡上 立刻打开我涵盖了妇女</view>
+  </view>
+  <view class='vipInterItem'>
+    <view class='column'>
+      <view class='between'>
+        <view class='start w75'>
+          <image src='../../images/bb1.png' mode='aspectFill' class='vipItenIcon'></image>
+          <view class='vipItemTitlte'>会员补贴金</view>
+        </view>
+        <view class='vipBtn'>立即使用</view>
+      </view>
+    </view>
+    <view class='vipItemContent'>授课计划法可视电话疯狂夺金沙发ID还是覅打开 了打卡师傅来看；恢复卡上 立刻打开我涵盖了妇女</view>
+  </view>
+  <view class='vipInterItem'>
+    <view class='column'>
+      <view class='between'>
+        <view class='start w75'>
+          <image src='../../images/bb1.png' mode='aspectFill' class='vipItenIcon'></image>
+          <view class='vipItemTitlte'>会员补贴金</view>
+        </view>
+        <view class='vipBtn'>立即使用</view>
+      </view>
+    </view>
+    <view class='vipItemContent'>授课计划法可视电话疯狂夺金沙发ID还是覅打开 了打卡师傅来看；恢复卡上 立刻打开我涵盖了妇女</view>
+  </view>
+  <view class='vipInterItem'>
+    <view class='column'>
+      <view class='between'>
+        <view class='start w75'>
+          <image src='../../images/bb1.png' mode='aspectFill' class='vipItenIcon'></image>
+          <view class='vipItemTitlte'>会员补贴金</view>
+        </view>
+        <view class='vipBtn'>立即使用</view>
+      </view>
+    </view>
+    <view class='vipItemContent'>授课计划法可视电话疯狂夺金沙发ID还是覅打开 了打卡师傅来看；恢复卡上 立刻打开我涵盖了妇女</view>
+  </view>
+</view>
+<view class='lastItem'></view>
+<view class='pay'>
+  <view class='btn'>开通会员 (季卡)</view>
+  <!-- <view class='btn'>立即续费 (季卡)</view> -->
+</view>

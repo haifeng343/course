@@ -1,0 +1,69 @@
+<view class='logTop between'>
+  <view class='start'>
+    <picker mode="multiSelector" value="{{date2}}" range='{{array}}' start="{{dataStart}}" end="{{dataEnd}}" fields="month" bindchange="bindDateChange" bindtap='initPicker'>
+      <view class="picker">
+        {{date?date:now}}
+      </view>
+    </picker>
+    <image src='../../images/select.png' class='select' mode='aspectFill' lazy-load='true'></image>
+  </view>
+</view>
+
+<view class='List' wx:if="{{List.length>0}}">
+  <view class='item' wx:for="{{List}}" wx:key>
+    <view class="{{item.TicketList.length>0 || item.TaskList.length>0?'' :'borderNone'}} exchange-title">
+      <view>兑换码：{{item.CodeNumber}}</view>
+      <view class='bb'>{{item.UseTime}}</view>
+    </view>
+    <view class='exchange-content' wx:for="{{item.TicketList}}" wx:key wx:for-item="k">
+      <image src='{{k.CardIconUrl}}' mode='aspectFill' class='exchangeImg'></image>
+      <view class='quanContent'>
+        <view class='quanTitle noWrap'>{{k.CardName}}</view>
+        <view class=' noWrap ft24 bb'>{{k.UseContext}}</view>
+        <view class=' ft24 bb'>有效期至{{k.EndTime}}</view>
+      </view>
+    </view>
+    <view class='exchange-content' wx:for="{{item.TaskList}}" wx:key wx:for-item="b">
+      <view class='column w100'>
+        <view class='startd w100'>
+          <image src='{{b.TaskIconShow}}' mode='aspectFill' class='icon'></image>
+          <view class='hongbo noWrap'>{{b.TaskName}}</view>
+        </view>
+        <view class='bb ft24'>有效期:{{b.TaskEndTime}}</view>
+        <view class='startd ft24'>
+          <view class='bb'>奖励现金:
+            <span class="red">￥{{b.PrizeAmountNow*1.0/100}}</span>
+            <span class="ml10" wx:if="{{b.PrizeAmountNowStatus==1}}">(未提现)</span>
+            <span class="ml10" wx:if="{{b.PrizeAmountNowStatus==2}}">(领取中)</span>
+            <span class="ml10" wx:if="{{b.PrizeAmountNowStatus==3}}">(已领取)</span>
+            <span class="ml10" wx:if="{{b.PrizeAmountNowStatus==4}}">(领取失败)</span>
+          </view>
+          <view class='bb ml40'>奖励积分:
+            <span class="red">{{b.PrizeScoreNow}}</span>
+            <span class="ml10" wx:if="{{b.PrizeScoreNowStatus==1}}">(未领取)</span>
+            <span class="ml10" wx:if="{{b.PrizeScoreNowStatus==2}}">(已领取)</span>
+          </view>
+        </view>
+        <view class='startd ft24'>
+          <view class='bb'>任务现金:
+            <span class="red">￥{{b.PrizeAmountFinish*1.0/100}}</span>
+          </view>
+          <view class='bb ml40'>任务积分:
+            <span class="red">{{b.PrizeScoreFinish}}</span>
+          </view>
+        </view>
+        <view class='startd ft24'>
+          <view class='bb'>任务状态:
+            <span>{{b.TaskFinishiStatus==0?'未完成':'已完成'}}</span>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='nohasLog' wx:else>
+    <view class='no_record_frame'>
+      <image class='noImg' src='../../images/zanwu.png' mode='aspectFill' lazy-load='true'></image>
+      <view>暂无兑换记录</view>
+    </view>
+  </view>

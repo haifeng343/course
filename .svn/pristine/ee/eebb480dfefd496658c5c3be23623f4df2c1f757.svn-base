@@ -1,0 +1,62 @@
+<view class='vipTop mt20'>
+  <view class='vipUserInfo'>
+    <image src='../../images/userIcon.png' mode='aspectFill' class='userImg'></image>
+    <view class='vipText'>
+      <view class='vipName'>合伙基金 (元): 2290.00</view>
+      <!-- <view>您好，合伙人</view> -->
+      <view>成为合伙人，享更多权益</view>
+    </view>
+  </view>
+  <view class='vipLog' bindtap='bindAbout'>
+    <view class='vipLogText'>合伙权益</view>
+    <image src='../../images/vipIcon.png' mode='aspectFill' class='vipIcon'></image>
+  </view>
+</view>
+
+<view class='List'>
+  <view class='name'>基金增长记录</view>
+  <view class='item'>
+    <view class='column'>
+      <view class='itemName'>用户增加都是</view>
+      <view class='itemTime'>2019-12-12</view>
+    </view>
+    <view class='itemMoney'>+￥16</view>
+  </view>
+  <view class='item'>
+    <view class='column'>
+      <view class='itemName'>用户增加都是</view>
+      <view class='itemTime'>2019-12-12</view>
+    </view>
+    <view class='itemMoney'>+￥16</view>
+  </view>
+</view>
+<!-- <view class='nohasLog'>
+  <view class='no_record_frame'>
+    <image class='noImg' src='../../images/zanwu.png' mode='aspectFill' lazy-load='true'></image>
+    <view>暂无积分变更记录</view>
+  </view>
+</view> -->
+<view class='lastItem'></view>
+<view class='pay'>
+  <button class='btn' open-type='share' bindtap='transpond'>转入余额</button>
+</view>
+
+<!-- 转入余额 -->
+<view class="zan-dialog" hidden='{{!showLog}}' catchtouchmove="ture">
+  <view class="zan-dialog__mask"/>
+  <view class="zan-container">
+    <view class='zan-title'>转入余额</view>
+    <view class='title'>确认转入<span class="boldFont">￥28.00</span>到钱包吗？</view>
+    <button class='btn1' bindtap='closeded'>知道了</button>
+  </view>
+</view>
+<!-- 转入余额成功 -->
+<view class="zan-dialog" hidden='{{!showSuccess}}' catchtouchmove="ture">
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-container zan-container1">
+    <image src='../../images/success1.png' class='success1' mode='aspectFill'></image>
+    <view class='zan-title'>转入余额成功</view>
+    <view class='title'>请至您的钱包查看</view>
+    <view class='know' bindtap='closeded'>知道了</view>
+  </view>
+</view>

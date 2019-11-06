@@ -19,7 +19,7 @@ Page({
     bankName: "中国", //卡类型
     btntext: "获取验证码", //验证码按钮
     notEdit: false, //验证码按钮是否可点击
-    imgCodeShow: true, //图片验证码弹窗
+    imgCodeShow: false, //图片验证码弹窗
     imgCodeUrl:'',//图片验证码地址
     ActionCode:'',//操作码
     tips:false,//验证码发送提示
