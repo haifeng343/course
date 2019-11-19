@@ -1,0 +1,7 @@
+
+  <image src='{{content.ShowUrl}}' mode='widthFix' class='boo-bgImg'></image>
+<view class='vipLog' wx:if="{{content.rulesChecked==true}}" style='background-color:{{content.rulesBgColor}};color:{{content.rulesFontColor}}' bindtap='clickDec'>助力规则</view>
+<view class="boo-pay1" style='background-color:{{content.buttonBgColor}}'>
+  <button class='boo-btn1' bindtap='bindLog' data-title="{{content.button1Text}}" style='background-color:{{content.button1BgColor}};color:{{content.button1FontColor}};border-color:{{content.button1borderColor}}'>{{content.button1Text}}</button>
+  <button class='boo-btn1' open-type='share' style='background-color:{{content.button2BgColor}};color:{{content.button2FontColor}};border:{{content.button2borderColor}}'>{{content.button2Text}}</button>
+</view>

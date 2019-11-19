@@ -1,0 +1,6 @@
+.boo-logList{
+  margin-top: 0;
+}
+.boo-logItem{
+  border-top: 1rpx solid #f4f4f4;
+}

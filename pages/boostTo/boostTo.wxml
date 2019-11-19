@@ -1,0 +1,39 @@
+<view wx:if="{{type==1}}" style='width:{{windowWidth}}rpx;height:{{windowHeight}}rpx'>
+<image src='{{content.ShowUrl}}' mode='widthFix' class='boo-bgImg'></image>
+  <button class="boo-btn {{userInfo.IsPartner==true?'gray':''}}" wx:if="{{content.buttonChecked==true}}" bindtap="{{userInfo.IsPartner==true?'':'creat'}}" style='background-color:{{content.button1BgColor}};color:{{content.button1FontColor}};border-color:{{content.button1borderColor}}'>{{userInfo.IsPartner==true?'您已是永久合伙人':content.button1Text}}
+    <span wx:if="{{price && !userInfo.IsPartner}}">({{price/100}}元)</span>
+  </button>
+
+  <view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
+    <view class="zan-dialog__mask">
+      <view class="zan-dialog__container">
+        <image src='../../images/success1.png' class='success' mode='aspectFill'></image>
+        <view class='title'>恭喜您，已成为永久合伙人！</view>
+        <button class='btn' bindtap='closeded'>知道了</button>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<view wx:else>
+  <view style='width:{{windowWidth}}rpx;height:{{windowHeight}}rpx'>
+    <image src='{{content.ShowUrl}}' mode='widthFix' class='boo-bgImg'></image>
+  </view>
+
+  <view wx:if="{{content.buttonChecked==true}}">
+    <view class="boo-pay1" wx:if="{{content.button1JumpType!=3}}">
+      <view class='boo-btn' bindtap='clickTo' data-type="{{content.button1JumpType}}" style='background-color:{{content.button1BgColor}};color:{{content.button1FontColor}};border-color:{{content.button1borderColor}}'>{{content.button1Text}}</view>
+    </view>
+
+    <view wx:else>
+      <view wx:if="{{concat}}">
+        <button open-type="contact" send-message-title="{{concat.SendTitle}}" send-message-img="{{concat.SendImgUrl}}" send-message-path="{{concat.SendLinkPath}}" session-from="{{concat.ReplyContent}}" bindtap='clickTo' show-message-card
+          plain style='background-color:{{content.button1BgColor}};color:{{content.button1FontColor}};border-color:{{content.button1borderColor}}' class='boo-btn'>{{content.button1Text}}</button>
+      </view>
+      <view wx:else>
+        <button class='boo-btn' open-type='contact' bindtap='clickTo' style='background-color:{{content.button1BgColor}};color:{{content.button1FontColor}};border-color:{{content.button1borderColor}}'>{{content.button1Text}}</button>
+      </view>
+    </view>
+  </view>
+</view>

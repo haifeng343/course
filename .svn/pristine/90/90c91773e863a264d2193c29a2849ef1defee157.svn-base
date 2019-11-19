@@ -1,0 +1,22 @@
+<view class='boo-log'>
+  <view class='rela' wx:if="{{List.length<=0}}">
+    <view class='nohasLog'>
+      <view class='no_record_frame'>
+        <image class='noImg' src='../../images/zanwu.png' mode='aspectFill' lazy-load='true'></image>
+        <view>暂无助力记录</view>
+      </view>
+    </view>
+  </view>
+  <view class='boo-logList'>
+    <view class='boo-logItem between' wx:for="{{List}}" wx:key>
+      <view class='itemLeft start'>
+        <image class='boo-avator' src='{{item.HeadUrl}}' mode='aspectFill' lazy-load='true'></image>
+        <view>
+          <view class='boo-share'>{{item.AccountName}}</view>
+          <view class='boo-time'>{{item.CreateTime}}</view>
+        </view>
+      </view>
+      <view class='boo-fraction red'>+{{item.TempRateCount/100}}%</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,36 @@
+<view class='vipList'>
+  <view class='vipInterItem' wx:for="{{vipList}}" wx:key wx:for-item="item1">
+    <view class='column'>
+      <view class='between'>
+        <view class='start w70'>
+          <image wx:if="{{item1.ShowIcon}}" src='{{item1.ShowIcon}}' mode='aspectFill' class='vipItenIcon'></image>
+          <view class='vipItemTitlte'>{{item1.EquityName}}</view>
+        </view>
+        <view class='vipBtn' wx:if="{{item1.EquityType==1}}" bindtap='gotoKaquan'>立即使用</view>
+        <view class='vipBtn' wx:if="{{item1.EquityType==2}}" bindtap='gotoSubsidy'>立即使用</view>
+        <view class='vipBtn' wx:if="{{item1.EquityType==3}}" bindtap='baozhangDialog' data-title="{{item1.EquityName}}" data-content="{{item1.Context}}">我的保障金</view>
+        <view class='vipBtn' wx:if="{{item1.EquityType==4}}" bindtap='gotoPoster'>专属海报</view>
+      </view>
+    </view>
+    <view class='vipItemContent'>{{item1.EquityDes?item1.EquityDes:'暂无权益简介'}}</view>
+  </view>
+</view>
+
+<view class='nohasLog none'>
+  <view class='no_record_frame'>
+    <image class='noImg' src='../../images/zanwu.png' mode='aspectFill' lazy-load='true'></image>
+    <view>暂无会员权益</view>
+  </view>
+</view>
+
+<!-- 弹窗 -->
+<view class="zan-dialog {{ showSuccess ? 'zan-dialog--show' : '' }}" catchtouchmove="ture">
+  <view class="zan-dialog__mask" bindtap="toggleDialog" />
+  <view class="zan-dialog__container">
+    <view class='zan-title'>{{name}}</view>
+    <view class='content'>
+      <rich-text nodes="{{content}}"></rich-text>
+    </view>
+    <view class='know' bindtap='closeded'>知道了</view>
+  </view>
+</view>

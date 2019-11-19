@@ -1,0 +1,33 @@
+.gray{
+  background-color: #ccc!important;
+  color: #fff!important;
+  border: 1rpx solid #ccc!important;
+}
+.btn{
+  width: 80%;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  color: #fff;
+  background-color: #29D9D5;
+  border-radius: 15rpx;
+  margin-top: 20rpx;
+}
+.zan-dialog__container{
+  padding: 20rpx;
+}
+.zan-dialog__container{
+  position: fixed;
+  width: 650rpx;
+  height: 270rpx;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.success{
+  width: 100rpx;
+  height: 100rpx;
+}
