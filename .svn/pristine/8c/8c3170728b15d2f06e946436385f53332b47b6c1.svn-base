@@ -1,0 +1,89 @@
+
+.dialogMask{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  align-items: center;
+  font-size: 28rpx;
+}
+.dialog-content1 {
+  width: 100%;
+  height: auto;
+  max-height: 800rpx;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  padding: 20rpx 5%;
+}
+.dialog-container{
+  width: 90%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 15rpx;
+  max-height: 80%;
+  position: relative;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding-top: 0;
+}
+.dialog-content1 {
+  width: 100%;
+  height: auto;
+  max-height: 800rpx;
+  box-sizing: border-box;
+  padding: 20rpx 5%;
+}
+.dialog-footer{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  display: flex;
+  justify-content: space-around;
+  border-top: 2rpx solid #f4f4f4;
+  z-index: 9;
+  background-color: #fff;
+  border-bottom-right-radius: 15rpx;
+  border-bottom-left-radius: 15rpx;
+}
+.dialog-btn{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+.dialog-btn:first-child{
+  border-right: 2rpx solid #f4f4f4;
+}
+.dialog-btn:last-child{
+  border-right: none!important;
+}
+
+.dialog-title{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+}
+
+
+
+
+
+
+
+
+

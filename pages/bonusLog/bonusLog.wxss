@@ -18,9 +18,6 @@ page{
   color: #fff;
   background-color: #9e9e9e;
 }
-.cc{
-  color: #5b5b5b;
-}
 .log{
   width: 100%;
   margin-top: 60rpx;
@@ -49,6 +46,7 @@ page{
 .time{
   font-size: 24rpx;
   line-height: 40rpx;
+  color: #717171;
 }
 .share{
   font-size: 28rpx;

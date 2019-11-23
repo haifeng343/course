@@ -6,19 +6,14 @@
     <button open-type='contact' class='contact contact_right'>客服</button>
   </movable-view>
   <view class='mTop'>
-    <view class='paypag'>
-      <view class='paypagItem' bindtap='bous'>
-        <view class='ml2'>{{userInfo.BountyMoney*1.0/100}}</view>
-        <view class='ml1'>奖励金</view>
-      </view>
-      <!-- <view class='wallet' wx:if="{{promptText}}"></view> -->
-      <view class='paypagItem' bindtap='balanceLog'>
-        <view class='ml2'>{{(userInfo.Money+userInfo.TaskMoney)*1.0/100}}</view>
-        <view class='ml1'>余额</view>
+    <image class='mTopImg' src='../../images/mm1.png' mode='widthFix' lazy-load='true'></image>
+    <view class='column mt10'>
+      <view class='Balance'>我的余额</view>
+      <view class='b1'>
+        <text class='money'>￥{{money}}</text>
       </view>
     </view>
-    <image src='../../images/moredec.png' bindtap='bindDec' mode='aspectFill' class='more'></image>
-
+    <view class='rule' bindtap='balanceLog'>余额变更记录</view>
   </view>
   <view class='List mt20'>
     <view class='item mt20' bindtap='withdraw'>
@@ -59,6 +54,5 @@
     </view>
   </view>
 
-  <dialog id="dialog"></dialog>
   <pop id="pop"></pop>
 </movable-area>

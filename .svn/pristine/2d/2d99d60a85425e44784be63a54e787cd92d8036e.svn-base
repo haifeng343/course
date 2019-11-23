@@ -18,11 +18,11 @@
   <view class='vipContent'>
     <view class='vipItem' bindtap='bindGrand'>
     <!-- 累计节省字段 -->
-      <view class='vipNumber'>{{userInfo.SavedMoney*1.0/100}}</view>
-      <view>累计收益 (元)</view>
+      <view class='vipNumber'>{{userInfo.SavedMoney/100}}</view>
+      <view>累计节省 (元)</view>
     </view>
     <view class='vipItem' bindtap='bindFund'>
-      <view class='vipNumber'>{{userInfo.FundAmount*1.0/100}}</view>
+      <view class='vipNumber'>{{userInfo.FundAmount/100}}</view>
       <view>合伙基金 (元)</view>
     </view>
   </view>
