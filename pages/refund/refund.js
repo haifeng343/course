@@ -21,10 +21,9 @@ Page({
     kd: '',
     Reason: '拍错/不想拍',
     lpm: {},
-    urlImgs: [],
-    PayAmount:'',
-    type:'',
-    film:'',
+    PayAmount: '',
+    type: '',
+    film: '',
   },
 
   onLoad: function(options) {
@@ -43,7 +42,7 @@ Page({
       orderId: options.OrderId || '',
       kmd: options.kmd || '',
       kd: options.kd || '',
-      type : options.type || '',
+      type: options.type || '',
     });
 
     that.init();
@@ -60,7 +59,7 @@ Page({
     that._ticketUsedetails(that.data.type);
   },
 
-  init: function () {
+  init: function() {
     let that = this;
     shareApi.getShare("/pages/refund/refund", 0).then(res => {
       res.Data.SharePath = res.Data.SharePath.replace(/@recommand/g, wx.getStorageSync('userInfo').RecommandCode)
@@ -68,40 +67,43 @@ Page({
         obj: res.Data,
       })
     })
-    
+
   },
 
-  hasFilm:function(e){
+  hasFilm: function(e) {
     this.setData({
-      film:e.detail.value
+      film: e.detail.value
     })
   },
 
-// 获取换购券使用详情
-  _ticketUsedetails: function (type) {
+  // 获取换购券使用详情
+  _ticketUsedetails: function(type) {
     let that = this;
     var url = 'member/repurchase/ticket/usedetails';
     var params = {
       Id: type,
     }
-    netUtil.postRequest(url, params, function (res) { //onSuccess成功回调
+    netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       that.setData({
-        content:res.Data,
+        content: res.Data,
         imgs: res.Data.ImgList,
         film: res.Data.Description,
       })
     });
   },
 
-  getData: function (formId) {
+  getData: function(formId) {
     let that = this;
+    let imgPathArr = that.data.imgs.map(e => {
+      return e.ImgPath;
+    });
     var url = 'order/refund/apply';
     var params = {
       OrderId: that.data.orderId,
       Reason: that.data.Reason,
-      ImgList: that.data.urlImgs,
+      ImgList: imgPathArr,
     }
-    netUtil.postRequest(url, params, function(res) { 
+    netUtil.postRequest(url, params, function(res) {
       console.log(res.Data.RefundStatus)
       var refundStatus = res.Data.RefundStatus;
       var refundTime = res.Data.RefundTime;
@@ -134,7 +136,7 @@ Page({
           detail: temp,
         });
 
-        if (that.data.kd == 3){
+        if (that.data.kd == 3) {
           let temp = [];
           temp = prePage1.data.modelList;
           temp.forEach(x => {
@@ -151,9 +153,9 @@ Page({
         }
       }
       wx.showModal({
-        title: '您已成功申请退款',
-        showCancel:false,
-        success: function () {
+        content: '您已成功申请退款',
+        showCancel: false,
+        success: function() {
           wx.navigateBack({
             delta: 1
           });
@@ -162,23 +164,27 @@ Page({
           prevPage.init();
         }
       })
-    }, null, true, true, true, formId); 
+    }, null, true, true, true, formId);
   },
 
-// 换购申请
-  _memberRepurchaseApply(formId){
+  // 换购申请
+  _memberRepurchaseApply(formId) {
     let that = this;
+    let imgPathArr = that.data.imgs.map(e => {
+      return e.ImgPath;
+    });
+    
     var url = 'member/repurchase/apply';
     var params = {
       MyTicketId: that.data.type,
       Description: that.data.film,
-      ImgList: that.data.urlImgs,
+      ImgList: imgPathArr,
     }
-    netUtil.postRequest(url, params, function (res) { 
+    netUtil.postRequest(url, params, function(res) {
       wx.showModal({
         content: '您已成功申请换购电影票',
         showCancel: false,
-        success: function () {
+        success: function() {
           wx.navigateBack({
             delta: 1
           });
@@ -189,7 +195,6 @@ Page({
 
   chooseImg: function(e) {
     var that = this;
-    var imgs = that.data.imgs; //存图片地址的变量
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -197,12 +202,7 @@ Page({
       success: function(res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths;
-        // console.log(res)
-        imgs.push(tempFilePaths[0]);
         that.upLoadImg(tempFilePaths[0]);
-        that.setData({
-          imgs: imgs
-        });
         that.showHide();
       }
     });
@@ -229,11 +229,15 @@ Page({
     var index = e.currentTarget.dataset.index;
     //所有图片
     var imgs = this.data.imgs;
+    let urlArr = imgs.map(e => {
+      return e.ImgUrl
+    });
+    console.log(urlArr)
     wx.previewImage({
       //当前显示图片
-      current: imgs[index],
+      current: imgs[index].ImgUrl,
       //所有图片
-      urls: imgs
+      urls: urlArr 
     })
   },
 
@@ -266,7 +270,7 @@ Page({
     netUtil.postRequest(url, params, function(res) { //onSuccess成功回调
       that.setData({
         lpm: res.Data,
-        PayAmount: Number(res.Data.PayAmount/100).toFixed(2)
+        PayAmount: Number(res.Data.PayAmount / 100).toFixed(2)
       })
     });
   },
@@ -281,7 +285,7 @@ Page({
     }
     if (this.data.orderId) {
       this.getData(formId);
-    }else{
+    } else {
       this._memberRepurchaseApply(formId);
     }
   },
@@ -299,14 +303,13 @@ Page({
         'appVersion': '1.0.1',
         "userToken": usertoken,
       },
-      name: that.data.orderId ? 'Order.Refund' :'Member.Img',
+      name: that.data.orderId ? 'Order.Refund' : 'Member.Img',
       success: (res) => {
-        console.log(res)
-        var ttt = JSON.parse(res.data)
-        var temp = that.data.urlImgs;
-        temp.push(ttt.Data.ImgPath);
+        let tempArr = JSON.parse(res.data);
+        let tempImgs=that.data.imgs;
+        tempImgs.push(tempArr.Data);
         that.setData({
-          urlImgs: temp
+          imgs: tempImgs
         })
       },
       fail: (res) => {
@@ -326,8 +329,8 @@ Page({
       Reason: this.data.array[index]
     })
   },
-  
-  onShareAppMessage: function (res) {
+
+  onShareAppMessage: function(res) {
     return {
       title: this.data.obj.Title,
       path: this.data.obj.SharePath,

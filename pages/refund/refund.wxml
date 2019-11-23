@@ -43,13 +43,13 @@
     <view style='background-color:#fff;height:400rpx;'>
       <view class="image" wx:for="{{imgs}}" wx:for-item="item" wx:key="*this">
         <!-- 图片预览 -->
-        <image src="{{item}}" class='onload' data-index="{{index}}" bindtap="previewImg" mode='scaleToFill' lazy-load='true'></image>
+        <image src="{{item.ImgUrl}}" class='onload' data-index="{{index}}" bindtap="previewImg" mode='scaleToFill' lazy-load='true'></image>
         <view class="deleteImage" data-index="{{index}}" catchtap="deleteImg">
           <!-- 图片删除 -->
           <image wx:if="{{content.Status!=1 && content.Status!=2 && content.Status!=3}}" src='../../images/cha.png' class='cha' mode='widthFix' lazy-load='true'></image>
         </view>
       </view>
-      <view class='jiatupian' bindtap="chooseImg" wx:if="{{plusShow && (content.Status==0 || content.Status==5)}}">
+      <view class='jiatupian' bindtap="chooseImg" wx:if="{{plusShow && (content.Status==0 || content.Status==4 || content.Status==5)}}">
         <image class='camero' src='../../images/certificate.png' mode='widthFix' lazy-load='true'></image>
       </view>
     </view>
