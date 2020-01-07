@@ -1,6 +1,0 @@
-<view class='List'>
-  <view class='item start' wx:for="{{List}}" wx:key>
-     <image class='cion' src='{{item.BankIconUrl}}' mode='widthFix' lazy-load='true'></image>
-      <view>{{item.BankName}}</view>
-  </view>
-</view>

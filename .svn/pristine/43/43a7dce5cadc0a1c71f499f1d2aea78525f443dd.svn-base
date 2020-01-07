@@ -1,7 +1,0 @@
-<view style='width:{{windowWidth}}rpx;height:{{windowHeight}}rpx'>
-  <image src='{{content.ShowUrl}}' mode='widthFix' class='boo-bgImg'></image>
-</view>
-
-<view class="boo-pay1" style='background-color:{{content.buttonBgColor}}'>
-  <view class='boo-btn' bindtap='showDialog' style='background-color:{{content.button1BgColor}};color:{{content.button1FontColor}};border-color:{{content.button1borderColor}}'>{{content.button1Text}}</view>
-</view>

@@ -1,9 +1,0 @@
-<!--绑定点击事件-->
-<button bindtap="nearby_search">搜索周边KFC</button>
-<!--地图容器-->
-<map id="myMap"
-   markers="{{markers}}"
-   style="width:100%;height:100vh;"
-   longitude="120.160678"
-   latitude="30.176286" scale='16'>
-</map>

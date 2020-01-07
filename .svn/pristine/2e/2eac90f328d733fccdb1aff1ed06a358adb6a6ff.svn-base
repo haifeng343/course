@@ -1,6 +1,0 @@
-<view class='nohasLog'>
-  <view class='no_record_frame'>
-    <view wx:if="{{loading==true}}">正在跳转...</view>
-    <view class='red' wx:else bindtap='next'>跳转失败，点击重试...</view>
-  </view>
-</view>

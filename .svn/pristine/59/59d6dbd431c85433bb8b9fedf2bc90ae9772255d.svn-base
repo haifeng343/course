@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "待体验课程",
-  "usingComponents":{
-    "pop":"../../components/pop/pop"
-  }
-}

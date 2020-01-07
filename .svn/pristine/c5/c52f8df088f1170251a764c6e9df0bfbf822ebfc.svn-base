@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "提现",
-  "usingComponents": {
-    "pop": "../../components/pop/pop"
-  }
-}

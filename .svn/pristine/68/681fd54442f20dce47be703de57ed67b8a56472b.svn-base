@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "机构详情",
-  "usingComponents":{
-    "pop":"../../components/pop/pop"
-  }
-}

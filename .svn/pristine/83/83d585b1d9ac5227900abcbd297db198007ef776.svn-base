@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "课程分类查询",
-  "enablePullDownRefresh": true,
-  "usingComponents":{
-    "pop":"../../components/pop/pop"
-  }
-}
